@@ -1,0 +1,85 @@
+\documentclass[10pt]{article}
+
+\usepackage{homework}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\title{CMSC 277: Homework \#3}
+\author{Jesse Farmer}
+\date{20 Obctober 2005}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item \emph{For each $\varphi \in \FormP$ give a deduction showing that $\varphi \vdash \neg\neg\varphi$.}
+\begin{align*}
+\set{\varphi, \neg\varphi} &\vdash \varphi & (\mbox{Assumption}) \tag{1}\\
+\set{\varphi, \neg\varphi} &\vdash \neg\varphi & (\mbox{Assumption}) \tag{2} \\
+\varphi & \vdash \neg\neg\varphi & (\mbox{Contr on (1) and (2)}) \tag{3}
+\end{align*}
+
+\item
+\begin{enumerate}
+\item \emph{For each $\varphi, \psi \in \FormP$ give a deduction showing that $\neg \varphi \vdash \neg (\varphi \land \psi)$.}
+\begin{align*}
+\set{\neg\varphi, \varphi \land \psi} &\vdash \neg\varphi & (\mbox{Assumption}) \tag{1}\\
+\set{\neg\varphi, \varphi \land \psi} &\vdash \varphi \land \psi & (\mbox{Assumption}) \tag{2}\\
+\set{\neg\varphi, \varphi \land \psi} &\vdash \varphi & (\mbox{$\land EL$ on (2)}) \tag{3}\\
+\neg \varphi &\vdash \neg(\varphi \land \psi) & (\mbox{Contr on (1) and (3)}) \tag{4}
+\end{align*}
+\item \emph{For each $\varphi, \psi \in \FormP$ give a deduction showing that $\neg(\varphi \land \psi) \vdash (\neg\varphi) \lor (\neg\psi)$.}
+\begin{align*}
+\set{\neg(\varphi \land \psi), \varphi, \psi} & \vdash \varphi & (\mbox{Assumption}) \tag{1} \\
+\set{\neg(\varphi \land \psi), \varphi, \psi} & \vdash \psi & (\mbox{Assumption}) \tag{2} \\
+\set{\neg(\varphi \land \psi), \varphi, \psi} & \vdash \varphi \land \psi & (\mbox{$\land I$ on (1) and (2)}) \tag{3} \\
+\set{\neg(\varphi \land \psi), \varphi, \psi} & \vdash \neg(\varphi \land \psi) & (\mbox{Assumption}) \tag{4} \\
+\set{\neg(\varphi \land \psi), \varphi} & \vdash \neg\psi & (\mbox{Contr on (3) and (4)}) \tag{5} \\
+\set{\neg(\varphi \land \psi), \varphi} & \vdash (\neg\varphi) \lor (\neg\psi) & (\mbox{$\lor IR$ on (5)}) \tag{6} \\
+\set{\neg(\varphi \land \psi), \neg\varphi} & \vdash \neg\varphi & (\mbox{Assumption}) \tag{7} \\
+\set{\neg(\varphi \land \psi), \neg\varphi} & \vdash (\neg\varphi) \lor (\neg\psi) & (\mbox{$\lor IL$ on (7)}) \tag{8} \\
+\neg(\varphi \land \psi) & \vdash (\neg\varphi) \lor (\neg\psi) & (\mbox{$\neg PC$ on (6) and (8)}) \tag{9}
+\end{align*}
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Show that if $\Gamma \vdash \varphi$ then $\Gamma \vDash \varphi$.}
+
+Let $\varphi \in \FormP$ be such that $\Gamma \vdash \varphi$ but $\Gamma \not\vDash \varphi$.  Then there exists a truth assignment $v: P \to \set{0,1}$ such that $\bar{v}(\Gamma) = \set{1}$ and $\bar{v}(\varphi) = 0$.  Hence $\Gamma$ is satisfiable.  Moreover, $\Gamma \cup \set{\neg\varphi}$ is also satisfiable since $\bar{v}(\neg\varphi) = 1$.  Therefore by soundness both $\Gamma$ and $\Gamma \cup \set{\neg\varphi}$ are consistent.  However, as $\Gamma \cup \set{\neg\varphi} \vdash \varphi$ by Proposition 3.53 and $\Gamma \cup \set{\neg\varphi} \vdash \neg\varphi$ by assumption, it follows that $\Gamma \cup \set{\neg\varphi}$ is inconsistent -- a contradiction.
+
+\item \emph{Show that every consistent set of formulas is satisfiable.}
+
+Assume $\Gamma$ is consistent and that for every truth assignment $v: P \to \set{0,1}$ there exists some $\varphi \in \Gamma$ such that $\bar{v}(\varphi) = 0$.  Then $\Gamma \vDash \psi$ for all $\psi \in \FormP$, vacuously.  In particular $\Gamma \vDash \varphi$ and $\Gamma \vDash \neg\varphi$.  But then $\Gamma \vdash \varphi$ and $\Gamma \vdash \neg\varphi$ by completeness, so that $\Gamma$ is inconsistent -- a contradiction.
+\end{enumerate}
+
+\item \emph{Suppose that $\theta \vdash \gamma$ and $\gamma \vdash \theta$.  Show that if $\Gamma \vdash \varphi$ then $\Gamma \vdash \Subst_{\theta, \gamma}(\varphi)$.}
+
+Since $\theta$ and $\gamma$ are syntactically equivalent, by soundness and completeness they are also semantically equivalent and hence for any truth assignment $v: P \to \set{0,1}$ we have that $\bar{v}(\theta) = bar{v}(\gamma)$. If $\Gamma \vdash \varphi$ then by soundness $\Gamma \vDash \varphi$.  From the first problem on the previous homework it follows that $\bar{v}(\varphi) = \Subst_{\theta, \gamma}(\varphi)$.  Hence $\Gamma \vDash \Subst_{\theta, \gamma}(\varphi)$ and by completeness $\Gamma \vdash \Subst_{\theta, \gamma}(\varphi)$
+
+\item \emph{Suppose we eliminate the $\to E$ rule, the $\neg PC$ rule and the $Contr$ rule.  Show that the completeness theorem no longer holds.}
+
+\item \emph{Fix $k \in \N^+$.  Let $P$ be a poset such that such that every finite subset of $P$ is the union of $k$ chains.  Show that $P$ itself is the union of $k$ chains.}
+
+Fix $k \in \N^+$ and define
+\begin{align*}
+&\Gamma = \set{C_{a,1} \lor \cdots \lor C_{a, k} \mid a \in P} \\
+&\cup \set{\neg(C_{a,i} \land C_{b,i}) \mid \mbox{$a$ and $b$ are incomparable}}
+\end{align*}
+
+Intuitively each $C_{a,i}$ corresponds to the element $a$ being in one of $k$ chains but incomparable elements being in different chains.  We include the possibility of there only being ``one'' chain, e.g., a one element subset is the union of $k$ chains, viz., itself $k$ times.  Let $\Gamma_0 \subset \Gamma$ be a finite subset and let $A = \set{a_1, \ldots, a_n}$ be the set of all $a \in P$ such that $C_{a,i}$ occurs in some element of $\Gamma_0$ for some $i \in \set{1, \ldots, k}$.  By hypothesis we can write $A$ as the union of $k$ chains which corresponds to a truth assignment witnessing that $\Gamma_0$ is satisfiable.
+
+Since every such $\Gamma_0$ is satisfiable it follows from compactness that $\Gamma$ itself is satisfiable, and hence $P$ can be written as the union of $k$ chains.
+\end{enumerate}
+\end{document}

@@ -1,0 +1,99 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\title{MATH 270: Homework \#6}
+\author{Jesse Farmer}
+\date{12 November 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Consider the function $f(x) = \frac{1}{z^2}$.}
+\begin{enumerate}
+\item \emph{$f$ satisfies $\int_{\gamma} f(z) \,d = 0$ for all closed contours not passing through the origin but is not holomorphic at $z=0$.  Does this statement contradict Morera's Theorem?}
+
+No, because Morera's theorem requires that the integral be zero along any closed curve, not only those avoiding any singularities.
+
+\item \emph{$f$ is founded as $z \rightarrow \infty$ but it is not a constant.  Does this statement contradict Liouville's theorem?}
+
+No.  Liouville's theorem requires that $f$ be bounded on all of $\C$, not eventually bounded, i.e., bounded for $z$ with sufficiently large moduli.
+
+\end{enumerate}
+
+\item \emph{Let $f(z)$ be entire and let $|f(z)| \geq 1$ for all $z \in \C$  Prove that $f$ is constant.}
+
+Since $|f(z)| \geq 1$ on $\C$, $f$ never vanishes and $\frac{1}{f(z)}$ is also entire.  Then $\left|\frac{1}{f(z)}\right| \leq 1$, so by Liouville's theorem it is constant, and so $f$ must also be constant.
+
+\item \emph{Let $f$ be entire and let $|f(z)| \leq M$ for $z$ in $\gamma=\{z \mid |z| = R\}$, for fixed $R$.  Prove that $$f^{(k)}(re^{i\theta}) \leq \frac{k!M}{(R-r)^k}$$ for all $k \in \N$ and $0 \leq r < R$.}
+
+Pick any point $z_0 \in \C$ with $|z_0| = r < R$.  Then there exists a neighborhood around $z_0$ of radius $R - r$ contained in $\gamma$.  $f$ is entire so by the maximum modulus principle $|f(z)| \leq M$ on this circle, too.  Cauchy's inequality implies that $|f(z_0)^{(k)}| \leq \frac{k!}{(R-r)^k}M$ for $k \in \N$, but since $z_0$ was arbitrary this is true for all $z$ with $|z| < R$ and the result follows.
+
+\item \emph{Let $f$ and $g$ be holomorphic on a region $A$ with $g'(z) \neq 0$ for all $z \in A$.  Furthermore, let $g$ be injective and $\gamma$ be any closed curve in $A$.  Show that for $z \notin \gamma$, $$f(z)I(\gamma,z) = \frac{g'(z)}{2\pi i}\int_{\gamma} \frac{f(\zeta)}{g(\zeta) - g(z)}\,d\zeta$$}
+
+Since $g$ is injective and $g'$ never vanishes $g^{-1}$ exists and $\frac{dg^{-1}(w)}{dw} = \frac{1}{g'(z)}$ where $z = g^{-1}(w)$.  Therefore, writing $\zeta = g^{-1}(w)$ and $w_0 = g(z)$, by Cauchy's theorem
+\begin{eqnarray*}
+\frac{1}{2\pi i} \int_{\gamma} \frac{f(\zeta)}{g(\zeta) - g(z)}\,d\zeta &=& \frac{1}{2\pi i} \int_{\gamma} \frac{dg^{-1}(w)}{dw} \frac{f\left(g^{-1}(w)\right)}{w - w_0} \,dw \\
+&=&  \frac{dg^{-1}(w_0)}{dw} f\left(g^{-1}(w_0)\right) I\left(\gamma, z\right) \\
+&=& \frac{f(z)}{g'(z)}I\left(\gamma, z\right)
+\end{eqnarray*}
+
+\item \emph{Let $f(z) = \sum_{n=0}^\infty a_nz^n$ have radius of convergence $R$ and let $A = \{z \in \C \mid |z| < R\}$.  Show that $\int_{\gamma} f = 0$ for every closed curve $\gamma$ in $A$ where $A = \{z \in \C \mid |z| < R\}$.}
+
+Every polynomial is entire, so by Cauchy's theorem $\int_{\gamma} a_nz^n = 0$ for any closed curve $\gamma$ in $\C$, assuming $a_n$ is defined there.  Since integrals are finitely additive, if $\gamma$ is a closed curve in $A$
+\[
+\int_{\gamma} \left(\sum_{n=0}^k a_nz^n\right) \,dz = \sum_{n=0}^k \int_{\gamma} a_nz^n \,dz = 0
+\]
+
+Certainly, then, the integral is $0$ in the limit, since the above statement is true for every $k \in \N$.
+\item \emph{Let $f(z) = \sum_{n=0}^\infty a_nz^n$ converge for $|z| < R$.  If $0 < r < R$ show that $f(z) = \sum_{n=0}^\infty a_nr^ne^{in\theta}$ where $z = re^{i\theta}$ and $$a_n = \frac{1}{2 \pi r^n} \int_0^{2 \pi} f\left(re^{i\theta}\right) e^{-in\theta} \,d\theta$$ and $$\frac{1}{2\pi} \int_0^{2\pi} \left|f\left(re^{i\theta}\right)\right|^2\,d\theta = \sum_{n=0}^\infty |a_n|^2r^{2n}$$}
+
+From Taylor's theorem the coefficients $a_n$ are $a_n = \frac{f^{(n)}(0)}{n!}$.  Parameterize the circle of radius $r$ by $\gamma(\theta) = re^{i\theta}$ for $\theta \in [0,2\pi]$, then by Cauchy's theorem
+\[
+a_n = \frac{f^{(n)}(0)}{n!} = \frac{1}{2\pi i}\int_{\gamma} \frac{f(\zeta)}{\zeta^{n+1}}\,d\zeta = \frac{1}{2\pi i}\int_0^{2\pi} \frac{f(re^{i\theta})}{r^{n+1}e^{i(n+1)\theta}} rie^{i\theta}\,d\theta = \frac{1}{2\pi r^n} \int_0^{2\pi} f(re^{i\theta}) e^{-in\theta} \,d\theta
+\]
+
+As for the second equation, consider that
+\begin{eqnarray*}
+f\left(re^{i\theta}\right)\overline{f\left(re^{i\theta}\right)} = \left|f\left(re^{i\theta}\right)\right|^2 &=& \left(\sum_{n=0}^\infty a_n r^n e^{in\theta}\right)\left(\sum_{m=0}^\infty \overline{a_m} r^m e^{-im\theta}\right) \\
+&=& \sum_{n=0}^\infty\left[\left(\sum_{m=0}^\infty \overline{a_m} r^m e^{-im\theta}\right)a_n r^n e^{in\theta}\right] \\
+&=& \sum_{n=0}^\infty\sum_{m=0}^\infty \left(a_n\overline{a_m} r^{n+m} e^{i(n-m)\theta}\right)
+\end{eqnarray*}
+
+But note that if $n=m$ then $\int_0^{2\pi} a_n\overline{a_m} r^{n+m} e^{i(n-m)\theta} = 2\pi |a_n|^2 r^{2n}$, and if $n \neq m$ this integral is $0$.  Hence
+\[
+\int_0^{2\pi} \left|f\left(re^{i\theta}\right)\right|^2 \,d\theta = 2\pi \sum_{n=0}^\infty |a_n|^2 r^{2n}
+\]
+
+\item \emph{Suppose $f$ is a nonvanishing function on $\overline{D(0,1)}$ such that $f\mid_{D(0,1)}$ is holomorphic.  Prove that if $|f(z)|=1$ when $|z|=1$ then $f$ is constant.}
+
+Define $$\tilde{f}(z) = \begin{cases} f(z) & |z|\leq 1 \\ \frac{1}{\overline{f(\overline{z})}} & |z|>1\end{cases}$$
+
+Since $f$ never vanishes $\tilde{f}$ is defined and analytic for $|z| > R$ with a power series
+\[
+\frac{1}{\overline{f(\overline{z})}} = \frac{1}{\sum_{n=0}^\infty \overline{a_n} z^n}
+\]
+
+This power series converges since it has a radius of convergence of $\frac{1}{R}$ where $R$ is the radius of convergence of the power series representation of $f$.  Hence, if $R > 1$ then $\frac{1}{R} < 1$ and the series converges.  By the same reasoning as in the Schwarz reflection principle $\tilde{f}$ is entire and $\tilde{f}\mid_{\overline{D(0,1)}} = f$.  In particular this means $\left|\tilde{f}(z)\right| = 1$ when $|z| = 1$.  The only analytic functions with constant moduli on any set are constant functions, so $\tilde{f}$ must be constant on the boundary of the unit disc.  Cauchy's formula implies that $\tilde{f}$ is the same constant for any $z$ with $|z| < 1$.  Finally, $\tilde{f}$ must be constant since the extension is unique.
+
+\end{enumerate}
+\end{document}

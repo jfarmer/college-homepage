@@ -1,0 +1,77 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\title{MATH 270: Homework \#7}
+\author{Jesse Farmer}
+\date{19 November 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Find all the values of}
+\begin{enumerate}
+\item \emph{$\log -i $}
+
+For both of these exercises, the only values $\log z $ can take on are those such that $e^{\log z} = z$. Here $$\log -i = -i\frac{\pi}{2} + 2\pi i n$$ for any $n \in \Z$
+\item \emph{$\log \left(1+i\right)$}
+
+Represented in polar form $1 + i = \sqrt{2}e^{i\frac{\pi}{4}} = e^{\log \sqrt{2} + i\frac{\pi}{4}}$, so $$\log \left(1+i\right) = \log \sqrt{2} + i\frac{\pi}{4} + 2 \pi i n$$ where the $\log$ function is defined as usual for real numbers and $n \in \Z$.
+\end{enumerate}
+
+\item \emph{Evaluate $\int_{\gamma} \frac{dz}{z^2-2z}$ where $\gamma$ is the circle of radius $1$ centered at $2$ traveled once counterclockwise.}
+
+By Cauchy's theorem, since $z \mapsto \frac{1}{z}$ is holomorphic here,
+\[
+\frac{1}{z}I(\gamma,z) = \int_{\gamma} \frac{1}{\zeta}\frac{d\zeta}{\zeta - z} = \int_{\gamma} \frac{d\zeta}{\zeta^2 - z\zeta}
+\]
+
+This problem is a special case where $z = 2$.  Since $I(\gamma, 2) = 1$, the integral is $\frac{1}{2}$.
+
+\item \emph{Prove that $\C \setminus \{0\}$ is not simply connected.}
+
+If $\C \setminus \{0\}$ were simply connected then every closed curve $\gamma$ contained in it would be homotopic to a point and hence any function holomorphic on $\C \setminus \{0\}$ would have a $0$ integral over $\gamma$ by Cauchy's theorem.  However, the function $z \mapsto \frac{1}{z}$ is holomorphic on $\C \setminus \{0\}$ and
+\[
+\int_{|z|=1} \frac{dz}{z} = 2\pi i
+\]
+
+This is a contradiction, and therefore $\C \setminus \{0\}$ cannot be simply connected.
+
+\item \emph{Prove that if the image of $\gamma$ lies in a simply connected region $A$ and if $z_0 \notin A$ then $I(\gamma, z_0) = 0$}
+
+First note that since $\gamma$ is closed and in a simply connected region it divides the complex plane into two disjoint, open, connected sets, one of which is unbounded.  Since $I(\gamma, z)$ is a continuous, integer-valued function with respect to $z$ it must be constant on any connected set.  However,
+\[
+\lim_{z \rightarrow \infty} I(\gamma,z) = \lim_{z \rightarrow \infty} \int_{\gamma} \frac{d\zeta}{\zeta - z} = 0
+\]
+
+So for sufficiently large $z$, $I(\gamma, z)$ is arbitrarily close to $0$.  Since $I(\gamma, z)$ is a continuous, integer-valued function this means it must be identically $0$ on the unbounded region induced by $\gamma$.  Therefore $I(\gamma, z) = 0$ for all $z \notin A$ since all points not in $A$ are in this unbounded region.
+
+\item \emph{Let $f$ be holomorphic on $A = \{z \in \C \mid |z| > 1\}$.  Show that if $\gamma_r$ is the circle of radius $r > 1$ and center $0$ then $\int_{\gamma_r} f$ is independent of $r$.}
+
+Any two circles with radius $r_1, r_2$ are homotopic by the homotopy $H(t,\theta) = (1-t)r_1e^{i\theta} + tr_2e^{i\theta}$ where $t \in [0,1]$ and $\theta \in [0,2\pi]$.  The desired result is a direct consequence of the deformation theorem, which states that if $f$ is holomorphic on an open set (here $A$) then the integrals over any two homotopic curves in $A$ are equal.
+
+\item \emph{Let $f$ be holomorphic and non-vanishing on a region $A$.  Let $\gamma$ be a closed curve homotopic to a point in $A$.  Show that $$\int_{\gamma} \frac{f'(z)}{f(z)}\,dz = 0$$}
+
+Cauchy's formula for derivatives imply that $f'$ is holomorphic on $A$.  Since $f$ does not vanish on $A$, $\frac{f'}{f}$ is also holomorphic on $A$.  Because $\gamma$ is holomorphic to a point Cauchy's formula yields the desired result.
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,252 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Mr. Farmer at the University of Chicago" />
+	<title>Jesse E. I. Farmer - Tutorials - SSI: How to Create an Almost-dynamic Webpage</title>
+	<link rel="stylesheet" type="text/css" href="/~farmerje/farmerje.css" />
+</head>
+<body>
+<div id="page">
+
+<div id="header">
+<h1>Jesse E. I. Farmer</h1>
+<a href="http://www.uchicago.edu">University of Chicago</a>
+<img src="/~farmerje/img/header.png" alt="Phoenix" />
+</div>
+
+<div id="navigation">
+<ul>
+<li class="first"><a href="/~farmerje/index.shtml">Home</a></li>
+<li><a href="/~farmerje/math">Math</a></li>
+<li><a href="/~farmerje/code">Code</a></li>
+<li><a href="/~farmerje/tutorials">Tutorials</a></li>
+<li><a href="/~farmerje/latex">LaTeX</a></li>
+<li><a href="/~farmerje/linux">Linux</a></li>
+<li><a href="/~farmerje/resume.pdf">Resumé</a></li>
+</ul>
+</div>
+
+<div id="content">
+
+
+<h2>SSI: How to Create an Almost-dynamic Webpage</h2>
+<h3>Contents</h3>
+<ol>
+	<li><a href="#whatis">What is SSI?</a></li>
+	<li><a href="#whyuse">Why use SSI?</a></li>
+	<li><a href="#howto">How to use SSI directives</a></li>
+	<li><a href="#examples">More examples of SSI directives</a></li>
+	<li><a href="#conclusion">Conclusion and other resources</a></li>
+</ol>
+
+
+<a name="whatis"></a>
+<h3>What is SSI?</h3>
+<p>
+Server Side Includes or SSI is a simple server-side scripting language which does not find much use these days.  It is available on any major web server such as Apache or Microsoft's IIS and dates back to the days of NCSA's web server.  As the name implies its most common use is in including other files.  It also has support for very basic conditional expressions and variables, and a few built-in functions to do things like display the date a file was last modified.  It is <i>not</i>, by any means, a full programming language.
+</p>
+
+<a name="whyuse"></a>
+<h3>Why use SSI?</h3>
+<p>
+So SSI sounds pretty lame, right?  Nowadays the big tools for webpage development are things like <a href="http://www.php.net">PHP</a> or <a href="http://www.perl.org">Perl</a>.  These are actual programming languages, and in the case of Perl, find themselves used just as often as a basis for regular old client-side applications as they do web development.  If you need to manipulate even a moderate amount of data or do anything in any way fancy then SSI probably isn't going to do the job for you.  And even if it could it would probably be more trouble than its worth as other languages are simply better suited.
+</p>
+
+<p>
+What SSI <i>is</i> good for, however, is creating a simple, modular site which can be easily updated by hand.  For example, if you are making a webpage that includes an identical navigational tables on every page then it makes sense from a programmatic standpoint to write the table once and somehow include it in every page.  That way if you want to add or remove a link you only have to edit one file, instead of however many files you have on your website.  If you're using a webserver which doesn't support full-on web development you might think you're out of luck; however, most servers support SSI and it is perfectly suited for this sort of naive "scripting."
+</p>
+
+<p>
+So, if you have a simple homepage with maybe a few dozen pages and want to make it more maintainable by eliminating redundant HTML then SSI is an almost ideal solution.  For example, at the University of Chicago, your student homepage hosted at <a href="http://home.uchicago.edu">home.uchicago.edu</a> does not support PHP, Perl, or any other full scripting languages for security reasons, but it <i>does</i> support SSI.  In fact, this site right here makes extensive use of it.
+</p>
+
+<a name="howto"></a>
+<h3>How to use SSI directives</h3>
+<p>
+First, HTML files which use SSI typically end in one of <tt>.shtml</tt> or <tt>.shtm</tt>.  You will notice, for example, that every page on this website ends in <tt>.shtml</tt>.  Many servers don't require this and are able to process SSI within files ending in <tt>.html</tt> or <tt>.htm</tt>, but since <a href="http://home.uchicago.edu">home.uchicago.edu</a> requires <tt>.shtml</tt> or <tt>.shtm</tt> we will use that convention here.
+</p>
+
+<p>
+Create a file you want to have use SSI, say, <tt>example.shtml</tt>.  SSI commands are in the following format:  </p>
+<pre class="code">&lt;!--#directive parameter="value" --&gt;</pre>
+
+<p>
+So let's take a simple html file:
+</p>
+<pre class="code">
+&lt;html&gt;
+
+&lt;head&gt;
+	&lt;title&gt;Example SSI Page&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;ul&gt;
+	&lt;li&gt;Link 1&lt;/li&gt;
+	&lt;li&gt;Link 2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Some text
+&lt;/p&gt;
+
+Copyright &amp;copy; 2005
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+
+<p>
+This is a generic page with basic header information like the title of the page, and a body which contains an unordered list of navigational links which might be styled with CSS, some body text, and a footer containing perhaps copyright information or the date last modified.  In fact, this is a template for pretty much every hand-made webpage out there.  Like I mentioned before, if you had, say, two dozen HTML files in your website and you wanted to add a "Link 3" to your navigational section then it would be very tedious.  If you knew some shell programming perhaps you could do something tricky to add the link in the appropriate spot in each file, but unless you already had such a program on hand it would probably be just as difficult to write that as it would to edit each file manually.  In either case it's a waste of time and a pain in the butt.
+</p>
+
+<p>
+This is where SSI comes in.  Lets create two SSI pages called <tt>header.shtml</tt> and <tt>footer.shtml</tt> which contain, respectively, the following:
+</p>
+<tt>header.shtml</tt>:
+<pre class="code">
+&lt;html&gt;
+
+&lt;head&gt;
+	&lt;title&gt;Example SSI Page&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;ul&gt;
+	&lt;li&gt;Link 1&lt;/li&gt;
+	&lt;li&gt;Link 2&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<tt>footer.shtml</tt>:
+<pre class="code">
+Copyright &amp;copy; 2005
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+
+
+<p>
+Next, create the file <tt>example.shtml</tt> in the same directory which contains the following:
+</p>
+<pre class="code">
+&lt;!--#include virtual="header.shtml" --&gt;
+&lt;p&gt;
+Some text
+&lt;/p&gt;
+&lt;!--#include virtual="footer.shtml" --&gt;
+</pre>
+
+<p>
+This is almost self-explanatory.  The <tt>#include</tt> directive has a parameter of <tt>virtual</tt> which takes as its value the SSI page to be included.  One can also have a parameter of <tt>file</tt>; however, virtual is always preferred since this enables SSI to be executed recursively.  That is, if you had SSI in <tt>header.shtml</tt> and included it with the <tt>file</tt> parameter it would not be executed, but would be were you to use the <tt>virtual</tt> parameter.  There is no reason not to use <tt>virtual</tt> since regular HTML is unaffected and adding SSI later would require a change in whatever file is doing the including.  This is exactly the manner in which I use SSI includes for this website.
+</p>
+
+<p>
+The <tt>#include</tt> directive is probably the most often-used directive, and also the most useful.  However, there are other common directives which are worth learning.
+</p>
+
+<a name="examples"></a>
+<h3>More examples of SSI directives</h3>
+<p>
+In addition to including pages we can set and echo variables.  If you're familiar with programming then I'll just say here that in SSI there is no such things as <i>scope</i>, so all variables are global and available to anything processed after the variable is created.  Here is how I use variables in this page:
+</p>
+My (stripped-down) <tt>header.shtml</tt>:
+<pre class="code">
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+	<b>&lt;title&gt;Jesse E. I. Farmer - &lt;!--#echo var="title" --&gt;&lt;/title&gt;</b>
+&lt;/head&gt;
+&lt;body&gt;
+...
+navigational links
+...
+
+</pre>
+
+<p>
+You'll see that I am <tt>echo</tt>'ing the variable called <tt>title</tt>, but nowhere is this variable actually declared.  Well, if you look at where this is being echoed you can see that what is being echoed is actually everything that occurs in the title after my name, e.g., "Programming," "Home," etc.  In fact, it is on each <i>individual</i> page where I declare the variable:
+</p>
+
+My (stripped-down) <tt>index.shtml</tt>:
+<pre class="code">
+<b>&lt;!--#set var="title" value="Home" --&gt;</b>
+&lt;!--#include virtual="header.shtml"--&gt;
+&lt;h2&gt;Where am I?&lt;/h2&gt;
+&lt;p&gt;
+You've stumbled upon the homepage of Jesse Farmer. etc. etc.
+&lt;/p&gt;
+&lt;!--#include virtual="footer.shtml"--&gt;
+</pre>
+
+<p>
+I'm sure you can see the advantage of this.  Programmatically I'm striving for a certain degree of encapsulation: the only thing that "knows" the name of a given page is the page itself, and anything else that needs the name can simple reference this (global) variable.
+</p>
+
+<p>
+My last example will be how to include a "last updated" text on each page.
+</p>
+
+My (stripped-down) <tt>footer.shtml</tt>:
+<pre class="code">
+
+&lt;div id="footer"&gt;
+<b>&lt;!--#config timefmt="%d %B %Y" --&gt;</b>
+&lt;div class="updated"&gt;Last updated: <b>&lt;!--# echo var="LAST_MODIFIED" --&gt;</b>&lt;/div&gt;
+&lt;img src="img/xhtml.png" alt="Valid xhtml 1.0" /&gt;
+&lt;img src="img/css.png" alt="Valid CSS" /&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>
+This one is a little funny because it uses two directives, <tt>config</tt> and <tt>echo</tt>.  <tt>echo</tt> we already know, so the real meat is in the <tt>config</tt> directive.  <tt>LAST_MODIFIED</tt> is a special variable, and it always means the last time <i>this</i> page was modified.  One can include the time other files were modified by using the following directive:
+</p>
+<pre class="code">
+&lt;!--#flastmod virtual="index.html" --&gt;
+</pre>
+
+<p>
+In both cases, however, it is the <tt>config</tt> directive which controls the appearance of the output.  The configuration string follows the standard UNIX <tt>date</tt> syntax, so if you're familiar with that then you're all set.  Otherwise just know that <tt>%d</tt> is the day with a possibly-prepended zero, e.g., the fourth of a month is "04" rather than just "4", <tt>%B</tt> is the month's full name, e.g., August, and <tt>%Y</tt> is a four-digit year.  If you search Google for either "ssi last updated" or "unix date" you will come up with several pages that contain the various switches, all beginning with a percent sign.
+</p>
+
+<a name="conclusion"></a>
+<h3>Conclusion and other resources</h3>
+<p>
+You've seen a few simple examples of what SSI can do.  Personally I view it was a way to simplify web page maintenance, since as a scripting language it is very lacking.  SSI allows you to create content which, while not dynamic, is not quite static, either. It also allows you to reduce redundant HTML by including files where appropriate.
+</p>
+<p>
+There are some more advanced things which SSI supports.  Many of these things are only supported by certain http servers, and even then many of them are turned off because of potential security hazards.  For example, there is, in fact, SSI syntax which allows rudimentary access to databases.  If you're interested in learning more "advanced" SSI I first recommend searching Google.  However, I find that both <a href="http://http-server.carleton.ca/~dmcfet/html/ssi.html">Carleton College</a> and <a href="http://httpd.apache.org/docs/1.3/howto/ssi.html">Apache.org</a> provide a nice overview of additional SSI directives and techniques.
+</p>
+
+<p>
+Enjoy your new found power with SSI!
+</p>
+</div>
+
+<div id="footer">
+Copyright &copy; <a href="mailto&#058;farmerje&#064;uchicago&#046;edu">Jesse E.I. Farmer</a>, 2005-2006
+
+<div class="updated">Last updated: 08 May 2006</div>
+<img src="/~farmerje/img/xhtml.png" alt="Valid xhtml 1.0" />
+<img src="/~farmerje/img/css.png" alt="Valid CSS" />
+</div>
+
+</div>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-313699-1";
+urchinTracker();
+</script>
+</body>
+</html>
+

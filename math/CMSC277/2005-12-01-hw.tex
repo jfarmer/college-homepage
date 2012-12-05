@@ -1,0 +1,96 @@
+\documentclass[10pt]{article}
+
+\usepackage{homework}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\title{CMSC 277: Homework \#7}
+\author{Jesse Farmer}
+\date{01 December 2005}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item \emph{Fix a nonstandard model of analysis $\leftexp{\ast}{\mathfrak{R}}$.  Let $A \subseteq \R$ and $r \in \R$.  Show that $r$ is in the closure of $a$ if and only if there exists $a \in (A^\ast) \cap \cal{F}$ such that $\st(a) = r$.}
+
+Let $r \in \overline{A}$.  Then the sentence
+\[
+\forall \e > 0 \exists s \in \underline{A} (\abs{\underline{r} - s} < \e)
+\]
+
+is in $\Th(\mathfrak{R}) = \Th(\leftexp{\ast}{\mathfrak{R}})$.  Let $\e$ be a positive infinitesimal, then there exists some (finite) $a \in \leftexp{\ast}{A}$ such that $|a-r| < \e$ so that $a \approx r$.  But as $r \in \R$ it follows that $\st(a) = r$.
+
+Similarly, if $a \in \leftexp{\ast}{A} \cap \cal{F}$ such that $\st(a) = r$ then the sentence
+\[
+\forall \e > 0 \exists s \in \underline{A} (\abs{\underline{r} - s} < \e)
+\]
+
+is in $\Th(\mathfrak{R}) = \Th(\leftexp{\ast}{\mathfrak{R}})$ since substituting $\underline{a}$ for $s$ satisfies it.  That $r \in \overline{A}$ follows immediately.
+
+\item \emph{Fix a nonstandard model of analysis $\leftexp{\ast}{\mathfrak{R}}$ and let $f: \R \to \R$.  Show that $f$ is uniformly continuous on $\R$ if and only if for all $a,b \in \leftexp{\ast}{\R}$ with $a \approx b$ we have $\leftexp{\ast}{f(a)} \approx \leftexp{\ast}{f(b)}$}
+
+We proceed using the contrapositive.
+
+
+
+
+Assume that there exist $a,b \in \leftexp{\ast}{\R}$ such that $a \approx b$ but $\leftexp{\ast}{f(a)} \not\approx \leftexp{\ast}{f(b)}$.  Then there exists some $\e > 0$ such that $|\leftexp{\ast}{f(a)} - \leftexp{\ast}{f(b)}| > \e$.  The sentence
+\[
+\forall \delta > 0 \exists x,y \in \R (|x-y| < \delta \land |\underline{f}(x) - \underline{f}(y)| > \underline{\e}
+\]
+
+is in $\Th(\leftexp{\ast}{\mathfrak{R}}) = \Th(\mathfrak{R})$ since substituting $a$ for $x$ and $b$ for $y$ satisfies it.  But this sentence says precisely that $f$ is not uniformly continuous.
+
+Assume that $f$ is not uniformly continuous and fix $\e > 0$.  Then the sentence
+\[
+\forall \delta > 0 \exists a,b \in \R (|a-b| < \delta \land |\underline{f}(a) - \underline{f}(b)| > \underline{\e} 
+\]
+
+is in $\Th(\mathfrak{R}) = \Th(\leftexp{\ast}{\mathfrak{R}})$.  Letting $\delta$ be a positive infinitesimal we then have that $a \approx b$ but $\leftexp{\ast}{f(a)} \not\approx \leftexp{\ast}{f(b)}$ so that the second property does not hold.
+
+\item \emph{Let $\L$ be the empty language.  For each $n \in \N^+$ let $\sigma_n \in \Sent_\L$ be $$\exists x_1 \cdots \exists x_n \left( \bigwedge_{1 \leq i < j \leq n} x_i \neq x_j\right)$$ Let $\Sigma = \set{\sigma_n \mid n \in \N^+}$ and define $T = \Cn(\Sigma)$.  Show that $T$ has QE and is complete.}
+
+First note that any model of $T$ is necessarily infinite since any model of $\sigma_n$ has a cardinality of at least $n$.  Hence any model of $T$ cannot be finite.
+
+To show that $T$ has quantifier elimination let $\exists y(\alpha_1 \land \cdots \land \alpha_m)$ be as in Proposition $7.11$.  Then each $\alpha_i$ is of the form $x_j = y$ or $x_j \neq y$ for some $j$.  If there exists an $i$ such that $\alpha_i = (x_j = y)$ then
+\[
+T \vDash \exists y(\alpha_1 \land \cdots \land \alpha_m) \leftrightarrow (\alpha_1 \land \cdots \land \alpha_m)^{x_j}_y
+\]
+
+If $\alpha_i = (x_j \neq y)$ for all $i$ and some $j$ then it is always the case that $T \vDash \exists y(\alpha_1 \land \cdots \land \alpha_m)$ since any model of $T$ is necessarily infinite.  Simply pick $\varphi(x_1, \ldots, x_k)$ to be any tautology, e.g., $x_1 = x_1$.
+
+Completeness is trivial: the $\L$-structure consisting of a single point can be embedded in any model of $T$.  Since $T$ has QE it follows directly from Proposition $7.15$ that $T$ is complete.
+\item
+\begin{enumerate}
+\item \emph{Show that the theory of DLO has QE and is complete.}
+
+Recall that any model of DLO is infinite.  Let $\exists y(\alpha_1 \land \cdots \land \alpha_m)$ be as in Proposition $7.11$.  As above, if there exists an $i$ such that $\alpha_i = (x_j = y)$ then
+\[
+DLO \vDash \exists y(\alpha_1 \land \cdots \land \alpha_m) \leftrightarrow (\alpha_1 \land \cdots \land \alpha_m)^{x_j}_y
+\]
+
+Hence we may assume that each $\alpha_i$ is of the form $x_j \neq y$, $x_j < y$, or $x_j \not\le y$ for some $j \leq k$.  But each of these is tautologically satisfied by DLO since the theory contains the axioms that there are no endpoints, i.e., $\forall x \exists y (y < x)$ and $\forall x \exists y(x<y)$.
+
+To see that DLO is complete take the $\L$ structure consisting of two points in $x,y$ with $x < y$.  Then this structure can be embedded in any model of DLO by mapping $x$ anywhere and mapping $y$ to some element in the model greater than the image of $x$, which exists by the DLO axioms.  It follows from Proposition $7.15$ that DLO is complete.
+
+\item \emph{How many definable subsets of $\R^2$ are there in the model $(\R, <)$ of DLO?}
+
+$\R^2$ and $\emptyset$ are definable as witnessed by $x=x$ and $\neg(x=x)$, respectively.  Furthermore, the set of $(x,y) \in \R^2$ satisfying the sentences $x < y$, $y < x$, $x = y$, and $x \neq y$, plus their negations and pairwise conjunction and disjunction (note that some of these are contradictory or redundant, e.g., $(x < y) \land (x = y)$, or $(x < y) \land (x \neq y)$).
+
+Using the fact that DLO has QE and is complete we can show that these are the only such definable sets.
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

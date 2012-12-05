@@ -1,0 +1,114 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\powset}[1]{
+\wp\left(#1\right)
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\End}{\text{End}}
+\newcommand{\Ann}{\text{Ann}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\T}{\mathcal{T}}
+
+\newcommand{\iso}{\cong}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MATH 263: Homework \#2}
+\author{Jesse Farmer}
+\date{12 April 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Let $p: E \rightarrow B$ be a continuous and surjective map.  Suppose that $U$ is an open set of $B$ that is evenly covered by $p$.  Show that if $U$ is connected then the partition of $p^{-1}(U)$ into slices is unique.}
+
+Let $\{V_\alpha\}$ be a family of open sets homeomorphic to $U$ which partition $p^{-1}(U)$.  Since $U$ is connected each $V_\alpha$ is.  Consider a subset $A \subset p^{-1}(U)$, where $A$ is connected.  $A$ cannot be contained in more than one $V_\alpha$ since then $V_\alpha$ and the remaining elements of the partition would separate $A$ into two disjoint open sets, contradicting the fact that $A$ is connected.  Therefore the $\{V_\alpha\}$ correspond exactly to the connected components of $p^{-1}(U)$, which implies any such decomposition is unique.
+
+\item \emph{Let $p: E \rightarrow B$ be a covering map, where $B$ is connected.  Show that if $p^{-1}(b_0)$ has $k$ elements for some $b_0 \in B$ then $p^{-1}(b)$ has $k$ elements for every $b \in B$.}
+
+Let $f: I \rightarrow B$ be a path connecting $b_0$ to an arbitrary $b$, and label the $k$ points in $p^{-1}(b_0)$ as $\{e_1, \ldots, e_k\}$ so that $p(e_j) = b_0$ for $1 \leq j \leq k$.  For each $k$ there exists a uniqe map $\tilde{f}: I \rightarrow E$ such that $p \circ \tilde{f} = f$ and $\tilde{f}(e_k) = b_0$.  Call this map $\tilde{f}_k$.  Then $p \circ \tilde{f}_k(1) = f(1) = b$ which implies $\tilde{f}_k(1) \in p^{-1}(b)$ for all $k$, i.e., there are at least $k$ elements in $p^{-1}(b)$.  The converse follows \emph{mutatis mutandis} by considering a path $g$ that connects an arbitrary $b$ to $b_0$, and defining $g_k$ similarly.
+
+\item \emph{Let $q: X \rightarrow Y$ and $r : Y \rightarrow Z$ be covering maps and define $p = r \circ q$.  Show that if $r^{-1}(z)$ is finite for each $z \in Z$ then $p$ is a covering map.}
+
+Since $r^{-1}(z)$ if finite, by the previous problem, for all $z \in Z$ there exist $\{y_1, \ldots, y_n\}$ such that $r^{-1}(z) = \{y_1, \ldots, y_n\}$.  Let $U_z$ be an evenly covered neighborhood of $z$ by $V_1, \ldots, V_n$ via $r$, and let $W_i$ be an evenly covered neighborhood of $y_i$ via $q$.  Since $r^{-1}(z)$ is finite and $r$ is open on $V_i \bigcup W_i$ it follows that $$U'_z = \bigcup_{i=1}^n r\left(V_i \cup W_i\right)$$ is an open neighborhood of $z$ evenly covered by $r$.  However, now, each $r^{-1}(U'_z)$ is also evenly covered by $q$.  Writing the slices of $W_i$ as $\{O_{i,j}\}$, it follows that
+\[
+(r \circ q)^{-1} \left( U'_z \right) = \bigcup_j \bigcup_{i=1}^n \left( O_{i,j} \cap q^{-1}(V_i)\right)
+\]
+
+which partition $(r \circ q)^{-1} \left( U'_z \right)$ by construction.  $r \circ q$ is a homeomorphism over the sets on the right-hand side since the composition of homeomorphisms is a homeomorphism, and these are restrictions of sets on which $r$ and $q$ are homeomorphic to sets on which they both are.  Hence $r \circ q$ is a covering map.
+
+\item \emph{For a path-connected space $X$ show that $\pi_1(X)$ is abelian if and only if all base-point change homomorphisms $\beta_h$ depend only on the endpoints of the path $h$.}
+
+Assume $\pi_1(X,x_0)$ and $\pi_1(X,x_0)$ are abelian and let $\alpha, \beta$ be two paths connecting $x_0$ to $x_1$.
+\[
+[\beta \ast f \ast \bar{\beta}] = [\beta \ast \bar{\beta} \ast f] = [f] = [\alpha \ast \bar{\alpha} \ast f] = [\alpha \ast f \ast \bar{\alpha}]
+\]
+
+That is, $\alpha_f = \beta_f$ for all such $\alpha, \beta$.  Assume the converse, then
+\[
+[p \ast f \ast f \ast \overline{(p \ast f)}] = [p \ast g \ast f \ast \overline{(p \ast g)}]
+\]
+
+by hypothesis, i.e., $p \ast g$ and $p \ast f$ induce the same homomorphism since they share the same endpoints.  But since $[\overline{(p \ast f)}] = [\overline{f} \ast \overline{p}]$ it follows that $[f] = [g \ast f \ast \bar{g}]$, and hence $[f]$ and $[g]$ commute.
+
+\item \emph{Show that for a space $X$ the following three conditions are equivalent:}
+\begin{enumerate}
+\item \emph{Every map $S^1 \rightarrow X$ is homotopic to a constant map, with image a point.}
+\item \emph{Every map $S^1 \rightarrow X$ extends to a map $D^2 \rightarrow X$.}
+\item \emph{$\pi_1(X,x_0) = 0$ for all $x_0 \in X$.}
+\end{enumerate}
+\emph{Deduce that a space $X$ is simply connected if and only every map $S^1 \rightarrow X$ are homotopic.}
+
+Assume $f$ is homotopic to a point $y_0$ via $H$.  Then, denoting the Euclidian ($l_2$) norm by $\| \cdot \|$, define
+\[
+\tilde{f}(\vec{x}) = \begin{cases} H\left(f\left(\frac{\vec{x}}{\|\vec{x}\|}\right), 1 - \|\vec{x}\|\right) & \vec{x} \neq 0 \\ y_0 & \vec{x} = 0 \end{cases}
+\]
+
+From the continuity of $f$, this function is continuous on all of $D^2$, and when $\|\vec{x}\| = 1$, i.e., when $\vec{x} \in S^1$, this function is precisely $f(\vec{x})$.  To see the converse assume $f$ extends continuously to $D^2$ and define $$H(\vec{x},t) = \tilde{f}((1-t)\vec{x} + tx_0)$$  where $x_0 \in S^1$.  This is a homotopy between $f$ and $x_0$, as $\tilde{f}$ is continuous and equals $f$ on $S^1$.
+
+\item \emph{Let $\Phi: \pi_1(X,x_0) \rightarrow [S^1, X]$ be the map obtained by ``forgetting'' the basepoint of a homotopy class.  Show that $\Phi$ is onto if $X$ is path-connected, and that $\Phi([g]) = \Phi([f])$ if and only if $[f]$ and $[g]$ are conjugate in $\pi_1(X,x_0)$.}
+
+If $X$ is path connected then any two basepoints can be connected via a path, and hence the image of $[f]$ under $\Phi$ is precisely its homotopy class.  If $[f]$ and $[g]$ are conjugate then there exists a path which connects their basepoints and hence $f$ and $g$ are homotopic by the homotopy which ``slides'' the basepoint of $f$ along the line which connects it to the basepoint of $g$.  If $f$ and $g$ are in the same homotopy class then there exists a homotopy $F: S^1 \times I \rightarrow X$.  Fixing $x_0 \in S^1$, define a path by $h(t) = F(x_0, t)$.  Then $f$ and $g$ are conjugated via $h$.
+
+\item \emph{Show that every homomorphism of $\pi_1(S^1)$ can be realized as the induced homomorphism $\varphi_\ast$ for some $\varphi: S^1 \rightarrow S^1$.}
+
+It can be seen that $\Hom(\Z) \iso \Z$ by considering the map $\varphi \mapsto \varphi(1)$ for all $\varphi \in \Hom(\Z)$.  Since $\pi_1(S^1) \iso \Z$, it follows that any homomorphism $\psi_n: \pi_1(S^1) \rightarrow \pi_1(S^1)$ is actually of the form $\psi: \Z \rightarrow n\Z$ for some $n \in \Z$.  This follows from basic algebra -- the image of a group homomorphism is a subgroup of the range, and the only subgroups of $\Z$ are those of the form $n\Z$ for some $n \in \Z$.  In terms of $\pi_1(S^1)$, this sends all elements with lifting correspondence $m$ to $nm$.  For any $[f] \in \pi_1(S^1)$ we can pick a path homotopy class representative of the form $e^{2 \pi i m t}$, where $m$ is the image of $[f]$ under its lifting correspondence.  Under $\psi$ the image is therefore $[e^{2 \pi i mn t}]$.
+
+Now consider the map $\zeta_n : S^1 \rightarrow S^1$ defined by $z \mapsto z^n$.  Then $(\zeta_n)_\ast$ takes loops in the class of $e^{2 \pi i m t}$ to the class of $e^{2 \pi i mn t}$, i.e., $\psi_n = (\zeta_n)_\ast$.
+\end{enumerate}
+\end{document}

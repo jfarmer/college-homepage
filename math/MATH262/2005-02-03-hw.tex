@@ -1,0 +1,192 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\powset}[1]{
+\wp\left(#1\right)
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\T}{\mathcal{T}}
+
+\newcommand{\iso}{\cong}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MATH 262: Homework \#4}
+\author{Jesse Farmer}
+\date{03 February 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Show that $\R^2$ is the dictionary order topology is metrizable.}
+
+To avoid confusion denote $(x_i, y_i)$ by $\vec{x_i}$, so that an interval in the dictionary order would be $(\vec{x_1}, \vec{x_2})$, etc.  Define $$d(\vec{x_1}, \vec{x_2}) = \begin{cases} 1 & \mbox{if}~x_1 \neq x_2 \\ \min\{|y_1-y_2|, 1\} & \mbox{if}~x_1 = x_2 \end{cases}$$
+
+This is clearly positive definite and symmetric.  Consider the triangle inequality
+\[
+d(\vec{x_1},\vec{x_2}) \leq d(\vec{x_1}, \vec{x_3}) + d(\vec{x_3}, \vec{x_2})
+\]
+
+To show this is always true, it suffices to consider the worst possible case.  That is, the most the left-hand side can be is $1$, and the least the right-hand side can be is $|y_1 - y_3| + |y_3 - y_2| \geq |y_1 - y_2|$.  But if the right-hand side is $1$ then $|y_1 - y_2| \leq 1$.  Therefore $d$ is indeed a metric on $\R^2$.
+
+Let $(\vec{x_1}, \vec{x_2})$ be an open interval in the dictionary order topology of $\R^2$.  There are two cases by symmetry: either $x_1 < x_2$ or $x_1 = x_2$.  Assume $x_1 < x_2$ and $\vec{x_3} \in (\vec{x_1}, \vec{x_2})$, then one of three things can happen: $x_1 = x_3$, $x_1 < x_3 < x_2$, or $x_2 = x_3$.  If $x_1 = x_3$ then $y_1 < y_3$.  Let $\epsilon = \frac{1}{2} \min\{|y_1 - y_3|, 1\}$, then $B_d(\vec{x_3}, \epsilon) \subset (\vec{x_1}, \vec{x_2})$.  If $x_1 < x_2 < x_3$, then $B_d(\vec{x_2}, 1/2) \subset (\vec{x_1}, \vec{x_2})$.  If $x_2 = x_3$ then $y_3 < y_2$ and define $\epsilon = \frac{1}{2} \min\{|y_2 - y_3|, 1\}$, so that $B_d(\vec{x_3}, \epsilon) \subset (\vec{x_1}, \vec{x_3})$.
+
+Now assume $x_1 = x_2$.  If $\vec{x_3} \in (\vec{x_1}, \vec{x_2})$ then $y_1 < y_3 < y_2$.  Let $\epsilon = \frac{1}{2}\min\{|y_1 - y_3|, |y_2 - y_3|, 1\}$, then $B_d(\vec{x_3}, \epsilon) \subset (\vec{x_1}, \vec{x_2}$.  Hence every basis element of $\R^2$ is open with respect to the $d$ metric.
+
+For the converse, note that we may assume $\epsilon < 1$ since if $\epsilon \geq 1$ then $B_d(x, \epsilon) = \R^2$ for any $x \in \R^2$, which is open in any topology.  Then $$B_d(\vec{x_1}, \epsilon) = \{\vec{x} \in \R^2 \mid x = x_1 \mbox{ and } |y_1 - y| < \epsilon\}$$
+
+since, if $x \neq x_1$, it must be the case that $\epsilon \geq 1$.  But is is precisely the interval $(\vec{x}, \vec{x}')$ where $x = (x_1, y_1 - \epsilon)$ and $x' = (x_1, y_1 + \epsilon)$, which is open in $\R^2$.  Therefore the topology induced by the metric $d$ and the dictionary order topology on $\R^2$ are equivalent and $\R^2$ is metrizable.
+
+\item \emph{Let $(X,d)$ be a metric space.}
+\begin{enumerate}
+\item \emph{Show that $d: X \times X \rightarrow \R$ is continuous.}
+
+Let $U$ be an open subset of $\R$ containing $d(x,y)$ for $(x,y) \in X \times X$.  Then there exists $\epsilon > 0$ such that
+\[
+d(x,y) \in (d(x,y) - \epsilon, d(x,y) + \epsilon) \subset U
+\]
+
+Let $(a,b) \in B_d(x, \epsilon/2) \times B_d(y, \epsilon/2)$, then
+\[
+d(a,b) \leq d(x,a) + d(a,b) + d(b,y) < d(x,y) + \epsilon
+\]
+
+Similarly, $d(x,y) < d(a,b) + \epsilon$, so that $d(a,b) \in (d(x,y) - \epsilon, d(x,y) + \epsilon)$.  Therefore
+\[
+d(B_d(x, \epsilon/2) \times B_d(y, \epsilon/2)) \subset U
+\]
+
+and $d^{-1}(U)$ is open, i.e., $d$ is continuous.
+
+\item \emph{Let $X'$ denote a space having the same underlying set as $X$.  Show that if $d: X' \times X' \rightarrow \R$ is continuous then the topology of $X'$ is finer than the topology of $X$.}
+
+Assume $d: X' \times X' \rightarrow \R$ is continuous, then
+\[
+d^{-1}(-\infty, \epsilon) = B_d(x, \epsilon)
+\]
+
+for any $x \in X$ and $\epsilon > 0$, and hence $B_d(x, \epsilon)$ is open in $X'$.
+
+\end{enumerate}
+
+\item \emph{Consider the product, uniform, and box topologies on $\R^\omega$.}
+\begin{enumerate}
+\item \emph{In which topologies are the following functions from $\R$ to $\R^\omega$ continuous?}
+
+Define $f(t) = (nt)_{n \in \N}$, $g(t) = (t)$, and $h(t) = (t/n)_{n \in \N}$.  All three functions are continuous in the product topology since their components are.  Considering the product $((-1/n^2, 1/n^2))_{n \in \Z_+}$, we see that it is open in the box topology, but its preimage under all the functions is $\{0\}$, which is not open, and hence none of the functions are continuous in the box topology.
+
+In the uniform topology, $f$ is not continuous since any neighborhood $B_\epsilon(0)$ with $\epsilon < 1$, has $\{0\}$ for a preimage which is not closed in $\R$.  Both $g$ and $h$ are continuous since, denoting the uniform metric as $\bar{d}$, $\bar{d}(g(x), g(y)) = d(x,y)$, and $\bar{d}(h(x), h(y)) = d(x,y)$.  The former equality is obvious, and the latter follows from the fact that the largest difference between any two elements in the sequence occurs in the first position, which is just $x$ or $y$, respectively.
+
+\item \emph{In which of the topologies do the following sequences converge?}
+
+If there are two topologies, $\T$ and $\T'$ with $\T \subset \T'$, and a sequence converges in $\T'$ then it converges in $\T$ since any open set in the former topology is also an open set in the latter.
+
+Let $w_1 = (1,1,\ldots), w_2=(0,2,2,\ldots), w_3=(0,0,3,3,\ldots)$, etc.  $(w_k)$ converges to $0$ in the product topology since any neighborhood of $0$ contains all but finitely many $w_k$.  It does not converge in the uniform topology since a neighborhood of $0$ with radius less than $1$ contains at most one of the $w_k$, and hence it also does not converge in the box topology.
+
+Let $x_1 = (1,1,\ldots), x_2=(0,1/2, 1/2, \ldots), x_3 = (0,0,1/3,1/3,\ldots)$, etc.  The distance from $0$ to any point in the sequence goes $1/n$ and hence $(x_k)$ converges to $0$ in the uniform topology (and therefore the product topology, too).  It does not converge in the box topology since the open set $(1/n)_{n \in \N}$ contains no $x_k$.
+
+Let $y_1=(1,0,0, \ldots), y_2=(1/2, 1/2, 0, \ldots), y_3=(1/3, 1/3, 1/3, 0, 0, \ldots)$, etc.  This sequence converges to $0$ in the product and uniform topologies for the same reasons as $(x_k)$ does, and, similarly, does not converge in the box topology (using the same example, even).
+
+Let $z_1 = (1,1,0,\ldots), z_2 = (1/2,1/2, 0,\ldots), z_3 = (1/3, 1/3, 0, \ldots)$, etc.  Any neighborhood of $0$ in the box topology contains all but possibly the first two $z_k$, but these converge to $0$ as $1/n$, so that $(z_k)$ converges to $0$ in the box topology and hence in the other two topologies, also.
+
+\end{enumerate}
+
+\item \emph{Let $\R^\infty$ be the subset of $\R^\omega$ consisting of all sequences that are eventually zero.  What is the closure of $\R^\infty$ in $\R^\omega$ in the uniform topology?}
+
+Let $x \in \R^\omega$ be a limit point of $\R^\infty$, and denote the uniform metric by $\bar{d}$.  Then $x$ is a limit point of $\R^\omega$ if and only if for every $\epsilon > 0$, $B_{\bar{d}}(x, \epsilon) \cap \R^\omega \neq \emptyset$, i.e., all but finitely many $x_i \in x$ are such that $|x_i| < \epsilon$.  But this means precisely that $x_i \rightarrow 0$.  Therefore the closure of $\R_\infty$ in $\R^\omega$ with respect to the uniform topology is the set of all sequences that converge to zero.
+
+\item \emph{Show that every isometry is an imbedding.}
+
+Let $f: X \rightarrow Y$ be a isometry of the metric spaces $(X, d)$ and $(Y,d')$.  If $f(x) = f(y)$ for $x,y \in X$ then $$0 = d'(f(x), f(y)) = d(x,y)$$
+and hence $x = y$.  Therefore any isometry is injective.
+
+\begin{lemma}$f: X \rightarrow Y$ is a surjective isometry if and only if $f^{-1}: Y \rightarrow X$ is a surjective isometry.\end{lemma}\label{surjective_isometry}
+\begin{proof}
+Since every isometry is injective, if $f$ is surjective then $f^{-1}$ exists and is well-defined over all of $Y$.  Let $w,z \in Y$, then
+\[
+d(f^{-1}(w), f^{-1}(z)) = d'((f \circ f^{-1})(w), (f \circ f^{-1})(z)) = d'(w,z)
+\]
+\end{proof}
+
+Using the above lemma it is therefore sufficient to prove that $f: X \rightarrow f(X)$ is continuous.  But this is obvious, since, for any $\epsilon > 0$, if $\delta = \epsilon$, then $$d'(f(x), f(y)) = d(x,y) < \delta = \epsilon$$
+
+\item \emph{Define $f_n: [0,1] \rightarrow \R$ by $f_n(x) = x^n$.  Show that $f_n$ converges pointwise but not uniformly on $[0,1]$.}
+
+\begin{lemma}
+\label{polynomial_diverge}
+For $h > 0$, $(1+h)^n \geq 1 + nh$
+\end{lemma}
+
+\begin{proof}
+We will use induction.  This is trivial for $n=1$, so assume it is true for a positive integer $n$.  Then
+\begin{eqnarray*}
+(1+h)^{n+1} &\geq& (1+nh)(1+h) \\
+&=& 1 + h + nh + nh^2 \\
+&\geq& 1 + (n+1)h
+\end{eqnarray*}
+
+Therefore $(1+h)^n \geq 1 + nh$ for all $n \in \N$.
+\end{proof}
+
+Using the approximation from the above lemma, it follows that $\lim_{n \rightarrow \infty} a^n = \infty$ for $a > 1$, and hence, for $0 \leq a < 1$, $\lim_{n \rightarrow \infty} a^n = 0$.  Let $f_n(x) = x^n$ for $0 \leq x \leq 1$.  If $x < 1$ then $f_n(x) \rightarrow 0$, but if $x = 1$, then $f_n(x) \rightarrow 1$.  From basic calculus we know that each $x^n$ is uniformly continuous on any closed and bounded interval, and hence, if $f_n(x)$ converged uniformly on $[0,1]$ it would converge to something continuous.  As this is not the case, $f_n(x)$ cannot converge uniformly there.
+
+\item \emph{Let $X$ be a set and $f_n: X \rightarrow \R$ be a sequence of function.  Let $\bar{d}$ be the uniform metric on $\R^X$.  Show that $(f_n)$ converges uniformly to the function $f: X \rightarrow \R$ if and only if $f_n$ converges to $f$ in $(\R^X, \bar{d})$.}
+
+Recall that, for $\R$, the uniform metric is
+\[
+\bar{\rho}(f,f_n) = \sup_{x \in \R}| f_n(x) - f(x) |
+\]
+
+If $f_n \rightarrow f$ in the uniform metric then for every $\epsilon > 0$ there exists some $N$ such that $\sup |f_n - f| < \epsilon$ for all $n > N$.  But then $|f_n(x) - f(x)| \leq \sup |f_n - f| \epsilon$ for all $x \in X$ if $n > N$, so that $f_n(x) \rightarrow f$ uniformly.  Similarly, if $f_n \rightarrow f$ uniformly, then for all $\epsilon > 0$ there exists an $N$ such that for $n > N$ and all $x \in X$, $|f_n(x) - f(x)| < \epsilon$.  $|f_n(x) - f(x)|$ is therefore bounded above for $n > N$, and hence has a supremum.  By definition the supremum is the least such bound, and so, if all $|f_n(x) - f(x)| < \epsilon$ where $n > N$, it must be true that $\sup|f_n - f| < \epsilon$.  Therefore $f_n \rightarrow f$ in the uniform metric.
+
+\item
+\begin{enumerate}
+\item \emph{Let $X = \R^2$ and define an equivalence relation on $X$ by $x_0 \times y_0 \sim x_1 \times y_1$ if $$x_0 + y_0^2 = x_1 + y_1^2$$  To what space is $X^\ast$ homeomorphic?}
+
+Each equivalence class is a parabola opening to the left, with a vertex on the $y$-axis.  Define a function $g: X^\ast \rightarrow \R$ by $g(x,y) = x + y^2$.  This is clearly a bijection since if $x_0 + y_0^2 = x_1 + y_1^2$, then $x_0 \times y_0 ~ x_1 \times y_1$.  It is surjective as a function of $x$ alone, so is certainly surjective as a function of both $x$ and $y$.
+
+Moreover, $g^{-1}(c - \epsilon, c + \epsilon) = \{(x,y) \in \R^2 \mid |x+y^2 - c| > \epsilon \}$, which is open.  Since any open set in $\R$ is the union of open intervals, it follows that $g$ is in fact a homeomorphism between $X^\ast$ and the real line.
+
+\item \emph{Let $X = \R^2$ and define an equivalence relation on $X$ by $x_0 \times y_0 \sim x_1 \times y_1$ if $$x_0^2 + y_0^2 = x_1^2 + y_1^2$$  To what space is $X^\ast$ homeomorphic?}
+
+Each equivalence class is a circle centered at the origin of arbitrary radius.  Define $g: X^\ast \rightarrow \R^{\geq 0}$ by $g(x,y) = x^2 + y^2$.  As above, this function is obviously a bijection, since it's injective by construction, and surjective in either one of the variables.  
+
+It is a homeomorphism, too, since $g^{-1}(c - \epsilon, c + \epsilon) = \{ (x,y) \in \R^2 \mid |x^2 + y^2  - c| < \epsilon \}$ and $g^{-1}([0, \epsilon))~=~\{(x,y) \in \R^2 \mid 0 \leq x^2 + y^2 < \epsilon\}$, both of which are open in $[0, \infty)$.  Since any open set in $[0, \infty)$ is a union of intervals and sets of the form $[0,\epsilon)$, $g$ is actually a homeomorphism.
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,163 @@
+\documentclass[10pt]{article}
+
+\usepackage{homework}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\title{CMSC 277: Homework \#2}
+\author{Jesse Farmer}
+\date{13 Obctober 2005}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item \emph{Recall the definition of $\Subst_{\theta, \gamma} : \FormP \to \FormP$.  If $v: P \to \set{0,1}$ is a truth assignment such that $\bar{v}(\gamma) = \bar{v}(\theta)$ then $\bar{v}(\varphi) = \Subst_{\theta, \gamma}(\varphi)$ for all $\varphi \in \FormP$. }
+
+For notatinal convenience denote $\bar{v}$ by $w$ and $\Subst_{\theta, \gamma}$ by $S$.  Define
+\[
+X = \set{\varphi \in \FormP \mid w(\varphi) = w(S(\varphi))}
+\]
+
+We proceed by induction.  For the base case we wish to show that $P \subseteq X$.  So let $\varphi \in X$ and recall that by definition $w(\varphi) = v(\varphi)$.  Either $\varphi = \gamma$ or $\varphi \neq \gamma$.  If the former is the case then
+\[
+w(\varphi) = w(\gamma) = w(\theta) = w(S(\varphi)
+\]
+
+and hence $\varphi \in X$.  If the latter is the case then $w(\varphi) = w(S(\varphi))$ directly from the definition of $S$.
+
+Now let $\varphi \in X$.  To show that $X$ is closed under $h_{\neg}$ first assume $\gamma = (\neg \varphi)$.  Then
+\[
+w(\neg \varphi) = w(\gamma) = w(\theta) = w(S(\neg \varphi))
+\]
+
+and hence $(\neg \varphi) \in \FormP$.  If $\gamma \neq (\neg \varphi)$ then we have the following:
+\begin{align*}
+w(S(\neg \varphi)) &= w[(\neg S(\varphi))] \\
+&= \neg w(S(\varphi)) \\
+&= \neg w(\varphi) \\
+&= w(\neg \varphi)
+\end{align*}
+
+where $\neg: \set{0,1} \to \set{0,1}$ is the map such that $\neg 0 = 1$ and $\neg 1 = 0$.  Hence $(\neg \varphi) \in X$.
+
+The remainder of the proof essentially follows \emph{mutatis mutandis}.  Let $\varphi, \psi \in X$.  First assume $\gamma = (\varphi \diamond \psi)$.  Then
+\[
+w(\varphi \diamond \psi) = w(\gamma) = w(\theta) = w(S(\varphi \diamond \gamma))
+\]
+
+so that $(\varphi \diamond \psi) \in X$.  Otherwise we have the following:
+\begin{align*}
+w(S(\varphi \diamond \psi)) &= w[(S(\varphi) \diamond S(\psi))] \\
+&= \diamond (w(S(\varphi)), w(S(\psi))) \\
+&= \diamond (w(\varphi), w(\psi)) \\
+&= w((\varphi \diamond \psi))
+\end{align*}
+
+where $\diamond: \set{0,1}^2 \to \set{0,1}$ is defined according to the behavior of $w$ with respect to $\diamond$.  In either case, $(\varphi \diamond \psi) \in X$.  Since $X \subseteq \FormP$ by hypothesis and $X$ is inductive, it follows that $X = \FormP$ and the proposition is proven.
+
+\item \emph{Let $\FormPb = G(L^\ast, P, \set{h_{\neg}, h_{\lor}, h_{\land}})$ and let $\Dual$ be defined as in the problem.  Show that $\Dual(\varphi)$ is semantically equivalent to $\neg \varphi$ for all $\varphi \in \FormPb$.}
+
+Define
+\[
+X = \set{\varphi \in \FormPb \mid \ \Dual(\varphi) \mbox{ is semantically equivalent to } \neg\varphi}
+\]
+
+We will show that $X$ is inductive.  First, note that $P \subseteq X$ directly from the definition of $\Dual$.  So assume $\varphi, \psi \in X$.  By the previous exercise we have that substituting a formula for something with which it is semantically equivalent preserves semantic equivalence.  Writing $\equiv$ for semantic equivalence we have
+\[
+\Dual(\neg\varphi) \equiv \neg\Dual(\varphi) \equiv \neg(\neg\varphi) \equiv \varphi
+\]
+
+which follow by definition of $\Dual$, the inductive hypothesis, and from the proof in class that $\neg\neg\varphi$ is syntactically equivalent to $\varphi$ plus soundness and completeness, respectively.
+
+Similarly, by deMorgan's laws as proven in class,
+\[
+\Dual(\varphi \lor \psi) \equiv \Dual(\varphi) \land \Dual(\psi) \equiv \neg\varphi \land \neg\psi \equiv \neg(\varphi \lor \psi)
+\]
+
+It follows \emph{mutatis mutandis} for $h_{\land}$, and hence $X = \FormPb$.
+\item
+\begin{enumerate}
+\item \emph{Show that the following are equivalent for $\Gamma_1, \Gamma_2 \subseteq \FormP$:}
+\begin{enumerate}
+\item \emph{$\Gamma_1$ and $\Gamma_2$ are semantically equivalent.}
+\item \emph{For all $\theta \in \FormP$, $\Gamma_1 \vDash \theta$ if and only if $\Gamma_2 \vDash \theta$.}
+\end{enumerate}
+
+That the latter implies the former is trivial, since if it holds for all $\theta \in \FormP$ it certainly holds for subsets of $\FormP$.  Define
+\[
+X = \set{\theta \in \FormP \mid \mbox{If $\Gamma_1, \Gamma_2$ are semantically equivalent then $\Gamma_1 \vDash \theta$ if and only if $\Gamma_2 \vDash \theta$.}}
+\]
+
+I'm not sure where to go from here.  The inductive steps seems easy enough, e.g., if $\varphi, \psi \in X$ then $\Gamma_1 \vDash \varphi \land \psi$ implies $\Gamma_1 \vDash \varphi$ and $\Gamma_1 vDash \psi$. Hence by the inductive hypothesis $\Gamma_2 \vDash \varphi$ and $\Gamma_2 vDash \psi$, so that $\Gamma_2 \vDash \varphi \land \psi$.  Why this holds for the base case, however, I don't know.
+
+\item \emph{Show that if $\Gamma$ is finite then $\Gamma$ has an independent semantically equivalent subset.}
+
+We proceed by induction on the size of $\Gamma$.  If $\abs{\Gamma} = 0$ then the statement is vacuously true, so let $|\Gamma| = k$ for some finite $k$.  If $\Gamma$ is independent then we are done, so assume there exists $\varphi$ such that $\Gamma \setminus \set{\varphi} \vDash \varphi$.  By the inductive hypothesis there exists $\Gamma_0 \subseteq \Gamma\setminus\set{\varphi}$ such that $\Gamma_0$ is indepednent and semantically equivalent to $\Gamma \setminus \set{\varphi}$.  But $\Gamma \setminus{\varphi}$ is semantically equivalent to $\Gamma$ since $\Gamma \setminus{\varphi} \vDash \Gamma$ by hypothesis and $\Gamma \vDash \Gamma \setminus \set{\varphi}$ trivially.  Therefore $\Gamma_0$ is independent and semantically equivalent to $\Gamma$.
+
+\item \emph{Show that there exists a set $P$ and an infinite set $\Gamma \subseteq \FormP$ which has no independent semantically equivalent subset.}
+\end{enumerate}
+
+\item \emph{Let $P = \set{A_1, \ldots, A_7}$.  Show that there exists a boolean function $f: \set{0,1}^7 \to \set{0,1}$ such that $\Depth(\varphi) \geq 5$ for all $\varphi \in \FormP$ with $B_{\varphi} = f$.}
+
+Recall that the map $\varphi \mapsto B_\varphi$ is surjective from $\FormP$ to the set of all boolean functions over $P$.
+
+Consider all formulas with $\Depth(\varphi) \leq 4$.  In general for a formula with depth $n$ there will be $2^n$ possible positions for atomic formulas, so that for $|P| = 7$ there are $7^{(2^4)} \cdot 3^15$ formulas of depth at most $4$ (since any formula of depth less than $4$ can incrase their depth by using $A = (A \land A)$), where $3^15$ is counting the use of the connectives.  There are $2^{(2^7)}$ boolean functions in all.  Hence there are at most $7^{(2^4)}\cdot 3^15$ functions represented by these elements.  Since $7^{(2^4)} \cdot 3^15 < 2^{(2^7)}$ it follows that there must exist at least one function which can be represented only by a formula of depth at least $5$.
+
+\item \emph{Let $P$ be a set not containing the symbols $($, $\neg$, $\land$, $\lor$, and $\to$.  Let $L = P \cup \set{(, \neg, \land, \lor, \to}$.  Define a unary function $h_{\neg}$ and binary functions $h_{\land}$, $h_{\lor}$, and $h_{\to}$ on $L^\ast$ as follows: \begin{align*}h_{\neg}(\varphi) &= (\neg \varphi \\ h_{\land}(\varphi, \psi) &= (\varphi \land \psi \\ h_{\lor}(\varphi, \psi) &= ( \varphi \lor \psi \\ h_{\to}(\varphi, \psi) &= (\varphi \to \psi\end{align*} Show that $(L^\ast, P, \cal{H})$ is free where $\cal{H} = \set{h_{\neg}, h_{\land}, h_{\lor}, h_{\to}}$.}
+
+Let $S = \set{\neg, \land, \lor, \to}$.  Define $K: L^\ast \to \Z$ as follows.  For $\diamond \in S$ let $K(\diamond) = -1$ and $K(() = 1$.  For all other symbols $\varphi \in L$ let $K(\varphi) = 0$.  Let $K(\lambda) = 0$ and for $\sigma \in L^\ast$ let $K(\sigma) = \sum_{i=1}^{|\sigma|} K(\sigma(i))$.  In other words, we are going to exploit the fact that in this language there are as many left parantheses as there are connectives in a well-formed formula.
+
+\begin{lemma}$K(\varphi) = 0$ for all $\varphi \in \FormP$.
+\end{lemma}
+
+\begin{proof}
+We proceed by induction.  Define 
+\[
+X = \set{\varphi \in \FormP \mid K(\varphi) = 0}
+\]
+
+Certainly $P \subset \varphi$ since $K(A) = 0$ for all $A \in P$.  Let $\varphi, \psi \in X$.  Then
+\begin{align*}
+K((\neg \varphi) &= K(() + K(\neg) + K(\varphi) \\
+&= 1 + -1 + K(\varphi) \\
+&= 0
+\end{align*}
+For $\diamond \in \set{\lor, \land, \to}$,
+\begin{align*}
+K((\varphi \diamond \psi) &= K(() + K(\varphi) + K(\diamond) + K(\psi) \\
+&= 1 + K(\varphi) + -1 + K(\psi) \\
+&= 0
+\end{align*}
+
+Since $X \subseteq \FormP$ and $X$ is inductive, $X = \FormP$.  This means all well-formed formulas have the same number of left parentheses as connectives.
+\end{proof}
+
+Here is a second lemma.
+\begin{lemma}
+If $\varphi \in \FormP$ and $\lambda \neq \sigma \subset \varphi$ then either $K(\sigma) \leq -1$ or $\sigma$ ends in a connective.
+\end{lemma}
+\begin{proof}
+We cannot simply say that $K(\sigma) \leq -1$ for all proper initial segments because then things such as $(\neg$ would become well-formed formulas, which we do not want.  Let $X$ be the set of all $\varphi \in \FormP$ satisfying this property.  This is trivially satisfied by elements of $P$ since the only proper initial segments are $\lambda$ and $K(\lambda) = 0$.
+
+Let $\varphi \in \FormP$.  Then $\sigma \in \set{(, (\neg, (\neg\tau}$ where $\tau \subset \varphi$.  If $\sigma = ($ then $K(\sigma) = -1$.  If $\sigma = (\neg$ then $\sigma$ ends in a connective.  If $\tau$ does not end in a connective then $K(\tau) \leq -1$ by hypothesis and hence $K(\sigma) = K(() + K(\neg) + K(\tau) \leq -1$.  Otherwise, $\sigma$ ends in a connective since $\tau$ does.
+
+The proofs for binary connetives, $\diamond$, is the same.  If $\varphi, \psi \in X$ then one must consider $\sigma$ as one of $($, $(\tau$, $(\varphi$, $(\varphi\diamond$, or $(\varphi\diamond\tau'$ where $\tau \subset \varphi$ and $\tau' \subset \varphi$.  The same analysis proves that either there are too few connectives in $\sigma$ or $\sigma$ ends in a connective.
+\end{proof}
+
+Hence $\varphi \in \FormP$ is a well-formed formula if and only if it has the same number of left parentheses as connectives and does not end in a connective.  Together these two lemmas prove that no proper initial segment of a well-formed formula is itself a well-formed formula.  From this the injectivity of the various functions in the definition of a free generating system follows since we have that $\varphi, \psi \in \FormP$ implies $\varphi \not\subset \psi$ (and $\lambda \notin \FormP$.
+
+
+\end{enumerate}
+\end{document}

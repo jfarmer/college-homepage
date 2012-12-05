@@ -1,0 +1,154 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{MATH 208: Homework \#3}
+\author{Jesse Farmer}
+\date{26 January 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Let $X \subseteq \mathbb{R}^n$ be a compact subset.  Prove that every continuous real-valued function on $X$ can be approximated by real polynomials in $n$ variables, uniformly on $X$.}
+
+Every real-valued polynomial in $\mathbb{R}^n$ has terms of the form $c\prod_{k=1}x^{n_k}$, for some $n_k \in \mathbb{N}$.  It is clear that this is a subset of $C(X,\mathbb{R})$ and that it is closed under addition and multiplication.  Addition is obvious (i.e., any sum of these terms plus any other sum of these terms is surely a sum of these terms), and multiplication follows from repeated application of the distributive law.  Since this set is closed, it follows that $\mathbb{R}^n[x]$ is a subring of  $C(X,\mathbb{R})$.
+
+Trivially, every constant function is a polynomial of this kind.  Let $a,b \in X$ such that $a \neq b$.  Then $(a_1,\ldots,a_n) \neq (b_1,\ldots,b_n)$.  Define $K = \{k \in \mathbb{N} \mid a_k \neq b_k\}$.  Since $a \neq b$ we know that $K \neq \varnothing$.  Consider $f(x_1,\ldots,x_n) = \prod_{k \in K}^n(x_k - a_k)$.  It is clear that $f(a)=0$ and $f(b) \neq 0$, and that this is a real-valued polynomial in $n$ variables.  This then separates points of $X$, and is therefore, by the Stone-Weierstrass theorem, dense in $C(X,\mathbb{R})$.  It follows immediately that any continuous function in $\mathbb{R}$ can be approximated by a polynomial of $n$ variables.
+
+\item \emph{Prove that every continuous complex-valued function on the unit circle can be approximated uniformly on the unit circle by Laurent polynomials.}
+
+Every Laurent polynomial is continuous on the unit circle, since $|z| = 0$ if and only if $z = 0$.  Additive and multiplicative closure require nothing more than the distributive property.  As this is an algebraically closed subset of the ring $C(S^1,\mathbb{C})$, it is also a subring.
+
+Define $p(z) = \sum_{j=-N}^Na_jz^j$, for $a_j \in \mathbb{C}$ and $N \in \mathbb{N}$ and let $\mathbb{C}[z,z^{-1}]$ denote the set of all Laurent polynomials.
+
+If we consider the Laurent polynomial where $N=0$, we see that all complex constant functions are of this form. 
+
+We know that $z\overline{z} = |z| = 1$, so $\overline{z} = \frac{1}{z}$.  So
+
+\[ \overline{p}(z) = \overline{\sum_{j=-N}^N a_j z^j} = \sum_{j=-N}^N \overline{a_j z^j} = \sum_{j=-N}^N \overline{a_j} \overline{z^j} =  \sum_{j=-N}^N b_j \left(\frac{1}{z}\right)^j \in \mathbb{C}[z,z^{-1}]\] 
+
+Therefore this is stable under complex conjugation.
+
+The identity function is a Laurent polynomial which trivially separates points on $S^1$.
+
+By the Stone-Weierstrass theorem we have that $\mathbb{C}[z,z^{-1}]$ is dense in $C(S^1,\mathbb{C})$, so any continuous function on $S^1$ can be approximated by Laurent polynomials.
+
+\item \emph{Let $A$ be the dense subring provided by the Stone-Weierstrass theorem and $B$ be the closure of $A$.  Prove that $B$ is also a subring of $C(X,\mathbb{R})$.}
+
+Let $f \in B$ be arbitrary.  If $f \in A$, then we are done since $A$ itself is algebraically closed.  We can thus consider only the limits of functions in $A$, since $B$ is the union of $A$ and the accumulation points of $A$.  From the previous homework we know that the unform limit of continuous function is continuous (the ``$\frac{\epsilon}{3}$'' argument), so $B \subseteq C(X,\mathbb{R}$.  Since the limit of the sum of the sum of the limits and the limit of the product of the product of the limits, we see that $B$ is algebraically closed and thus that $B$ is a subring of $C(X,\mathbb{R})$.
+
+\item \emph{Show that for any $\epsilon > 0$ there exists a real polynomial $p(y)$ in one variable such that $|p(y)- |y\| < \epsilon$ for all $y \in [-M,M]$.}
+
+\item \emph{Show that $A_\mathbb{R}$ is a subring of $C(X,\mathbb{R}$) that satisfies the conditions of the Stone-Weierstrass theorem on $\mathbb{R}$.}
+
+Clearly every constant function is a real-valued complex function.  We only need to show that $A_\mathbb{R}$ separates points.
+
+We know that $A$ is stable under complex conjugation, so $\overline{f} \in A$.  If $x,y \in X$ such that $x_1 \neq x_2$ then there exists $f \in A$ such that $y_1 = f(x_1) \neq f(x_2) = y_2$.  It is the case that $\Re(y_1) \neq \Re(y_2)$ or $\Im(y_1) \neq \Im(y_2)$.  If it is the former, consider $u = \frac{f + \overline{f}}{2}$.  Then $u(x_1) \neq u(x_2)$.  If it is the latter, consider $v = \frac{i(\overline{f} - f)}{2}$.  Then $v(x_1) \neq v(x_2)$.  Both $u,v$ are real valued functions, one of which will separate points for any $x_1,x_2 \in \mathbb{X}$.  Moreover, $A_\mathbb{R}$ is trivially closed under addition and multiplication, since any sum or product of real-valued functions could never be a complex valued-function.
+
+Thus $A_\mathbb{R}$ satisfies the hypotheses of the real Stone-Weierstrass theorem.
+
+\item \emph{Show that $C_c(X,F)$ is contained in the space $BC(X,F)$.  Determine whether or not $C_c(X,F)$ is closed in $BC(X,F)$ or not.  When is $C_c(X,F)$ a Banach space?}
+
+Let $f \in C_c(X,F)$.  Since the support of $f$ is compact and the continuous image of a compact set is compact and thus bounded, $C_c(X,F) \subseteq BC(X,F)$.
+
+Define 
+
+\begin{equation*}
+f_n(x) = 
+\begin{cases}
+0 & x \leq 0 \\
+x & 0 < x < 1 \\
+\frac{1}{x} & 1 \leq x \leq n \\
+\frac{-x+1}{n} + 1 & n < x < n+1 \\
+0 & n+1 \leq x
+\end{cases}
+\end{equation*}
+
+Clearly each $f_n$ is compactly supported by the $\frac{1}{x}$ section, and that as $n \rightarrow \infty$, $f_n$ approaches the function
+
+\begin{equation*}
+f(x) = 
+\begin{cases}
+0 & x \leq 0 \\
+x & 0 < x < 1 \\
+\frac{1}{x} & 1 \leq x
+\end{cases}
+\end{equation*}
+
+This function is not compactly supported since it is non-zero on an unbounded set, which means the support of $f$ is not compact.  Therefore $C_c(X,F)$ is not topologically closed.
+
+(When is $C_c(X,F)$ a Banach space.  Iff $X$ is compact?)
+
+\item \emph{Show that $C_c(X,F) \subseteq C_0(X,F) \subseteq BC(X,F)$.  Prove that $C_0(X,F)$ is a Banach space.  Give examples showing that, in general, all three inclusions are strict.}
+
+Any $f \in C_c(X,F)$ must eventually be zero as its support is bounded.  So for any $\epsilon > 0$ simply choose its support, and outside of that $|f(x)| < \epsilon$.  Therefore $C_c(X,F) \subseteq C_0(X,F)$.  Take $g \in C_0(X,F)$, then there exists a compact set outside of which $g$ is arbitrarily small, and certainly bounded.  Since $g$ is continous, its image is bounded on that compact set.  Therefore $C_0(X,F) \subseteq BC(X,F)$.
+
+(Banach space)
+
+Let
+
+\begin{equation*}
+f(x) = 
+\begin{cases}
+\frac{1}{x^2} & |x| \geq 1 \\
+1 & |x| < 1
+\end{cases}
+\end{equation*}
+
+Then $f \in C_0(X,F)$ but $f \notin C_c(X,F)$.  Any constant function strictly satisfies the second inclusion.
+
+\item \emph{Show that $X = \{(a_n) \mid a_i \in \mathbb{R} \mbox{ and all but finitely many are zero}\} \subseteq l^\infty(\mathbb{R})$ is of the first kind.} 
+
+Define $A_k = \{(a_n) \in X \mid \text{Exactly $k$ $a_i$ are zero} \}$. 
+Clearly $X \subseteq \bigcup_{k \in \mathbb{N}} A_k$.  Then, let $(b_k) \in A_k$ be such that $b_j = 0$ for some $j \in \mathbb{N}$.
+
+For any $\epsilon > 0$ define a new sequence as
+
+\begin{equation*}
+c_n = 
+\begin{cases}
+b_n & n \neq m \\
+\frac{\epsilon}{2} & n = m
+\end{cases}
+\end{equation*}
+
+Then $||a_k - b_k|| = \frac{\epsilon}{2}$, so $(b_n) \in B_\epsilon((a_n))$ but $(b_n) \notin A_k$ since it has $k+1$ non-zero terms.  This implies that the interior of $\overline{A}_k$ is empty, i.e., $A_k$ is nowhere dense.  Therefore $X$ is of the first kind, by definition.
+
+\item \emph{Let $T: V \rightarrow W$ be a linear transformation.  Show that the following are equivalent:}
+\begin{enumerate}
+\item \emph{$T$ is bounded}
+\item \emph{$T$ is continuous at zero}
+\item \emph{$T$ is continuous for every $v \in V$}
+\end{enumerate}
+
+\begin{enumerate}
+\item[$(a \Rightarrow b)$]  
+
+Assume that there exists some $C > 0$ such that $\|T(v)\| \leq C\|v\|$ for all $v \in V$.  Let $\delta = \frac{\epsilon}{C}$.  Since $T(0) = 0$ have
+\[ \|T(v)- T(0)\| = \|T(v)\| \leq C\|v\| < \epsilon \]
+\item[$(b \Rightarrow c)$]
+
+Assume $T$ is continuous at $0$, then there is some $\delta > 0$ such that $\|v\| < \delta \Rightarrow \|T(v)\| < \epsilon$ for all $v \in V$, since $T(0) = 0$.  So, as $v-a \rightarrow 0$ we have $\|T(v) - T(a)\| \leq \|T(v-a)\| < \epsilon$, i.e., $T$ is continuous for all $v \in V$.
+
+\item[$(c \Rightarrow a)$]
+
+Since $T$ is a continous mapping from $V \rightarrow W$ we know that $T^{-1}(B_1(0))$ is open and contains $0$ since $T(0) = 0$.  So there exists $r > 0$ such that $B_r(0) \subset T^{-1}(B_1(0))$.  Let $\epsilon = \frac{r}{2\|v\|}$, with $v \neq 0$.  Then
+\[\|\epsilon v\| = |\epsilon|\|v\| = \frac{r}{2} < r\]
+so $\epsilon v \in B_r(0)$ and $T(\epsilon v) \in B_1(0)$.
+
+Finally,
+\[ |\epsilon| \|T(v)\| = \|\epsilon T(v)\| = \|T(\epsilon v)\| < 1 = \frac{r}{2\|v\|} \cdot \frac{2 \|v\|}{r} = |\epsilon|\frac{2 \|v\|}{r} \]
+
+Letting $C = \frac{2}{r}$, we get that $\|T(v)\| \leq C\|v\|$ for all $v \in V$, where $C$ does not depend on $v$.
+\end{enumerate}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\powset}[1]{
+\wp\left(#1\right)
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\T}{\mathcal{T}}
+
+\newcommand{\iso}{\cong}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MATH 262: Homework \#7}
+\author{Jesse Farmer}
+\date{08 March 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Show that if $X$ has a countable basis $\{B_n\}$ then every basis $\mathcal{C}$ for $X$ contains a countable basis for $X$.}
+
+Since $\{B_n\}$ and $\mathcal{C}$ are bases for the same topology, it follows that for every $x \in X$ and $m$ there exists a $n$ and $C_{n,m}$ such that $x \in B_n \subset C_{n,m} \subset B_m$.
+
+Let $x \in X$ and let $x \in B_m \in \{B_n\}$.  Then there exists some $C_{n,m}$ such that $x \in C_{n,m} \subset B_m$.  If $x \in C_{n_1, m_1} \cap C_{n_2, m_2}$ then there exists $n'$, $B_{n_3}$, $C_{n', n_3}$ such that 
+\[
+x \in C_{n', n_3} \subset B_{n_3} \subset B_{n_1} \cap B_{n_2} \subset C_{n_1, m_1} \cap C_{n_2, m_2}
+\]
+
+Hence the $\{C_{n,m}\}$ form a countable basis.
+
+\item \emph{Let $X$ have a countable basis and let $A$ be an uncountable subset of $X$.  Show that uncountably many points of $A$ are limit points of $A$.}
+
+Let $\{B_i\}$ be a countable basis for $X$ and $Z$ be the set of all points that are not limit points of $X$.  For every $z \in Z$ there exists a neighborhood $U_z$ of $z$ which is disjoint from all other points of $X$, and there is some $x \in B_k \subset U_z$.  But then the $B_k$ must be disjoint, and hence $Z = \bigcup B_k$ is countable as it is the countable union of countable sets (singletons, in fact).  If $A$ is an uncountable subset of $X$ then it must have an uncountable number of limit points since otherwise it would be the union of two countable sets, viz., the set of all limits points of $A$ and $Z \cap A$ (which is countable from the argument above), and hence countable itself.
+
+\item
+\begin{enumerate}
+\item \emph{Show that every metrizable space with a countable dense subset $X$ has a countable basis.}
+
+Let $(X, \rho)$ be a metric space and $A \subset X$ a countable dense subset.  For every $x$ there exists a neighborhood $U$ of $x$ and a basis element $B_\epsilon(x)$ with $\epsilon < 1$ such that $x \in B_\epsilon(x) \subset U$.  Since $A$ is dense in $X$, there exists some $a \in B_\frac{\epsilon}{3}(x)$ so that $\rho(x,a) < \frac{\epsilon}{3}$.  Then $$B_\frac{2\epsilon}{3}(a) \subset B_\epsilon(x)$$
+
+and choosing an integer $n$ such that $\frac{\epsilon}{3} < \frac{1}{n} < \frac{2\epsilon}{3}$ (which is possible since the interval has length less than $1$), it follows that $$x \in B_\frac{1}{n}(a) \subset B_\frac{2\epsilon}{3}(a) \subset B_\epsilon(x)$$
+
+Therefore the collection of sets $\left\{B_\frac{1}{n}(a) \mid n \in \Z_+, a \in A\right\}$ form a countable basis for $X$.
+
+\item \emph{Show that every metrizable Lindel\"{o}f space has a countable basis.}
+
+Let $(X, \rho)$ be a metric Lindel\"{o}f space.  Consider the open cover $\mathcal{B} = \left\{B_\frac{1}{n}(x) \mid x \in X\right\}$, for some fixed $n \in \Z_+$.  Since $X$ is Lindel\"{o}f there exists a countable subcover $\mathcal{B}'$.  Define $$A_n = \left\{a \in X \mid B_\frac{1}{n}(a) \in \mathcal{B}'\right\}$$ and $$A = \bigcup_{n \in \Z_+} A_n$$
+
+Since the $A_n$ are countable it follows that $A$ is also countable.  We claim that $A$ is a dense, so that the condition from the previous part is satisfied and therefore $X$ has a countable basis.  Let $x \in X$ and $U$ be a neighborhood of $x$ containing the basis element $B_\epsilon(x)$.  Choose $\frac{1}{n} < \epsilon$.  Since $A_n$ is a subcover there exists some $a$ such that $x \in B_\frac{1}{n}(a)$.  But then $a \in B_\frac{1}{n}(x) \subset B_\epsilon(x) \subset U$.  Therefore $x$ is in the closure of $A$, and hence $A$ is dense in $X$.  From the previous part $X$ is second-countable.
+\end{enumerate}
+
+\item \emph{Show that if $X$ has a countable dense subset then every collection of disjoint open sets in $X$ is countable.}
+
+Let $A$ be a countable dense subset of $X$ and $\mathcal{O}$ a collection of nonempty disjoint open sets.  If $U \in \mathcal{O}$ then there exists some $a \in A$ with $a \in U$.  Since the sets in $\mathcal{O}$ are disjoint they cannot contain the same $a$, and therefore the cardinality of $\mathcal{O}$ at most the cardinality of $A$, i.e., $\mathcal{O}$ is countable.
+
+\item \emph{Show that if $X$ is normal then every pair of disjoint closed sets have neighborhoods whose closures are disjoint.}
+
+Let $A$ and $B$ be disjoint closed sets.  Since $X$ is normal there exist disjoint neighborhoods $U_1$ and $V_1$ such that $A \subset U_1$ and $B \subset V_1$.  But then $X \setminus U_1$ is closed with $V_1 \subset X \setminus U_1$, and similarly, $U_1 \subset X \setminus V_1$.  Again, by the normality of $X$ there exist disjoint neighborhoods $U_2$ and $V_2$ such that $V_1 \subset X \setminus U_1 \subset U_2$ and $U_1 \subset X \setminus U_1 \subset V_2$.  Since $X \setminus V_1$ and $X \setminus U_1$ are closed it follows that $\overline{U}_1 \subset V_2$ and $\overline{V}_1 \subset U_2$.  Hence $U_2$ and $V_2$ are precisely the neighborhoods for which we were looking.
+
+\item \emph{Let $f,g: X \rightarrow Y$ be continuous and $Y$ a Hausdorff space.  Show that $\{x \in X \mid f(x) = g(x)\}$ is closed in $X$.}
+
+Let $f,g: X \rightarrow Y$ be any two continuous functions and $Y$ be Hausdorff.  Then the set
+\[
+C = \{x \in X \mid f(x) = g(x)\}
+\]
+
+is closed.  This follows from the fact that $x \in X \setminus C$ then there exist disjoint neighborhoods $U, V$ of $f(x)$ and $g(x)$ respectively, and $x \in f^{-1}(U) \cup f^{-1}(V)$, i.e., $X \setminus C$ is open.
+
+\item \emph{Show that a closed subspace of a normal space is normal.}
+
+Let $X$ be normal and $Y \subset X$ a closed subspace.  Let $A$ and $B$ be two closed subsets in $Y$.  From the definition of the subspace topology, $A = Y \cap A'$ and $B = Y \cap B'$ where $A'$ and $B'$ are closed in $X$, and therefore $A$ and $B$ are also closed.  Since $X$ is normal there exist disjoint $U$ and $V$ such that $A \subset U$ and $B \subset V$.  But then $U \cap Y$ and $V \cap Y$ are open sets in $Y$ which separate $A$ and $B$, and hence $Y$ is normal.
+
+\item \emph{Show that every regular Lindel\"{o}f space is normal.}
+
+Let $A$ and $B$ be disjoint closed subsets of a regular Lindel\"{o}f space $X$.  Since they are closed they are also Lindel\"{o}f as subspaces of $X$.  By the regularity of $X$ choose a neighborhood $U_x$ for every point $x \in A$ such that $x \in U_x \subset \overline{U}_x \subset X \setminus B$, which is open.  Then there exist a countable subcover of $\{U_x\}$, call it $\{U_n\}$ where $n \in \Z_+$.  Similarly, there is a countable cover of $B$ by open sets $\{V_n\}$.  Define $$U'_n = U_n \setminus \bigcup_{i=1}^n \overline{V}_i$$ and similarly define a $V'_n$.  The $\{U'_n\}$ and $\{V'_n\}$ are open as they are the set different between an open set and a closet set.  Moreover, they are still covers of $A$ and $B$, respectively.  Let $U = \bigcup_{n \in \Z_+} U'_n$ and $V = \bigcup_{n \in \Z_+} V'_n$.  These are open neighborhoods of $A$ and $B$.
+
+Assume for contradiction that there exists an $x \in U \cap V$.  Then $x \in U'_k \cap V'_j$ for some $j,k$.  If $j = k$ then $x \in U_k \cap V_k$, which is impossible by our construction from the regularity of $X$.  So assume without loss of generality that $j < k$.  Then $V'_j$ is disjoint from both $U'_k$ and $U_k$ by construction, again, which is also a contradiction.  Therefore there exist disjoint neighborhoods around $A$ and $B$, i.e., $X$ is normal.
+
+\item \emph{Is $\R^\omega$ normal in the product topology?  In the uniform topology?}
+
+$\R^\omega$ is metrizable in both topologies, and therefore normal in both topologies.
+
+\item
+\begin{enumerate}
+\item \emph{Show that a connected normal space having more than one point is uncountable.}
+
+Let $X$ be a connected normal space with at least two distinct points $x,y \in X$.  From Urysohn's lemma there exists a continuous function $f: X \rightarrow [0,1]$ such that $f(x) = 0$ and $f(y) = 1$.  Since $X$ is connected and $f$ is continuous, $f(X) = [0,1]$, and therefore the cardinality of $X$ must be at least that of $[0,1]$, i.e., $X$ is uncountable.
+
+\item \emph{Show that a connected regular space having more than one point is uncountable.}
+
+Let $X$ be a connected regular space.  If $X$ is countable then $X$ is Lindel\"{o}f.  Since $X$ is also regular, from a previous problem, it follows that $X$ is normal, and hence from the previous part $X$ is uncountable -- a contraction.
+
+\end{enumerate}
+
+\item \emph{Give a direct proof of the Urysohn lemma for a metric space $(X,\rho)$ by setting $$f(x) = \frac{\rho(x,A)}{\rho(x,A) + \rho(x,B)}$$}
+
+It follows directly that $0 \leq \rho(x,A) \leq \rho(x,A) + \rho(x,B)$ and therefore that $0 \leq f(x) \leq 1$ for all $x \in X$.  If $x \in A$ then $\rho(x,A) = 0$ and $f(x) = 0$.  If $x \in B$ then $\rho(x,B) = 0$ and $f(x) = 1$.  Since no point is in both $A$ and $B$, $\rho(x,A) + \rho(x,B)$ never vanishes, and hence $f$ is continuous.
+
+\end{enumerate}
+\end{document}

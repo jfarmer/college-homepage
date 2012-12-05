@@ -1,0 +1,183 @@
+\documentclass[letterpaper,11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\def\bddots{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu
+        \raise4pt\hbox{.}\mkern2mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern1mu}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{problem}[theorem]{Problem}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\ip}[2]{\left(#1\mid#2\right)}
+\title{MATH 209: Homework \#8}
+\author{Jesse Farmer}
+\date{24 May 2004}
+\begin{document}
+\maketitle
+\begin{problem}
+Let $\chi(x) = e^{2\pi it(x)}$ where $t: \Q_p \rightarrow \R$ is defined as $t(x) = \sum_{n=\nu(x)}^{-1} a_n p^n$.  Show that $\chi(x+y) = \chi(x)\chi(y)$.
+\end{problem}
+
+If $x \in R_p$ then $\chi(x) = 1$.  Assume therefore that $x \notin R_p$ and let $\nu(x) \leq \nu(y)$ without loss of generalization.  Define
+\[
+t(x) = \sum_{k=\nu(x)}^{-1} a_k p^k \mbox{ and } t(y) = \sum_{k=\nu(y)}^{-1} b_k p^k
+\]
+
+Letting $a_k=b_k = 0$ if $k < \nu(x)$, then
+\begin{equation}
+\label{sum_tail}
+t(x) + t(y) = \sum_{k=\nu(x)}^{-1} (a_k + b_k)p^k
+\end{equation}
+
+However, $t(x) + t(y) = t(x + y)$ except when there are enough carries.  This is clear if we let
+\[
+c_{k-1} = \begin{cases} 1 & \text{if $a_{k-1} + b_{k-1} + c_{k-2} > p$}\\ 0 & \text{otherwise} \end{cases}
+\]
+
+Then
+\begin{equation}
+\label{tail_sum}
+t(x+y) = \sum_{k=\nu(x)}^{-1} (a_k + b_k + c_{k-1} \,(\text{mod} \,p))p^k
+\end{equation}
+
+($\ref{sum_tail}$) and ($\ref{tail_sum}$) are clearly equal unless too many carries occur (i.e.,$a_{-1} + b_{-1} + c_{-2} > p$).   However, in this case, they will only differ by $1$ and, since $e^{2\pi in\theta} = e^{2\pi i(n+1)\theta}$, $\chi$ is still a homomorphism.  We proved in class that $\chi = 1$ around a neighborhood of $0$, and therefore $\chi$ is continuous.
+
+\begin{problem}
+Let $\chi_u(x) = \chi(ux)$.  Show that $\{\chi_u\} \subset \hat{\Q}_p$.
+\end{problem}
+
+$\chi_u$ is clearly unitary and continuous by the same reason as above.  Moreover,
+\[
+\chi_u(x+y) = \chi(ux+uy) = \chi(ux)\chi(uy) = \chi_u(x)\chi_u(y)
+\]
+
+\begin{problem}
+Let $g$ be a piecewise continuous function on $\T$.  Show that
+\[
+\lim_{\lambda \rightarrow \infty} \int_{-\pi}^{\pi} g(e^{i\varphi}) \sin(\lambda\varphi) \,d\varphi = 0
+\]
+\end{problem}
+
+Since the $\sin(\lambda\varphi)$ are orthonormal, by Bessel's inequality
+\[
+\sum_{\lambda=1}^n \left|\int_{-\pi}^{\pi} g(e^{i\varphi}) \sin(\lambda\varphi) \,d\varphi\right|^2 = \sum_{\lambda=1}^n |\ip{g}{\sin(\lambda\varphi)}|^2 \leq \|g\|^2
+\]
+
+Therefore the series $\sum_{\lambda=1}^n \left(\int_{-\pi}^{\pi} g(e^{i\varphi}) \sin(\lambda\varphi) \,d\varphi\right)^2$ converges, which implies that
+\[
+\lim_{\lambda \rightarrow \infty} \int_{-\pi}^{\pi} g(e^{i\varphi}) \sin(\lambda\varphi) \,d\varphi = 0
+\]
+\begin{problem}
+Let $g$ be a piecewise continuous function on $[a,b]$.  Show that
+\[
+\lim_{\lambda \rightarrow \infty} \int_a^b g(t) \sin(\lambda t) \,dt = 0
+\]
+\end{problem}
+
+Let $u = at$ where $a = \frac{2\pi}{b-a}$.  Then define
+\[
+f(u) = g\left(\frac{u}{a}\right) \mbox{ and } \lambda' = \frac{\lambda}{a}
+\]
+
+Then $f$ can be treated as a function from $S^1$ since $u$ sends $[a,b]$ to an interval of length $2\pi$, and therefore
+\[
+\lim_{\lambda \rightarrow \infty} = \int_a^b g(t) \sin(\lambda t) \,dt = \lim_{\lambda' \rightarrow \infty}\frac{1}{a} \int_{S^1} f(e^{i\theta})\sin(\lambda'\theta) \,d\theta= 0
+\]
+\begin{problem}
+Let $D_n$ be the $n^{th}$ Dirichlet kernel.  Show that
+\[
+\int_{-\pi}^{\pi} D_n(e^{i\theta}) \,d\theta = 2\pi
+\]
+\end{problem}
+
+\begin{eqnarray*}
+1 + 2\sum_{k=1}^n \cos(n\theta) &=& 1 + \sum_{k=1}^n \left(e^{-ik\theta} + e^{ik\theta}\right) \\
+&=& \sum_{k=-n}^n e^{ik\theta} \\
+&=& e^{-in\theta}\frac{1-e^{i(2n+1)\theta}}{1-e^{i\theta}} \\
+&=&\frac{e^{i\left(n+\frac{1}{2}\right)\theta}-e^{-i\left(n+\frac{1}{2}\right)\theta}} {e^{i\frac{\theta}{2}}-e^{-i\frac{\theta}{2}}}\\
+&=&\frac{\sin\left(\left(n+\frac{1}{2}\right)\theta\right)}{\sin\frac{\theta}{2}}
+\end{eqnarray*}
+
+Since $\cos\theta$ is an odd function it follows that $\int_{-\pi}^{\pi} \cos(n\theta) \,d\theta = 0$ for any $n \in \N$ and hence
+\[
+\int_{-\pi}^{\pi} D_n(e^{i\theta}) \,d\theta = \int_{-\pi}^{\pi} 1 + 2\sum_{k=1}^n \cos(n\theta) = 2\pi
+\]
+\begin{problem}
+Show that the inner product of a Hilbert space is continuous with respect to both variables.
+\end{problem}
+
+From the linearity and conjugate symmetry of the inner product, it follows that if the inner product is continuous at zero with respect to the first variable, then it is continuous everywhere with respect to both variables.  Moreover, since $\ip{v}{w}^{\frac{1}{2}}$ defines a norm, this is continuous.  By the Cauchy-Schwarz inequality,
+\[
+0 \leq |\ip{v}{w}| \leq \|v\|\|w\|
+\]
+
+which implies that, as $v \rightarrow 0$, $|\ip{v}{w}| \rightarrow 0$.  Therefore the inner product is continuous in the first variable at $0$.
+
+\begin{problem}
+Show that $\ip{v - S_N(v)}{S_N(v)} = 0$, where $v \in \mathcal{H}$, a complex Hilbert space and $S_N(v)$ denotes the $N^{th}$ partial sum of $v$.
+\end{problem}
+
+Since
+\[
+\ip{\ip{v}{e_n} e_n}{\ip{v}{e_m} e_m} = 0
+\]
+
+if and only if $n \neq m$ then
+\begin{equation}
+\label{bdblsum}
+\ip{\sum_{n=1}^N a_n e_n}{\sum_{n=1}^N a_n e_n} = \sum_{n=1}^N \ip{a_n e_n}{a_n e_n} = \sum_{n=1}^N |a_n|^2
+\end{equation}
+
+Also,
+\begin{equation}
+\label{leftscalar}
+\ip{v}{a_n e_n} = \overline{a_n} \ip{v}{e_n} = \overline{a_n} a_n = |a_n|^2
+\end{equation}
+
+Therefore by ($\ref{bdblsum}$) and ($\ref{leftscalar}$) 
+\begin{eqnarray*}
+\ip{v - \sum_{n=1}^N a_n e_n}{\sum_{n=1}^N a_n e_n} &=& \ip{v}{\sum_{n=1}^N a_n e_n} - \ip{\sum_{n=1}^N a_n e_n}{\sum_{n=1}^N a_n e_n} \\
+&=& \sum_{n=1}^N \ip{v}{a_n e_n} - \sum_{n=1}^N |a_n|^2 \\
+&=& \sum_{n=1}^N |a_n|^2 - \sum_{n=1}^N |a_n|^2 = 0
+\end{eqnarray*}
+
+The orthogonality of these vectors guarantees that
+\[
+\|v\|^2 = \|v - S_N(v)\|^2 + \|S_N(v)\|^2 \Rightarrow \sum_{n=1}^N |a_n|^2 = \|S_N(v)\|^2  \leq \|v\|^2
+\]
+
+\begin{problem}
+Show that the $\{e_n\}$ form an orthonormal basis for $L^2(S^1)$.
+\end{problem}
+
+First, we will use Stone-Weierstass to show that the $\{e_n\}$ are dense in $L^2(S^1)$.  For any constant $c = ce^{i0\theta} \in \{e_n\}$.  Trivially, $e^{i\theta}$ separates points.  Finally, let $f \in span\{e_n\}$.  Then
+\[
+\bar{f} = \overline{\sum_{n=1}^n a_n e^{in\theta}} = \sum_{n=1}^n \overline{a_n e^{in\theta}} = \sum_{n=1}^n \overline{a_n} e^{in(-\theta)} \in span\{e_n\}
+\]
+
+Therefore the span of $\{e_n\}$ is dense in $L^2(S^1)$.  Let $f_n$ be a linear combination of $e_n$ such that $\sup|f_n - f| < \epsilon$ for arbitrary $\epsilon > 0$.  Then
+\[
+\|f_n - f\|_2 = \int_{S^1} |f_n - f| \,\frac{d\theta}{2\pi} \leq \sup |f_n - f| < \epsilon
+\]
+\end{document}

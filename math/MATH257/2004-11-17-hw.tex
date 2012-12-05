@@ -1,0 +1,149 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\Aut}{\text{Aut}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{MATH 257: Homework \#7}
+\author{Jesse Farmer}
+\date{17 November 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Let $G = A_1 \times A_2 \times \cdots \times A_n$ and for each $i$ let $B_i \unlhd A_i$.  Prove that $B_1 \times \cdots \times B_n \unlhd G$ and that $$\frac{A_1 \times \cdots \times A_n}{B_1 \times \cdots \times B_n} \cong \frac{A_1}{B_1} \times \cdots \times \frac{A_n}{B_n}$$}
+
+
+Denote the direct product of the $A_i, B_i$, etc., by $\prod_{i=1}^n A_i$ and the $n$-tuple by $\prod_{i=1}^n (a_i)$, etc.
+
+Let $\prod_{i=1}^n (a_i) \in \prod_{i=1}^n A_i$ and $\prod_{i=1}^n (b_i) \in \prod_{i=1}^n B_i$, then 
+\begin{eqnarray*}
+\left(\prod_{i=1}^n (a_i)\right)
+\left(\prod_{i=1}^n (b_i)\right)
+\left(\prod_{i=1}^n (a_i)\right)^{-1} &=&
+\left(\prod_{i=1}^n (a_i)\right)
+\left(\prod_{i=1}^n (b_i)\right)
+\left(\prod_{i=1}^n (a_i^{-1})\right) \\ &=& 
+\prod_{i=1}^n (a_ib_ia_I^{-1}) \\ &\in& \prod_{i=1}^n B_i
+\end{eqnarray*}
+
+And hence normality follows from the normality of each $B_i$.  Define the map $\varphi: \prod_{i=1}^n A_i \rightarrow \prod_{i=1}^n \frac{A_i}{B_i}$ by $\prod_{i=1}^n (a_i) \mapsto \prod_{i=1}^n (a_iB_i)$.  This map is clearly a surjective homomorphism, and 
+\begin{eqnarray*}
+\ker \varphi &=& \{(a,b) \mid \varphi(a,b) = 1 \} \\
+&=& \left\{\prod_{i=1}^n (a_i) \mid \prod_{i=1}^n (a_iB_i) = 1\right\} \\
+&=& \left\{\prod_{i=1}^n (a_i) \mid a_iB_i = B_i,\, i=1,2,\ldots,n\right\} \\
+&=& \left\{\prod_{i=1}^n (a_i) \mid a_i \in B_i,\, i=1,2,\ldots,n\right\} \\
+&=& \prod_{i=1}^n B_i
+\end{eqnarray*}
+
+The second statement then follows from the first isomorphism theorem.
+
+\item \emph{Let $G$ act on the set $A$.  Prove that is $a,b \in A$ and $b \ g \cdot a$ for some $g \in G$ then $G_b = gG_ag^{-1}$.  Deduce that if $G$ acts transitively on $A$ then the kernel of the action if $\cap_{g \in G} gG_ag^{-1}$.}
+
+Recall that if $b = g \cdot a$ then $g^{-1} \cdot b = a$.  Let $h \in G_b$.  Then $g^{-1}hg \in G_a$ since
+\[
+(g^{-1}hg) \cdot a = (g^{-1}h) \cdot a = (g^{-1}h) \cdot b = g^{-1} \cdot (h \cdot b) = g^{-1} \cdot b = a
+\]
+
+Let $k = g^{-1}hg$ so that $h = gkg^{-1} \in gG_ag^{-1}$ since $k \in G_a$.  Therefore $G_b \subseteq gG_ag^{-1}$.  If $h \in gG_ag^{-1}$ then there exists $k \in G_a$ such that $h = gkg^{-1}$, but
+\[
+h \cdot b = (gkg^{-1}) \cdot b = (gk) \cdot (g^{-1} \cdot b) = (gk) \cdot a = g \cdot ( k \cdot a) = g \cdot a = b
+\]
+
+That is, $h \in G_b$ and therefore $gG_ag^{-1} \subseteq G_b$.  If $G$ acts transitively on $A$ then there is one and only one orbit, i.e., $A = \{g \cdot a \mid G \in G\}$ for fixed $a$.  This implies that if $b \in A$ then there is some $g$ such that $b = g \cdot a$.  From above we know that $G_b = gG_ag^{-1}$, and so the kernel of the action is $$\bigcap_{b \in A} G_b = \bigcap_{g \in G} gG_ag^{-1}$$
+
+where $a \in A$ is fixed.
+
+\item \emph{Let $G$ be a transitive permutation group on the finite set $A$.  A \emph{block} is a nonempty subset $B1$ of $A$ such that for all $\sigma \in G$ either $\sigma(B)=B$ or $\sigma(B) \cap B = \emptyset$.}
+\begin{enumerate}
+\item \emph{Prove that if $B$ is a block containing the element $a$ of $A$ then the set $G_b$ defined by $G_B = \{\sigma \in G \mid \sigma(B) = B\}$ is a subgroup of $G$ containing $G_a$.}
+
+Since $G$ is a group there is an identity map which fixes every element, and it is obviously in $G_B$.  Moreover, since each $\sigma$ is a permutation such that $\sigma(B) = B$, there exists an inverse $\sigma^{-1}$ and $\sigma^{-1}(B) = B$.  Finally, the composition of any two $\sigma_1, \sigma_2 \in G_B$ is in $G_B$ since $\sigma_1(\sigma_2(B)) = \sigma_1(B) = B$.  Therefore $G_B \leq G$.
+
+Let $a \in B$ and $\sigma \in G_a$ so that $\sigma(a)=a$.  Then $a \in B$ and $a \in \sigma(B)$, so $\sigma(B) \cap B \neq \emptyset$.  Because $B$ is a block it must be the case that $\sigma(B)=B$ and therefore $\sigma \in G_B$, i.e., $G_a \subseteq G_B$.
+
+\item \emph{Show that if $B$ is a block and $\sigma_1(B), \sigma_2(B),\ldots,\sigma_n(B)$ are all the distinct images of $B$ under the elements of $G$ then these form a partition of $A$.}
+\item \emph{A (transitive) group $G$ on a set $A$ is said to be \emph{primitive} if the only blocks in $A$ are the trivial ones: the sets of size $1$ and $A$ itself.  Show that $S_4$ is primitive on $A=\{1,2,3,4\}$.  Show that $D_8$ is not primitive as a permutation group on the four vertices of a square.}
+
+Assume $B \subset A$ and consider the action of $S_4$ on $B$. There is an $a \in B \setminus A$.  Since $B$ is not only one element we can pick a $\sigma$ which fixes every element in $B$ except $a$, and then sends $a$ to some element in $A \setminus B$ and sends that element to $A$, so that $a \in \sigma(B) \cap B$, but $\sigma(B) \neq B$.
+
+The action of the dihedral group preserves the relative position of opposite vertices of a $n$-gon, so for $D_8$ the set consisting of a vertex and its opposite form a block.
+
+\item \emph{Prove that the transitive group $G$ has a primitive $A$ if and only if for each $a \in A$ the only subgroups of $G$ containing $G_a$ are $G_a$ and $G$.}
+\end{enumerate}
+
+\newpage
+
+\item \emph{Let $H$ and $K$ be subgroups of the group $G$.  For each $x \in G$ define the \emph{$HK$ double coset} of $x$ in $G$ to be the set $$HxK = \{hxk \mid h \in H, k \in K\}$$}
+\begin{enumerate}
+\item \emph{Prove that $HxK$ is the union of the left cosets $x_1K, x_2K, \ldots, x_nK$ where $\{x_1K, \ldots, x_nK\}$ is the orbit containing $xK$ of $H$ acting by left multiplication on the set of left cosets of $K$.}
+
+The action is defined by $h \cdot (xK) = (hx)K$.  If these are all the orbits, then for every $y \in HxK$ there exists some $h \in H$ such that $y \in hxK$.  However, $hx$ is in one of the above orbits and therefore $y \in x_1K$.  This is both necessary and sufficient, so $y \in HxK$ if and only if $y \in (hx)K = x_iK$ for some $h \in H$ and the corresponding $i$.
+
+\item \emph{Prove that $HxK$ is a union of right cosets of $H$.}
+
+For the same $HxK$ is a union of left cosets it is also the union of right cosets.  A different argument that the one above, though, is that if there is some element $g$ with $Hg \cap HxK$, then there exist $h, h' \in H$ and $k \in K$ such that $hg = h'xk \Rightarrow g = h^{-1}h'xk \Rightarrow g \in HxK \Rightarrow Hg \subseteq HxK$.  So if any right coset has anything in common with the double coset then it is complete contained within the double coset, and so the union over all the $K$ of $Hxk$ must be $HxK$.
+
+\item \emph{Show that $HxK$ and $HyK$ are either the same set or are disjoint for all $x,y \in G$.  Show that the set of $HK$ double cosets partitions $G$.}
+
+Since $H, K$ are subgroups of $G$ they contain the identity, and therefore every $x$ is in at least one double coset (i.e., $HxK$).  To show that the $HxK$ partition $G$ it is sufficent to show that if two double cosets have any element in common then they must be equal.  Let $x,y \in G$ and assume there is a $w \in G$ such that $w \in HxK$ and $w \in HyK$.  There must exist $h_1,h_2 \in H$ and $k_1, k_2 \in K$ such that $$h_1xk_1 = w = h_2yk_2$$  But then
+\[
+x = h_1^{-1}h_2yk_2k_1^{-1} \mbox{ and } y = h_2^{-1}h_1xk_1k_2^{-1}
+\]
+
+So every element $l$ of $HxK$ can be expressed as an element of $HyK$ and vice versa by using the above equalities, and therefore $HxK = HyK$ and the set of double cosets partitions $G$.  It is obvious that the union of all double cosets is the entire set since both $H$ and $K$ contain the identity element.
+
+\item \emph{Prove that $|HxK| = |K| \cdot \left[H : H \cap xKx^{-1}\right]$.}
+
+$xKx^{-1}$ is a subgroup of $G$.  Consider the map $HxK \rightarrow HxKx^{-1}$ defined by $hxk \mapsto hxkx^{-1}$.  This map is clearly a bijection, so that $|HxK| = |HxKx^{-1}|$.  Moreover, if the sets are finite (since otherwise the question doesn't even make sense),
+\[
+|HxK| = |HxKx^{-1}| = \frac{|H||xKx^{-1}|}{|H \cap xKx^{-1}|}
+\]
+
+But $G$ acting on $K$ by conjugation is a permutation so that $|xKx^{-1}| = |K|$, and the original statement is proven.
+
+\item \emph{Prove that $|HxK| = |H| \cdot \left[H : K \cap x^{-1}Hx\right]$.}
+
+This follows $\emph{mutatis mutandtis}$ from the previous part -- change the map from $hxk \mapsto hxkx^{-1}$ to $hxk \mapsto x^{-1}hxk$, and note that $x^{-1}Hx \leq G$.
+\end{enumerate}
+
+\item \emph{Prove that if $H \leq G$ has finite index $n$ then there is a normal subgroup $K$ of $G$ with $K \leq H$ and $[G : K] \leq n!$.}
+
+$\frac{G}{K}$ is a group which acts on $\frac{G}{H}$ by the action $gK \cdot g'H = (gg')H$ since $K \leq H$ (and so $HK = H$).  This has a permutation representation by Cayley's theorem, and since $\frac{G}{H}$ is a set of $n$ elements, the largest order it could have is $n!$ which is the order of $S_n$, the set of all possible permutation of $n$ elements.  Hence $[G:K] \leq n!$.
+
+\item \emph{Let $G$ be a finite group of composite order $n$ with the property that $G$ has a subgroup of order $k$ for each positive integer $k$ dividing $n$.  Prove that $G$ is not simple.}
+
+Let $p$ be the smallest prime dividing $n$.  $1 < p < n$ since $n$ is composite, and by hypothesis there exists a subgroup of order $\frac{n}{p}$ and hence of index $p$.  By Corollary 5 this subgroup is normal and non-trivial, and so $G$ is not simple.
+
+\item \emph{Let $Q_8$ be the quaternion group of order $8$.}
+\begin{enumerate}
+\item \emph{Prove that $Q_8$ is isomorphic to a subgroup of $S_8$.}
+
+By Cayley's theorem every group of order $n$ is isomorphic to a subgroup of $S_n$.
+
+\item \emph{Prove that $Q_8$ is not isomorphic to a subgroup of $S_n$ for any $n \leq 7$.}
+
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

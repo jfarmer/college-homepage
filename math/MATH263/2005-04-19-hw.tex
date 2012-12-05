@@ -1,0 +1,161 @@
+\documentclass[10pt]{article}
+
+\usepackage{homework}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\title{MATH 263: Homework \#3}
+\author{Jesse Farmer}
+\date{19 April 2005}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item \emph{Define the categories of left and right $G$-sets and show they are isomorphic.}
+
+Let $\Set$ be the category of sets, where $\Hom_\Set$ is the set of all set functions.  Define the category of left $G$-sets $\cat{C}$ as $$\cat{C} = \set{X \in \Ob(\Set) \mid G \mbox{ has a left action on } X}$$
+
+with $\varphi \in \Hom_\cat{C}(A,B)$ if $\varphi(ga) = g\varphi(a)$ for all $a \in A$.  Define similarly $\cat{D}$ the category of right $G$-sets, with $G$ having a \emph{right} rather than left action on a set, and the morphisms preserving that action.
+
+Since for ever left action we can define a right action via $a \cdot g = g^{-1} \cdot a$, and vice versa, it follows that $\Ob(\cat{C}) = \Ob(\cat{D})$.  Define $F: \cat{C} \rightarrow \cat{D}$ by $F(X) = X$ for all $X \in \Ob(\cat{C})$ and $F(\alpha) = \beta$ where $\beta(a \cdot g) = g^{-1} \cdot \alpha(a)$ and $X$ is given the right action defined above.
+
+Let $\alpha_1, \alpha_2$ be morphisms in $\cat{C}$ and $\beta_1, \beta_2$ their respective images under $F$ in $\cat{D}$.  Then 
+\begin{align*}
+\left(F(\alpha_1) \circ F(\alpha_2)\right)(a \cdot g) 	&= 	(\beta_1 \circ \beta_2)(a \cdot g) \\
+							&=	\beta_1\left(g^{-1} \cdot \alpha_2(a)\right) \\
+							&=	\beta_1(\alpha_2(a) \cdot g) \\
+							&=	g^{-1} \cdot (\alpha_1 \circ \alpha_2)(a) \\
+							&=	F(\alpha_1 \circ \alpha_2)(a \cdot g)
+\end{align*}
+
+and
+
+\[
+F\left(1_A\right)(a \cdot g) = 1_A\left(g^{-1} \cdot a\right) = g^{-1} \cdot a = a \cdot g
+\]
+
+Hence $F: \cat{C} \rightarrow \cat{D}$ is a covariant functor.  Let $G: \cat{D} \rightarrow \cat{C}$ be defined $G(\beta) = \beta'$ where $\beta'(g \cdot a) = \beta\left((a \cdot g^{-1}\right)$.  Then 
+\[
+(G \circ F)(\alpha) = G(\beta) = \beta'
+\]
+
+and $\beta'(g \cdot a) = \beta(a \cdot g^{-1}) = \alpha(g \cdot a)$.  Hence $\beta' = \alpha$, and similarly for $F \circ G$.  Therefore $G \circ F$ and $F \circ G$ are isomorphic to the identity functors on $\cat{C}$ and $\cat{D}$, respectively.  Indeed, they are equal to the identity functor, so that choosing $\eta_A \in \Hom_\cat{C}(F(A), A)$ to be the identity morphism for each $A \in \Ob\cat{C}$ gives $(F \circ G) \circ \eta_A = \eta_B \circ 1$.
+
+\item \emph{Show that any $G$-set is the disjoint union of transitive $G$-sets and that any transitive right $G$-set is isomorphic to $H \bs G$ for some subgroup $H$ of $G$.}
+
+Let $G$ act on a set $X$ and define the orbit of the action as $$\cal{O}_x = \set{g \cdot x \mid g \in G}$$
+
+The action restricted to $\cal{O}_x$ is clearly transitive since if $y,z \in \cal{O}_x$ then there exist $g_1, g_2$ such that $g_1 \cdot y = z = g_2 \cdot z$, and hence $g_1^{-1}g_2 \cdot z = y$.  To see that the $\cal{O}_x$ partition $X$ let $z \in \cal{O}_x \cap \cal{O}_y$ then
+\[
+g_1 \cdot x = z = g_2 \cdot y \Rightarrow g_1^{-1}g_2 \cdot y = x
+\]
+
+and hence $\cal{O}_x \subset \cal{O}_y$.  The other direction is immediate, and, since every element of $X$ is in at least one orbit, namely $\cal{O}_x$, it follows that the collection $\set{\cal{O}_x \mid X \in x}$ partitions $X$.  The case for right group actions follows \emph{mutatis mutandis}.
+
+Let $A$ be a transitive right $G$-set and fix $x \in A$.  Define $\varphi_x: G \rightarrow A$ by $g \mapsto x \cdot g$.  Denote the stabilizer of $x$, the set of all elements of $G$ which fix $x$, by $G_x$.  We claim that $\varphi_x$ is a well-defined isomorphism on $G_x \bs G$.  Let $G_x \cdot g = G_x \cdot g'$, then there exists a $g_0 \in G_x$ such that $g = g'g_0$ and
+\[
+x \cdot g = x \cdot (g' g_0) = (x \cdot g') \cdot g = x \cdot g
+\]
+
+Hence $\varphi_x$ is well-defined.  It is surjective by the transitivity of $A$, and is innjective since 
+\[
+x \cdot g = x \cdot g' \Rightarrow x \cdot (g' g^{-1}) = x \Rightarrow G_x \cdot (g' g^{-1}) = G_x
+\]
+
+so that $G_x \cdot g' = G_x \cdot g$.  Finally, $\varphi_x$ is a homomorphism since
+\[
+\varphi_x((G_x \cdot g )\cdot g') = \varphi_x(G_x (g \cdot g')) = x \cdot (g g') = (x \cdot g) \cdot g'  = \varphi_x(g) \cdot g'
+\]
+
+Therefore $\varphi_x$ is an isomorphism of $G$-sets.
+
+\item \emph{Show that the stabilizer of $Hx$ in $H \bs G$ is $x^{-1}Hx$.}
+
+The stabilizer of $Hx$ is the set $\set{g \in G \mid Hx \cdot g = Hx}$.  But
+\[
+Hx \cdot g = Hx \Leftrightarrow Hxgx^{-1} = H \Leftrightarrow xgx^{-1} \in H \Leftrightarrow g \in x^{-1}Hx
+\]
+
+Thus the stabilizer of $x$ in $H \bs G$ is $x^{-1}Hx$.
+\item \emph{Show that the $G$-set $H \bs G$ is isomorphic to $K \bs G$ if and only if $H$ and $K$ are conjugate subgroups in $G$.}
+
+Let $\varphi: H \bs G \rightarrow K \bs G$ be an isomorphism of $G$-sets.  Then there exists some $Ka \in K \bs G$ such that $\varphi\left(He\right) = Ka$ where $e \in G$ is the group identity.  Hence, for all $h \in H$, 
+\[
+Ka = \varphi\left(He\right) = \varphi\left(Hh\right) = Kah
+\]
+
+so that $aha^{-1}K = K$.  Since this holds for all $h \in H$ it follows that $aHa^{-1} \subseteq K$.  This is in fact true for any homomorphism of $G$-sets of this form.  However, since $\varphi$ is an isomorphism, it follows that
+\[
+\varphi^{-1}\left(Ke\right) = Ha^{-1}
+\]
+
+Then, \emph{mutatis mutandis}, $a^{-1}Ka \subseteq H$ or $K \subseteq aHa^{-1}$.  Therefore $K = aHa^{-1}$.
+
+\item \emph{Show that if $A$ is a retract of $B^2$ then every continuous map $f: A \rightarrow A$ has a fixed point.}
+
+Let $r: B^2 \rightarrow A$ be a retraction map and $f: A \rightarrow A$ be a continuous map.  Define $$g = i \circ f \circ r$$ where $i: A \into X$ is the inclusion map.  $g: B^2 \rightarrow B^2$ is continuous and hence has a fixed point in $B^2$.  But then $x = g(x) = (i \circ f \circ r)(x) = (f \circ r)(x)$, so that $x \in A$.  Since $r$ is a retract, $r(x) = x$, and therefore $x = (f \circ r)(x) = f(x)$.
+
+\item \emph{Show that if $h: S^1 \rightarrow S^1$ is nullhomotopic then $h$ has a fixed point and maps some point $x$ to its antipode $-x$.}
+
+If $h: S^1 \rightarrow S^1$ is nullhomotopic then it extends to a continuous function $\tilde{h}: B^2 \rightarrow S^1$.  Let $i: S^1 \into B^2$ be the inclusion map.  Then $i \circ \tilde{h}$ has a fixed point $x = (i \circ \tilde{h})(x) = \tilde{h}(x)$.  But then $x \in S^1$ so that $x = \tilde{h}(x) = h(x)$.  Similarly, since $-h$ is also nullhomotopic on $S^1$ it extends in the same way.  Hence there exists some $x \in S^1$ such that $-h(x) = x$ or $h(x) = -x$.
+
+\item \emph{Show that if $g: S^2 \rightarrow S^2$ is continuous and $g(x) \neq g(-x)$ for all $x$ then $g$ is surjective.}
+
+Suppose for contradiction that $g$ is not surjective, and pick $x_0 \in S^2 \setminus \im g$.  Then $g \mid_{S^2 \setminus \set{x_0}}$ is continuous and there exists a homeomorhpism $h: S^2 \setminus \set{x_0} \rightarrow \R^2$.  Define $k = h \circ g$.  Then $k(x) \neq k(-x)$ for all $x \in S^2$, since otherwise $h(g(x)) = h(g(-x))$ and hence $g(x) = g(-x)$.  But this contradicts Borsuk-Ulam, and therefore $g$ must be surjective.
+
+\item \emph{Let $h: S^1 \rightarrow S^1$ be continuous and antipode-preserving with $h(b_0) = b_0$.  Show that $h_\ast$ carries a generator of $\pi_1(S^1, b_0)$ to an odd power of itself.}
+
+Let $q$ be the quotient map that identifies antipodal points on the sphere.  Then the fundamental group of this quotient space has only two classes of loop, namely, those that end at $b_0$ and those that end at $-b_0$, and is therefore isomorphic to the only group of order $2$: $\Z/2\Z$.  If $h: S^1 \rightarrow S^1$ preserves antipodal points then $h$ can be extended to this quotient space via $\tilde{h}([x]) = [h(x)]$, where $[x]$ denotes the equivalence class of $x$ under this identification.  Then $q_\ast$ is the natural homomorphism from $Z \rightarrow \Z/2\Z$ and we have $q_\ast \circ h_\ast = \tilde{h}_\ast \circ q_\ast$.  If $h$ sent a generator of $\Z$ to an even number then $q \circ h$ would be the trivial homomorphism, which would also imply that $\tilde{h}_\ast \equiv 0$.  Hence $\tilde{h}$ would be nullhomotopic, which is impossible by theorem 57.1.
+
+\item
+\begin{enumerate}
+\item \emph{Show that $\R^1$ and $\R^n$ are not homeomorphic if $n > 1$.}
+
+Let $h: \R^n \rightarrow R^1$ be a homeomorphism, and pick $x \in \R^n$.  Then $h \mid_{\R^n \setminus \set{x}}$ is still a homeomorphism, but its image is disconnected, viz., it separates $\R^1$ into $(-\infty, h(x))$ and $(h(x), \infty)$.  But this is impossible as connectedness is a topological property and $\R^n \setminus \set{x}$ is still connected.
+
+\item \emph{Show that $\R^2$ and $\R^n$ are not homeomorphic if $n > 2$.}
+
+Pick $x \in \R^n$ and let $h: \R^n \rightarrow \R^2$ be a homeomorphism.  Then $h' = h\mid_{\R^n \setminus \set{x}}$ is still a homeomorphism.  However, $\im h' = \R^2 \setminus \set{y}$ for some $y$, which has a fundamental group isomorphic to the integers, and $\R^n \setminus \set{x}$ still has a trivial fundamental group.  Then $h'_\ast$ is an isomorphism between these two groups, which is absurd.  Therefore $h$ cannot be a homeomorphism.
+\end{enumerate}
+
+\item \emph{Use the covering space given by figure 60.3 to show that the fundamental group of the figure eight is not abelian.}
+
+Label the three points of intersection in the covering space $e_1$, $e_0$, and $e_2$ in that order from left to right.  Let $\tilde{g}$ be the path traversing the upper-half of $B_1$ from $e_0$ to $e_1$ and $\tilde{f}$ be the path along the lower-half of $A_1$ from $e_0$ to $e_2$.  Let $f = p \circ \tilde{f}$ and $g = p \circ \tilde{g}$.  Then these two functions are loops around $A$ and $B$, respectively, based at $x_0$.
+
+Consider the lift of $f \ast g$.  This function first traverses the lower-half of $A_1$ and then the $B_0$, ending at $e_2$.  Similarly, $g \ast f$ first traverses the upper-half of $B_1$ followed by $A_0$, ending at $e_1$.  Since these lifts end at different points it cannot be the case that $f \ast g$ is path homotopic to $g \ast f$, and therefore the figure eight is not abelian. 
+
+\item \emph{State and prove a universal property for free products.}
+
+Let $\set{G_\alpha}_{\alpha \in I}$ be a family of groups.  Then the free product can be defined as a set $C$ and a family of group homomorphisms $\set{f_\alpha: G_\alpha \rightarrow C}_{\alpha \in I}$ such that for any group $H$ and family homomorphisms $\set{g_\alpha: G_\alpha \rightarrow D}$ there exists a uniqe homomorphism $h: C \rightarrow H$ such that $h \circ f_\beta = g_\beta$ for all $\beta \in I$.  The free product of the $\set{G_\alpha}_{\alpha \in I}$ satisfy this property, and any other group $C$ which satisfies this property is isomorphic to the free product.
+
+It is easy to see that the free product satisfies this property.  Let $i_\alpha: G_\alpha \into \coprod_{\beta \in I} G_\beta$ be the inclusion map, i.e., $i_\alpha(g) = g$ for all $g \in G_\alpha$.  Then for any family of homomorphisms $\set{\varphi_\alpha: G_\alpha \rightarrow D}$ for some group $D$ define
+\[
+\varphi\left(a_{\alpha_1}^{\epsilon_1} \cdots a_{\alpha_k}^{\epsilon_k}\right) = \varphi_{\alpha_1}\left(a_{\alpha_1}\right)^{\epsilon_1} \cdots \varphi_{\alpha_k}\left(a_{\alpha_k}\right)^{\epsilon_k}
+\]
+
+where $a_{\alpha_k} \in G_{\alpha_k}$ for some $k$.  This is a homomorphism by construction, and is unique since for any other homomorphism satisfying this, say $\varphi'$, we have $\varphi'(g_\alpha) = \varphi_\alpha(g_\alpha)$ for $g_\alpha$ in $G_\alpha$.  Hence $\varphi \equiv \varphi'$ on each $G_\alpha$, and therefore on all of $\coprod_{\beta \in I} G_\beta$.
+
+Let $C$ be any other group which satisfies this property, and let $\set{f_\beta: G_\beta \rightarrow C}$ be a family of homomorphisms.  Let $\set{i_\beta: G_\beta \into \coprod_{\beta \in I} G_\beta}$ be the inclusion maps.  Then there exists a unique homomorphism $f: \coprod_{\beta \in I} G_\beta \rightarrow C$ such that $f_\beta = f \circ i_\beta$ for all $\beta \in I$.  We claim this is in fact a group isomorphism, and to prove this claim we will demonstrate a two-sided inverse.
+
+By hypothesis $C$ also satisfies this universal property, and therefore there exists a unique homomorphism $g: C \rightarrow \coprod_{\beta \in I} G_\beta$ such that $i_\beta = g \circ f_\beta$ for all $\beta \in I$.  From above we have that $f_\beta = f \circ i_\beta$, so that $i_\beta = g \circ f \circ i_\beta$.  But since $i_\beta$ is the inclusion map it follows that $g \circ f(g_\beta) = g_\beta$ for all $\beta \in G_\beta$, and for all $\beta \in I$.  Since $g \circ f$ is a homomorphism it follows immediately that $g \circ f$ is the identity on $\coprod_{\beta \in I} G_\beta$.  Similarly, since $f_\beta = f \circ i_\beta$, it follows that $f_\beta \equiv f$ on $G_\beta$.  Then by exchanging the roles of $C$ and $\coprod_{\beta \in I} G_\beta$ we get that $f_\beta = f \circ g \circ f_\beta$.  Hence $f \circ g$ is the identity on $C$ by the fact that $f \circ g$ is a homomorphism and that they are both unique.  Therfore $f$ is, in fact, an isomorphism of groups.
+
+\item \emph{Show that the free product $G \ast H$ of nontrivial groups $G$ and $H$ has trivial center, and that the only elements of $G \ast H$ of finite order are the conjugates of finite-order elements of $G$ and $H$.}
+
+Let $g,h$ be nonidentity elements in $G$ and $H$, respectively.  Then for any reduced and non-empty word $w \in G \ast H$ there exists a word $w'$, which might be the empty word, such that $w = w'g'$ for some $g' \in G$, or $w = w'h'$ for some $h' \in H$.  Assume for former is the case.  Then $hw \neq wh$ since $hw$ ends in an element of $G$ and $wh$ ends in an element of $h$.  Similarly, if $w = w'h'$, then $gw \neq wg$.  Therefore, for any reduced nom-empty $w \in G \ast H$, there exists an element with which it does not commute, and hence cannot be in the center, i.e., $|Z\left(G \ast H\right)| = 1$.
+
+If $w = w' g w'^{-1}$ for some $w' \in G \ast H$ then $w^n = w' g^nw'^{-1}$.  Therefore any $G \ast H$-conjugate of a finite order element in $G$ (or $H$) is of finite order.  To see the converse, assume $w \in G \ast H$ is of finite order.  $w$ cannot be of even length since if $w = w_1 \cdots w_{2k}$ then $w_{2k}$ and $w_1$ are in different groups and $w^n$ is a reduced word of length $(2k)^n$, which can obviously never be $1$.  So assume $w$ is of odd length.  In order to allow any reduction of length in $w^n$ it must be the case that $w_{2k+1} = w_1^{-1}$, and $w_{j} = w_{2k+2-j}$ in general.  Hence $w = w' w_{k+1} w'^{-1}$ where $w' = w_1 \cdots w_k$.
+
+\end{enumerate}
+\end{document}

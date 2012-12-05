@@ -1,0 +1,153 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\powset}[1]{
+\wp\left(#1\right)
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\T}{\mathcal{T}}
+
+\newcommand{\iso}{\cong}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MATH 263: Homework \#1}
+\author{Jesse Farmer}
+\date{05 April 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Construct an explicit deformation retraction of the torus with one point deleted onto a graph consisting of two cirecles intersecting in a point, namely, longitude and meridian circles of the torus.}
+
+The torus $S^1 \times S^1$ is homeomorphic to the quotient space obtained by identifying opposite edges of the unit square, and hence the once-punctured torus is homeomorphic to this same quotient space with an open disk removed from the center of said square.  It is therefore sufficient to prove that a the boundary of a once-punctured square is a deformation retract of the once-punctured square.
+
+Assume without loss of generality that the point missing is the origin and the square is $X = [-1,1] \times [-1,1]$, so that $\|\vec{x}\|_\infty > 0$ for all $\vec{x}$ in question, where $\| \cdot \|_\infty$ denotes the $l$-infinity norm, i.e.,
+\[
+\|\vec{x}\|_\infty = \max\{|x_1|, |x_2|\}
+\]
+
+Then for $t \in [0,1]$ and $\vec{x} = (x_1, x_2)$ in the punctured square define
+\[
+F(\vec{x}, t) = \left(\frac{x_1}{t\|\vec{x}\|_\infty + 1-t}, \frac{x_2}{t\|\vec{x}\|_\infty + 1-t}\right)
+\]
+
+This function is continuous and satisfies all the conditions of a deformation retraction, since $F(\vec{x},0) = \vec{x}$, $\|F(\vec{x}, 1)\|_\infty = 1$ so that $F(\vec{x}, 1) \in \partial X$, and $F(\vec{x}, 1) = \vec{x}$ if $\|\vec{x}\|_\infty = 1$.  When opposite edges are identified, this map remains well-defined and retracts the once-puncutred torus to a space homeomorphic to the wedge product of two circles.  To see this, note that all four vertices of the square are identified and no others are, and that the end of any one edge is identified with the opposite end, i.e., the boundary is simply two circles sharing a common point.
+
+\item \emph{Show that the retract of a contractible space is contractible.}
+
+Let $A$ be a retract of the contracible space $X$ with retraction mapping $r: X \rightarrow A$.  Let $H$ be the homotopy provided by the fact that $X$ is contractible, with $H(x,0) = x$ and $H(x,1) = x_0$ for all $x \in X$ and some $x_0 \in X$.  Let $i: A \rightarrow X$ be the embedding map, i.e., $i(a) = a$ for all $a \in A$.  Define $G: A \times I \rightarrow A$ by $$G(x,t) = r(H(i(x),t))$$  This map is continuous with $G(x,0) = r(H(i(x),0)) = r(i(x)) = r(x) = x$ and $G(x,1) = r(x_0)$, so that $G$ is a homotopy between the identity map on $A$ and the constant function $f = r(x_0)$.  Therefore $A$ is contractible.
+
+\item \emph{Show that if $h,h': X \rightarrow Y$ are homotopic and $k,k': Y \rightarrow Z$ are homotopic, then $k \circ h$ and $k' \circ h'$ are homotopic.}
+
+Let $H: X \times I \rightarrow Y$ be a homotopy between $h$ and $h'$, and $K: Y \times I \rightarrow Z$ be a homotopy between $k$ and $k'$.  Define $F: X \times I \rightarrow Z$  by $$F(x,t) = K(H(x,t), t)$$
+
+This is continuous since $K$ and $H$ are continuous.  Then $$F(x,0) = K(H(x,0), 0) = k(h(x)) = (k \circ h)(x)$$ and $$F(x,1) = K(H(x,1),1) = k'(h'(x)) = (k' \circ h')(x)$$  Therefore $F$ is a homotopy between $k \circ h$ and $k' \circ h'$.
+
+\item
+\begin{enumerate}
+\item \emph{Show that $I$ and $\R$ are contractible.}
+
+The map $F(x,t) = tx$ is continuous on $\R^2$, and in particular for $t \in I$.  $F$ is then a homotopy between the identity map and zero for both $I$ and $\R$, and hence both $I$ and $\R$ are contractible.
+
+\item \emph{Show that a contractible space is path connected.}
+
+Let $X$ be a contractible space and $F: X \times I \rightarrow X$ a homotopy between the identity and some constant map $c$, i.e., $F(x,0) = c$.  If $y$ is some other point in $X$ then the map $\gamma(t) = F(y,t)$ is a path connecting $c$ and $y$.  Hence all points of $X$ are in the same path component, namely the path component of $F(x,0)$, and therefore $X$ is path-connected.
+
+\item \emph{Show that if $Y$ is contractible then for any $X$ the set $[X,Y]$ has a single element.}
+
+Let $F: Y \times I \rightarrow Y$ be the homotopy between $i$, the identity map on $Y$, and a constant map with $F(y,0)$ being the constant.  Let $f: X \rightarrow Y$ be any continuous map and $g: X \rightarrow Y$ the map such that $g(x) = F(y,0)$ for all $x \in X$.  Define $G: X \times I \rightarrow Y$ by $$G(x,t) = F(f(x), t)$$  This map is continuous with $G(x,0) = F(f(x), 0) = g(x)$ and $G(x,1) = F(f(x),1) = (i \circ f)(x) = f(x)$.  Hence $G$ is homotopy between $f$ and $g$.  Since $f$ was arbitrary every such map must belong to the same homotopy class as $g$, and therefore $[X,Y]$ consists of only this homotopy class.
+
+\item \emph{Show that if $X$ is contractible and $Y$ is path connected then $[X,Y]$ has a single element.}
+
+All maps into a path connected space are homotopic via the path connecting their respective (single point) images, and so belong to the same homotopy class.  Hence it suffices to show that every continuous map $f: X \rightarrow Y$ is homotopic to some constant map.  Let $F: X \times I \rightarrow X$ be the map provided by the fact that $X$ is contractible, i.e., a homotopy between the constant $F(x,0)$ and the identity map $i$ on $X$.  Define $G: X \times I \rightarrow Y$ by $$G(x,t) = f(F(x,t))$$  $G$ is continuous with $G(x,0) = f(F(x,0)) = c$, where $c \in Y$ is some constant, and $G(x,1) = f(F(x,1)) = (f \circ i)(x) = f(x)$.  Hence $f$ is homotopic to the constant map $c$, and so every continuous map $f: X \rightarrow Y$ belong to the same homotopy class, i.e., $\left|[X,Y]\right| = 1$.
+
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Find a star convex set that is not convex.}
+
+Let $A$ be the union of the $x$ and $y$ axes in $\R^2$.  $A$ is star convex with center $(0,0)$, but not convex.
+
+\item \emph{Show that if $A$ is star convex then $A$ is simply connected.}
+
+Let $A$ be a star convex set with star center $a_0$.  Clearly $A$ is path connected, so that it suffices to show that any loop in $(A,a_0)$ is nullhomotopic.  Let $\gamma$ be a loop with endpoints at $a_0$.  Then the straight line homotopy $t\gamma(x) + (1-t)a_0$ is a homotopy between $\gamma$ and $a_0$, since every point on $\gamma$ is connected to $a_0$ by a straight line.  Hence there is only one homotopy class, and $\pi_1(A,a_0) = 0$, i.e., $A$ is simply connected.
+
+\end{enumerate}
+
+\item \emph{Let $A \subset X$ and suppose $r: X \rightarrow A$ is a retraction of $X$ onto $A$.  Fix $a_0 \in A$.  Show that $r_\ast$ is surjective.}
+
+Let $f$ be a loop with endpoint $a_0$ in $A$ and $r$ a retraction of $X$ onto $A$.  Then since $r(a) = a$ for all $a \in A$, and $f([0,1]) \subset A \subset X$, $$r_\ast([f]) = [r \circ f] = [f]$$ Therefore $r_\ast$ is surjective.
+
+\item \emph{Let $A$ be a subspace of $\R^n$ and let $h : (A, a_0) \rightarrow (Y,y_0)$.  Show that if $h$ is extendable to a continuous map of $\R^n$ into $Y$ then $h_\ast$ is the trivial homomorphism.}
+
+Let $\tilde{h}$ be the continuous extension of $h$ on $\R^n$ into $Y$ and recall that $\R^n$ is simply connected, i.e., $\pi_1(\R^n, x) = 0$ for all $x \in \R^n$.  Then $\tilde{h}_\ast: \pi_1(\R^n, a_0) \rightarrow \pi_1(Y,y_0)$ must be the trivial homomorphism.  Let $f$ be a loop in $A$ with endpoint $a_0$, then $\tilde{h} \circ f = h \circ f$ and $$h_\ast([f]) = [h \circ f] = [\tilde{h} \circ f] = \tilde{h}_\ast([f]) = 0$$
+
+\item \emph{Let $X$ be path connected and $h: X \rightarrow Y$ be continuous with $h(x_0) = y_0$ and $h(x_1) = y_1$.  Let $\alpha$ be a path in $X$ from $x_0$ to $x_1$ and define $\beta = h \circ \alpha$.  Show that $$\hat{\beta} \circ (h_{x_0})_\ast = (h_{x_1})_\ast \circ \hat{\alpha}$$}
+Let $[f] \in \pi_1(X,x_0)$.
+\begin{eqnarray*}
+(h_{x_1})_\ast \circ \hat{\alpha}([f]) &=& (h_{x_1})_\ast ([\overline{\alpha} \ast f \ast \alpha]) \\
+&=& [h \circ(\overline{\alpha} \ast f \ast \alpha]) \\
+&=& [(h \circ \overline{\alpha}) \ast (h \circ f) \ast (h \circ \alpha)] \\
+&=& [\overline{\beta} \ast (h \circ f) \ast \beta] \\
+&=& \hat{\beta}([h \circ f]) \\
+&=& \hat{\beta} \circ (h_{x_0})_\ast([f])
+\end{eqnarray*}
+
+\item \emph{Let $G$ be a topological group with operation $\cdot$ and identity element $x_0$.  Let $\Omega(G,x_0)$ denote the set of all loops in $G$ based at $x_0$.  If $f,g \in \Omega(G,x_0)$, define $$(f \otimes g)(s) = f(s) \cdot g(s)$$}
+\begin{enumerate}
+\item \emph{Show that this operation makes $\Omega(G,x_0)$ a group.}
+
+The operation $\otimes$ is indeed an internal law of composition, as $(f \otimes g)(0) = (f \otimes g)(1) = x_0^2 = x_0$ and, from the definition of a topological group, the group operation $\cdot$ is continuous, and therefore $\otimes$ is also continuous.  The identity of $\Omega$ is the map $x \mapsto e$, while the inverse of a map $g$ is defined by $s \mapsto g(s)^{-1}$.  Associativity is inherited from the group operation on $G$.
+
+\item \emph{Show that this operation induces a group operation $\otimes$ on $\pi_1(G,x_0)$.}
+
+Let $f \simeq_p f'$ and $g \simeq_p g'$ by $F$ and $G$, respectively.  Define $H: I \times I \rightarrow G$ by $$H(s,t) = (F \otimes G)(s,t) = F(s,t) \cdot G(s,t)$$  This is continuous since $\otimes$ is continuous, and is a path homotopy between $f \otimes g$ and $f' \otimes g'$.  Therefore $\otimes$ is well-defined on $\pi_1(G,x_0)$.
+
+\item \emph{Show that the two troup operations $\ast$ and $\otimes$ on $\pi_1(G,x_0)$ are the same.}
+
+Let $f,g \in \Omega(G,x_0)$.  We know that $f \simeq_p f \ast e_{x_0}$ and $g \simeq e_{x_0} \ast g$.  From above it follows that $$f \otimes g \simeq_p (f \ast e_{x_0}) \otimes (e_{x_0} \ast g)$$ But the RHS is equal to $f \ast g$ directly from the definition, and hence $$[f] \otimes [g] = [f] \ast [g]$$
+
+\item \emph{Show that $\pi_1(G,x_0)$ is abelian.}
+
+From the previous part we have $[f] \otimes [g] = [f] \ast [g]$, so it is sufficient to show that $[f] \otimes [g] = [g] \ast [f]$.  But this is true \emph{mutatis mutandis} -- simply write $[f \otimes g] = [(e_{x_0} \ast f) \otimes (g \ast e_{x_0})] = [g \ast f]$.
+\end{enumerate}
+
+
+\end{enumerate}
+\end{document}

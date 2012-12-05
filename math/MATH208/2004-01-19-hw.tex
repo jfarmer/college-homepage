@@ -1,0 +1,208 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{MATH 208: Homework \#2}
+\author{Jesse Farmer}
+\date{19 January 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Represent $T: \mathbb{R}_n[x] \rightarrow \mathbb{R}_{n-1}[x]$ where $Tp(x) = p'(x)$ for $p(x) \in \mathbb{R}_n[x]$ with a matrix.}
+
+Since the sum of the derivatives is the derivatives of the sums and the scalar product of the derivative is the derivative of the scalar product $T$ is clearly a linear transformation.  As such it is possible to represent it with a matrix.
+
+
+For $\mathbb{R}_n[x]$ choose as a basis $V = \{1,x,x^2,\ldots,x^n\}$ and for $\mathbb{R}_{n-1}[x]$, $W = \{1,x,x^2,\ldots,x^{n-1}\}$.
+
+We want to find a matrix $A$ such that 
+
+\[ 
+\left(\begin{array}{c} \alpha_1 \\ 2\alpha_2x \\ \vdots \\ n\alpha_nx^{n-1} \end{array} \right) = 
+A \left(\begin{array}{c} \alpha_0 \\ \alpha_1x \\ \vdots \\ \alpha_nx^n \end{array} \right)
+\]
+
+It follows that $A$ must be a $n \times n+1$ matrix.
+
+Let 
+\[ A = \left( \begin{array}{ccccc}
+0 & 1 & 0 & \cdots & 0 \\
+0 & 0 & 2 &  & 0\\
+\vdots & &  & \ddots & 0 \\
+0 & 0 & 0 & 0 & n\end{array} \right)\]
+
+This matrix clearly satisfies the condition, as, intuitively, all the constants are removed and each power of $x$ is multiplied by the appropriate scalar.
+
+\item \emph{Show that $\mathcal{L}(V,W)$ is a vector space.}
+
+Let $T,T_1,T_2 \in \mathcal{L}(V,W)$, $a,b \in \mathbb{F}$, and $v,v_1,v_2 \in V$.
+
+We have closure under scalar multiplication since $(aT)(v_1 + v_2) = aT(v_1+v_2) = a(T(v_1)+T(v_2)) = aT(v_1) + aT(v_2) = (aT)(v_1) + (aT)(v_2)$ and $(aT)(bv) = aT(bv) = abT(v) = baT(v) = b(aT)(v)$.  With closure under addition proven below, all the scalar properties for a vector space are inherited.
+
+We also have closure under addition since $(T_1 + T_2)(v_1 + v_2) = T_1(v_1 + v_2) + T_2(v_1 + v_2) = T_1(v_1) + T_1(v_2) + T_2(v_1) + T_2(v_2) = (T_1 + T_2)(v_1) + (T_1 + T_2)(v_2)$ and $(T_1 + T_2)(ax) = T_1(ax) + T_2(ax) = aT_1(x) + aT_2(x) = a(T_1(x) + T_2(x)) = a((T_1 + T_2)(x))$.  
+
+Since addition is defined point-wise associativity and commutativity are inherited from $W$.  Finally, it is clear that $T(v) = 0$ is the identity since $T(0_V) = 0_W$ and that $T(v) + -1 \cdot T(v) = T(v) + T(-v) = T(v + -v) = 0$.
+
+Therefore $\mathcal{L}(V,W)$ is a vector space over $\mathbb{F}$.
+
+\item \emph{Find $\mathrm{dim} \mathcal{L}(V,W)$ in terms of $\mathrm{dim} V$ and $\mathrm{dim} W$.}
+
+Every linear transformation must take an element from $V$ to $W$, and therefore every element in $\mathcal{L}(V,W)$ can be represented by a $\mathrm{dim} W \times \mathrm{dim} V$ matrix.  Every such matrix can be uniquely represented by a linear combination of $\mathrm{dim} W \times \mathrm{dim} V$ matrices where there is a ``1'' in only one spot and zero elsewhere, for every index in the transformation matrix.  Therefore $\mathrm{dim} \mathcal{L}(V,W) = \mathrm{dim} W \mathrm{dim} V$
+
+
+\item \emph{Show that $B(X,\rho)$ with $\|f\| = sup_{x \in X}|f|$ and $(X,\rho)$ a metric space is a normed linear space.}
+
+\item \emph{Show that the complex algebraic numbers form a subfield of $\mathbb{C}$.}
+
+We will prove that the algebraic numbers, denoted $\mathbb{A}$, form a field in general.  Since $\mathbb{C}$ and $\mathbb{R}$ are closed under addition and multiplication, it will follow immediately they the complex algebraic numbers and real algebraic numbers are subfields of the above two fields, respectively.
+
+Let $x,y \in \mathbb{A}$.  We will first prove additive closure.  Then there exist two polynomials such that $x^m + a_{m-1}x^{m-1} + \cdots a_1x + a_0 = 0$ and 
+$y^n + b_{n-1}x^{n-1} + \cdots b_1x + b_0 = 0$, where the $a_i, b_i$ are rational and not all zero.  We have the following:
+
+\begin{equation}
+\label{x-poly}
+x^m = -a_{m-1}x^{m-1} + \cdots + -a_1x + -a_0
+\end{equation}
+and
+\begin{equation}
+\label{y-poly}
+y^n = -a_{n-1}y^{n-1} + \cdots + -a_1y + -a_0
+\end{equation}
+
+We want to find a polynomial over the rationals such that $x+y$ is a root.  By (\ref{x-poly}) and (\ref{y-poly}) we see that any $x^k$ with $k \geq m$ can be re-written as a polynomial in $x$ with coefficients less than $k$.  We can continue this process until we get a polynomial with coefficients less than $m$.  Likewise for $y^l$ with $l \geq n$.
+
+Consider the set $V = \{x^iy^k \mid 0 \leq i < m,\,0 \leq j < m\}$.  Because of the above fact, this set generates a vector space over $\mathbb{Q}$ and is a basis of that vector space.  Since this set has $mn$ elements we see that the dimension of the vector space is $mn$.
+
+Let $w = x+y$.  By the same fact as above we see that the $w^i$ for $i=0,\ldots,mn$ are in the vector space and form a set of $mn+1$ elements.  This means that this set is linearly dependent.  Take $f(w) = c_{mn}w^{mn} + \cdots + c_1w + c_0 = 0$.  Since this is linearly dependent, we know that there exist $c_0,\ldots,c_{mn}$ not all zero such that $f(w)=0$.  This is exactly the polynomial for which we were looking.  Therefore $\mathbb{A}$ is closed under addition.
+
+Using the same arguments as above it is easy to see that $\mathbb{A}$ is also closed under multiplication, since we can re-express $(xy)^i$ for any $i$ as an element of the vector space using the ``reduction'' technique.
+
+Consider $(\mathbb{A},+)$.  Associativity and commutativity are inherited from $\mathbb{C}$.  $0 \in \mathbb{A}$ since $p(x)=x$ has $0$ for its only root.  If $x \in \mathbb{A}$ then $-x \in \mathbb{A}$, by the fact that $-x$ is a root of any polynomial of which $x$ is a root with $a_i = -a_i$ for $i$ odd.
+
+Consider $(\mathbb{A},\cdot)$.  As above, associativity and commutativity are inherited and $1 \in \mathbb{A}$ since $p(x) = x-1$ is the requisite polynomial.
+
+Let $x_0 \in \mathbb{A}$ and $p(x) = x^n + \cdots a_1x + a_0$ be a polynomial with $x_0$ as a root.  Then $p(x) = \prod_{k=1}^n(x - r_k)$ where each $r_i$ is a root of $p(x)$.  Note that $r_i$ might be in $\mathbb{C}$.  Then, consider $q(x) = \prod_{k=1}^n(1 - xr_k) = \prod_{k=1}^n(\frac{1}{r_k} - x)$ for $r_i \neq 0$.  We can remove any zero before this process, however, so they do not change the result.  In fact, it can be assumed that $a_0 \neq 0$ for any polynomial which describes an element of $\mathbb{A}$, as said element would stil be a root after factoring.  This polynomial has $\frac{1}{x_0}$ as a root, and so $\frac{1}{x_0} \in \mathbb{A}$.
+
+Therefore $\mathbb{A}$ is a field.  Since the real numbers and complex numbers are closed under multiplication and addition, it follows that $\mathbb{R} < \mathbb{A} < \mathbb{C}$.
+
+\item \emph{Look at the unit balls in $l_p^n(\mathbb{F})$.}
+
+\item \emph{Show that $BC(X,\mathbb{F})$ is a closed subspace of $B(X,\mathbb{F})$}
+
+It is sufficient to show that the uniform limit of a sequence of continuous function is itself a continous functions, as this means that any accumulation point must be in the set.
+
+Let $(f_n)$ be a sequence of continuous functions which converges uniformly to $f$, then there exists an $n$ sufficiently large such that:
+
+\begin{equation}
+\label{e1}
+|f(x) - f_n(x)| < \frac{\epsilon}{3}
+\end{equation}
+
+\begin{equation}
+\label{e2}
+|f(x+h) - f_n(x+h)| < \frac{\epsilon}{3}
+\end{equation}
+
+And by the continuity of each $f_n$ we have that there exists some $\delta > 0$ such that for $|h| < \delta$
+
+\begin{equation}
+\label{e3}
+|f_n(x) - f_n(x+h)| < \frac{\epsilon}{3}
+\end{equation}
+
+Thus, if $|h| < \delta$,
+
+\begin{tabular}{lll}
+$|f(x+h) - f(x)|$ & $=$	& $|f(x+h) - f_n(x+h) + f_n(x+h) - f_n(x) + f_n(x) - f(x)|$ \\
+& $\leq$ & $|f(x+h) - f_n(x+h)| + |f_n(x+h) - f_n(x)| + |f_n(x) - f(x)|$ \\
+& $<$ & $\frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3}$ \\
+& $=$ & $\epsilon$
+\end{tabular}
+
+Therefore any uniform limit of a sequence of continuous functions is itself a continuous function and so $BC(X,\mathbb{F})$ contains all its accumulation points.
+
+\item \emph{Show that $f \in B(X,\mathbb{F})$ and that $\lim_{n \rightarrow \infty} f_n = f$.}
+
+We have that $f(x_0) = \lim_{n \rightarrow \infty} f_n(x_0)$ for all $x_0 \in \mathbb{X}$.  This function is bounded since we have that, for each $x_0$ there exists some $M$ such that $\|f_n(x_0)\| \leq M$ by the fact that is is Cauchy and $\|f_n(x_0) - f(x_0)\| < \epsilon$ for all $\epsilon > 0$.  We get
+
+\begin{tabular}{lll}
+$M - \|f(x_0)\|$	&$=$&		$\|M\| - \|f(x_0)\|$ \\
+			&$\leq$&	$\|M - f(x_0)\|$ \\
+			&$\leq$&	$\|f_n(x_0) - f(x_0)\|$ \\
+			&$<$&		$\epsilon$
+\end{tabular}
+
+So $f(x_0)$ is bounded by $M + \epsilon$.
+
+That $\lim_{n \rightarrow \infty} f_n = f$ follows from our arbitrary choice of $x_0$.  These properties hold for all $x_0$ so any $x$ in the domain of $f$ is one of those $x_0$.
+
+\item \emph{Show that a finite dimensional normed linear space is complete.}
+
+Let $\|\cdot\|_1,\|\cdot\|_2$ be two norms on a vector space.  Define the relation $\|\cdot\|_1 \sim \|\cdot\|_2$ as $\|\cdot\|_1 \sim \|\cdot\|_2$ if there exists $\alpha,\beta > 0$ such that $\alpha\|v\|_2 \leq \|v\|_1 \leq \beta\|v\|_2$ for all $v \in V$.
+
+$\|v\|_1 \leq \|v\|_1 \leq \|v\|_1$, so obviously $\|\cdot\|_1 \sim \|\cdot\|_1$.
+
+Given $\alpha\|v\|_2 \leq \|v\|_1 \leq \beta\|v\|_2$, it immediately follows that $\frac{\|v\|_1}{\beta} \leq \|v\|_2 \leq \frac{\|v\|_1}{\alpha}$, so $\|\cdot\|_1 \sim \|\cdot\|_2$ implies $\|\cdot\|_2 \sim \|\cdot\|_1$.
+
+Given $\|\cdot\|_1 \sim \|\cdot\|_2$ and $\|\cdot\|_2 \sim \|\cdot\|_3$, we have $\alpha\|v\|_2 \leq \|v\|_1 \leq \beta\|v\|_2$ and $\delta\|v\|_3 \leq \|v\|_2 \leq \gamma\|v\|_3$.  It follows that $\alpha\delta\|v\|_3 \leq \|v\|_1 \leq \beta\gamma\|v\|_3$, so $\|\cdot\|_1 \sim \|\cdot\|_3$.
+
+Therefore $\sim$ is an equivalence relation on the set of all norms for a vector space.
+
+\underline{Lemma}: \emph{If a vector space $V$ is complete with respect to $\|\cdot\|_1$ and $\|\cdot\|_1 \sim \|\cdot\|_2$ then $V$ is complete with respect to $\|\cdot\|_2$.}
+
+Let $(a_k)$ with a Cauchy sequence with respect to $\|\cdot\|_1$, then for all $\epsilon > 0$ there exists a $N \in \mathbb{N}$ such that $n,m \geq N$ implies $\|a_n - a_m\|_1 < \epsilon$.  But by the equivalence of the two norms we have that there exists an $\alpha$ such that $\alpha\|a_n - a_m\|_2 \leq \|a_n - a_m\|_1 < \epsilon$ which implies for $n,m \geq N$, $\|a_n - a_m\|_2 < \frac{\epsilon}{\alpha}$.  That is, if $(a_K)$ is Cauchy with respect to $\|\cdot\|_1$ then it is also Cauchy with respect to $\|\cdot\|_2$.  The same argument works for convergence, too.
+
+Therefore, since a sequence is Cauchy and converges with respect to a given norm if and only if it does the same with respect to an equivalent norm, this relation also preserves completeness.  That is, if $V$ is complete with respect to 
+$\|\cdot\|_1$ it is complete with respect to $\|\cdot\|_2$.
+
+We can then fix one norm on a given finite-dimensional vector space and show that all norms for arbitrary finite-dimensional vector spaces are equivalent to it.  In particular, we will fix one to be, say, the Euclidian norm on $\mathbb{R}^n$.  Then, since $\mathbb{R}^n$ is complete any finite dimensional vector space is also complete.
+
+We will have $V$ be our finite-dimensional normed linear space.
+
+Let $v \in V$ and $\|\cdot\|_1,\|\cdot\|_2$ be norms on $V$.  Then $v = \sum_{k=1}^n \alpha_kv_k$ and $\|v\|_2 \leq \sum_{k=1}^n |\alpha_k|\|v_k\|_2$.  Let $\|\cdot\|_1$ be the sup norm relative to the above basis on $V$.  Then we see that $\|v\|_2 \leq \beta \|v_k\|_1$ where $\beta$ is the sum of the $\|\cdot\|_2$ norms of the basis vectors.  It follows that $\|\cdot\|_2$ is continuous with respect to $\|\cdot\|_1$ since $|\|v\|_2 - \|a\|_2\|_1 \leq \beta(\|v\|_1 - \|a\|_1) \leq \beta\|v-a\|_1$.  In particular, it is continuous on the compact set $S = \{v \in V \mid \|v\|=1\}$.  The function $\frac{1}{\|v\|_2}$ is continuous here, and so since $S$ is compact it is bounded.  Let $\alpha$ be an upper bound for this function.  (Something is funny here, I think I messed up the direction of the 
+
+Finally, we have $\alpha\|v\|_2 \leq \|v\|_1 \leq \frac{1}{\beta} \|v\|_2$.  Since any two norms on a finite dimensional vector space are equivalent and, for example, Euclidian space is complete, any finite dimensional vector space is complete.
+
+\item \emph{Show that $l^p(\mathbb{F})$ is a normed linear space.}
+
+First we show additive closure.  Let $(a_k),(b_k) \in l^p(\mathbb{F})$.  Then by Minkowski's inequality we have $\left(\sum_{k=1}^{\infty}|a_k + b_k|^p\right)^{\frac{1}{p}} \leq \left(\sum_{k=1}^{\infty}|a_k|^p\right)^{\frac{1}{p}} + \left(\sum_{k=1}^{\infty}|b_k|^p\right)^{\frac{1}{p}}$ for all $n \in \mathbb{N}$.  Moreover, we have, for any $\epsilon > 0$, there exists an $N$ such that $n \geq N$ implies $|\left(\sum_{k=1}^{\infty}|a_k + b_k|^p\right)^{\frac{1}{p}} - L - M| \leq |\left(\sum_{k=1}^{\infty}|a_k|^p\right)^{\frac{1}{p}} + \left(\sum_{k=1}^{\infty}|b_k|^p\right)^{\frac{1}{p}} - L - M| \leq |\left(\sum_{k=1}^{\infty}|a_k|^p\right)^{\frac{1}{p}} - L| +  |\left(\sum_{k=1}^{\infty}|b_k|^p\right)^{\frac{1}{p}} - M| < \epsilon$ since the two right-hand series converge (in this case, calling their respective limits $L$ and $M$).
+
+The properties of the Abelian Group are inherited immediately from the field.
+
+Since, in general, a scalar times each summand of a partial sum is equal to a scalar times the partial sum, we have closure under scalar multiplication.  Since each partial sum is an element of the field, distributivity by scalar multiplication also holds.  Likewise with the identity.
+
+Therefore $l^p(\mathbb{F})$ is a vector space.
+
+That the $p-norm$ is a norm on this vector space follows the same proof as additive closure, since it is merely an extension of Minkowski's Inequality to an infinite sum.
+
+\item \emph{Show that $B_c(X,\mathbb{F})$ is a closed subspace of $B(X,\mathbb{F})$.}
+
+\item \emph{Show that $C_c(X,\mathbb{F})$ is a closed subspace of $B(X,\mathbb{F})$.}
+
+\item \emph{Let $(a_k)$ be a sequence in a field $\mathbb{F}$ such that $\lim_{k \rightarrow \infty} a_k = 0$.  Does there exists a $p$ such that $(a_k) \in l^p(\mathbb{F})$?}
+
+Let $a_k = \frac{1}{\log(k)}$.  $(a_k) \in l^p(\mathbb{F})$ if and only if $\left(\sum_{k=1}^{\infty}|a_k|^p\right)^{\frac{1}{p}}$ converges.  Denote $b_{k,p} = |a_k|^p$ for some fixed $p$ with $1 \leq p < \infty$.  By the Cauchy Condensation Test we know that $\sum_{k=1}^{\infty}b_{k,p}$ converges if and only if $\sum_{k=1}^{\infty}2^kb_{2^k,p}$ converges.  Since $\log(k) > 0$ for all $k \in \mathbb{N}$, we have that $\sum_{k=1}^{\infty}b_{k,p}$ converges if and only if $\sum_{k=1}^{\infty}\frac{2^k}{\log(2^k)^p} = \sum_{k=1}^{\infty}\frac{2^k}{k^p\log(2)^p}$ converges.
+
+Since $\frac{1}{log(2)^p}$ is a constant for a given $p$ it has no effect no whether or not the sum converge and we can consider only $\sum_{k=1}^{\infty}\frac{2^k}{k^p}$.  This obviously does not converge as, \emph{for any $p$}, $\lim_{k \rightarrow \infty}\frac{2^k}{k^p} \neq 0$.  In fact, this sequence is a canonical example of a divergent sequence.  Therefore, there exists a sequence satisfying the conditions of the hypothesis but which is not in $l^p(\mathbb{F})$ for any $p$.
+
+\item \emph{Show that $C_0(\mathbb{F})$ and $C(\mathbb{F})$ are closed subspaces of $l^{\infty}(\mathbb{F})$.}
+
+\item \emph{Show that the linear span of ${e_j}$ is dense in $l^p(\mathbb{F})$.  Can the same be said about $l^{\infty}$?}
+
+Take $(a_k)\in l^{p}$, so that $||(a_{k})||_{p}=\left(\sum_{k=1}^{\infty}|a_k|^{p}\right)^{\frac{1}{p}}<\infty$. Consider $b_{j}=\sum_{k=j}^{\infty}|a_{k}|$. Because $\lim_{n \rightarrow \infty} |a_n| = 0$ it is clear that $(b_{j})$ is eventually non-increasing and tends to zero.  For any $\epsilon > 0$ there exists a $N \in \mathbb{N}$ such that if $j \geq N$ then $\|b_j\|_p<\epsilon$. Then, $c_j=\sum_{i=1}^{j}|a_{i}|e_{i}\in \mathrm{span} \{e_{i}\}$.  We have that $\sum_{k=1}^{\infty}|a_k| = b_j + c_j$, so $\|\sum_{k=1}^{\infty}a_k-c_j\|_{p}<\epsilon$. Therefore $\mathrm{span} \{e_{j}\}$ is dense in $l^p$. 
+
+The above proof is missing something, I believe, but the general idea is that we can remove the first finite (though possibly very large) number of terms from any sequence so that the distance between $a_k$ and the linear combination is arbitrarily small.  This works because, in order for a sequence to be summable, the limit of the sequence must be zero.
+
+This in general is not true for $l^{\infty}$, as we no longer have the condition that the terms in the infinite sum must approach zero to be in the set.  Take any sequence defined as $a_k = c \neq 0$.  Clearly $\|(a_k)\|_{\infty} = c < \infty$.  Since the difference between $(a_k)$ and any finite linear combination of $e_j$ can only affect a finite number of elements of the sequence, the value of the norm cannot be made arbitrarily small.
+\end{enumerate}
+\end{document}

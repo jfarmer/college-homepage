@@ -1,0 +1,104 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\def\bddots{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu
+        \raise4pt\hbox{.}\mkern2mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern1mu}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\title{MATH 209: Homework \#5}
+\author{Jesse Farmer}
+\date{03 May 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Let $s,t$ be simple functions.  Show that $\int_X (s+t) \, d\mu = \int_X s \, d\mu + \int_X t \, d\mu$}
+
+Because $s$ and $t$ are simple there exist $\alpha_i, \beta_i$ such that
+\[
+\int_X (s+t) \, d\mu = \sum_{i=1}^\infty (\alpha_i + \beta_i) \mu\left(A_i\right) = \sum_{i=1}^\infty \alpha_i \mu\left(A_i\right) + \sum_{i=1}^\infty\beta_i \mu\left(A_i\right) = \int_X s \,d\mu + \int_X t \,d\mu
+\]
+
+\item \emph{What sets are measurable with respect to the measure $\nu$?}
+
+Recall that
+\[
+\nu(A) = \int_A f \,d\mu
+\]
+
+for $f$ measurable.  Clearly $A$ must be at least Lebesgue measurable, since otherwise the definition does not make any sense.  If $A$ is Lebesgue measurable then for any $E \subseteq \R^n$, $\mu(E) = \mu(E \cap A) + \mu(E \setminus A)$.  I am concerned about the measurability of $E \cap A$ and $E \setminus A$, since if they are not measurable then $\nu(E)$ wouldn't make sense.  However, under certain restrictions it seems to me that the additivity of $\nu$ and the fact that it is define in terms of the Lebesgue integral would guarantee that if $A$ is Lebesgue measurable then it is $nu$-measurable.
+
+What confuses me is that we defined \emph{measurable} in terms of the outer measure, but we have nothing akin to that for arbitrary measure as far as I know.
+
+\item \emph{Let $f: X \rightarrow \C$ be measurable.  Show that $|\int_X f \,d\mu| \leq \int_X |f| \,d\mu$.}
+
+From the properties of complex numbers it follows that  $|u| \leq |f|$, $|v| \leq |f|$, and $|f| \leq |u| + |v|$.  Moreover, for any Lebesgue measurable function there exists $c \in \C$ with $|c| = 1$ such that
+\[
+c \int_X f \,d\mu \geq 0
+\]
+
+Let $cf = u + iv$  Then $\int_X cf \,d\mu$ is real because
+\[
+\int_X cf \,d\mu = c\int_X f \,d\mu = \left|\int_X f \,d\mu\right|
+\]
+
+Therefore
+\[
+\left|\int_X f \,d\mu\right| = \left|\int_X u \,d\mu\right| \leq \int_X |cf| \,d\mu =|c|\int_X |f| \,d\mu = \int_X |f| \,d\mu
+\]
+
+\item \emph{Do Stewart \#1-12}
+
+See attached papers.
+
+\item \emph{Write a proof for the Lebesgue Dominated Convergence Theorem.}
+
+Let $E$ be a measurable set and $\{f_n\}$ a sequence of measurable functions such that $f_n \rightarrow f$ pointwise on $E$ and let $g$ be a measurable function on $E$ such that $|f_n(x)| \leq g(x)$.  Clearly $f$ and $f_n$ are measurable on $E$, so $g + f_n \geq 0$.  By Fatou's Lemma, 
+\[
+\int_E (f + g) \,d\mu \leq \liminf_{n \rightarrow \infty} \int_E (f_n + g) \,d\mu
+\]
+
+and hence
+\begin{equation}
+\label{ldom_liminf}
+\int_E f \,d\mu \leq \liminf_{n \rightarrow \infty} \int_E f_n \,d\mu
+\end{equation}
+
+Moreover, by hypothesis $g - f_n \geq 0$, so again by Fatou's Lemma
+\[
+\int_E (g - f) \,d\mu \leq \liminf_{n \rightarrow \infty} \int_E (g - f_n) \,d\mu \Rightarrow -\int_E f \,d\mu \leq \liminf_{n \rightarrow \infty} -\int_E f_n \,d\mu
+\]
+
+Which is equivalent to 
+\begin{equation}
+\label{ldom_limsup}
+\limsup_{n \rightarrow \infty} \int_E f_n \,d\mu \leq \int_E f \,d\mu
+\end{equation}
+
+Inequalities (\ref{ldom_liminf}) and (\ref{ldom_limsup}) together imply
+\[
+\lim_{n \rightarrow \infty} \int_E f_n \,d\mu = \int_E f \,d\mu
+\]
+
+\end{enumerate}
+\end{document}

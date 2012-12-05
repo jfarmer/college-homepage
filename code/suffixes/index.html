@@ -1,0 +1,122 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Mr. Farmer at the University of Chicago" />
+	<title>Jesse E. I. Farmer - Code - suffixes</title>
+	<link rel="stylesheet" type="text/css" href="/~farmerje/farmerje.css" />
+</head>
+<body>
+<div id="page">
+
+<div id="header">
+<h1>Jesse E. I. Farmer</h1>
+<a href="http://www.uchicago.edu">University of Chicago</a>
+<img src="/~farmerje/img/header.png" alt="Phoenix" />
+</div>
+
+<div id="navigation">
+<ul>
+<li class="first"><a href="/~farmerje/index.shtml">Home</a></li>
+<li><a href="/~farmerje/math">Math</a></li>
+<li><a href="/~farmerje/code">Code</a></li>
+<li><a href="/~farmerje/tutorials">Tutorials</a></li>
+<li><a href="/~farmerje/latex">LaTeX</a></li>
+<li><a href="/~farmerje/linux">Linux</a></li>
+<li><a href="/~farmerje/resume.pdf">Resumé</a></li>
+</ul>
+</div>
+
+<div id="content">
+
+
+<h2>suffixes</h2>
+<ul>
+<li><a href="suffixes-1.0.0.tar.bz2">Download source</a></li>
+<li><a href="#description">Description</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#technical">Technical details</a></li>
+</ul>
+
+<a name="description"></a>
+<h3>Description</h3>
+<p>
+suffixes is a program written in C++ which tries to guess root/suffix boundaries within a word.  For example, given the word "jumpers" it would (hopefully) output jump|er|s, meaning that the root is jump, and there are two suffixes: er and s.  More properly speaking, <tt>suffixes</tt> tries to guess suffix morpheme boundaries.  It will run on any standard UNIX system, and it should compile in UNIX environment like Cygwin, though I haven't tested it personally.
+</p>
+
+<a name="installation"></a>
+<h3>Installation</h3>
+<p>
+Download the source using the link above and uncompress it.  A makefile is contained, so all that is required to compile it is to run <tt>make</tt> in the source directory.  The executable is called <tt>suffixes</tt>.
+</p>
+
+<a name="usage"></a>
+<h3>Usage</h3>
+<p>
+For now just run <tt>suffixes -h</tt> for a (terse) description of the command line parameters
+</p>
+
+<a name="technical"></a>
+<h3>Technical details</h3>
+<p>
+Here I'm going to try to explain the idea of successor frequency and my implementation of it.  First, we need a little linguistic background.  <a href="http://en.wikipedia.org/wiki/Linguistics">Linguistics</a> is the scientific study of natural language.  It is usually classified as a social science, although many subdisciplines such as syntax and (generative) phonology involve some pretty high-falutin' mathematics (e.g., formal language theory).  Here we're interested in <a href="http://en.wikipedia.org/wiki/Morphology_%28linguistics%29">morphology</a>.
+</p>
+
+<p>
+Morphology is the study of word structure.  In a lose sense we're interested in answering the question, "What is a word and what is a word made of?"  Oddly enough, linguists don't have a very good answer for "What is a word?" aside from "We know it when we see it," but their answer for "What is a word made of?" is something called a <em>morpheme</em>.  Roughly speaking a morpheme is the smallest subpart of a word which has meaning.  Take the word <em>dogs</em>.  The substring <em>og</em> has no meaning whatsoever.  The substring <em>dog</em>, however, does, meaning a canine, as does the suffix <em>-s</em>, which indicates plurality.  Hence <em>dogs</em> consists of two morphemes: <em>dog</em> and <em>-s</em>.  Here <em>dog</em> is called the <em>root</em> and <em>-s</em> is a suffix, or, more generally, an <em>affix</em>.  The key to morphology is this: a word is more than just a bag of letters.
+</p>
+<p>
+As a native speaker of a language, given a word, you can usually find the morphemes reliably.  Sometimes there might be ambiguity, but those times are rarer than not.  But what if we wanted to teach a computer the morphology of, say, English?  It sees a word as a bag of letters, with no substring having any substantive meaning on its own.
+</p>
+<p>
+One of the easiest solutions rests with the idea of successor frequency.  First, we have somewhere a big corpus of English, say, every news article printed in English in the year 2005.  The program keeps track of each string, and for each substring keeps track of how many letters can follow that substring.  For example, take the word <em>jumping#</em>, where '#' denotes the end of a word.
+</p>
+<pre>
+ 6 3 1 4 1 1 1
+j u m p i n g #
+</pre>
+<p>
+This means that given the string 'j' there are 6 possible letters which can follow it, where here 'possible' means that we saw it in our big corpus of English.  There are three letters which can follow the string 'ju', perhaps attested by <em>jump</em>, <em>juice</em>, and <em>just</em>.  After 'jum' there is only one possible letter: 'p'.  However, after 'jump' there are four possibilities, probably <em>jump#</em>, <em>jumping</em>, <em>jumps</em>, and <em>jumped</em>.
+</p>
+<p>
+It should probably be clear where the suffix boundary is given the above data; it's between jump and ing, and we know this because there's a spike in the successor frequency there.  Of course, there are spikes at the beginning of the word, too, but this is to be expected.  Given only two or three letters, there are many words which begin with them but in which these letters form no morpheme.  So we limit our investigation to finding suffixes for words of a certain minimum length (at least four characters long).  If you're clever you'd realize that we could implement a "predecessor frequency" algorithm by running each string through our algorithm backwards.
+</p>
+
+<p>
+If you have any linguistic background you should be able to spot some problems with this right away.  For one, we're dealing with written (orthographical) English here, which makes no sense.  For example, in certain cases in written English we double a consonant before certain suffixes, e.g., <em>dog</em> versus <em>dogged</em>.  The extra 'g' is an artifact of our orthography and has no phonetic realization.  Similarly, words which have other superfluous orthography, like a final "silent e" as in <em>retrieve</em> will mess up our algorithm.  Properly speaking the input should not be orthographic English but rather a representation of spoken English.
+</p>
+
+<p>
+A second, more technical problem, is that some suffixes might end in the same letter, e.g., <em>-ed</em> and <em>-er</em>. Although these represent three different suffixes our algorithm lumps them all together as one.  The opposite can happen, too, as in the case with <em>-es</em>, <em>-s</em>, and <em>-z</em> which, while orthographically distinct, all represent the same morpheme, viz., that which designates plurality.
+</p>
+
+<p>
+These failings aside, the successor frequency algorithm is surprisingly good at guessing suffix boundaries.  As a final solution it needs work, but often it is used as a bootstrapping heuristic for more complex algorithms which need a basic understanding of the morphology before they can proceed to refine it.
+</p>
+</div>
+
+<div id="footer">
+Copyright &copy; <a href="mailto&#058;farmerje&#064;uchicago&#046;edu">Jesse E.I. Farmer</a>, 2005-2006
+
+<div class="updated">Last updated: 08 May 2006</div>
+<img src="/~farmerje/img/xhtml.png" alt="Valid xhtml 1.0" />
+<img src="/~farmerje/img/css.png" alt="Valid CSS" />
+</div>
+
+</div>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-313699-1";
+urchinTracker();
+</script>
+</body>
+</html>
+

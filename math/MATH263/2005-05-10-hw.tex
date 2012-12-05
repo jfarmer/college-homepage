@@ -1,0 +1,83 @@
+\documentclass[10pt]{article}
+
+\usepackage{homework}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\title{MATH 263: Homework \#6}
+\author{Jesse Farmer}
+\date{10 May 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Let $H^2 = \set{ (x,y) \in \R^2 \mid y \geq 0}$ and $X$ be a surface with boundary.}
+\begin{enumerate}
+\item \emph{Show that no point of $H^2$ of the form $(x,0)$ has a neighborhood in $H^2$ that is homeomorphic to an open set of $\R^2$.}
+
+This follows from the connectedness properties of $H^2$ and open subsets of $\R^2$, respectively.  We may assume without loss of generality that any neighborhood of $(x,0) \in H^2$ is connected, since otherwise there exists an open connected subset of the neighborhood which is a refinement of the original.  So, for any connected neighborhood $U$ of a point $(x,0)$ we can remove a point, e.g., $(x,0)$, and $U$ will remain simply connected.  However, no point can be removed from any open set in $\R^2$ without it ceasing to be simply connected (viz., a small loop around the removed point will no longer be nullhomotopic).
+
+
+\item \emph{Show that $x \in \partial X$ if and only if there is a homeomorphism $h$ mapping a neighborhood of $x$ onto an open set of $H^2$ such that $h(x) \in \R \times \set{0}$.}
+
+Let $x \in \partial X$.  Then any neighborhood $U$ of $x$ is homeomorphic to an open subset of $H^2$, but not an open subset of $\R^2$.  If $h(x) \notin \R \times \set{0}$ then there would exist a $\e$-neighborhood of $h(x)$ homeomorphic to an open subset of $\R^2$ via inclusion whose preimage is a neighborhood of $x$, contradicting the hypothesis that $x \in \partial X$.  Therefore $h(x) \in \R \times \set{0}$ if $x \in \partial X$.
+
+Assume there is a homeomorphism $h$ mapping a neighborhood $U$ of $x$ onto an open set of $H^2$ such that $h(x) \in \R \times \set{0}$.  Then $h(U)$ is homeomorphic to a neighborhood $V$ of a point of the form $(y,0)$, which, from the first part, implies that $V$ is not homeomorphic to an open subset of $\R^2$.  Hence $U$ is not homeomorphic to an open subset of $\R^2$ and $x \in \partial X$.
+
+
+\item \emph{Show that $\partial X$ is a $1$-manifold.}
+
+
+\end{enumerate}
+
+\item \emph{Show that the closed unit ball in $\R^2$ is a $2$-manifold with boundary.}
+
+Let $D$ be the closed unit ball in $\R^2$.  If $U \subset D$ is a neighborhood of the point $x$ contained in the interior of $D$ then $U$ is homeomorphic to an open subset of $\R^2$ by inclusion.  Assume that $U$ intersects the boundary of $D$.  Then define a map $U \rightarrow H^2$ that fixes all interior points and sends elements of the boundary to their projection along the secant line defined by where $U$ intersects $D$.  This is a homeomorphism, though not with an open subset of $H^2$.  However, we can create a second homeomorphism which takes the image of $U$ and translates and rotates it so that the secant line defined above resides on the line $\R \times \set{0}$.  The composition of these two homeomorphisms is the homeomorphism for which are are looking.
+
+\item \emph{Let $X$ be a $2$-manifold and let $\set{U_1, \ldots, U_k}$ be a collection of disjoint open sets in $X$.  Suppose that for each $i$ there is a homeomorphism $h_i$ of the open unit ball $B^2$ with $U_i$.  Let $\e = \frac{1}{2}$ and $B_\e$ be the open ball of radius $\e$.  Show that the space $Y = X \setminus \bigcup h_i(B_\e)$ is a $2$-manifold with boundary and that $\partial Y$ has $k$ components.}
+
+Let $x \in Y$.  Then either $x \in \partial h_i(B_\e)$ or not.  If not then since $X$ is a $2$-manifold there exists a sufficiently small neighborhood $U$ of $x$ such that $U$ is homeomorphic to $\R^2$.  If $x \in \partial h_i(B_\e)$ for some $i$ then there exists a neighborhood $V$ of $x$ such that $V$ does not intersect $\partial h_j(B_\e)$ for $i \neq j$, again since $X$ is a $2$-manifold, and such that $V$ is homeomorphic to a subspace of $\R^2$.  Treating $V$ and $h_i(B_\e)$ as their corresponding subspaces in $\R^2$, then, we see that as a subset of $\R^2$ (not subspace), we can produce a homeomorphism of $V$ with an open subset of $H^2$ by projecting the boundary of $V$ in $\R^2$ onto the secant line defined by the points where $V$ intersects $h_i(B_\e)$ and then composing it with a homeomorphism that rotates and translates this secant line onto $\R \times \set{0}$.  Hence $X$ is a $2$-manifold with boundary.
+
+The only points of $Y$ which have neighborhoods not homeomorphic to an open subset of $\R^2$ are those in $\partial h_i(B_\e)$, for each $i$.  However, each $h_i(B_\e)$ is connected and $h_i(B_\e) \cap h_j(B_\e) = \emptyset$ for $i \neq j$.  Hence if $x, y \in \partial Y$ then $x$ and $y$ are in the same component if and only if they are in $\partial h_i(B_\e)$.  Since there are $k$ of these there are precisely $k$ components.
+
+\item \emph{Given a compact connected triangulable $2$-manifold $Y$ with boundary such that $\partial Y$ has $k$ components show that $Y$ is homeomorphic to $X$-with-$k$-holes, where $X$ is either $S^2$ or the $n$-fold torus $T_n$ or the $m$-fold projective plane $P_m$.}
+
+Since each component of $\partial Y$ is homeomorphic to a circle, $Y$ can be written as the quotient space of a polygonal region in the plane with pairs of edges identified containing $k$ holes.  From the classification theorem, however, it follows that the polygonal region must be homeomorphic to $S^2$, $T_n$, or $P_m$, and hence $Y$ is homeomorphic to one of these with $k$ disjoint neighborhoods homeomorphic to $B^2$ removed from their surface.
+
+\item \emph{Let $T$ be the torus.}
+\begin{enumerate}
+\item \emph{Find a covering space of $T$ corresponding to the subgroup $\Z \times \Z$ generated by the element $m \times \set{0}$, where $m \in \Z_+$.}
+
+This subgroup is precisely $m\Z \times \set{0} \iso m\Z$.  Define $p: S^1 \times \R_+ \rightarrow T$ by
+\[
+p(z, x) = z^m \times (\cos 2 \pi x, \sin 2 \pi x)
+\]
+
+where $S^1$ is viewed as residing in the complex plane.  This induces an injection of fundamental groups $p_\ast$, and the image is $p_\ast(\pi_1(S_1 \times \R_+)) = p_\ast(\pi_1(S^1)) \times p_\ast(\pi_1(\R_+)) = p_\ast(\pi_1(S^1)) \times \set{0} = m \Z \times 0 = \brac{m \times 0 \mid m \in \Z_+}$ since $\R_+$ is simply connected.
+
+\item \emph{Find a covering space of $T$ corresponding to the trivial subgroup of $\Z \times \Z$.}
+
+Let $p: \R_+ \rightarrow S^1$ be the usual covering map defined by $x \mapsto (\cos 2 \pi x, \sin 2 \pi x)$.  Then $p \times p: \R_+^2 \rightarrow T$ is a covering map, and the image of $\pi_1(\R_+^2)$ under $p_\ast$ must be trivial since $\R_+^2$ is simply connected.
+
+\item \emph{Find a covering space of $T$ corresponding to the subgroup of $\Z \times \Z$ generated by $m \times \set{0}$ and $\set{0} \times n$, where $m,n \in \Z_+$.}
+
+Define a map $p: T \rightarrow T$ by $p(z,w) = z^m \times z^n$.  Since this is the (Cartesian) product of two covering maps it is a covering map, and the corresponding subgroup is isomorphic to the image of $\pi_1(T)$ under $p_\ast$, which, in turn, is isomorphic to the Cartesian product of the fundamental group of $S^1$ under the image of the respective component monomorphisms of $p_\ast$.  In other words, $p_\ast(\pi_1(T)) \iso m\Z \times n\Z = \brac{ m \times 0, 0 \times n \mid m,n \in \Z_+}$.
+
+\end{enumerate}
+
+\item \emph{Let $G$ be a topological group with multiplication $m: G \times G \rightarrow G$ and identity element $e$.  Let $p: \widetilde{G} \rightarrow G$ is a covering map.  Show that given $\tilde{e}$ with $p(\tilde{e}) = e$ there is a unique multiplication operation on $\widetilde{G}$ that makes it into a topological group such that $\tilde{e}$ is the identity element and $p$ is a homomorphism.}
+
+\item \emph{Let $p: \widetilde{G} \rightarrow G$ be a homomorphism of topological groups that is a covering map.  Show that if $G$ is abelian then so is $\widetilde{G}$.}
+\end{enumerate}
+\end{document}

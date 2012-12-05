@@ -1,0 +1,103 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\Res}{\text{Res}}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\title{MATH 270: Homework \#8}
+\author{Jesse Farmer}
+\date{24 November 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Find the residues of the following functions at the indicated points:}
+\begin{enumerate}
+\item \emph{$\frac{e^z-1}{\sin z}$ at $z = 0$}
+
+Both $e^z-1$ and $\sin z$ have zeros of order $1$ at $z=0$, so the residue at $z=0$ is $0$.
+
+\item \emph{$\frac{1}{e^z-1}$ at $z = 0$}
+
+$e^z-1$ has a zero of order $1$ at $z=0$, but all derivatives are non-zero, so the residue at $z=0$ is given by $1/e^z$ evaluated at $z=0$, i.e., it has a residue of $1$.
+
+\item \emph{$\frac{z+2}{z^2-2z}$ at $z = 0$}
+
+$\lim_{z \rightarrow 0} z \frac{z+2}{z^2-2z} = -1$, so this is the desired residue.
+
+\item \emph{$\frac{1+e^z}{z^4}$ at $z = 0$}
+
+$z^4$ has a zero of order $4$, so the residue is $\phi^{(3)}(0)/3!$ where $\phi(z) = 1+e^z$.  Evaluated at $z=0$ this is $\frac{1}{6}$.
+\end{enumerate}
+
+\item \emph{Evaluate $\int_{\gamma} \frac{dz}{(z+1)^3}$ for the following curves:}
+\begin{enumerate}
+\item \emph{$\gamma$ is a circle of radius $2$ centered at $0$.}
+
+Let $f(z) = \frac{1}{(z+1)^3}$ and $\phi(z) = 1$, then
+\[
+\Res_{z=-1} \frac{1}{(z+1)^3} = \frac{\phi^{(z)}(1)}{2!} = 0
+\]
+
+By the Residue Theorem the integral is therefore $0$.
+
+\item \emph{$\gamma$ is a square with vertices at $0$, $1$, $1+i$, and $i$.}
+
+This region contains no singularities and so the integral is $0$.
+\end{enumerate}
+
+\item \emph{Show using Cauchy's inequalities that the Laurent-Taylor series of a holomorphic funciton on $\Omega \setminus \{z_0\}$, where $z_0$ is a removable singularity or a pole, converges in $0 < |z - z_0| < R$ where $D(z_0, R) \subset \Omega$, and that $$f(z) = \sum_{k=-n}^\infty a_k(z-z_0)^k$$}
+
+This question confuses me because it seems like exactly what DDSF proved in class, namely, that if $f$ has a pole or a removable singularity at $z_0$ then on $D(z,0) \setminus \{z_0\}$ there is some holomorphic function $h$ such that
+\[
+f(z) = \frac{a_{-n}}{(z-z_0)^n} + \cdots + \frac{a_{-1}}{z-z_0} + h(z)
+\]
+
+The first (finite) number of terms do not affect the convergence of anything since they are finite, and $h(z)$ is holomorphic precisely because it can be expressed as a convergent power-series.  At what point are Cauchy's inequalities necessary?
+
+\item \emph{Show the convergence of the series $$\sum_{k=-\infty}^\infty a_k(z-z_0)^k$$ on $D(z_0, R) \setminus \{z_0\}$ where $$a_k = \frac{1}{2\pi i}\int_{\partial D(z_0, R/2)} \frac{f(\zeta)}{(\zeta-z_0)^{k+1}} \,d\zeta$$}
+
+I do not understand why it is sufficient to prove this statement for $R/2$, so instead I will do it for any two curves below.
+
+\item \emph{Deduce Laurent's theorem from these results.}
+
+If I remember to draw a picture of what I'm talking about in the morning, then that will go a long way toward explaining what I'm about to try and articulate -- I'm pretty sure this is a normal thing to do anyhow.  Let $\gamma_1$ and $\gamma_2$ be two circles with radius $r_1$ and $r_2$ such that $r_1 < |z-z_0| < r_2$.  Fix $z$ in this region and let $\gamma_3$ be a segment joining $\gamma_1$ and $\gamma_2$ that does not pass through $z$.  Let $\gamma$ be the path that first traverses $\gamma_2$, then $\gamma_3$, then $\gamma_1$ in reverse order, and back again along $\gamma_3$ in reverse order.  Clearly $\gamma$ as constructed like this, i.e., $\gamma = \gamma_2 + \gamma_3 - \gamma_1 - \gamma_3$, is homotopic to a neighborhood $\gamma'$ of $z$ as the points of self-intersection are homotopic to a point.  $f$ is holomorphic in this neighborhood, so by Cauchy's integral formula
+\begin{eqnarray*}
+f(z) &=& \frac{1}{2\pi i} \int_{\gamma'} \frac{f(\zeta)}{\zeta-z}\,d\zeta \\
+&=& \frac{1}{2\pi i} \int_{\gamma} \frac{f(\zeta)}{\zeta-z}\,d\zeta \\
+&=& \frac{1}{2\pi i} \int_{\gamma_2} \frac{f(\zeta)}{\zeta-z}\,d\zeta + \frac{1}{2\pi i} \int_{\gamma_3} \frac{f(\zeta)}{\zeta-z}\,d\zeta - \frac{1}{2\pi i} \int_{\gamma_1} \frac{f(\zeta)}{\zeta-z}\,d\zeta - \frac{1}{2\pi i} \int_{\gamma_3} \frac{f(\zeta)}{\zeta-z}\,d\zeta \\
+&=& \frac{1}{2\pi i} \int_{\gamma_2} \frac{f(\zeta)}{\zeta-z}\,d\zeta - \frac{1}{2\pi i} \int_{\gamma_1} \frac{f(\zeta)}{\zeta-z}\,d\zeta
+\end{eqnarray*}
+
+But $\frac{f(\zeta)}{\zeta - z}$ itself is also holmorphic on $\gamma_2$, so that
+\[
+\frac{1}{2\pi i}  \int_{\gamma_2} \frac{f(\zeta)}{\zeta-z}\,d\zeta = \frac{1}{2\pi i} \int_{\gamma_2} \sum_{k=0} a_k (z-z_0)^k\,d\zeta = \sum_{k=0}^\infty \left[\int_{\gamma_2} a_k \,d\zeta\right] (z-z_0)^k
+\]
+
+since $(z-z_0)^k$ is bounded on $\gamma_2$.  From Cauchy's formula we know that $a_k = \frac{f(\zeta)}{(\zeta-z)^{k+1}}$, and that this series converges uniformly on $\gamma_2$, so the portion consisting of positive powers of $n$ is proven for the laurent expansion.
+
+Anyhow, it's getting late.  The portion with the negative parts is done the same way, except that the fact that the powers of $n$ are negative guarantee that it converges \emph{outside} the radius $r_1$, i.e., if a power-series in $z$ has a radius of convergence $R$ then the corresponding power-series in $1/z$ converges in $1/R$, but since $R$ is arbitrarily small, this new power-series converges outside the disc rather than inside -- it has a lower limit of $1/R$ and no upper-limit in terms of convergence.
+
+I don't understand why part 2 is different from the extra-credit, though.  This part shows that the Laurent series with the given coefficients converges to $f$ in particular, while part 2 seems to just say that it converges, but not to what specifically.  Why not simply prove the former, which implies the latter?
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,268 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\powset}[1]{
+\wp\left(#1\right)
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\T}{\mathcal{T}}
+
+\title{MATH 262: Homework \#2}
+\author{Jesse Farmer}
+\date{20 January 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Prove that $\A$ is countable and that $\R \setminus \A$ is uncountable.}
+
+First, we show that $\Z$ and $\Q$ are countable.  Consider the map $\varphi: \Z_+ \rightarrow \Z$ where
+\[
+\varphi(n) = \begin{cases} -\frac{n}{2} & \mbox{if } 2 \mid n \\ \frac{n-1}{2} & \mbox{if } 2 \nmid n\end{cases}
+\]
+Then $\varphi$ is clearly a bijection between these two sets, and hence $\Z$ is countable.  Let $A = \{(p,q) \mid p,q \neq 0, p \mbox{ and } q \mbox{ are relatively prime}\} \cup \{0\} \subset \Z \times \Z$, which is countable since $\Z \times \Z$ is.  Then there is a natural bijection from $A$ to $\Q$ given by $(p,q) \mapsto \frac{p}{q}$ and $0 \mapsto 0$, and hence $\Q$ is countable.
+
+Denote the set of polynomials of degree $n$ with with rational coefficients by $P_n$.  We may assume the leading coefficient $a_n$ of the polynomial is $1$, since, if it is not, we may divide through by $a_n$ and have a polynomial with exactly the same roots but $1$ as the leading coefficient. There is a bijection from $P_n \rightarrow \Q^n$ defined by $$x^n + a_{n-1}x^{n-1} + \cdots + a_0 \mapsto (a_{n-1}, \ldots, a_0)$$ so that $P_n$ is countable.  
+
+If $P$ is the set of all polynomials with rational coefficients then $$P = \bigcup_{n \in \N} P_n$$ where $\N = \Z_+ \cup \{0\}$.  $\N$ is countable, and hence $P$ is also countable as it is the countable union of countable sets.
+
+From the Fundamental Theorem of Algebra we know there exist at most $n$ distinct real roots of a polynomial $p$ of degree $n$.  Denote the set of all real roots of $p$ by $R_p$.  Then $$\A = \bigcup_{p \in P} R_p$$  But $P$ is countable, as is $R_p$, and hence $\A$ is also countable.
+
+We know that $\R$ is not countable.  If $\R \setminus \A$ were countable, then $\R = \A \cup (\R \setminus \A)$ would also be countable, a contradiction.  Hence $\R \setminus \A$, the set of transcendental numbers, is uncountable.
+
+\item \emph{Determine whether or not each of the following sets is countable:}
+\begin{enumerate}
+\item \emph{The set $A$ of all functions $f: \{0,1\} \rightarrow \Z_+$.}
+
+There is a bijection between $A$ and $\Z_+ \times \Z_+$ given by $$f \mapsto \left(f(0), f(1)\right)$$ and hence $A$ is countable.
+
+\item \emph{The set $B_n$ of all functions $f: \{1,\ldots,n\} \rightarrow \Z_+$.}
+
+As above, there is a bijection between $B_n$ and $\Z_+^n$ given by $$f \mapsto (f(1), \ldots, f(n))$$ and hence $B_n$ is countable for all $n \in \Z_+$.
+
+\item \emph{The set $C = \bigcup_{n \in \Z_+} B_n$.}
+
+$C$ is the countable union of countable sets and is therefore countable.
+
+\item \emph{The set $D$ of all functions $f: \Z_+ \rightarrow \Z_+$.}
+
+Every function from $\Z_+$ to $\{0,1\}$ is also a function from $\Z_+$ to $\Z_+$.  From the following exercise it follows that this set must be uncountable, since the set of all functions $f: \Z_+ \rightarrow \{0,1\}$ is uncountable and any set cannot have a proper subset with cardinality greater than the set itself.
+
+\item \emph{The set $E$ of all functions $f: \Z_+ \rightarrow \{0,1\}$.}
+
+This set is uncountable since there is a bijection from $E$ to $\powset{\Z_+}$ given by $$f \mapsto \{n \in \Z_+ \mid f(n) = 1\}$$
+
+This is obviously injective, since if two functions $f$ and $g$ are $1$ on the same subset of $\Z_+$ then they must be $0$ everywhere else and hence equal on all of $\Z_+$.  It is surjective since, if $A \in \powset{\Z_+}$ we can define
+\[
+f(n) = \begin{cases} 1 & n \in A \\ 0 & n \in \Z_+ \setminus A \end{cases}
+\]
+
+Then $f \mapsto A$.
+\item \emph{The set $F$ of all functions $f: \Z_+ \rightarrow \{0,1\}$ that are eventually zero.}
+
+If $f$ is eventually zero then are are a finite number of $n \in \Z_+$ such that $f(n) = 1$.  Define
+\[
+F_n = \{ f \in F \mid f(n) = 1 \mbox{ and } f(x) = 0 \mbox{ for all } x \geq n \}
+\]
+
+Then $F_n$ is finite, and in fact it is easy to see by counting that $|F_n| = 2^{n-1}$.  But
+\[
+F = \bigcup_{n \in \Z_+} F_n
+\]
+
+So $F$ is countable.
+
+\item \emph{The set $G$ of all functions $f: \Z_+ \rightarrow \Z_+$ that are eventually $1$.}
+
+Similarly, define
+\[
+G_n = \{ f \in G \mid f(n) = 1 \mbox{ and } f(x) = 0 \mbox{ for all } x \geq n \}
+\]
+
+There is a bijection between $G_n$ and all the functions from $A = \{1,\ldots,n-1\}$ to $\Z_+$ given by
+\[
+f \mapsto f\mid_A
+\]
+
+where $f_A$ is $f$ restricted to $A$.  This is easily seen to be a bijection since for all $x > n-1$, $f(x) = g(x)$ for any $f,g \in G_n$.  $G$ is the union of all the $G_n$ over $\Z_+$, and is therefore countable.
+
+\item \emph{The set $H$ of all functions $f: \Z_+ \rightarrow \Z_+$ that are eventually constant.}
+
+Define
+\[
+H_n = \{ f \in H \mid f \mbox{ is eventually $n$}\}
+\]
+
+Each $H_n$ is countable by the previous part, i.e., the constant $1$ from the previous part was completely arbitrary.  Then $H$ is the union of all these $H_n$ over $\Z_+$ and hence is countable.
+
+\item \emph{The set $I$ of all two-element subsets of $\Z_+$.}
+
+As the set of all finite subsets of $\Z_+$ is countable and as $I$ is a subset of this set, $I$ is also countable.
+
+\item \emph{The set $J$ of all finite subsets of $\Z_+$.}
+
+Let
+\[
+J_n = \{ A \subset J \mid |A| = n\}
+\]
+
+Then there exists a surjection from $\Z_+^n$ to $J_n$ given by
+\[
+(a_1, a_2, \ldots, a_n) \mapsto \{a_1, a_2, \ldots, a_n\}
+\]
+
+Hence $J_n$ is countable since $\Z_+^n$ is countable. But
+\[
+J = \bigcup_{n \in \Z_+} J_n
+\]
+
+so that $J$ is also countable. 
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Show that if $B \subset A$ and if there is an injection $f: A \rightarrow B$ then $A$ and $B$ have the same cardinality.}
+
+Let $C_0 = A \setminus B$ and define recursively $C_{n+1} = f(C_n)$.  Note that the $f(C_j)$ are pairwise disjoint.  Assume there is a counterexample, then there is a minimal counterexample, i.e., minimal $i,j$ with $i \neq j$ such that $C_i \cap C_j \neq \emptyset$.  $C_0$ is disjoint with respect to all the other $C_j$, so that if they are disjoint $j > 0$.  Then 
+\[
+\emptyset \neq C_i \cap C_j = f(C_{i-1}) \cap f(C_{j-1}) \supset f(C_{i-1}\cap C_{j-1})
+\]
+
+Hence $C_{i-1} \cap C_{j-1} \neq \emptyset$, contradicting the minimality of $i$ and $j$.  Let $C = \bigcup_{i=1}^\infty C_i$ and define
+\[
+h(x) = \begin{cases} f(x) & x \in C \\ x & x \notin C \end{cases}
+\]
+
+$h$ is injective since it cannot be the case that if $f(x) = f(y)$ then $x \in C$ and $y \notin C$, or vice versa.  Let $b \in B$.  If $b \notin C$ then $h(b) = b$, otherwise, if $b \in C$ then there is some $C_k$ such that $b \in C_k$.  Then $b \in C_k = f(C_{k-1})$, and hence there is some $a \in C_{k-1}$ with $h(a) = f(a) = b$.  Therefore $h$ is a bijection, and $A$ and $B$ have the same cardinality.
+
+\item \emph{Two sets $A,C$ have the same cardinality if there exist injective functions $f,g$ with $f: A \rightarrow C$ and $g: C \rightarrow A$.}
+
+Let $f$ and $g$ be as stated, then $g \circ f: A \rightarrow g(C)$ is an injection.  By the previoius part there exists a bijection $h: A \rightarrow g(C)$.  Since $g$ is injective there also exists a bijection $g^{-1}: g(C) \rightarrow C$.  Define a bijection by from $A$ to $C$ by
+\[
+\varphi(x) = (g^{-1} \circ h)(x)
+\]
+
+The composition of two bijections is a bijection, so $A$ and $C$ have the same cardinality.
+\end{enumerate}
+
+\item \emph{Let $X$ be a topological space and let $A \subset X$.  Show that $A$ is open in $X$ if for every $x \in A$ there is an open set $U$ containing $x$ such that $U \subset A$.}
+
+Let $U_x$ be an open set containing an arbitrary point $x \in A$.  Then, since $U_x \subset A$ for all $x \in A$,
+\[
+A = \bigcup_{x \in A} U_x
+\]
+
+Since each $U_x$ is open $A$ itself is open.
+
+\item \emph{Let $X$ be a set and let $\T_c$ be the collection of all subsets $U$ of $X$ such that $X \setminus U$ is either countable or all of $X$.  Show that $\T_c$ is a topology on $X$.  Is the collection $\T_\infty$, the collection of all subsets $U$ of $X$ such that $X \setminus U$ is infinite, empty, or all of $X$, a topology on $X$?}
+
+Clearly $\emptyset, X \in \T_c$ since $X \setminus U$ is all of $X$ if and only if $U = \emptyset$, and certainly $X \setminus X = \emptyset$ is countable.  So we need only consider the case where $X \setminus U$ is countable.  Let $\{U_\beta\}$ be a collection of open sets, then fix $\beta'$ and
+\[
+X \setminus \bigcup_\beta U_\beta = \bigcap_\beta (X \setminus U_\beta) \subset X \setminus U_{\beta'}
+\]
+
+Hence the set is closed under arbitrary union.  Likewise, the complement of a finite intersection is a finite union of intersections and if each such intersection is countable then so is that finite union, i.e., $\T_c$ closed under finite intersection and is therefore a topology.
+
+$\T_\infty$ is not a topology since the finite intersection of two infinite sets might be finite, e.g., two open sets whose complement is infinite but only share one element would have a finite intersection.  An explicit example of this would be $\Z$.  In $\T_\infty$ every singleton is open but $\Z \setminus \bigcup_{i \neq 2} \{i\}$ is finite.
+
+\item
+\begin{enumerate}
+\item \emph{If $\{T_\alpha\}$ is a family of topologies on $X$ show that $\bigcap \T_\alpha$ is a topology on $X$.  Is $\bigcup \T_\alpha$ a topology on $X$?}
+
+Let $\{U_\beta\} \subset \bigcap \T_\alpha$.  Then $U_\beta \in \T_\alpha$ for all $\alpha, \beta$ in an arbitrary indexing set.  But then $\bigcup_\beta U_\beta \in \T_\alpha$ for all $\alpha$, and hence $\bigcup_\beta U_\beta \in \bigcap \T_\alpha$.  Similarly, the finite intersection of any of the $\{U_\beta\}$ is an element of $\bigcap \T_\alpha$ since by hypothesis the finite intersection is an element of every $\T_\alpha$.  $X$ and $\emptyset$ are also in every $\T_\alpha$, so $\bigcap \T_\alpha$ is a topology on $X$.
+
+$\bigcup \T_\alpha$ need not be a topology on $X$.  For example consider $X = \{1,2,3\}$ and two topologies $\{\emptyset, X, \{1\}, \{1,2\}\}$ and $\{\emptyset, X, \{1\}, \{2,3\}\}$.  Their union contains $\{1,2\}$ and $\{2,3\}$, two subsets whose intersection is not in the union.  Hence a union of arbitrary topologies is not necessarily a topology.  It is, however, a subbasis for a topology.
+
+\item \emph{Let $\{\T_\alpha\}$ be a family of topologies on $X$.  Show that there is a unique smallest topology on $X$ containing all the collections $\T_\alpha$ and a unique largest topology contained in all $\T_\alpha$.}
+
+If there is a largest or smallest such topology then it must be unique, since any other topology satisfying these conditions must be comparable to such a topology by definition.
+
+First, we show that $\bigcap \T_\alpha$ is the largest topology contained in all the  $\T_\alpha$.  That this is contained in all the topologies is clear, since it is the intersection of all those topologies.  Let $\T'$ be a topology contained in all the $T_\alpha$.  If $x \in \T'$ then $x \in \T_\alpha$ for all $\alpha$, and certainly $x \in \bigcap \T_\alpha$ from the definition of an arbitrary intersection.  Hence $\bigcap \T_\alpha$ is the largest topology contained in all the $\T_\alpha$.
+
+Second, we show that the topology $\T$ generated by the subbasis $\bigcup \T_\alpha$ is the smallest topology containing all the $\T_\alpha$.  It clearly contains all the topologies since it contains their union.  Let $T'$ be another topology containing all the $\T_\alpha$ and let $U \in \T$.
+\[
+U = \bigcup_\beta\left(\bigcap_{i=1}^n U_{i,\beta}\right)
+\]
+
+where $U_{i,b} \in \bigcup \T_\alpha \subset T'$.  Hence $T \subset T'$, and $T$ is the smallest topology containing all the $\T_\alpha$.
+
+\item \emph{If $X = \{a,b,c\}$ let $\T_1 = \{\emptyset, X, \{a\}, \{a,b\}\}$ and $\T_2 = \{\emptyset, X, \{a\}, \{b,c\}\}$.  Find the smallest topology containing $\T_1$ and $\T_2$ and the the largest topology contained in $\T_1$ and $\T_2$.}
+
+The smallest topology containing $\T_1$ and $T_1$ is $\{\emptyset, X, \{a\}, \{b\}, \{a,b\}, \{b,c\}\}$ and the largest topology contained in $\T_1$ and $\T_2$ is $\{\emptyset, X, \{a\}\}$.
+
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+\item \emph{Show that the collection $\mathcal{B} = \{(a,b) \mid a<b \mbox{ and } a,b \in \Q\}$ is a basis that generates the standard topology on $\R$.}
+
+$\mathcal{B}$ is a collection of open sets in $\T$, the standard topology on $\R$.  Suppose $U$ is open in the standard topology and $x \in U$, then there exist $c,d \in \R$ with $c < d$ such that $x \in (c,d) \subset U$.  Since $\Q$ is dense in $\R$ there exist $a,b \in \Q$ with $a < b$ and $x \in (a,b) \subset (c,d) \in U$.  By Lemma $13.2$, $\mathcal{B}$ forms a basis for $\T$.
+
+\item \emph{Show that the collection $\mathcal{C} = \{[a,b) \mid a<b \mbox{ and } a,b \in \Q\}$ is a basis that generates a topology different from the lower limit topology on $\R$.}
+
+$\mathcal{C}$ is clearly a basis for a topology for all the same reasons the basis for $\R_l$ is.  Moreover, every element of $\mathcal{C}$ is open in the lower-limit topology and hence the topology which it generates must be coarser than the lower-limit topology.  That it is strictly coarser follows from considering $[\sqrt{2}, 2)$, which is open in $\R_l$.  $\sqrt{2} \in [\sqrt{2}, 2)$, so suppose there exist $a,b \in \Q$ with $a < b$ and $\sqrt{2} \in [a,b)$.  Since $\sqrt{2} \in \R \setminus \Q$, it must be the case that $\sqrt{2} \in (a,b)$.  But then $a \notin [\sqrt{2}, 2)$ and $[a,b) \not\subset [\sqrt{2}, 2)$, so that $[\sqrt{2}, 2)$ is not open in the topology generated by $\mathcal{C}$.  Hence this topology is strictly coarser than the lower-limit topology on $\R$.
+
+\end{enumerate}
+
+\item \emph{Show that if $Y$ is a subspace of $X$ and $A$ is a subset of $Y$ then the topology $A$ inherits as a subspace of $Y$ is the same as the topology it inherits as a subspace of $X$.}
+
+Denote the topology $A$ inherits from $Y$ or $X$ as $\T_{A,Y}$ or $\T_{A,X}$ respectively.  Then since $A \subset Y \subset X$,
+\[
+\T_{A,Y} = \{A \cap U \mid U \in \T_Y\} = \{A \cap (Y \cap V) \mid V \in \T\} = \{A \cap V \mid V \in \T\} = \T_{A,X}
+\]
+
+\item \emph{Show that $\pi_1: X \times Y \rightarrow X$ defined by $(x,y) \mapsto x$ and $\pi_2 : X \times Y \rightarrow Y$ defined by $(x,y) \mapsto y$ are both open maps.}
+
+Let $U \times V$ be open in the product topology, i.e., $U$ is open in $X$ and $V$ is open in $Y$.  Then
+\[
+\pi_1\left(U \times V\right) = \{\pi_1(x,y) \mid (x,y) \in U \times V\} = \{x \mid (x,y) \in U \times V\} = U
+\]
+
+which is by definition open in $X$.  That $\pi_2$ is an open map follows \emph{mutatis mutandis}.
+
+\item \emph{Let $X$ be a countable set.  Find an infinite number of non-isomorphic well-orderings of $X$.  How many well-orderings of $X$ are there?}
+
+Since $X$ is countable there exists a bijection $\varphi: X \rightarrow \Z_+$ and a well-ordering can be defined on $X$ by
+\[
+x <_\varphi y \Leftrightarrow \varphi(x) < \varphi(y)
+\]
+
+where $<$ is an arbitrary well-ordering on $\Z_+$.  Hence it is sufficient to talk about well-orderings of the positive integers, rather than $X$ itself.  Indeed, insofar as ordering is concerened, $X$ and $\Z_+$ are the same sets.
+
+We can create an infinite class of non-isomorphic well-orderings on $\Z_+$ by picking some $n \in \Z_+$ and saying that $x <_n y$ if and only if $y \leq n < x$, or $x < y \leq n$, or $n < x < y$.  This is equivalent to ordering the integers as
+\[
+\{n+1, n+2, \ldots, 1,2,\ldots,n\}
+\]
+
+Every integer in $\{1,2,\ldots, n\}$ is greater than every integer in its complement, but within this set and its complement we use the normal ordering on $\Z_+$.  To see that these well-orderings are not isomorphic consider $(\Z_+, <_m)$ and $(\Z_+, <_n)$ where $m < n$.  If there were an order-preserving bijection between these two ordered sets then any such bijection would have to send some subset of $n$ integers in $(\Z_+, <_m)$ to $\{1,\ldots,n\}$ in $(\Z_+, <_n)$.  After choosing $m$ such integers, however, the $m+1$ such integer would necessarily be out of order.
+
+Denote the set of all well-orderings of the integers by $W$, then $W$ is uncountable.  Assume $W$ were countable for contradiction, then there exists a $1-1$ correspondence with the integers, i.e., a list of well-orderings.  But this list itself defines a well-ordering which cannot be in the list since, if it were, $W$ would be an element of itself.
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,72 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\title{MATH 270: Homework \#4}
+\author{Jesse Farmer}
+\date{29 October 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Show that the region $G = \{z \mid |\Re z| < 1 \mbox{ and } |\Im z| < 3\} \cup \{z \mid |\Re z| < 3 \mbox{ and } |\Im z| < 1\}$ is star-shaped.}
+
+Let $z_0 \in G$, then the line segment joining $0$ and $z_0$ is parameterized by $\gamma(t) = tz_0$ for $t \in [0,1]$.  Then $|\Re tz_0 | = t|\Re z_0| \leq |\Re z_0|$ and $|\Im tz_0| = t|\Im z_0| \leq |\Im z_0|$.  If $z_0 \in \{z \mid |\Re z| < 1 \mbox{ and } |\Im z| < 3\}$ then $|\Re\gamma(t)| < 1$ and $|\Im\gamma(t)| < 3$, so $\gamma(t)$ is contained in the same set for all $t \in [0,1]$ (and likewise if $z_0$ is in the other rectangle).  Therefore $G$ is a star-shaped region about $0$ since every point in $G$ is connected to $0$ through a line segment.
+
+\item \emph{Evaluate the following integrals without performing an explicit computation:}
+\begin{enumerate}
+\item \emph{$\int_{\gamma} \frac{1}{z}\,dz$ where $\gamma(t) = \cos t + 2i\sin t$ for $t \in [0,2\pi]$.}
+
+$\gamma$ parameterizes an ellipse, which is homotopic to a circle which can be parameterized by $\gamma(\theta) = e^{i\theta}$ for $\theta \in [0,2 \pi]$.  Hence
+\[
+\int_{\gamma} \frac{1}{z}\,dz = \int_0^{2\pi} i = 2 \pi i
+\]
+
+\item \emph{$\int_{\gamma} \frac{1}{z^2}\,dz$ where $\gamma$ is as in (a).}
+
+This function is entire and therefore the integral is $0$ since $\gamma$ is closed.
+
+\item \emph{$\int_{\gamma} \frac{e^z}{z} \,dz$ where $\gamma(t) = 2 + e^{it}$ for $t \in [0,2\pi]$.}
+
+$\gamma$ is closed and the function is entire, so the integral is $0$.
+
+\item \emph{$\int_{\gamma} \frac{1}{z^2-1} \,dz$ where $\gamma$ is a circle of radius $1$ centered about $1$.}
+
+We can decomposed this into partial fractions by writing
+\[
+\frac{1}{z^2-1} = \frac{1}{2}\frac{1}{z-1} - \frac{1}{2}\frac{1}{z+1}
+\]
+
+However, $\frac{1}{z+1}$ is holomorphic on this disc and so its contribution to the integral is $0$.  $\frac{1}{z-1}$ around the circle centered at $1$ is the same as the integral of $\frac{1}{\zeta}$ around the unit disc centered at $0$ through a simple change of variables.  From part $(a)$ this integral is $2\pi i$, so
+\[
+\int_{C(1,1)} \frac{1}{z^2-1} \,dz = \frac{1}{2}\int_{C(0,1)} \frac{1}{\zeta} \,d\zeta = \pi i
+\]
+\end{enumerate}
+
+\item \emph{Evalutate $\int_{\gamma} \frac{1}{z} \,dz$ where $\gamma$ is the line segment joining $1$ to $i$.}
+
+By Cauchy's theorem the integral along this line joined with the quarter of the unit circle in the first quadrant is $0$.  The quarter-circle is parameterized by $\gamma(\theta) = e^{i\theta}$ for $\theta \in \left[0,\frac{\pi}{2}\right]$, hence
+\[
+\int_{\gamma} \frac{dz}{z} = \int_0^{\frac{\pi}{2}} i \,dz = \frac{i\pi}{2}
+\]
+
+\item \emph{Evaluate $\int_{\gamma} \sin z\,dz$ where $\gamma$ is the unit circle.}
+
+$\sin z$ is holomorphic since $\sin z = \Re e^{iz} = \frac{e^{iz} - e^{-iz}}{2i}$, and $e^{iz}$ is certainly holomorphic.  Hence the integral is $0$.
+
+\end{enumerate}
+\end{document}

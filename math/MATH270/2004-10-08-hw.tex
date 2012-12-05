@@ -1,0 +1,139 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{MATH 270: Homework \#1}
+\author{Jesse Farmer}
+\date{08 October 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Express the following complex number in the form $a + ib$:}
+\begin{enumerate}
+\item \emph{$(2+3i) + (4+i)$}
+\[
+(2+3i) + (4+i) = 6 + 4i
+\]
+\item \emph{$\frac{2+3i}{4+i}$}
+\[
+\frac{2+3i}{4+i} = \frac{2+3i}{4+i} \frac{4-i}{4-i} = \frac{1}{17}(2+3i)(4-i) = \frac{11}{17} + \frac{10}{17}i
+\]
+\item \emph{$\frac{1}{i} + \frac{3}{1+i}$}
+\[
+\frac{1}{i} + \frac{3}{1+i} = -i + \frac{3}{1+i}\frac{1-i}{1-i} = \frac{3-3i}{2} - i = \frac{3}{2} - \frac{5}{2}i
+\]
+\end{enumerate}
+
+\item \emph{Find the real and imaginary parts of the following, where $z = x + iy$:}
+\begin{enumerate}
+\item \emph{$\frac{1}{z^2}$}
+
+For $z = x+iy$, $z^2 = x^2 - y^2 + 2xyi$.  So $\frac{1}{z^2} = \left( \frac{\overline{z}}{|z|^2} \right)^2$, and
+\[
+\Re \frac{1}{z^2} = \frac{\left( \frac{\overline{z}}{|z|^2} \right)^2 + \left( \frac{z}{|z|^2} \right)^2}{2} = \frac{1}{2|z|^4} (\overline{z}^2 + z^2) = \frac{x^2 - y^2}{\left(x^2 + y^2\right)^2}
+\]
+
+Using the same formula for squaring a complex number as before (only subtracting instead of adding), yields
+\[
+\Im \frac{1}{z^2} = \frac{\left( \frac{\overline{z}}{|z|^2} \right)^2 - \left( \frac{z}{|z|^2} \right)^2}{2i} = \frac{1}{2i|z|^4} (\overline{z}^2 - z^2) = - \frac{2xy}{\left(x^2 + y^2\right)^2}
+\]
+\item \emph{$\frac{1}{3z+2}$}
+
+\[
+\frac{1}{3z+2} = \frac{1}{(3x+2) + 3yi} = \frac{1}{(3x+2) + 3yi}\frac{(3x+2) - 3yi}{(3x+2) - 3yi} = \frac{(3x+2) - 3yi}{(3x+2)^2 + 9y^2}
+\]
+
+so
+\[
+\Re \frac{1}{3z+2} = \frac{3x+2}{(3x+2)^2 + 9y^2} \mbox{ and } \Im \frac{1}{3z+2} = \frac{-3y}{(3x+2)^2 + 9y^2}
+\]
+\end{enumerate}
+
+\newpage
+
+\item \emph{Define $\phi_z(w) = zw$.}
+\begin{enumerate}
+\item \emph{Prove that the matrix of $\phi_z$ is given by $\left(\begin{array}{cc} x & -y \\ y & x \end{array}\right)$.}
+
+Choose $\{(1,0), (0,1)\}$ as the basis for both $\mathbb{C}$ as the domain and range.  The map $\phi_z$ is obviously linear, so to find a matrix representation we look at how the transformation affects the basis elements.  Write $z = (x,y)$.  Then
+\[
+\phi_z\left((1,0)\right) = (x,y)(1,0) = (x,y) \mbox{ and } \phi_z\left((0,1)\right) = (x,y)(0,1) = (-y,x)
+\]
+
+Therefore the matrix representation of $\phi_z$ is precisely as was given in the statement of the problem.
+\item \emph{Show that $\phi_{z_1z_2} = \phi{z_1} \circ \phi_{z2}$.}
+
+Let $w \in \mathbb{C}$ be arbitrary.
+\[
+\phi_{z_1z_2}(w) = (z_1z_2)w = z_1(z_2w) = z_1\phi_{z_2}(w) = \phi_{z_1}(\phi_{z_2}(w)) = (\phi_{z_1} \circ \phi_{z_2})(w)
+\]
+\end{enumerate}
+
+\item \emph{Let $a+ib = \frac{x-iy}{x+iy}$.  Show that $a^2 + b^2 = 1$.}
+
+Let $z = x+iy$ and define $w = \frac{\overline{z}}{z}$.  Then, since $|\overline{z}| = |z|$ and $\left| \frac{z}{z'} \right| = \frac{|z|}{|z'|}$,
+\[
+|w| = 1 \Rightarrow |w|^2 = 1 \Rightarrow \left(\Re w\right)^2 + \left(\Im w\right)^2 = 1 \Rightarrow a^2 + b^2 = 1
+\]
+
+\item \emph{Solve the following equations:}
+\begin{enumerate}
+\item \emph{$z^6 + 8 = 0$}
+
+The roots are of the form $\sqrt[6]{8}\left[\cos\frac{\pi + 2\pi k}{6} + \sin\frac{\pi + 2\pi k}{6}\right]$ for $k=0,1,\ldots,5$.  Simply calculating these yields
+\[
+\frac{z}{\sqrt[6]{8}} = \frac{\sqrt{3}}{2} + \frac{1}{2}i, i, -\frac{\sqrt{3}}{2} + \frac{1}{2}i, -\frac{\sqrt{3}}{2} - \frac{1}{2}i, -i, \frac{\sqrt{3}}{2} - \frac{1}{2}i
+\]
+
+\item \emph{$z^3 - 4 = 0$}
+
+The roots are of the form $\sqrt[3]{6}\left[\cos\frac{2\pi k}{3} + i\sin\frac{2\pi k}{3}\right]$ for $k=0,1,2$.  Calculating these yields
+\[
+\frac{z}{\sqrt[3]{6}} = 1, -\frac{1}{2} + i\frac{\sqrt{3}}{2}, -\frac{1}{2} - i\frac{\sqrt{3}}{2}
+\]
+\end{enumerate}
+
+\item \emph{Let $w$ be an $n$th root of unity, $w \neq 1$.  Show that $1 + w + \cdots + w^{n-1} = 0$.}
+
+By hypothesis $w^n -1 = 0$, so
+\[
+0 = w^n - 1 = (w-1)(1+w+\cdots w^{n-1})
+\]
+
+Since $w \neq 1$, $1+w+\cdots w^{n-1} = 0$.
+
+\item \emph{Show that the roots of a polynomial with real coefficients occur in conjugate pairs.}
+
+It is easy to see that because the complex numbers are a field and conjugation preserves both addition and multiplication for two elements, that conjugation preserves addition and multiplication for any number of elements.  Assume $z_0$ is a root of a polynomial $p(z) = a_nz^n + \cdots a_1z + a_0$.  Then since $a_i \in \mathbb{R}$, 
+\[
+0 = \overline{p(z_0)} = \overline{\sum_{i=0}^n a_nz_0^n} = \sum_{i=0}^n \overline{a_nz_0^n} = \sum_{i=0}^n \overline{a_n}\overline{z_0^n} = \sum_{i=0}^n a_n\overline{z_0}^n = p(\overline{z_0})
+\]
+
+\item \emph{Assuming either $|z|=1$ or $|w| = 1$ and $\overline{z}w \neq 1$, prove that $$\left|\frac{z-w}{1-\overline{z}w}\right| = 1$$}
+
+The problem is equivalent to showing that $|z-w| = |1-\overline{z}w|$.  Assume $|z| = 1$.  Then $|\overline{z}| = 1$ and
+\[
+|z-w| = |\overline{z}||z-w| = |\overline{z}z - \overline{z}w| = ||z|^2 - \overline{z}w| = |1 - \overline{z}w|
+\]
+
+If $|w| = 1$ then
+\[
+|z-w| = |\overline{w}||z-w| = |z\overline{w} - 1| = \overline{|1 - z\overline{w}|} = |\overline{1 - z\overline{w}}| = |1 - \overline{z\overline{w}}| = |1 - \overline{z}w|
+\]
+
+\item \emph{Does $z^2 = |z|^2?$  If so, prove this equality.  If not, for what $z$ is it true?}
+
+This is not in general true, e.g., if $z = i$.  For $z=x+iy$, $z^2 = x^2 - y^2 + 2iyx$ and $|z|^2 = x^2 + y^2$.  So clearly these two are equal if and only if $y=0$, i.e., $z \in \mathbb{R}$.
+\end{enumerate} 
+\end{document}

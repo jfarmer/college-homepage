@@ -1,0 +1,56 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{MATH 257: Homework \#9}
+\author{Jesse Farmer}
+\date{01 December 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Prove that $A_n$ contains a subgroup isomorphic to $S_{n-2}$ for $n \geq 3$.}
+
+\item \emph{Prove that there are no simple groups of order $132$.}
+
+Let $G$ be a group such that $|G| = 132 = 2^2 \cdot 3 \cdot 11$.  Consider $n_3$ and $n_11$.  $n_3 = 1,\,4,\,22$ and $n_{11}=1\,12$.  If $n_3 = 4$, $G$ acts on $\Syl_3(G)$ by conjugation, so there is a homomorphism to $S_4$.  Since $24$ does not divide $132$, the kernel must be nontrivial which is necessarily normal.  If $n_3 = 22$ and $n_{11} = 12$ then there are too many elements, so either $n_3 = 1$ or $n_{11} = 1$, but not both, and $G$ has a nontrivial normal subgroup.
+
+\item \emph{Show that if $n_p \not\equiv 1 \mod p^2$ then there exist distinct Sylow $p$-subgroups $P$ and $Q$ such that $[P: P \cap Q] = [Q : Q \cap P] = p$.}
+
+\item \emph{Let $P \in \Syl_p(G)$ and $N_G(P) \leq M \leq G$.  Prove that $[G:M] \equiv 1 \mod p$.}
+
+\item \emph{Prove that $A_n$ does not have a proper subgroup of index $< n$ for all $n \geq 5$.}
+
+\item \emph{Prove that if $p$ is a prime and $P$ is a non-abelian group of order $p^3$ then $|Z(P)| = p$ and $P/Z(P) \cong \Z_p \times \Z_p$.}
+
+From the class equation it follows immediately that $Z(P)$ is nontrivial.  If $|Z(P)| = p^2$ then $G/Z(P)$ is cyclic and hence $G$ is abelian.  Therefore $|Z(P)| = p$.  $P/Z(P)$ has order $p^2$ and cannot be cyclic, so $P/Z(P) \cong \Z_p \times \Z_p$.
+
+\item \emph{Prove that every minimal normal subgroup of a finite solvable group is an elementary abelian $p$-group for some prime $p$.}
+
+\item \emph{Prove that every maximal subgroup of a finite solvable group has a prime power index.}
+
+\end{enumerate}
+\end{document}

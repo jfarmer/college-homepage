@@ -1,0 +1,110 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\title{MATH 270: Homework \#5}
+\author{Jesse Farmer}
+\date{05 November 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Evaluate the following integrals:}
+\begin{enumerate}
+\item \emph{$\int_{\gamma} \frac{z^2}{z-1} \,dz$, where $\gamma$ is a circle of radius $2$ centered at $0$}
+
+Let $f(z) = z^2$.  $f$ is holomorphic at $1$ and $n(\gamma, 1) = 1$, so by Cauchy's integral formula
+\[
+2\pi i = 2 \pi i f(1) = \int_{\gamma} \frac{z^2}{z-1} \,dz
+\]
+\item \emph{$\int_{\gamma} \frac{e^z}{z^2} \,dz$, where $\gamma$ is the unit circle}
+
+Let $f(z) = e^z$.  Then $f'(z) = e^z$ and $n(\gamma, 0) = 1$, so by Cauchy's integral formula for derivatives of holomorphic functions
+\[
+2\pi i = 2\pi i f'(0) = \int_{\gamma} \frac{e^\zeta}{(\zeta - 0)^2} \,d\zeta = \int_{\gamma} \frac{e^\zeta}{\zeta^2} \,d\zeta
+\]
+
+\end{enumerate}
+
+\item \emph{Let $f$ be entire and assume that $|f(z)| \leq M|z|^n$ for large $z$, constant $M$, and some integer $n$.  Show that $f$ is a polynomial of degree $\leq n$.}
+
+Let $\gamma$ be a circle with sufficiently large radius $R$ so that by theorem 2.4.7
+\[
+|f^{(k)}(z)| \leq \frac{k!}{R^k} M \sup_{\zeta \in \gamma} |\zeta|^n
+\]
+
+But $\sup_{\zeta \in \gamma}|\zeta^n| = R^n$, so if $k > n$ then as $R \rightarrow \infty$ the right-hand side of the above inequality goes to $0$ and we see that $f^{k}(z)$ is identically $0$.  That is, $f^{(k)}(z) = 0$ for all $k > n$.  If $f$ is not identically $0$ itself then there exists some $j \in \mathbb{N}$ and constant $c_i$ such that $f^{(j)}=c_j$.  Inductively we see that there exist constants $c_0, \ldots, c_j$ such that $f(z) = \sum_{k=0}^j \frac{c_k}{k!}x^k$, and therefore $f$ must be a polynomial.
+
+\item \emph{Let $f$ be holomorphic on a region $\Omega$ and let $\gamma$ be a closed curve in $\Omega$.  Show that for any $z_0 \in \Omega \setminus \gamma$ $$\int_{\gamma} \frac{f'(\zeta)}{\zeta - z_0} \,d\zeta = \int_{\gamma} \frac{f(\zeta)}{(\zeta - z_0)^2} \,d\zeta$$}
+
+From class we know that if $f$ is holomorphic on $\Omega$ then $f^{(n)}(z)$ exists on $\Omega$ for all $n \in \mathbb{N}$ and
+\[
+f^{(n)}(z) = \frac{n!}{2\pi i} \int_{\gamma} \frac{f(\zeta)}{(\zeta - z)^{n+1}} \,d\zeta
+\]
+
+The above statement is a special case where $n=1$.  Note, I emailed the TA about this problem and whether or not we were allowed to assume this general theorem given to us by Sinan on Wednesday.  Since I never received a response I will assume that we can use any general theorems given in class with complete proof before the homework was assigned.
+
+\item \emph{Evaluate the following integrals, where $\gamma$ is a circle of radius $2$ centered at the origin:}
+\begin{enumerate}
+\item \emph{$\int_{\gamma} \frac{dz}{z^2-1}$}
+
+Using Cauchy's integral formula for $f(z)=1$, $$\int_{\gamma}\frac{1}{z^2 - 1} \,dz = \frac{1}{2}\left(\int_{\gamma}\frac{1}{z-1}\,dz - \int_{\gamma}\frac{1}{z+1} \,dz\right) = \pi i - \pi i = 0$$
+\item \emph{$\int_{\gamma} \frac{dz}{z^2+z+1}$}
+
+The roots of this polynomial are $\frac{-1 \pm i\sqrt{3}}{2}$, which has a modulus of $1$.  Decomposing the polynomial into fractions gives that the original integral, as in the first part, is the difference of two functions with a $1$ in the numerator times some real constant.  By Cauchy's integral formula the integral for each of these must be equal, and hence the original integral is $0$.
+
+\item \emph{$\int_{\gamma} \frac{dz}{z^2-8}$}
+
+Since both roots of the polynomial in the denominator are outside $\gamma$, the winding number of $\gamma$ around both points is $0$ and by Cauchy's integral formula $$\int_{\gamma}\frac{1}{z^2 - 8} \,dz = \frac{1}{2}\left(\int_{\gamma}\frac{1}{z-2\sqrt{2}}\,dz - \int_{\gamma}\frac{1}{z+2\sqrt{2}} \,dz\right) = 0$$
+
+\item \emph{$\int_{\gamma} \frac{dz}{z^2+2z-3}$}
+
+Since the winding number of $\gamma$ about $3$ is $0$,
+\[
+\int_{\gamma} \frac{dz}{z^2+2z-3} = \frac{1}{4}\left(\int_{\gamma} \frac{dz}{z-1} \,dz - \int_{\gamma} \frac{dz}{z+3}\right) = \frac{1}{4}(2\pi i - 0) = \frac{\pi i}{2}
+\]
+\end{enumerate}
+
+\item \emph{Let $f$ be analytic on $A$ and $f'(z_0) \neq 0$.  Show that if $\gamma$ if a sufficiently small circle centered at $z_0$ then $$\frac{2\pi i}{f'(z_0)} = \int_{\gamma} \frac{dz}{f(z) - f(z_0)}$$}
+
+For a sufficiently small curve $\gamma$ $f^{-1}$ exists and is differentiable by the Inverse Mapping Theorem with derivative given by $\frac{df^{-1}(w)}{dw} = \frac{1}{f'(z)}$ where $w = f(z)$.  Substituting $z$ for $f^{-1}(w)$ and $w_0 = f(z_0)$ gives, by Cauchy's integral formula,
+\[
+\frac{1}{2\pi i}\int_{\gamma} \frac{dz}{f(z) - f(z_0)} = \frac{1}{2\pi i}\int_{\gamma} \frac{df^{-1}(w)}{dw} \frac{dw}{w - w_0} = \frac{df^{-1}(w_0)}{dw} = \frac{1}{f'(z_0)}
+\]
+
+\item \emph{Show that $\int_{0}^\infty \sin x^2 \,dx = \int_{0}^\infty \cos x^2 \,dx = \frac{\sqrt{2\pi}}{4}$.}
+
+Let $f(z) = e^{-z^2}$.  Consider the contour $\gamma$ defined by the line segment joining $0$ to $R$, the arc from $R$ to $Re^{i \frac{\pi}{4}}$ and the line segment joining $Re^{i \frac{\pi}{4}}$ to $0$ again.  $f$ is holomorphic here so by Cauchy's theorem the integral over $\gamma$ is $0$.  Moreover, these three segments can be parameterized by $\gamma_1(t) = t$ for $t \in [0,R]$, $\gamma_2(t) = Re^{it\frac{\pi}{4}}$ for $t \in [0,1]$, and $-\gamma_3(t) = Re^{i\frac{\pi}{4}}$ for $t \in [0,R]$.  Hence
+\[
+0 = \int_0^R e^{-x^2} \,dx + \int_0^1 e^{-R^2e^{i t \frac{\pi}{4}}} i R \frac{\pi}{4} e^{i t \frac{\pi}{4}} \,dt - \int_0^R e^{t^2 e^{i \frac{\pi}{2}}} e^{i\frac{\pi}{4}} \,dt
+\]
+
+As $R \rightarrow \infty$ the first integral is well-known to converge to $\frac{\sqrt{\pi}}{2}$.  This is easy to proove by squaring it to produce a double-integral and then changing to polar coordinates.  The second integral goes to $0$ since $\frac{R}{e^{R^2}} \rightarrow 0$ as $R \rightarrow \infty$.  Therefore
+\begin{eqnarray*}
+\frac{\sqrt{\pi}}{2} &=& \lim_{R \rightarrow \infty}\int_0^R e^{-t^2 e^{i \frac{\pi}{2}}} e^{i\frac{\pi}{4}} \,dt \\
+&=& \lim_{R \rightarrow \infty}\int_0^R e^{-i t^2} e^{i\frac{\pi}{4}} \,dt \\
+&=& \lim_{R \rightarrow \infty}\int_0^R \frac{(1-i)(\cos t^2 - i \sin t^2)}{\sqrt{2}} \,dt \\
+&=& \lim_{R \rightarrow \infty}\frac{1}{\sqrt{2}}\int_0^R \cos t^2 + \sin t^2 \,dt + i\frac{1}{\sqrt{2}}\lim_{R \rightarrow \infty}\int_0^R \cos t^2 - \sin t^2 \,dt
+\end{eqnarray*}
+
+The only way this quantity can be real-valued is if the imaginary part above is $0$, which gives a very simple system of equations of the form $A+B = C$ and $A - B = 0$, where $A = \frac{1}{\sqrt{2}}\int_0^R \cos t^2 \,dt$ and $B = \frac{1}{\sqrt{2}}\int_0^R \sin t^2 \,dt$.  This implies $A = B = \frac{C}{2}$, and therefore, as $R \rightarrow \infty$
+\[
+\int_0^\infty \sin t^2 \,dt = \int_0^\infty \cos t^2 \,dt = \frac{\sqrt{2}}{2} \frac{\sqrt{\pi}}{2} = \frac{\sqrt{2\pi}}{4}
+\]
+
+\end{enumerate}
+\end{document}

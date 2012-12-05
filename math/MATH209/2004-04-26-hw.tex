@@ -1,0 +1,157 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\def\bddots{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu
+        \raise4pt\hbox{.}\mkern2mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern1mu}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\title{MATH 209: Homework \#4}
+\author{Jesse Farmer}
+\date{26 April 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Let $f,f_i,g: \R^n \rightarrow [-\infty,\infty]$ be measurable.  Prove the following statements.}
+
+We will assume the sets on which each of these functions takes the values $\pm \infty$ is $0$.  In showing that the sets are measurable for $-\infty< f(x) < \infty$, etc., we can take the union those sets and the values for which the function is $\pm \infty$ and still retain a measurable set.  This restriction can be dealt with in other ways, e.g., redefining addition and multiplication of functions in the case where both of $f$ and $g$ are infinity.
+
+\begin{enumerate}
+\item \emph{$f+g$ is measurable.}
+
+Let $a,t \in \Q$ be arbitrary, then $\{x \mid f(x) > t\}$ and $\{x \mid g(x) > a-t\}$ are measurable and hence $\{x \mid f(x) > t\} \cap \{x \mid g(x) > a-t\}$ is measurable.  However,
+\[
+\{x \mid (f+g)(x) > a\} = \bigcup_{t \in \Q}\big( \{x \mid f(x) > t\} \cap \{x \mid g(x) > a-t\}\big)
+\]
+
+Therefore $f+g$ is measurable.
+\item \emph{$f \cdot g$ is measurable.}
+
+Let $f$ and $g$ be measurable functions.  Since the continuous function of a measurable function is measurable, it follows that $-g$ is measurable.  By part (a), $f-g$ is measurable.  Also, $(f+g)^2$ and $(f-g)^2$ are measurable.  Therefore
+\[
+fg = \frac{(f+g)^2 + (f-g)^2}{4}
+\]
+
+is measurable.
+\item \emph{$f \vee g = \sup\{f, g\}$ is measurable.}
+
+Clearly $\sup\{f(x), g(x)\} > a$ if and only if $f(x) > a$ or $g(x) > a$. Hence
+\[
+\{ x \mid (f \vee g)(x) > a\} = \{x \mid f(x) > a\} \cup \{x \mid g(x) > a\}
+\]
+
+is measurable, and therefore $f \vee g$ is measurable.
+
+\item \emph{$f \wedge g = \inf\{f,g\}$ is measurable.}
+
+Clearly $\inf\{f(x),g(x)\} < a$ if and only if $f(x) < a$ or $g(x) < a$.  Hence
+\[
+\{x \mid (f \wedge g)(x) < a\} = \{x \mid f(x) < a\} \cup \{g(x) < a\}
+\] 
+\item \emph{$\bigvee_{i \in \N} f_i$ is measurable.}
+
+Let $g(x) = \bigvee_{i \in \N} f_i(x)$.  Then
+\[
+\{x \mid g(x) > a\} = \bigcup_{i \in \N} \{x \mid f_i(x) > a\}
+\]
+
+is measurable, and therefore $g$ is measurable.
+
+\item \emph{$\bigwedge_{i \in \N} f_i$ is measurable.}
+
+Let $g(x) = \bigwedge_{i \in \N} f_i(x)$.  Then
+\[
+\{x \mid g(x) < a\} = \bigcup_{i \in \N} \{x \mid f_i(x) < a\}
+\]
+
+is measurable, and therefore $g$ is measurable.
+
+\item \emph{$\limsup_{i} f_i$ is measurable.}
+
+Let $h(x) = \inf\{g_m(x)\}$ where $g_m(x) = \sup\{f_n(x)\}$ such that $n \geq m$.  Each $g_m$ is measurable by the above problems, and hence $h$ is measurable since the functions (in this case $h$) defined by the countable ``cap'' of a set of measurable functions is measurable.
+
+\item \emph{$\liminf_{i} f_i$ is measurable.}
+
+This is the same problem as above, except that $h(x) = \sup\{g_m(x)\}$ where $g_m = \inf\{f_n(x)\}$ such that $n \geq m$.  The rest of the proof is the same as the previous problem.
+\end{enumerate}
+
+\item \emph{Let $X$ be a measure space and $Y,Z$ metric spaces.  Show that if $f: X \rightarrow Y$ is measurable and $g: Y \rightarrow Z$ is continuous then $g \circ f: X \rightarrow Z$ is measurable.}
+
+Let $A \subseteq Z$ be open.  By the continuity of $g$, $g^{-1}(A)$ is open and by the measurability of $f$ $f^{-1}(g^{-1}(A)) = (f^{-1} \circ g^{-1})(A)$ is measurable.  Therefore $g \circ f$ is measurable.
+
+\item \emph{Let $X,Y,Z$ be both measure spaces and metric spaces.  If $f:X \rightarrow Y$ and $g:Y \rightarrow Z$ are measurable, is $g \circ f: X \rightarrow Z$ measurable?}
+
+\item \emph{Show that if $\{f_n\}$ is a sequence of measurable functions such that $f_n(x) \rightarrow f(x)$ pointwise almost everywhere then $f$ is measurable.}
+
+If $f_n(x) \rightarrow f(x)$ pointwise, then the $\limsup$ and $\limsup$ of the $f_i(x)$ exist and are both equal to $f(x)$.  By above, therefore, $f$ is measurable.
+
+\item \emph{Show that simple functions are measurable.}
+
+Let $s: X \rightarrow Y$ be a simple function, then there exist finitely many non-zero $\alpha_i$ and (at most) countably many measurable $A_i$ such that
+\[
+s = \sum_{i \in N} \alpha_i \chi_{A_i}
+\]
+
+Take $E \subseteq Y$ to be open.  Then $E$ consists of finitely many points, since $Y$ itself has only finitely many points.  Then $s^{-1}(E)$ is the union of a finite number of the $A_i$, and hence measurable since the $A_i$ are measurable by hypothesis.  Therefore $s$ is measurable.
+
+\item \emph{Show that if $f$ is measurable then $f$ is the limit of a sequence of simple functions almost everywhere.}
+
+Let $f$ be a measurable function.  Define a sequence of simple functions as follows.  If $|f(x)| < n$ then let $f_n(x) = \frac{m}{n}$ for $\frac{m}{n} \leq f(x) < \frac{m+1}{n}$ for $m \in \Z$.  If $|f(x)| \geq n$ then define $f_n(x) = \frac{x}{|x|} n$.  Each $f_n$ takes on no more than $2(n^2+1)$ values, and hence they are simple.  Moreover, as $n \rightarrow \infty$ the first condition (i.e., $|f(x)|<n$) is satisfied for more and more values of $x$, so $f_n \rightarrow f$ uniformly.
+
+\item \emph{Do Kaplan \#1-6}
+
+See attached sheets of paper.
+
+\item \emph{Compute $\int_0^\infty \frac{\sin x}{x} dx$.}
+
+The computer says $\frac{\pi}{2}$, but I have no idea how to show it.
+
+\item \emph{Show that the uniform limit of Riemann integrable functions is not necessarily Riemann integrable.}
+
+Let $\{r_1, r_2, \ldots\}$ be an ordering of the rationals on $[0,1]$.  Define
+\[
+f_n(x) = \begin{cases}\frac{1}{n} & x \in \{r_1,\ldots,r_n\} \\ 0 & x \notin \{r_1,\ldots,r_n\}\end{cases}
+\]
+
+Each $f_i$ is Riemann integrable since it is continuous except on a set of measure zero.  Moreover,
+\[
+\int_0^1 f_n(x)\,dx = 0
+\]
+
+This approaches uniformly the function
+\[
+f(x) = \begin{cases}\frac{1}{n} & x = r_n \in \Q \\ 0 & x \notin \Q\end{cases}
+\]
+
+which is nowhere continuous, since in any neighborhood of an irrational point there will be rational points outside any $\epsilon$-neighborhood, and is therefore not Riemann integrable.
+
+\item \emph{Check what happens if the interval is infinite.}
+
+Consider
+\[
+f_n(x) = x^{-\left(1+\frac{1}{n}\right)}
+\]
+
+For every $n \in \N$ this function is Riemann integrable on $[1,\infty)$.  Moreover, this approaches $f(x) = \frac{1}{x}$ uniformly.  However, $f(x)$ is \emph{not} Riemann integrable on $[1,\infty)$.
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,136 @@
+\documentclass[12pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{MATH 208: Homework \#1}
+\author{Jesse Farmer}
+\date{12 January 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item Show that for $p,q \in \mathbb{R}[x]$, $\mathrm{deg} (p+q) \leq \mathrm{max}\{\mathrm{deg} p ,\mathrm{deg} q\}$ with equality when $\mathrm{deg} p = \mathrm{deg} q$ and that $\mathrm{deg} (pq) = \mathrm{deg} p + \mathrm{deg} q$.
+
+Let $p(x) = a_nx^n + a_{n-1}x^{n-1} + \cdots + a_1x + a_0$ and $q(x) = b_mx^m + b_{m-1}x^{m-1} + \cdots + b_1x + b_0$ be arbitrary.  Without any loss we can assume that $a_n,b_m \neq 0$ so that $\mathrm{deg} p = n$ and $\mathrm{deg} q = m$.
+
+Assume that $n > m$ without loss of generalization.  Then we have
+
+\begin{tabular}{lll}
+$(p+q)(x)$ 	&$=$& $p(x) + q(x)$ \\
+	 	&$=$& $a_nx^n + a_{n-1}x^{n-1} + \cdots + a_1x + a_0 + b_mx^m + b_{m-1}x^{m-1} + \cdots + b_1x + b_0$ \\
+		&$=$& $a_nx^n + a_{n-1}x^{n-1} + \cdots + (a_m + b_m)x^m + \cdots + (a_1 + b_1)x + a_0 + b_0$ \\
+		&$\Rightarrow$& $\mathrm{deg}(p+q) = n$
+\end{tabular}
+
+If $n = m$ then one of two things can happen.  Either $a_n + b_m = 0$, in which case $\mathrm{deg} (p+q) < n = m$ since the first non-zero coefficient will now occur at some index less than $n$ or $a_n + b_m \neq 0$, in which case the leading coefficient is non-zero and so $\mathrm{deg} (p+q) = n = m$.  Therefore, in general, $p,q \in \mathbb{R}[x] \Rightarrow \mathrm{deg}(p+q) \leq \mathrm{deg} p + \mathrm{deg} q$.
+
+\begin{tabular}{lll}
+$(pq)(x)$ 	&$=$& $p(x)q(x)$ \\
+	 	&$=$& $(a_nx^n + a_{n-1}x^{n-1} + \cdots + a_1x + a_0)(b_mx^m + b_{m-1}x^{m-1} + \cdots + b_1x + b_0)$ \\
+		&$=$& $a_nb_mx^{n+m} + a_{n}b_{m-1}x^{n+m-1} + \cdots +$\\
+		&&    $(a_kb_0 + a_{k-1}b_1 + \cdots + a_0b_k)x^k + \cdots + (a_1b_0 + a_0b_1)x + a_0b_0$ \\
+		&$\Rightarrow$& $\mathrm{deg}(pq) = n+m$
+\end{tabular}
+
+The third step guarantees the implication because $m$ and $n$ are the largest non-zero powers in each of the respective polynomials, and the product of any of the two coefficients can never be zero.
+
+\item Let $V$ be a vector space over a field $F$.  Show that $0_F \cdot v = 0_V$ for all $v \in V$.
+
+Let $v \in V$ be arbitrary.  We then have the following.
+
+\begin{tabular}{rll}
+	$1_F \cdot v$ & $=$ & $v$ \\
+	$(1_F + 0_F) \cdot v$ & $=$ & $v$ \\
+	$1_F \cdot v + 0_F \cdot v$ & $=$ & $v$ \\
+	$v + 0_F \cdot v$ & $=$ & $v$ \\
+	$-v + (v + 0_F \cdot v)$ & $=$ & $-v + v$ \\
+	$(-v + v) + 0_F \cdot v$ & $=$ & $0_V$ \\
+	$0_V + 0_F \cdot v$ & $=$ & $0_V$ \\
+	$0_F \cdot v$ & $=$ & $0_V$
+\end{tabular}
+
+\item Show that $\{1,x,x^2, \ldots, x^n, \ldots\}$ is linearly independent in $\mathbb{R}[x]$.
+
+Let $p(x) = a_0 + a_1 \cdot x + a_2 \cdot x^2 + \cdots + a_k \cdot x^k$.  By the Fundamental Theorem of Algebra we know that $p(x)=0$ for at most $k$ values of $x$.  Therefore, if $p(x)=0$ for all $x$ it must be the case that $a_0=a_1=\cdots=a_k=0$, i.e., the set is linearly independent.
+
+\item Find an infinite, linearly independent set for $\mathbb{R}/\mathbb{Q}$.
+
+Let $S = \{\sqrt{2}, \sqrt{3}, \sqrt{5}, \ldots, \sqrt{p}, \ldots\}$ where $p$ is a prime.  This set is infinite and linearly independent since, if it were not, there would be a non-prime $p$ whose square root was in the set.
+
+\item Let $V$ be the set of all piece-wise linear functions from $\mathbb{R}$ to $\mathbb{R}$ with addition and multiplication defined point-wise.  Show that $V$ is an infinite dimensional vector space over $\mathbb{R}$
+
+First we show that $V$ is a vector space.  We will denote the value of a function on the $i^{th}$ interval as $f_i(x) = ax + b$ for some $a,b \in \mathbb{R}$.  Consider $(V,+)$.
+
+Associativity and commutativity are inherited from $\mathbb{R}$ since addition is defined point-wise.  $f(x)=0$ is linear, so we have an identity.  $g_i(x) = -ax - b$ is the additive inverse.  The sum of any two linear functions is obviously linear since addition is defined point-wise and over any interval where one function is linear at least part of the other function in the sum will be linear.  Take $E$ to be the set of all the end-points of the intervals of the sum of two piece-wise linear functions.  Since these are real numbers they have an order, and we can create new intervals arranged by this same ordering which will guarantee that both functions are linear on each interval and hence that there sum is also linear.  Therefore $V$ is closed under addition and, finally, $(V,+)$ is an Abelian group.
+
+Consider $(V, \cdot)$.  Since $V$ is over $\mathbb{R}$ and multiplication is defined point-wise and the coefficients of the functions are real numbers, distributivity, associativity, and the identity are inherited.   We also have that $\alpha \cdot f(x) = \alpha (\cdot ax + b) = \alpha ax + \alpha b \in V$.  Therefore $V$ is a vector space over $\mathbb{R}$.
+
+For each $i,n \in \mathbb{N}$ let $f_i$ be a function decreasing linearly to the point $(i,0)$ and increasing linearly beyond that (e.g., $f_i(x) = |x-i|$).  Then consider $\{f_1,f_2,\ldots,f_n\}$.  At each $(i,0)$ every function but $f_i$ is linear, and therefore no combination of any of the other functions is equal to it, i.e., $\{f_1,f_2,\ldots,f_n\}$ is linearly independent for every $n \in \mathbb{N}$.  Therefore $V$ is infinite dimensional.
+
+\item Let $V$ be a vector space over a field $F$ and $S = \{v_1,\ldots,v_n\} \subseteq V$.  Show that the following are equivalent.
+\begin{enumerate}
+\item $S$ is a basis for $V$.
+\item $S$ is linearly independent and $\mathrm{span} S = V$.
+\item $S$ is linearly independent and if $S \subset S' \subseteq V$, then $S'$ is linearly dependent.
+\item $\mathrm{span} S = V$ and if $S' \subset S$, then $\mathrm{span} S' \neq V$.
+\end{enumerate}
+
+\begin{enumerate}
+
+\item[$(a \Leftrightarrow b)$] Let $S$ be a basis for $V$.  Since every element of $V$ is some linear combination of the elements in $S$, $\mathrm{span} S = V$.  Moreover, since each element in $V$ is represented uniquely by this linear combination, if $a_1 \cdot v_1 + \cdots + a_n \cdot v_n = 0$ then $a_1=a_2=\cdots=a_n=0$.
+
+Let $S$ be linearly independent and $\mathrm{span} S = V$.  Clearly every element can be represented by some linear combination of elements in $S$, though perhaps not uniquely.  Let 񄔳$a_1 \cdot v_1 + a_1 \cdot v_2 + \cdots a_n \cdot v_n$ = $b_1 \cdot v_1 + b_2 \cdot v_2 + \cdots + b_n \cdot v_n$, then $(a_1 - b_1) \cdot v_1 + \cdots (a_n - b_n) \cdot v_n \Rightarrow a_i - b_i = 0 \Rightarrow a_i = b_i$ for $i=1,\ldots,n$.  That is, each representation is unique.  Therefore $S$ is a basis for $V$. 
+
+\item[$(b \Rightarrow c)$] Let $S \subset S' \subseteq V$, where $S$ is linearly independent and $\mathrm{span} S = V$.  Obviously, $\mathrm{span} S' = V$.  Assume that $S'$ is not linearly dependent, i.e., that it is linearly independent.  Then $S'$ is a basis for $V$, but that implies $S$ and $S'$ have the same number of elements -- a contradiction.  Therefore, $S'$ must be linearly dependent.
+
+\item[$(c \Rightarrow d)$]  Let $S$ be linearly independent with the property that any set containing it is linearly dependent.  If $\mathrm{span} S \neq V$ then we known that there exists a $S \subset S'$ where $S'$ is a basis for $V$.  But this implies that $S'$ is linearly independent, a contradiction.  Therefore $\mathrm{span} S = V$.  Since $S' \subset S$, $S'$ is also linearly independent.  If $S'$ spanned $V$ then it would be a basis and would therefore have the same number of elements as $S$, which is also a basis since it is linearly independent and spans $V$ -- a contradiction.  Therefore, any set contained in $S$ does not span $V$.
+
+\item[$(d \Rightarrow a)$] Let $S$ span $V$ with the property that any set contained in $S$ does not span $V$.  Since $\mathrm{span} S = V$ and $S$ linear independent is sufficient to show it is a basis, we only need show the latter.  If this is already the case then we are done, so assume $S$ is linearly dependent.  Then we can remove some element without changing the span of $S$ by the lemma.  However, this new set would be contained in $S$ and would span $V$, a contradiction.  Therefore $S$ is linearly independent and hence is a basis for $V$.
+
+\end{enumerate}
+
+\item Show that a vector space $V$ is infinite dimensional if and only if for all $n \in \mathbb{N}$ there exists a linearly independent subset of $V$ with $n$ elements.
+
+If $V$ is finite dimensional then by the corollary any linearly independent subset has at most $\mathrm{dim}V$ elements and therefore there exists a $n \in \mathbb{N}$ such that there is no linearly independent subset of $V$ with $n$ elements.
+
+Consider ${v_1} \subseteq V$ where $v_1 \neq 0$.  This set is clearly linearly independent.  Let $S_n = \{v_1, \ldots, v_n\}$ be linearly independent.  Then by hypothesis $\mathrm{span} S_n \neq V$, so there exists some $v_{n+1} \in S_n^c$ that is not a linear combination of elements in $S_n$, i.e., $S_n \cup \{v_{n+1}\}$ is linearly independent.  Therefore, for any $n$ there exists a linearly independent subset.
+
+\item Show that a subspace of a finite dimensional vector space is also finite dimensional.
+
+Let $V,W$ be vector spaces with $W < V$ $\mathrm{dim} V = n$.  Consider a linearly independent set $\{w_1,\ldots,w_m\} \subseteq W$.  This set is also linearly independent in $V$, so $m \leq n$.  Let $M$ be the set of all $m$ such that $\{w_1,\ldots,w_m\}$ is linearly independent.  $M$ is obviously bounded above by $n$ as every $m \leq n$ and contains a largest element.  Call this element $k$.  Let $\{w_1,\ldots,w_k\}$ be linearly independent and assume for contradiction that it is not a basis.  Then there exists $u \in W$ with $u \notin \mathrm{span} \{w_1,\ldots,w_k\}$.  But then $\{w_1,\ldots,w_k,u\}$ is linearly independent and has more than $k$ elements, a contradiction.  Therefore $\{w_1,\ldots,w_k\}$ is a basis and $\mathrm{dim} W = k \leq n = \mathrm{dim} V$.  Moreover, if $\mathrm{dim} V$ is finite then $\mathrm{dim} W$ is also finite.
+
+\item Let $V,W$ be vector spaces with $V_0 < V$ and $T: V \rightarrow W$ be a linear transformation.  Show that if $\mathrm{dim} V = n$ then $\mathrm{dim} T(V_0) \leq n$.
+
+First, $T$ fixes 0 since $T(v) = T(v+0) = T(v) + T(0)$.  Then, if $\{T(v_1),\ldots,T(v_n)\}$ is linearly independent we have $\alpha_1 \cdot v_1 + \cdots \alpha_n \cdot v_n = 0 \Rightarrow 0 = T(0) = T(\alpha_1 \cdot v_1 + \cdots \alpha_n \cdot v_n) = \alpha_1 \cdot T(v_1) + \cdots \alpha_n \cdot T(v_n) \Rightarrow \alpha_1 = \cdots = \alpha_n = 0$.  That is, $\{v_1,\ldots,v_n\}$ is linearly independent.  If $\mathrm{dim} T(V_0) > \mathrm{dim} V_0$ then we would have a linearly independent set in $T(V_0)$ where  $\{v_1, \ldots v_{\mathrm{dim} T(V_0)}\}$ was not linearly independent.  Hence, $ \mathrm{dim} T(V_0) \leq \mathrm{dim} V_0 \leq \mathrm{dim} V$ by the previous problem.
+
+
+\item Let $V,W$ be vector spaces.  Find a $T: V \rightarrow W$ which preserves addition but not scalar multiplication.
+
+\item Let $V,W$ be vector spaces and $T: V \rightarrow W$ be a linear transformation.  Show that $\mathrm{ker} T < V$.
+
+It is sufficient to show that $\mathrm{ker} T$ is closed under addition and scalar multiplication as all the other properties will then be inherited.
+
+Let $v_1,v_2 \in \mathrm{ker} T$, $v \in V$, and $\alpha \in F$.  First we must demonstrate the following facts. 
+
+We know from Problem 2 that $0_F \cdot v = 0_V$.  From this we get that $0_F \cdot v = 0_V \Rightarrow (1 + -1) \cdot v = 0_V \Rightarrow v + -1 \cdot v = 0_V \Rightarrow -1 \cdot v = -v$.  
+
+Second, $v + -v = 0_V \Rightarrow \alpha \cdot (v + -1 \cdot v) = \alpha \cdot 0_V \Rightarrow \alpha \cdot v + ((-1)\alpha) \cdot v = \alpha \cdot 0_V \Rightarrow \alpha \cdot v + -\alpha \cdot v = \alpha \cdot 0_V \Rightarrow 0_V = \alpha \cdot 0_V$.
+
+$T(v_1 + v_2) = T(v_1) + T(v_2) = 0_W + 0_W = 0_W$, so $v_1,v_2 \in \mathrm{ker}T \Rightarrow v_1 + v_2 \in \mathrm{ker}T$.
+
+$T(\alpha \cdot v_1) = \alpha \cdot T(v_1) = \alpha \cdot 0_W = 0_W$, so $v_1 \in \mathrm{ker}T$, $\alpha \in F \Rightarrow \alpha \cdot v_1 \in \mathrm{ker}T$.
+
+Therefore $\mathrm{ker} T < V$.
+
+
+\end{enumerate}
+\end{document}

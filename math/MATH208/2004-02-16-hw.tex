@@ -1,0 +1,96 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{MATH 208: Homework \#6}
+\author{Jesse Farmer}
+\date{16 February 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item  \emph{Prove the Banach-Steinhaus Theorem}
+
+Let $V,W$ be normed linear spaces with $V$ complete, and $\{T_\alpha:V \rightarrow W\}$ be a family of bounded linear maps such that $\{\|T_\alpha v|\}$ is bounded.  Define $F_n := \{v \in V \mid \|T_\alpha v\| \leq n \|v\|\}$.
+
+Each $F_n$ is closed and $\bigcup_{n \in \mathbb{N}}F_n = V$.  The Baire Category Theorem implies that there exists some $k \in \mathbb{N}$ such that $F_k$ has a nonempty interior, so there exists $v_0 \in V$ such that for $\epsilon > 0$ we have $B_\epsilon(v_0) \subset F_k$.
+
+Let $v \in V$ be such that $\|v\| = 1$.  Then \begin{eqnarray*}
+\|T_\alpha v\| &\leq& \epsilon^{-1}(\|T_\alpha(v_0 + \epsilon v)\| + \|T_\alpha v_0\|) \\
+&\leq& \epsilon^{-1}k(\|v_0 + \epsilon v\| + \|v_0\|) \\
+&\leq& \epsilon^{-1}k(2\|v_0\| - \epsilon)
+\end{eqnarray*}
+
+\item \emph{Prove the Open Mapping Theorem}
+
+Let $V,W$ be Banach space and $T \in B(V,W)$ be surjective.  For $n \in \mathbb{N}$ and $0 \in V$ define $B_n := B_n(0)$.  Clearly $V = \bigcup_{n \in \mathbb{N}} B_n$.
+
+By the surjectivity of $T$, $T(V) = W$, so $W = \bigcup_{n \in \mathbb{N}} T(B_n)$ and since $W$ is complete, $\overline{T(B_1)}^o \neq \varnothing$.  Note that if $T(B_1)$ is nowhere dense then $T(B_n)$ is nowhere dense, and vice versa, since we can simply scale $B_1$ by multiplying or dividing by $n$.
+
+We want to show that there exists $r > 0$ such that $B_r(0) \subset T(B_1(0))$, which implies that $T$ is an open map.
+
+Let $w_0 \in \overline{T(B_1)}$ be such that $B_{4r}(w_0) \subset \overline{T(B_1)}$ for some $r > 0$.  Then take $w_1$ such that $\|w_1 - w_0\| < 2r$.  We can pick $v_1 \in V_1$ such that $w_1 = Tv_1$ (by density).  Consider $B_{2r}(w_1) \subset B_{4r}(w_0) \subset \overline{T(B_1)}$.
+
+$B_{2r}(0) = -w_1 + B_{2r}(w_1)$.  Suppose $w \in B_{2r}(0)$, then $w \in -w_1 + B_{2r}(w_1) \subset \overline{-w_1 + B_{2r}(w_1)}$.
+
+If $w \in -w_1 + T(B_1)$ then for some $v \in B_1$ we have
+\begin{eqnarray*}
+w &=& -w_1 + T(v) \\
+&=& -T(v_1) + T(v) \\
+&=& T(v - v_1)
+\end{eqnarray*}
+
+So $\|T(v - v_1\| < 2$ implies $w \in T(B_2)$.  This statement follows \emph{mutatis mutandis} for $\overline{T(B_2)}$.  If $\|w\| < r$ then $w \in \overline{T(B_1)}$, and hence $B_r(0) \subset \overline{T(B_1)}$.  In general, $\|w\| < r2^{-n}$ implies $w \in \overline{T(B_{2^{-n}})}$.
+
+To reduce this to the case of $T(B_1)$ instead of the closure it is sufficient to show that there exists $v \in  B_1$ such that $Tv = w$, for $\|w\| < \frac{r}{2}$.  We will do so by the completeness of $V$.
+
+There exists a $v_1 \in B_{\frac{1}{2}}$ such that $\|w - Tv_1\| < \frac{r}{4}$.  And, in general, there exists $v_n \in B_{2^{-n}}$ such that $\|w - \sum_{j=1}^n Tv_j \| < r 2^{-n-1}$.  Because $V$ is a Banach space it follows that $\sum_{j=1}^\infty Tv_j = v \in V$, where $Tv = w$.  Note that $\|v\| < \sum_{n=1}^\infty 2^{-n}$, so $B_{\frac{r}{2}}(0) \subset T(B_1)$.
+
+\item \emph{Prove the Hahn-Banach Theorem}
+
+Let $V$ ve a normed linear space, $V_0 \subset V$ a subspace, $f \in V_0^{\ast}$, and $v_0 \in V \setminus V_0$.  We will show that it is possible to extend $V_0$ by $v_0$ and retain the desired properties, and then apply Zorn's Lemma to conclude for all $\mathbb{R}$ in general.
+
+Take $F(v + \lambda v_0) = f(v) + \lambda F(v_0)$.  Denote $F(v_0) = \alpha$.  We need $|f(v) + \lambda \alpha | \leq \|v + \lambda v_0\|$.
+
+This is equivalent to
+\[
+-\|v + \lambda v_0\| \leq f(v) + \lambda \alpha \leq \|v + \lambda v_0\|
+\] 
+or
+\[
+-f(v) -\|v + \lambda v_0\| \leq \lambda \alpha \leq -f(v) + \|v + \lambda v_0\|
+\]
+It follows immediately that for arbitrary $v_1,v_1 \in V$ we have the inequality
+\[
+-f(v_1) - \|v_1 + v_0\| \leq \alpha \leq -f(v_2) + \|v_2 + v_0\|
+\]
+or
+\[
+f(v_2-v_1) = f(v_2) - f(v_1) \leq \|v_1 + v_0\| + \|v_2 + v_0\| \leq \|v_2 - v_1\|
+\]
+
+Letting $a = \sup\{-f(v_1) - \|v_1 + v_0\|\}$ and $b = \inf\{-f(v_2) +\|v_2 + v_0\|\}$, we see that choosing $\alpha \in [a,b]$ allows us to extend $f$ in such a way that the norm is preserved.  We now must deal with arbitrary extensions.
+
+Let $\mathcal{F}$ be the set of all extensions of $f$ satisfying the conditions of the hypothesis.  This set is partially ordered by set inclusion and each \emph{totally ordered} subset $\mathcal{F}_0 \subset \mathcal{F}$ has an upper bound, namely the functional defined on the union of the domains of all functionals.  By Zorn's Lemma $\mathcal{F}$ has a maximal element, $\tilde{f}$.  This function is exactly the function which satisfies the conclusions of the Hahn-Banach Theorem, since, if it were not, we could extend $\tilde{f}$ from the proper subspace on which it is defined to a larger subspace -- a contradiction of the maximality of $\tilde{f}$.
+
+We can now consider the Hahn-Banach Theorem over $\mathbb{C}$.  Let $V_{0R}$ and $V_R$ denote the spaces $V_0,V$ as \emph{real} linear spaces.  Clearly $f_R(v) = \Re f(v) \leq \|v\|$.  By the previous part there exists $F$ such that $|F(v)| \leq \|v\|$ on all $V_{0R}$.
+
+Define $\tilde{f}(v) := F(v) - iF(iv)$.  It is clear that $\tilde{f}(v) = F(v)$ for $v \in V_0$ and that $\Re \tilde{f}(v) = F(v)$.  Write $\tilde{f}(v) = \rho e^{i \theta}$ and $w = e^{-i \theta}v$ and assume for contradiction that $|\tilde{f}(v)| \geq \|v\|$.  Then
+
+\[
+F(w) = \Re \tilde{f}(w) = \Re[e^{-i \theta} \tilde{f}(v)] = \rho > \|v\| = \|w\|
+\]
+
+which contradicts the properties of $F$ given to us by the Hahn-Banach Theorem on $\mathbb{R}$.
+\end{enumerate}
+\end{document}

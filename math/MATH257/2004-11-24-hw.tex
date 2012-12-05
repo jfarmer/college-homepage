@@ -1,0 +1,82 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{MATH 257: Homework \#8}
+\author{Jesse Farmer}
+\date{24 November 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Let $G$ be a transitive permutation group of the finite set $A$ with $|A| > 1$.  Show that there is some $\sigma \in G$ such that $\sigma(a) \neq a$ for all $a \in A$.}
+
+Since $G$ acts transitively on $A$ there is one orbit, namely $A$ itself, so that $[G : G_a] = |A|$ for any $a \in A$.  Letting $|A| = n$, this implies that $|G_a| = \frac{|G|}{n}$ since $|G|$ is necessarily finite.  We first want to find an upper bound for the number of permutations that fix at least one element.  We know for certain that the trivial permutation is in every $G_a$, so there are at least $\frac{|G|}{n} - 1$ non-trivial permutations that stabilize a given $a$.  Since there are $n$ elements of $|A|$, there are at most $1 + n\left(\frac{|G|}{n} - 1\right)$ permutations that stabilize at least one element -- the $1$ is added to account for the trivial permutation.  Hence there are at lease $|G| - 1 + n\left(\frac{|G|}{n} - 1\right) = n-1$ elements of $G$ which stabilize no element of $A$.  For $|A| > 1$ this is always positive.
+
+\item \emph{Let $G$ be a group of odd order.  Show that if $x \in G$ is not the identity then $x$ and $x^{-1}$ are not conjugate.}
+
+Let $\sim$ be the equivalence relation afforded by conjugacy classes, and assume $x \sim x^{-1}$ is non-trivial.  Let $y \sim x$, then $y$ is non-trivial since the identity is always its own conjugacy class.  Moreover, there exist $g,h \in G$ such that $x^{-1} = gxg^{-1}$ and $y = hxh^{-1}$.  The latter equality implies $y^{-1} = h^{-1}x^{-1}h = h^{-1}gxg^{-1}h$, and $y^{-1} \sim x \sim y$.  This implies that the number of conjugates of $x$ must be even, and hence, $[G:C_G(x)]$ is even.  But this also implies that $|G|$ is even, a contradiction.
+
+\item \emph{Let $p$ be prime.  Find a formula for the number of conjugacy classes of elements of order $p$.}
+
+Every element of order $p$ is the product of $p$-cycles, and two elements are in the same conjguacy class if and only if they have the same cycle type, i.e., the same number of $p$-cycles.  There are $\left[\frac{n}{p}\right]$ such cycle types, and hence that number of conjugacy classes.
+
+\item \emph{Exhibit all Sylow $2$-subgroups of $S_4$ and find elements of $S_4$ which conjugate one of these into each of the others.}
+
+First note that $|S_4| = 2^3 \cdot 3$, so there are either $1$ or $3$ such subgroups.  Moreover, $S_4$ contains a subgroup isomorphic to $D_8$ so every Sylow $2$-subgroup of $S_4$ is isomorphic to $D_8$.  There are in fact three such subgroups which correspond to the three distinct labelings of the vertices of a square, or, alternatively, the three possible axes about which one can reflect a square.  Treating $D_8$ as a permutation group these three subgroups are $D_8$, $(2\,3)D_8(2\,3)$, and $(1\,4)D_8(1\,4)$.
+
+\item \emph{Prove that a group of order $351$ has a normal $p$-subgroup for some prime $p$ dividing its order.}
+
+Note that $351 = 3^3 \cdot 13$ and assume there are no normal Sylow $p$-subgroups for any $p$.  Since the power of $13$ in $351$ is $1$, every Sylow $13$-subgroup must intersect trivially.  Moreover, there must be $27$ such groups by Sylow's theorem.  Excluding the identity element there are $12$ elements distinct from all other Sylow $13$-subgroups, and hence $12 \cdot 27 = 324$ non-identity elements among these subgroups.  As for Sylow $3$-subgroups, there is more than one since by assumption none are normal, and therefore at least $28$ elements among these sets (though in fact there are definitely more).  Therefore there are at lesat $352$ elements in the group, a contradiction.
+
+\item \emph{Let $G$ be a group of order $315$ which has a normal Sylow $3$-subgroup.  Prove that $Z(G)$ contains a Sylow $3$-subgroup and deduce that $G$ is abelian.}
+
+Note that $315 = 3^2 \cdot 5 \cdot 7$.  The quotient $G/C_G(P)$ is isomorphic to a subgroup of $\Aut(P)$, and since $|P| = p^2$ for $p=2$, $|\Aut(P)| = 6$ if $P$ is cyclic or $|\Aut(P)| = 48$ if $P$ is elementary abelian.  What's more, this also implies that $P$ is abelian and therefore $P \leq C_G(P)$.  Hence $9 = |P| \mid \left|C_G(P)\right|$, which implies $[G:C_G(P)]$ is $1$, $5$, $7$, or $35$.  The only one of these that divide either $6$ or $48$ is $1$, so that the index is $1$, $C_G(P) = G$, and $P \leq Z(G)$.  This limits index $[G:Z(G)]$ to $5$, $7$, or $35$, all of which imply the quotient group is cyclic and hence $G$ is abelian.
+
+\item \emph{Let $P \in \Syl_p(G)$ and assume $N \unlhd G$.  Use the conjugacy part of Sylow's theorem to prove that $P \cap N$ is a Sylow $p$-subgroup of $N$.  Deduce that $PN/N$ is a Sylow $p$-subgroup of $G/N$.}
+
+Let $|G| = p^a m$ and $|N| = p^bm$. $P \cap N \unlhd P$, so $P \cap N$ is a $p$-subgroup of $P$ and $N$.  Let $Q \in \Syl_p(N)$, then there exists $g \in G$ such that $Q \leq gPg^{-1} \cap N$ by Sylow's theorem.  Since $N$ is normal, this implies $g^{-1}Qg \leq P \cap N$, but $\left|g^{-1}Qg\right| = p^b$.  Therefore $|P \cap N| = p^b$ and $P \cap N \in \Syl_p(N)$.
+
+For finite groups $$|PN| = \frac{|P|\cdot|N|}{|P \cap N|}$$  Hence $[PN : N] = p^{a-b}$.  But we also know $[G : N] = p^{a-b} \frac{m}{n}$.  Since $PN/N \leq G/N$, $PN/N \in \Syl_p(G/N)$.
+
+\item \emph{Prove that if $U$ and $W$ are normal subsets of a Sylow $p$-subgroup $P$ of $G$ then $U$ is conjugate to $W$ in $G$ if and only if $U$ is conjugate to $W$ in $N_G(P)$.  Deduce that two elements in the cneter of $P$ are conjugate in $G$ if and only if they are conjugate in $N_G(P)$.}
+
+\item \emph{Let $G$ be a group and $H$ be a subgroup of finite index.  Prove that there exists a normal subgroup of $N$ of $G$ with finite index such that $N \leq H$.}
+
+Define $\varphi(g): G/H \rightarrow G/H$ by $kH \mapsto gkH$.  This map is well-defined, and a bijection with inverse $\varphi\left(g^{-1}\right)$ so that $\varphi(g) \in \Sym(G/H)$.  Note that $\varphi$ is a homomorphism and consider the kernel of $\varphi$,
+\[
+\ker \varphi = \{g \in G \mid \varphi(g)(kH) = kH \} \subseteq \{g \in G \mid gH = H \} = H
+\]
+
+So $\ker \varphi \leq H$ and $\ker \varphi \unlhd G$. From the first isomorphism theorem
+\[
+\frac{G}{\ker \varphi} \cong \varphi\left(G\right) \leq \Sym(G/H) \cong S_n
+\]
+
+Therefore $[G : \ker \varphi] \leq n!$, and $\ker \varphi$ is precisely the subgroup for which are are looking.
+
+\end{enumerate}
+\end{document}

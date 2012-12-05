@@ -1,0 +1,190 @@
+\documentclass[10pt]{article}
+
+\usepackage{homework}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\title{CMSC 277: Homework \#5}
+\author{Jesse Farmer}
+\date{10 November 2005}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item \emph{Let $\L = \set{R}$ where $R$ is a binary relation symbol and let $\M$ be a finite $\L$-structure.  Show that there exists a $\sigma \in \SentL$ such that for all $\L$-structures $\mathfrak{N}$ we have $$\mathfrak{N} \vDash \sigma \mbox{ if and only if } \M \iso \mathfrak{N}$$}
+
+
+If $\mathfrak{N} \iso \M$ then $\mathfrak{N} \equiv \M$, so simply choose $\sigma \in \Th(\M)$.
+
+To see the converse, let $$\tau_i = \bigwedge_{\substack{k=1 \\ k \neq i}}^n (v_i \neq v_k)$$ and define
+\[
+\sigma_n = (\exists v_1 \cdots \exists v_n ((\tau_1) \land (\tau_2) \land \cdots \land (\tau_n))) \land (\forall v)((v = v_1) \lor (v = v_2) \lor \cdots \lor (v = v_n))
+\]
+
+Then are precisely $n$ elements in any $\L$-structure which models $\sigma_n$.  Define
+\[
+\upsilon = \bigwedge_{(a_i, a_j) \in R^\M} Rv_iv_j
+\]
+
+Then let $\sigma = \sigma_n \land \upsilon$.  If $\mathfrak{N} \vDash \sigma$ and $s$ is some variable assignment, then the map $M \to N$ given by $a_i \mapsto s(v_i)$ is an isomorphism between $\M$ and $\N$.
+
+\item \emph{Let $\L=\set{f}$ where $f$ is a binary function symbol.  Let $\M = \set{0,1}^\ast$ and $f^\M : \M^2 \to \M^2$ be the concatenation operation.}
+\begin{enumerate}
+\item \emph{Show that $\set{\lambda} \subset M$ is definable in $\M$.}
+
+Define $$\varphi(x) = \forall y (fxy = y)$$
+
+This expresses the statement that $\tau\sigma = \sigma$ if and only if $\tau = \lambda$.
+
+\item \emph{Show that for each $n \in \N$ the set $\set{\sigma \in \M \mid \abs{\sigma} = n}$ is definable.}
+
+Let $X_n = \set{\sigma \in \M \mid \abs{\sigma} = n}$.  By the previous part we have that $X_0$ is definable.  We proceed by strong induction.  Assume that each $X_k$ for $k < n$ is definable.  Let $\varphi_k(x) \in \SentL$ be the sentence which defines $X_k$.  Then define
+\[
+\varphi_n(x) = \exists y \exists z (\varphi_1(y) \land \varphi_{n-1}(z) \land (fyz = x))
+\]
+
+Then $X_n = \set{x \in M \mid \ \M \vDash \varphi_n(x)}$, since every element of $X_n$ can be written uniquely as the concatenation of a sequence of length $1$ and a sequence of length $n-1$.
+\item \emph{Find all automorphisms of $\M$.}
+
+First note that $(M, f^\M)$ is isomorphic to the free monoid on two generators.  Hence any automorphism of $\M$ is specified completely by its action on the two generators.  Likewise, any permutation $\sigma \in S_2$ induces an automorphism given by 
+\[
+h_\sigma(\tau) = \sigma(\tau(1)) \ast \cdots \ast \sigma(\tau(|\tau|))
+\]
+
+Hence $\Aut(\M) = \set{h_\sigma \mid \sigma \in S_2}$.
+
+\item \emph{Show that $\set{\sigma \in M \mid \sigma \mbox{ contains no $1$s}}$ is not definable in $\M$.}
+
+Let $X = \set{\sigma \in \M \mid \sigma \mbox{ contains no $1$s}}$.
+
+Recall that any definable set $X$ in $\M$ is closed under the natural action of elements of $\Aut(\M)$.  Hence it suffices to construct an automorphism under which $X$ is not closed.
+
+Since there are only two automorphisms of $\M$ the choice is pretty obvious: let $\sigma = (1\,2)$, using cycle notation.  Then $h_\sigma(X) = \set{\sigma \in M \mid \sigma \mbox{ contains no $0$s}} \not\subset X$.
+
+\end{enumerate}
+
+\item \emph{Let $\L=\set{f}$ where $f$ is a binary function symbol.  Let $\M$ be the $\L$-structure $(\N, \cdot)$.}
+\begin{enumerate}
+\item \emph{Show that $\set{0}$ is definable in $\M$.}
+
+Define $$\varphi(x) = \forall y (fxy = x)$$
+
+Since this defines a left zero in $\N$, and $\N$ has a unique zero, it follows that the set defined by $\varphi(x)$ is precisely $\set{0}$.
+
+\item \emph{Show that $\set{1}$ is definable in $\M$.}
+
+Define $$\varphi(x) = \forall y (fxy = y)$$
+
+Since identities are unique in a monoid, it follows that the set defined by $\varphi(x)$ is precisely $\set{1}$.
+
+\item \emph{Show that $\set{p \in \N \mid p \mbox{ is prime}}$ is definable in $\M$.}
+
+Let $\varphi(x)$ be as in the previous part.  Define $$\psi(x) = ((\exists m \exists n) fmn = x) \to (\varphi(m) \lor \varphi(n))$$
+
+\item \emph{Find all automorphisms of $\M$.}
+
+Since $(\N, \cdot)$ is a free commutative monoid with countably many generators (i.e., the primes), it follows that any automorphism of this monoid (and hence, by our construction, any automorphism of $\M$) is completely determined by its action on the generators.  Likewise, any permutation of the generators $\sigma$ induces an automorphism $h_\sigma$ by
+\[
+h_\sigma(n) = \sigma(p_1)^{a_1} \cdot \cdots \cdot \sigma(p_k)^{a_k}
+\] 
+where $n = p_1^{a_1} \cdots p_k^{a_k}$ by the fundamental theorem of arithmetic.
+
+Therefore $\Aut(\M) = \set{h_\sigma \mid \sigma \in S_P}$, where $P$ is the set of all primes in $\N$ and $S_P$ denotes the permutation group of the set $P$. 
+
+\item \emph{Show that $\set{n}$ is not definable in $\M$ for $n \geq 2$.}
+
+Recall that if a set $X \subset M^k$ is definable then it is closed under the natural action of any automorphism.  Hence to prove that such an $X$ is not definable it suffices to find an automorphism under which $X$ is not closed.
+
+But this is not hard.  Fix $n \in \N$ and choose a $\sigma_n \in S_P$, where $P$ is the set of all primes in $\N$, which swaps every prime appearing in the prime decomposition of $n$ with a prime not appearing in the decomposition.  Then certainly $h_\sigma(n) \neq n$, since $n$ has a unique prime decomposition up to powers and commutativity.
+
+\item \emph{Show that $\set{(k,m,n) \in \N^3 \mid k+m = n}$ is not definable in $\M$.}
+
+Let $X = \set{(k,m,n) \in \N^3 \mid k+m = n}$ and pick some element, say, $y = (2,4,6)$.  Let $\sigma \in S_P$ be, in cycle notation, $\sigma = (2\,3\,5)$.  Then $h_\sigma(2) = 3$, $h_\sigma(4) = 9$ and $h_\sigma(6) = 15$.  Hence $h_\sigma$ sends $y$ outside $X$, and so $X$ is not definable.
+
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Give an example of a language $\L$ together with a $\varphi \in \FormL$ and $x,y \in \Var$ such that $\left(\varphi_x^y\right)_y^x \neq \varphi$.}
+
+Let $L = \set{R}$ where $R$ is a binary relation.  Define
+\[
+\varphi = \forall y \forall x = Rxy Ryx
+\]
+
+Then
+\[
+(\varphi_x^y)_y^x = (\forall y \forall y = Ryy Ryy)_y^x = (\forall x \forall x = Rxx Rxx) \neq \varphi
+\]
+
+\item \emph{Suppose $\L$ is a language and $x,y \in \Var$.  Show that for every $\varphi \in \FormL$ with $y \notin \OccurVar(\varphi)$ we have $(\varphi_x^y)_y^x = \varphi$.}
+
+Denote by $\varphi'$, $(\varphi_x^y)_y^x$ and let $X = \set{\varphi \in \FormL \mid y \notin \OccurVar(\varphi) \Rightarrow \varphi' = \varphi}$.  We proceed by induction (thrice!) to show that $X = \FormL$.
+
+First note that if $y \in \OccurVar(\varphi)$ then $\varphi \in X$ vacuously, so it suffices to consider only those $\varphi \in \FormL$ with $y \notin \OccurVar(\varphi)$.
+
+For the base case we will show that $\AtomicFormL \subset X$.  We proceed by induction here, too.  To show that $\TermL \subset X$, let $\varphi \in \cal{C} \cup \Var$.  Since $y \notin \OccurVar(\varphi)$, from the definition of substitution it follows that $\varphi' = \varphi$.  Now let $\varphi_1, \ldots, \varphi_k \in X \cap \TermL$ with $y \notin \OccurVar(\varphi_i)$ for all $i$. Then from the definition of substitution it follows that
+\[
+h_f(\varphi_1, \ldots, \varphi_k)' = f\varphi_1' \varphi_2' \cdots \varphi_k' = f \varphi_1 \cdots \varphi_k = h_f(\varphi_1, \ldots, \varphi_k)
+\]
+
+Hence $\TermL \subset X$.  Now, assuming we have $\varphi_1, \ldots, \varphi_k \in \TermL$ with $y \notin \OccurVar(\varphi_i)$ for all $i$, it follows directly from the definition of substitution that
+\[
+(= \varphi_1 \varphi_2)' = (= \varphi_1' \varphi_2') = (= \varphi_1 \varphi_2)
+\]
+and
+\[
+(R\varphi_1 \cdots \varphi_k)' = (R\varphi_1' \cdots \varphi_k') = (R\varphi_1 \cdots \varphi_k)
+\]
+
+so that $\AtomicFormL \subset X$.  The final proof is really identical to all the above.  If $\varphi, \psi \in X$, with $y$ not occurring in either, then $(\neg \varphi)' = \neg \varphi' = \neg \varphi$, $(\varphi \diamond \psi)' = (\varphi' \diamond \psi') = (\varphi \diamond \psi)$, and so forth.  Hence $\FormL = X$ and the proposition follows.
+\end{enumerate}
+
+\item \emph{Let $\L = \set{P}$ where $P$ is a binary relation symbol, and let $x,y \in \Var$ be distinct.}
+\begin{enumerate}
+\item \emph{Give a deduction showing that $\forall x \forall y Pxy \vdash \forall y \forall x Pxy$.}
+
+In place of subscripts or superscripts to denote substitution, I will replace the actual variable with the appropriate letter.  Fix $t,u \in \Var$ not occurring in any of the formulas below.
+\begin{align*}
+\set{\forall x \forall y Pxy, \neg \forall y \forall x Pxy} &\vdash \forall x \forall y Pxy & (Assumption) & \tag{1} \\
+\set{\forall x \forall y Pxy, \neg \forall y \forall x Pxy} &\vdash \forall y Puy & (\forall E \mbox{ on } 1) & \tag{2} \\
+\set{\forall x \forall y Pxy, \neg \forall y \forall x Pxy} &\vdash Put & (\forall E \mbox{ on } 2) & \tag{3} \\
+\set{\forall x \forall y Pxy, \neg \forall y \forall x Pxy} &\vdash \neg \forall x \forall y Pxy & (Assumption) & \tag{4} \\
+\set{\forall x \forall y Pxy, \neg \forall y \forall x Pxy} &\vdash \neg \forall y Puy & (\forall E \mbox{ on } 4) & \tag{5} \\
+\set{\forall x \forall y Pxy, \neg \forall y \forall x Pxy} &\vdash \neg Put & (\forall E \mbox{ on } 5) & \tag{6} \\
+\forall x \forall y Pxy & \vdash \forall y \forall x Pxy & (Contr \mbox{ on $3$ and $6$}) & \tag{7}
+\end{align*}
+
+\item \emph{Give a deduction showing that $\exists x \forall y Pxy \vdash \forall y \exists x Pxy$.}
+
+In place of subscripts or superscripts to denote substitution, I will replace the actual variable with the appropriate letter.  Fix $t,u \in \Var$ not occurring in any of the formulas below.
+
+\begin{align*}
+\set{\forall y Puy, \neg \forall y \exists x Pxy} & \vdash \forall y Puy & (Assumption) & \tag{1} \\
+\set{\forall y Puy, \neg \forall y \exists x Pxy} & \vdash Put & (\forall E \mbox { on $1$}) & \tag{2} \\
+\set{\forall y Puy, \neg \forall y \exists x Pxy} & \vdash \exists x Pxt & (\exists I \mbox { on $2$}) & \tag{3} \\
+\set{\forall y Puy, \neg \forall y \exists x Pxy} & \vdash \neg \forall y \exists x Pxy & (Assumption) & \tag{4} \\
+\set{\forall y Puy, \neg \forall y \exists x Pxy} & \vdash \neg \exists x Pxt & (\forall E \mbox{ on $4$}) & \tag{5} \\
+\forall y Puy &\vdash \forall y \exists x Pxy & (Contr \mbox{ on $3$ and $5$}) & \tag{6} \\
+\exists x \forall y Pxy &\vdash \forall y \exists x Pxy & (\exists I \mbox{ on $6$}) & \tag{7}
+\end{align*}
+
+\item \emph{Show that $\forall y \exists x Pxy \not\vdash \exists x \forall y Pxy$.}
+
+Using completeness/soundess we can pass to semantics, and come up with a specific example.  Let $\L=\set{P}$ and $\M$ be $(G, P)$ where $G$ is a nontrivial group and $P = \set{(a,b) \mid ab = e}$.  Then it is true that for all $y$ there exists an $x$ such that $yx = e$, viz., $x = y^{-1}$.  However, it is not true that there exists an $x$ such that for every $y$, $xy = e$ since then $x$ is idempotent so that $x=e$ and $G$ is trivial.
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

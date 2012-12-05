@@ -1,0 +1,183 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{MATH 270: Homework \#2}
+\author{Jesse Farmer}
+\date{15 October 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Show that if $w \in \mathbb{C}$, then}
+\begin{enumerate}
+\item \emph{$|\Re w| \leq |w|$}
+
+Recall that $\Re w = \frac{w + \overline{w}}{2}$ and $|w| = |\overline{w}|$, so
+\[
+|\Re w| = \left| \frac{w + \overline{w}}{2}\right| \leq \frac{|w| + |\overline{w}|}{2} = \frac{2|w|}{2} = |w|
+\]
+\item \emph{$|\Im w| \leq |w|$}
+
+Since $\Im w = \frac{w - \overline{w}}{2i}$, 
+\[
+|\Im w| = \left| \frac{w - \overline{w}}{2i}\right| \leq \frac{|w| + |\overline{w}|}{|2i|} = \frac{2|w|}{2} = |w|
+\]
+\item \emph{$|w| \leq |\Re w| + |\Im w|$}
+\[
+|w| = \left|\frac{w + \overline{w} + w - \overline{w}}{2}\right| \leq \left| \frac{w + \overline{w}}{2} \right| + \left| \frac{w - \overline{w}}{2} \right| = \left| \frac{w + \overline{w}}{2} \right| + \left| \frac{w - \overline{w}}{2i} \right| = |\Re w| + |\Im w|
+\]
+\end{enumerate}
+
+\item \emph{For the following sets state whether or not the set is open or closed.}
+\begin{enumerate}
+\item \emph{$\{z \mid \Im z > 2\}$}
+
+This set is open since for any $z_0$ in the set, $D(z_0, \Im z_0) \subset \{z \mid \Im z > 2\}$.  This follows because
+\[
+|\Im z - \Im z_0| = |\Im (z - z_0)| \leq |z - z_0| < \Im z_0
+\]
+
+
+The set is not closed because $z=(0,2)$ limit point of the set, but not contained in the set.
+
+\item \emph{$\{z \mid 1 \leq |z| \leq 2\}$}
+
+Define $U = \{z \mid 1 \leq |z| \}$ and $U' = \{z \mid |z| \leq 2\}$.  Consider $U^c$.  If $z_0 \in U^c$ then $|z_0| < 1$, so there exists an $r > 0$ such that $|z_0| = 1-r$.  Let $z$ be such that $|z| < r$, then
+\[
+|z_0 - z| \leq |z_0| + |z| < 1-r + r < 1
+\]
+
+And therefore $U^c$ is open, and $U$ is closed.  Since the set is the intersection of $U'$ and complement of the interior of $U$ (which is closed by definition), it follows that the set itself is closed.  It is not open since any neighborhood around the point $z=(2,0)$ contains points in the complement of the set.
+
+\item \emph{$\{z \mid -1 < \Re z \leq 2\}$}
+
+This set is neither open nor closed, since $-1$ is a limit point of the set but not in the set, and any neighborhood around $2$ contains points in the complement.
+
+\end{enumerate}
+
+\item \emph{Determine the sets on which the following functions are holomorphic, and compute their derivatives:}
+\begin{enumerate}
+\item \emph{$(z+1)^3$}
+
+This function is a polynomial so it is holomorphic on all of $\mathbb{C}$ and its derivative is $3(z+1)^2$.
+\item \emph{$z + \frac{1}{z}$}
+
+This function is holomorphic on $\mathbb{C} \setminus \{0\}$, and its derivative is $1 - \frac{1}{z^2}$ there.
+\item \emph{$\left(\frac{1}{z-1}\right)^{10}$}
+
+This function is holomorphic on $\mathbb{C} \setminus \{1\}$, and its derivative is $-10\left(\frac{1}{z-1}\right)^{11}$ there.
+
+\item \emph{$\frac{1}{(z^3-1)(z^2+2)}$}
+
+Using de Moivre's formula for finding the roots of complex numbers shows that this function is holomorphic on $\mathbb{C} \setminus \{1, i\sqrt{2}, -i\sqrt{2}, e^{\frac{2 \pi i}{3}}, e^{\frac{4 \pi i}{3}} \}$ and its derivative is $-\frac{(z^3-1)2z + 3z^2(z^2+2)}{(z^3-1)^2(z^2+2)^2}$.
+\end{enumerate}
+
+\item \emph{Prove that $f(z) = |z|$ is not holomorphic.}
+
+Let $z = x + iy$ and write $f(x,y) = |(x,y)| = \sqrt{x^2 + y^2} = u(x,y) + iv(x,y)$.  Then $\frac{\partial u}{\partial x} = \frac{x}{\sqrt{x^2+y^2}}$ and $\frac{\partial u}{\partial y} = \frac{y}{\sqrt{x^2+y^2}}$.  Since $v(x,y) = 0$ the partial derivative with respect to both $x$ and $y$ is zero, and hence the Cauchy-Riemann equations are not satisfied which implies $f(z) = |z|$ is not holomorphic.
+
+\item \emph{Find the radius of convergence of each of the following power series:}
+\begin{enumerate}
+\item \emph{$\sum_{n=0}^\infty nz^n$}
+
+In all the following cases we use the fact that the radius of convergence $r$ is given by $r = \lim_{n \rightarrow \infty} \frac{a_n}{a_{n+1}}$.
+
+\[
+\lim_{n\rightarrow\infty} \frac{n}{n+1} = \lim_{n \rightarrow \infty} \frac{1}{1 + \frac{1}{n}} = 1
+\]
+\item \emph{$\sum_{n=0}^\infty \frac{z^n}{e^n}$}
+\[
+\lim_{n \rightarrow \infty} \frac{e^{n+1}}{e^n} = \lim_{n \rightarrow \infty} e = e
+\]
+\item \emph{$\sum_{n=1}^\infty n! \frac{z^n}{n^n}$}
+\[
+\lim_{n \rightarrow \infty} \frac{n! (n+1)^{n+1}}{(n+1)! n^n} = \lim_{n \rightarrow \infty} \left(\frac{n+1}{n}\right)^n = \lim_{n \rightarrow \infty} \left(1 + \frac{1}{n}\right)^n = e
+\]
+\item \emph{$\sum_{n=1}^\infty \frac{z^n}{n}$}
+\[
+\lim_{n \rightarrow \infty} \frac{n+1}{n} = \lim_{n \rightarrow \infty} 1 + \frac{1}{n} = 1
+\]
+\end{enumerate}
+\newpage
+\item \emph{Find the radius of convergence of each of the following power series:}
+\begin{enumerate}
+\item \emph{$\sum_{n=0}^\infty n^2 z^n$}
+\[
+\lim_{n \rightarrow \infty} \left(\frac{n}{n+1}\right)^2 = \lim_{n \rightarrow \infty} \left(\frac{1}{1 + \frac{1}{n}}\right)^2 = 1
+\]
+\item \emph{$\sum_{n=0}^\infty \frac{z^{2n}}{4^n}$}
+
+Here write $z^2 = x$, then consider the series of $x^n$ instead of $z^{2n}$.  This gives a radius of convergence of
+\[
+\lim_{n \rightarrow \infty} \frac{4^{n+1}}{4^n} = 4
+\]
+
+However, $|x| \leq 4$ if and only if $|z| \leq 2$, hence the radius of convergence of the original series is $2$.
+\item \emph{$\sum_{n=0}^\infty n! z^n$}
+
+\[
+\lim_{n \rightarrow \infty} \frac{n!}{(n+1)!} = \frac{1}{n} = 0
+\]
+
+\item \emph{$\sum_{n=0}^\infty \frac{z^n}{1+2^n}$}
+\[
+\lim_{n \rightarrow \infty} \frac{1+2^{n+1}}{1+2^n} = \lim_{n \rightarrow \infty} \frac{\frac{1}{2^n}}{\frac{1}{2^n}} \frac{1+2^{n+1}}{1+2^n} = \lim_{n \rightarrow \infty} \frac{\frac{1}{2^n} + 2}{\frac{1}{2^n} + 1} = 2
+\]
+
+\end{enumerate}
+
+\item \emph{Prove that a power series converges absolutely everywhere or nowhere on its circle of convergence.  Give an example to show that each case can occur.}
+
+If a power series converges absolutely at a point $z_0$ on its radius of convergence, then for all $z \in \mathbb{C}$ such that $|z| = |z_0|$, 
+\[
+\sum_{i=0}^\infty |a_n| |z|^n = \sum_{i=0}^\infty |a_n| |z_0|^n < \infty
+\]
+
+\item \emph{Let $$f(x) = \begin{cases} e^{\frac{-1}{x^2}} & x > 0 \\ 0 & x \leq  0 \end{cases}$$  Show that $f$ is a $C^\infty$ function and that $f^{(n)}(0) = 0$ for all $n \in \mathbb{N}$.  Conclude that $f$ is not analytic at $x=0$.}
+
+Let $p(x)$ be a $n$ degree polynomial of $\frac{1}{x}$, that is
+\[
+p(x) = \sum_{i=0}^n a_i\frac{1}{x^i}
+\]
+
+We will first show that $f^{(n)}(x)$ is of the form $e^{\frac{-1}{x^2}}p(x)$ when $x > 0$.  Clearly $f^{(0)}(x)$ is of this form, so assume 
+\[
+f^{(n)}(x) = e^{\frac{-1}{x^2}}\sum_{i=0}^n a_i\frac{1}{x^i}
+\]
+
+Then applying the product rule and chain rule we get that
+\[
+f^{(n+1)}(x) = e^{\frac{-1}{x^2}}\left(\frac{2}{x^3}\sum_{i=0}^n a_i\frac{1}{x^i} + \sum_{i=0}^n a_i\frac{-i}{x^{i-1}}\right)
+\]
+
+which is still of the the form $e^{\frac{-1}{x^2}}p(x)$, for the appropriate $p(x)$.
+
+Because the following is true
+\begin{eqnarray*}
+\lim_{x \rightarrow 0^+} e^{\frac{-1}{x^2}} \left(\sum_{i=0}^n a_i \frac{1}{x^i} \right) &=& \lim_{x \rightarrow 0^+}\sum_{i=0}^n a_i \frac{\frac{1}{x^i}}{e^{\frac{1}{x^2}}} \\
+&=& \lim_{u \rightarrow +\infty}\sum_{i=0}^n a_i \frac{u^i}{e^{u^2}} \\
+&=& 0
+\end{eqnarray*}
+
+we see that each $f^{(n)}(x)$ is continuous at zero since we define $f^{(n)}(x) = 0$ for all $x \leq 0$ (the left-hand limit is, of course, $0$)  All that remains to be shown is that each $f^{(n)}$ is differentiable at zero.  Since $f^{(n)}(0) = 0$, it follows that 
+
+\begin{eqnarray*}
+\lim_{x \rightarrow 0^+} \frac{e^{\frac{-1}{x^2}} \left(\sum_{i=0}^n a_i \frac{1}{x^i} \right)}{x} &=& \lim_{x \rightarrow 0^+} \frac{\frac{1}{x}\left(\sum_{i=0}^n a_i \frac{1}{x^i} \right)}{e^\frac{1}{x^2}} \\
+&=& \lim_{x \rightarrow 0^+} \frac{\left(\sum_{i=0}^n a_i \frac{1}{x^{i+1}} \right)}{e^\frac{1}{x^2}} \\
+&=& 0
+\end{eqnarray*}
+
+which is true by the same argument by which we showed continuity. Since $f^{(n)}(x) = 0$ for $x \leq 0$, the left-hand limit is obviously the same.  Therfore $f^{(n)}(x)$ is differentiable at $0$ and $f^{(n)}(0) = 0$ for all $n \in \mathbb{N}$, and hence $f$ is also a $\text{C}^\infty$ function.  If $f$ were analytic at $0$ then from Theorem $1.9$ in class $f$ would be identically $0$ in a neighborhood of $0$, which is certainly not true -- in fact, $f(x) \neq 0$ for all $x > 0$.
+\end{enumerate} 
+\end{document}

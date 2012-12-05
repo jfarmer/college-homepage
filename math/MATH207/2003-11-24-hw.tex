@@ -1,0 +1,185 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pslatex}
+\usepackage{enumerate}
+\title{MATH 207: Homework \#8}
+\author{Jesse Farmer}
+\date{24 November 2003}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Show that $\mathbb{Q}(\sqrt{2})$ is a field.}
+
+Let $a+b\sqrt{2},c+d\sqrt{2}$ be arbitrary elements of $\mathbb{Q}(\sqrt{2})$.
+We see that $(a+b\sqrt{2})(c+d\sqrt{2}) = (ac+2bd)+(ad+bc)\sqrt{2}$, so we can treat $\mathbb{Q}(\sqrt{2})$ as the set of all ordered pairs of real numbers with addition and multiplication defined as $(a,b)+(c,d) = (a+b,b+d)$ and $(a,b)(c,d) = (ac+2bd,ad+bc)$.
+
+Since addition is coordinate-wise all the additive properties of $\mathbb{R}$ are inherited, so $(\mathbb{Q})\sqrt{2}),+)$ is an Abelian group.  We only need look at multiplication and distributivity.
+
+\begin{itemize}
+\item \underline{Multiplication}:
+\begin{itemize}
+\item Associativity
+
+$(a,b)((c,d)(e,f))=(a,b)(ce+2df,cf+de)=(ace+2adf+2bcf+2bde,acf+ade+bce+2bdf)=(ac+2bd,ad+bc)(e,f)=((a,b)(c,d))(e,f)$
+
+\item Identity
+
+$(a,b)(1,0)=(1a + 2(b0),0a+1b)=(a,b)$
+
+\item Inverse
+
+$(a,b)(\frac{a}{a-2b^2},\frac{-b}{a-2b^2})=(\frac{a^2}{a-2b^2}+2\frac{-b^2}{a-2b^2}, \frac{-ab}{a-2b^2}+\frac{ab}{a-2b^2}) = (\frac{a-2b^2}{a-2b^2},\frac{ab-ab}{a-2b^2})=(1,0)$
+\end{itemize}
+
+\item \underline{Distributivity}
+
+$(a,b)((c,d)+(e,f))=(a,b)(c+e,d+f)=(ac+ae+2bd+2bf,ad+af+bc+be)=(ac+2bd,ad+bc)+(ae+2bf,af+be)=(a,b)(c,d)+(a,b)(e,f)$
+\end{itemize}
+
+Therefore $\mathbb{Q}(\sqrt{2})$ is a field.
+
+\item \emph{Show that any non-empty set with the discrete metric is a metric space.}
+
+Let $(X,\rho)$ be a set with the metric
+\[ \rho(x,y) = \left\{
+              \begin{array}{ll}
+                   0 & x = y\\
+                   1 & x \neq y
+              \end{array}
+       \right.
+\]
+
+\begin{itemize}
+\item \underline{Positive definite}:
+For any $x,y \in X$ we have either $\rho(x,y)=1$ or $\rho(x,y)=0$.  Clearly this is always non-negative.  Moreover, from the definition we get that $\rho(x,y)=0$ if and only if $x=y$ directly.
+
+\item \underline{Symmetric}:
+As the equality relation is symmetric, so is the discrete metric on any set.
+
+\item \underline{Triangle inequality}:
+
+We need to guarantee that for any $x,y,s \in X$ we have $\rho(x,y) \leq \rho(x,s) + \rho(s,y)$.  In this inequality, the left-hand side can be either $0$ or $1$ and the right-hand side can be one of $0$,$1$, or $2$.  The only combination where this statement7 is violated is when $\rho(x,y)=1$ and $\rho(x,s) + \rho(s,y) = 0$, so we need to show this case is impossible.
+
+If $\rho(x,s) + \rho(s,y) = 0$ then $\rho(x,s)=0$ and $\rho(s,y)=0$.  But this implies that $x=s=y$ by positive definite.
+Hence, $\rho(x,y)=0$.  Therefore the triangle inequality holds in every case.
+
+\end{itemize}
+\item \emph{Show that $(\mathbb{R}^n,\rho_p)$ is a metric space.}
+
+We define the metric as
+\[ \rho_p(x,y) = \left(\sum_{k=1}^n|x_k-y_k|^p\right)^\frac{1}{p} \]
+where $x=(x_1,x_2,\ldots,x_n)$ and $y=(y_1,y_2,\ldots,y_n)$.
+
+\begin{itemize}
+\item \underline{Positive definite}:
+Note that each term in the sum is positive.  As this is the case, we cannot have a non-negative distance. If $\rho_p(x,y)=0$ then $\sum_{k=1}^n|x_k-y_k|^p = 0$, but since each individual term in the sum is positive every term must be zero for this to occur, i.e., $|x_k-y_k|^p = 0$ for all $k$.  Clearly, then, $|x_k-y_k| = 0$ for all $k$.  That $x_k=y_k$ for all $k$ follows directly from the properties of the absolute value on $\mathbb{R}^1$ and therefore, if $\rho_p(x,y)=0$ then $x=y$.  The converse is even more obvious.
+
+\item \underline{Symmetric}:
+This follows directly from the properties of the absolute value in $\mathbb{R}^1$.
+
+\item \underline{Triangle inequality}:
+
+Save for the statement that for $a,b \geq 0$ we have $ab \leq \frac{a^p}{p} + \frac{b^q}{q}$ if $\frac{1}{p} + \frac{1}{q} =1$, I understand the proof in Kolmogorov and Fomin.  Since this is more-or-less the crux of the H\"older Inequality it would be rather cheap of me to just copy it here.
+
+\end{itemize}
+\item \emph{Show that $(\mathbb{C}^n, \rho_p)$ is a metric space.}
+\item \emph{Show that $(\mathbb{R}^n, \rho_\infty)$ is a metric space.}
+\begin{itemize}
+\item \underline{Positive definite}:
+This trivially follows from the same property in $\mathbb{R}$.
+
+\item \underline{Symmetric}:
+This trivially follow from the same property in $\mathbb{R}$.
+\item \underline{Triangle inequality}:
+
+It suffices to show that $\rho(a,b) \leq \rho(a) + \rho(b)$.
+If $j$ is the index at which $max_{1 \leq k \leq n}|x_k-y_k|$ is attained, then clearly $max_{1 \leq k \leq n}|x_k+y_k| = |x_j+y_j| \leq |x_j| + |y_j|=max_{1 \leq k \leq n}|x_k| +max_{1 \leq k \leq n}|y_k|$ by this very property in $\mathbb{R}$.
+
+\end{itemize}
+
+\item \emph{Show that the unit circles in $l_2^p(\mathbb{R})$ cover the entire space between $p=1$ and $p=\infty$.}
+
+The function, $f(p)=x^p+y^p$, which describes the unit circle in $l_2^p$ is continuous and thus by the Intermediate Value Theorem takes on every value from its minimum ($p=1$) to its maximum ($p=\infty$).  Moreover, since the derivative is always positive it takes on each value once if we restrict $x,y$ to be ``non-corner'' points.
+
+\item \emph{Show that the open ball is an open set.}
+
+Let $(X,\rho)$ be a metric space, $x \in X$ be arbitrary, and $B_\epsilon(x)$ be an open neighborhood around $x$.  If $y \in B_\epsilon(x)$ then $\rho(x,y) < \epsilon$.  Hence, there is some $r>0$ such that $\rho(x,y) = \epsilon - r$.
+
+Then, for all points $z \in X$ such that $\rho(y,z)<h$ we have $\rho(x,z) \leq \rho(x,y)+\rho(y,z) < r-h+h = r$.  Therefore $s \in B_\epsilon(x)$, i.e., $B_\epsilon(x)$ is open.
+
+\item \emph{Show that a subset of a metric space is closed if and only if it contains all its accumulation points.}
+
+Let $(X,\rho)$ be a metric space and $S \subseteq X$. If $S$ is closed then $S^c$ is open.  Assume for contradiction that $x_0 \in S^c$ is an accumulation point for $S$.  Every neighborhood around $x_0$ has a point in $S$, but because $S^c$ is open some of these neighborhoods will also be contained in $S^c$, a contradiction.
+
+Conversely, if $S$ is not closed then $S^c$ is not open.  That is, there exists some $x_0 \in S^c$ such that for any $\epsilon > 0 \, B_\epsilon(x_0) \nsubseteq S^c$.  So there is some $x \in S$ such that $x \in B_\epsilon(x_0)$ for all $\epsilon > 0$ and $x_0$ is an accumulation point of $S$ not in $S$.
+
+Therefore a subset of a metric space is closed if and only if it contains all its accumulation points.
+
+\item \emph{Find the following under the standard metric in $\mathbb{R}$}:
+\begin{enumerate}
+\item $\partial\mathbb{Q} = \mathbb{R}$
+\item $\partial(\mathbb{R} \backslash \mathbb{Q})=\mathbb{R}$
+\item $\partial([0,1])=\{0,1\}$
+\end{enumerate}
+
+\item \emph{Show the following}:
+\begin{enumerate}
+\item \emph{$\partial A = \bar{A} \backslash \AA$}
+
+Recall that $x \in \partial A$ if and only if every neighborhood around $x$ intersects both $A$ and $A^c$.
+
+First we show that $\partial A \subseteq \bar{A} \backslash \AA$.  If $x \in \partial A$ and $x \in \AA$ then there is a neighborhood around $x$ which is contained in $A$, a contradiction since every neighborhood around $x$ must also intersect the complement of $A$.  If $x \in \partial A$ and $x \notin \bar{A}$ then there is some closed set $B$ which contains $A$ that does not contain $x$.  Thus $x \in X \backslash B \subseteq X \backslash A$ is open, and so there exists a neighborhood around $x$ completely contained in both $X \backslash B$ and $X \backslash A$.  This is a contradiction since every neighborhood must intersect $A$.
+
+If $x \notin \AA$ then every interval intersects the complement of $A$ and if $x \in \bar{A}$ every interval intersects $A$ itself.  Therefore if both of these conditions hold $x \in \partial A$.
+
+Therefore $\partial A = \bar{A} \backslash \AA$.
+
+\item \emph{$\AA = X \backslash (\overline{X \backslash A})$}
+
+First we show that $\AA \subseteq X \backslash (\overline{X \backslash A})$.  Let $x \in \AA$.  That $x \in X$ is trivial.  As $x \in \AA$, there exists some open set $B \subseteq A$ such that $x \in B$.  We then have $x \notin X \backslash B$ and $X \backslash A \subseteq X \backslash B$.  But $X \backslash B$ is a closed set which contains $X \backslash A$, so $x \notin \overline{X \backslash A}$
+
+Second, we show that $\AA \supseteq X \backslash (\overline{X \backslash A})$.  If $x \in (\overline{X \backslash A})$ then there is closed set $x \notin B \supseteq X \backslash A$, but this means that $x \in B \backslash X \supseteq A$ and that $B \backslash X$ is open.  Therefore $x \in \AA$ as it is in an open set contained in $A$.
+
+Therefore $\AA = X \backslash (\overline{X \backslash A})$.
+
+\item \emph{$\bar{A} = X \backslash (X \backslash A)^o$}
+
+First we show that $\bar{A} \subseteq X \backslash (X \backslash A)^o$.  Let $x \in \bar{A}$.  That $x \in X$ is trivial.  Assume for contradiction that $x \in (X \backslash A)^o$, then there is some open set $x \in B \subseteq X \backslash A$.  We then have that $x \notin X \backslash B$ and $X \backslash B \supseteq A$ is closed.  Hence, $C = \bar{A} \cap (X \backslash B)$ is closed and $x \notin C$.  Moreover, $A \subseteq C$.  This is a contradiction since $C$ is a closed set which contains $A$ and, as $x \in \bar{A}$, it must be in every such set.
+
+Second we show that $\bar{A} \supseteq X \backslash (X \backslash A)^o$.  If $x \notin (X \backslash A)^o$ then $x$ is not in any open set in $X \backslash A$.  But if a closed set contains $A$ then its complement is one of these sets, and thus contains $x$.  Therefore $x \in \bar{A}$.
+
+Therefore $\bar{A} = X \backslash (X \backslash A)^o$.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Show that $\AA$ is the set of all interior points of $A$.}
+
+If $x \in \AA$ then there is an open set $S \subseteq A$ such that $x \in S$.  But since $S$ is open there must be an open neighborhood around $x$, i.e., $x$ is an interior point of $S$.  This same neighborhood, however, is contained in $A$, so $x$ is also an interior point of $A$.
+
+Conversely, if $x$ is an interior point of $A$ then there is some open neighborhood around $x$ contained in $A$.  Since an open neighborhood is also an open set and this neighborhood is contained in $A$, it is also in $\AA$ by definition of the interior.
+
+Therefore $x \in \AA$ if and only if $x$ is an interior point of $A$.  That is, $\AA$ is the set of all interior points of $A$.
+\item \emph{Show that $\bar{A}$ is union of $A$ and the set of all accumulation points of $A$.}
+
+We will denote the set of all accumulation points of $A$ as $A'$.
+
+First we show that $\bar{A} \subseteq A \cup A'$.  If $x \notin A \cap A'$ then there exists an $\epsilon>0$ such that $B_\epsilon(x) \cap A = \emptyset$.  But as $B_\epsilon(x)$ is open, $B_\epsilon^c(x)$ is closed and does not contain $x$.  Moreover, $A \subseteq B_\epsilon^c(x)$ since they are disjoint.  It is clearly impossible for $x$ to then be in the intersection of all closed sets that contain $A$ as $x \notin B_\epsilon^c(x)$.
+
+Now we show $A \cup A' \subseteq \bar{A}$.  If $x \in A$ then $x$ is certainly in any set, closed or open, which contains $A$.  Thus $x \in \bar{A}$.  Let $x \in A'$ and assume for contradiction that $x \notin \bar{A}$.  Then there exists a a closed set $B \supseteq A$ with $x \notin B$ which implies $x \notin A$.  $x$ is an accumulation point for $A$ and so is also an accumulation point for any superset, including $B$.  As $B$ is closed it contains all its accumulation points, specifically it contains $x$, a contradiction.
+
+Therefore $\bar{A}$ is union of $A$ and the set of all accumulation points of $A$.
+\end{enumerate}
+\end{enumerate}
+\end{document}

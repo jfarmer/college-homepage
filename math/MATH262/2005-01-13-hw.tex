@@ -1,0 +1,315 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\powset}[1]{
+\mathcal{P}\left(#1\right)
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+
+\title{MATH 262: Homework \#1}
+\author{Jesse Farmer}
+\date{13 January 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Determine which of the following statements are true for all sets $A$, $B$, $C$, and $D$.  If double implication fails determine whether one or the other of the possible implication holds.  If an equality fails determine whether the statement becomes true if the ``equals'' symbol is replace by one or the other of the inclusion symbols.}
+\begin{enumerate}
+\item \emph{$A \subset B$ and $A \subset C \Leftrightarrow A \subset B \cup C$}
+
+The ``only if'' holds since $A \subset B \subset B \cup C$, but the converse does not, e.g., if $B$ and $C$ are disjoint, nonempty sets and $A$ is a nonempty set contained entirely in $B$.
+
+\item \emph{$A \subset B$ or $A \subset C \Leftrightarrow A \subset B \cup C$}
+
+If $A \subset B$ then $A \subset B \subset B \cup C$, and if $A \subset C$ then $A \subset C \subset B \cup C$.  The converse does not hold since, for example, $B$ and $C$ could be nonempty, disjoint sets and $A$ could contain elements of both sets.
+
+\item \emph{$A \subset B$ and $A \subset C \Leftrightarrow A \subset B \cap C$}
+
+By hypothesis $a \in A \Rightarrow a \in B$ and $a \in C$, which is true is and only if $a \in B \cap C$.
+
+\item \emph{$A \subset B$ or $A \subset C \Leftrightarrow A \subset B \cap C$}
+
+From the previous part it follows that the ``if'' portion of the statement is true since $A \subset B$ and $A \subset C$ implies $A \subset B$ or $A \subset C$.  The converse, however, is not true: let $A$, $B$, and $C$ be nonempty sets with $B \cap C = \emptyset$ and $A \subset B$.
+
+\item \emph{$A \setminus (A \setminus B) = B$}
+
+Any sort of inclusion fails if $A$ and $B$ are disjoint, nonempty sets.  Equality holds if $B \subset A$, and left inclusion holds if $B \cap A \neq \emptyset$ but one is not included in the other.
+
+\item \emph{$A \setminus (B \setminus A) = A \setminus B$}
+
+Let $A$ and $B$ be two sets in some universe $X$.
+\begin{eqnarray*}
+x \in A \setminus (B \setminus A) &\Leftrightarrow& x \in A \cap (X \setminus (B \setminus A)) \\
+&\Leftrightarrow& x \in A \cap ((X \setminus B) \cup A) \\
+&\Leftrightarrow& x \in (A \setminus B) \cup A
+\end{eqnarray*}
+
+Hence the right-hand side is included in the left, but not the opposite.  For example, if $A \cap B \neq \emptyset$, then $x \in A \cap B$ is in the left-hand side but not the right-hand side.
+
+\item \emph{$A \cap (B \setminus C) = (A \cap B) \setminus (A \cap C)$}
+
+$x$ is in the left-hand set iff $x \in A$ and $x \in B$ and $(x \notin A \mbox{ or } x \notin C)$.  But $x \in A$, so this becomes $x \in A$ and $x \in B$ and $x \notin C$, i.e., $x \in A\cap(B \setminus C)$.  So they are equal.
+
+\item \emph{$A \cup (B \setminus C) = (A \cup B) \setminus (A \cup C)$}
+
+Left inclusion does not hold, for example, if $B$ and $C$ are the empty set and $A$ is nonempty.  
+\item \emph{$(A \cap B) \cup (A \setminus B) = A$}
+
+This is true, since this is equivalent to the statement that $x \in A$ and $x \in B$, or $x \in A$ and $x \notin B$.  Clearly this implies that $x \in A$.  But if $x \in A$, then either $x \in B$ or $x \notin B$, and hence the statement is still true.
+
+\item \emph{$A \subset C$ and $B \subset D \Rightarrow A \times B \subset C \times D$}
+
+This is true since $A \times B \subset A \times D \subset C \times D$.
+
+\item \emph{The converse of $(j)$.}
+
+If $A$ is the empty set and $B$ is nonempty, then this is not true since then $A \times B = \emptyset \subset C \times D$.
+
+\item \emph{The converse of $(j)$, assuming that $A$ and $B$ are nonempty.}
+
+If they are nonempty then there exists $x \in (A \setminus C) \cup (B \setminus D)$ and $(x,y) \notin C \times D$ for any $y \in B$, hence the converse is true in this case.
+
+\item \emph{$(A \times B) \cup (C \times D) = (A \cup C) \times (B \cup D)$}
+
+Prof. Weinberger wins.  I'm annoyed.
+
+\item \emph{$(A \times B) \cap (C \times D) = (A \cap C) \times (B \cap D)$}
+\item \emph{$A \times (B \setminus C) = (A \times B) \setminus (A \times C)$}
+\item \emph{$(A \setminus B) \times (C \setminus D) = (A \times C - B \times C) \setminus (A \times D)$}
+\item \emph{$(A \times B) \setminus (C \times D) = (A \setminus C) \times (B \setminus D)$}
+\end{enumerate}
+
+\item \emph{Let $A$ and $B$ set set of real numbers.  Write the negation of each of the following statements:}
+\begin{enumerate}
+\item \emph{For every $a \in A$, it is true that $a^2 \in B$.}
+
+$\exists a \in A$ such that $a^2 \notin B$
+
+\item \emph{For at least one $a \in A$, it is true that $a^2 \in B$.}
+
+$\forall a \in A, a^2 \notin B$
+
+\item \emph{For every $a \in A$, it is true that $a^2 \notin B$.}
+
+$\exists a \in A$ such that $a^2 \in B$
+
+\item \emph{For at least one $a \notin A$, it is true that $a^2 \in B$.}
+
+$\forall a \notin A, a^2 \notin B$
+
+\end{enumerate}
+
+\item \emph{Let $\mathcal{A}$ be a nomempty collection of sets.  Determine the truth of each of the following statements and of their converses:}
+\begin{enumerate}
+\item \emph{$x \in \bigcup_{A \in \mathcal{A}} \Rightarrow x \in A$ for at least one $A \in \mathcal{A}$.}
+
+Both this statement and its converse are true by the definition of an arbitrary union.
+
+\item \emph{$x \in \bigcup_{A \in \mathcal{A}} \Rightarrow x \in A$ for every $A \in \mathcal{A}$.}
+
+This statement is false since $x$ need only be in one $A$, but the converse is true.
+
+\item \emph{$x \in \bigcap_{A \in \mathcal{A}} \Rightarrow x \in A$ for at least one $A \in \mathcal{A}$.}
+
+This statement is true since by definition $x$ is in every $A \in \mathcal{A}$.  The converse is false, however, since $x$ must be in every $A \in \mathcal{A}$.
+
+\item \emph{$x \in \bigcap_{A \in \mathcal{A}} \Rightarrow x \in A$ for every $A \in \mathcal{A}$.}
+
+Both this statement and its converse are true by the definition of an arbitrary intersection.
+\end{enumerate}
+
+\item \emph{If a set $A$ has two elements, show that $\powset{A}$ has four elements.  How many elements does the power set have if $A$ has one element?  Three elements?  No elements?  Why is $\powset{A}$ called the power set of $A$?}
+
+$\powset{\{1,2\}} = \left\{\emptyset, \{1\}, \{2\}, \{1,2\}\right\}$ has four elements.  If $A$ has one element then the power set has two elements, and if $A$ has three elements then $\powset{A}$ has eight elements.  Presumably it is called the power set because if $|A|=n$ then $\left|\powset{A}\right| = 2^n$.
+
+\item \emph{Let $f: A \rightarrow B$, $A_0 \subset A$, and $B_0 \subset B$.}
+\begin{enumerate}
+\item \emph{Show that $A_0 \subset f^{-1}(f(A_0))$ and that equality holds if $f$ is injective.}
+
+Recall that $f^{-1}(f(A_0)) = \{x \in A \mid f(x) \in f(A_0)\}$.  Since, for every $x \in A_0$, $f(x) \in f(A_0)$ by definition, the inclusion is obvious.  The only possible situation where the opposite inclusion wouldn't hold is if there is some $x \in A \setminus A_0$ that is also in $f^{-1}(f(A_0))$.  But if $f$ is injective then no such $x$ can exist since there is precisely one $x \in A$ for which $f(x) = a$ for $a \in f(A_0)$, and there is at least one such $x$ in $A_0$.
+\item \emph{Show that $f(f^{-1}(B_0)) \subset B_0$ and that equality holds if $f$ is surjective.}
+
+Let $y \in f(f^{-1}(B_0))$.  Then there is some $x \in f^{-1}(B_0)$ such that $f(x) = y$.  But this implies $f(x) \in B_0$, so that $y = f(x) \in B_0$.  Let $y \in B_0$ and assume $f$ is surjective.  Then there is some $x \in A$ such that $f(x) = y$.  But then $x \in f^{-1}(y) \subset f^{-1}(B_0)$, so that $y = f(x) \in f(f^{-1}(B_0))$.
+
+
+\end{enumerate}
+
+\item \emph{Let $f: A \rightarrow B$ and let $A_i \subset A$ and $B_i \subset B$.  Show the following:}
+\begin{enumerate}
+\item \emph{$B_0 \subset B_1 \Rightarrow f^{-1}(B_0) \subset f^{-1}(B_1)$}
+
+Let $x \in f^{-1}(B_0)$ be arbitrary, and $B_0 \subset B_1$, then
+\begin{eqnarray*}
+x \in f^{-1}(B_0) &\Rightarrow& f(x) \in B_0 \\
+&\Rightarrow& f(x) \in B_1 \\
+&\Rightarrow& x \in f^{-1}(B_1)
+\end{eqnarray*}
+\item \emph{$f^{-1}(B_0 \cup B_1) = f^{-1}(B_0) \cup f^{-1}(B_1)$}
+
+If $x \in f^{-1}(B_0 \cup B_1)$ then $f(x) \in B_0 \cup B_1$, so that $f(x)$ belongs to at least one of $B_0$ or $B_1$.  But then $x$ belongs to at least one of the $f^{-1}(B_0)$ or $f^{-1}(B_1)$, i.e., $x \in f^{-1}(B_0) \cup f^{-1}(B_1)$.
+
+Conversely, if $x \in f^{-1}(B_0) \cup f^{-1}(B_1)$ then $x$ belongs to at least one of $f^{-1}(B_0)$ or $f^{-1}(B_1)$ so that $f(x)$ belongs to at least one of $B_0$ or $B_1$.  But then $f(x) \in B_0 \cup B_1$, and hence $x \in f^{-1}(B_0 \cup B_1)$.
+
+\item \emph{$f^{-1}(B_0 \cap B_1) = f^{-1}(B_0) \cap f^{-1}(B_1)$}
+
+This proof follows \emph{mutatis mutandis} from above by replacing every instance of ``or'' with ``and,'' but here it goes anyhow:
+
+If $x \in f^{-1}(B_0 \cap B_1)$ then $f(x) \in B_0 \cap B_1$, so that $f(x)$ belongs to both $B_0$ and $B_1$.  But then $x$ belongs to both $f^{-1}(B_0)$ and $f^{-1}(B_1)$, i.e., $x \in f^{-1}(B_0) \cap f^{-1}(B_1)$.
+
+Conversely, if $x \in f^{-1}(B_0) \cap f^{-1}(B_1)$ then $x$ belongs to both $f^{-1}(B_0)$ and $f^{-1}(B_1)$ so that $f(x)$ belongs to both $B_0$ and $B_1$.  But then $f(x) \in B_0 \cap B_1$, and hence $x \in f^{-1}(B_0 \cap B_1)$.
+
+\item \emph{$f^{-1}(B_0 \setminus B_1) = f^{-1}(B_0) \setminus f^{-1}(B_1)$}
+
+Let $B_0$ and $B_1$ be in some universe $X$.  Then $x \in f^{-1}(B_0 \setminus B_1)$ iff $f(x) \in B_0 \setminus B_1$, but this is equivalent to $f(x) \in B_0$ and $f(x) \in X \setminus B_1$, i.e., $x \in f^{-1}(B_0)$ and $x \in X \setminus f^{-1}(B_1)$.  This is identical to $x \in f^{-1}(B_0) \setminus f^{-1}(B_1)$.
+
+\item \emph{$A_0 \subset A_1 \Rightarrow f(A_0) \subset f(A_1)$}
+
+This one is obvious, but, since $A_0 \subset A_1$, we have $$f(A_0) = \{f(x) \mid x \in A_0\} \subset \{f(x) \mid x \in A_1\} = f(A_1)$$
+
+\item \emph{$f(A_0 \cup A_1) = f(A_0) \cup f(A_1)$}
+
+If $y \in f(A_0 \cup A_1)$ then $y=f(x)$ where $x$ is in at least one of $A_0$ or $A_1$.  Therefore $y$ is in at least one of $f(A_0)$ or $f(A_1)$.  Conversely, if $y$ is in $f(A_0)$ or $f(A_1)$ then $y=f(x)$ where $x$ is in at least one of $A_0$ or $A_1$, and hence $y = f(x) \in f(A_0 \cup A_1)$.
+
+\item \emph{$f(A_0 \cap A_1) \subset f(A_0) \cap f(A_1)$, and that equality holds if $f$ is injective.}
+
+If $y \in f(A_0 \cap A_1)$ then there exists an $x \in A_1 \cap A_0$ such that $f(x) = y$, but then $f(x) \in f(A_1)$ and $f(x) \in f(A_0)$, so that $y \in f(A_0) \cap f(A_1)$.  We know that there is at least one $x \in A_0 \cap A_1$ such that $f(x) = y$ for any $y \in f(A_0) \cap f(A_1)$.  If $f$ is injective then that is the only one, so $f^{-1}(y) \in A_0 \cap A_1$ and $y \in f(A_0 \cap A_1)$.
+
+\item \emph{$f(A_0 \setminus A_1) \supset f(A_0) \setminus f(A_1)$, and that equality holds if $f$ is surjective.}
+
+Let $y \in f(A_0) \setminus f(A_1)$, then there is some $x \in A_0 \setminus A_1$ such that $f(x) = y$ and therefore $f(x) \in f(A_0 \setminus A_1)$.  If $f$ is surjective then for every $y \in f(A_0 \setminus A_1)$ there is some $x \in A_0 \setminus A_1$ such that $f(x) = y$.  But then $f(x) \in A_0 \setminus A_1$.
+\end{enumerate}
+
+\item \emph{Let $f:A \rightarrow B$ and $g: B \rightarrow C$.}
+\begin{enumerate}
+\item \emph{If $C_0 \subset C$ show that $(g \circ f)^{-1}(C_0) = f^{-1}(g^{-1}(C_0))$.}
+
+\begin{eqnarray*}
+f^{-1}(g^{-1}(C_0)) &=& \{x \in A \mid f(x) \in g^{-1}(C_0)\} \\
+&=& \{x \in A \mid f(x) \in \{y \in B \mid g(y) \in C_0\}\} \\
+&=& \{x \in A \mid g(f(x)) \in C_0\} \\
+&=& (g \circ f)^{-1}(C_0)
+\end{eqnarray*}
+\item \emph{If $f$ and $g$ are injective, show that $g \circ f$ is injective.}
+
+Let $(g \circ f)(x) = (g \circ f)(x')$, then the injectivity of $g$ implies that $f(x) = f(x')$ and the injectivity of $f$ implies that $x = x'$.
+
+\item \emph{If $g \circ f$ is injective, what can you say about the injectivity of $f$ and $g$?}
+
+\item \emph{If $f$ and $g$ are surjective, show that $g \circ f$ is surjective.}
+
+Let $z \in C$, then there exist $x \in A$ and $y \in B$ such that $f(x) = y$ and $g(y) = z$ by the surjectivity of $f$ amd $g$.  But then $g(f(x)) = z$, and so $g \circ f$ is surjective.
+\item \emph{If $g \circ f$ is surjective, what can you say about the surjectivity of $f$ and $g$.}
+
+One of the functions must be surjective, since if neither were, $f$ would map $A$ to a proper subset of $B$ and $g$ would take that proper subset to yet another proper subset of $C$, and hence $g \circ f$ would not be surjective.
+
+\item \emph{Summarize these results in a theorem.}
+
+The composition of two bijections is itself a bijection.
+
+\end{enumerate}
+
+\item \emph{Prove that $(x_0, y_0) \sim (x_1, y_1)$ if and only if $y_0 - x_0^2 = y_1 - x_1^2$ is an equivalence relation on $\R^2$.  Describe the equivalence classes.}
+
+That this is an equivalence relation follows directly from the fact that equality is an equivalence relation.  The equivalence class of a point $(a,b) \in \R^2$ is the parabola given by $y = x^2 + a - b^2$.
+
+\item \emph{Let $f: A \rightarrow B$ be a surjective function.  Let us define a relation on $A$ by setting $a_0 \sim a_1$ if $f(a_0) = f(a_1)$.}
+\begin{enumerate}
+\item \emph{Show that $\sim$ is an equivalence relation.}
+
+That this is an equivalence relation follows directly, as above, from the fact that equality is an equivalence relation on any set.
+
+\item \emph{Let $\mathcal{A}$ be the set of equivalence classes induced by $\sim$.  Show there is a bijective correspondence of $\mathcal{A}$ with $B$.}
+
+From the definition of $\sim$ it is clear that the equivalence classes are precisely the preimages of all the points in $f(A)$, but since $f$ is surjective we have $f(A) = B$.  The function $b \mapsto f^{-1}(b)$, where $f^{-1}(b) = \{a \in A \mid f(a)=b\}$, is a bijection between $B$ and $\mathcal{A}$.  That this is injective follows from the fact that if two points have the same preimage then they must be the same point, otherwise $f$ would not be a function.  It is surjective because $f$ is also surjective: every point in $A$ corresponds to at least one point in $B$.
+
+\end{enumerate}
+
+\item \emph{Prove that $(x_0,y_0) < (x_1,y_1)$ if either $y_0 - x_0^2 < y_1 - x_1^2$, or $y_0 - x_0^2 = y_1 - x_1^2$ and $x_0 < x_1$ is an order relation on $\R^2$.  Describe it geometrically.}
+
+Clearly $(x_0, y_0) < (x_0, y_0)$ is never true, since that would imply $x_0 < x_0$.  Transitivity follows from the fact that both equality, i.e., the case where $y_0 - x_0^2 = y_1 - x_1^2$ occurs, and the usual order on $\R$ are transitive.
+
+The sets with elements that have preceeding elements are parabola described by the equivalence relation in $(8)$, i.e., we could redescribe the equivalence relation by saying that two elements are equivalent if there is a chain of preceeding elements from one to the other and it would have the same equivalence classes as in $(8)$.
+
+\item \emph{Consider the following order relations on $\Z_+ \times \Z_+$:}
+\begin{enumerate}[(i)]
+\item \emph{The dictionary order.}
+\item \emph{$(x_0, y_0) < (x_1,y_1)$ if either $x_0 - y_0 < x_1 - y_1$, or $x_0 - y_0 = x_1 - y_1$ and $y_0 < y_1$.}
+\item \emph{$(x_0, y_0) < (x_1,y_1)$ if either $x_0 + y_0 < x_1 + y_1$, or $x_0 + y_0 = x_1 + y_1$ and $y_0 < y_1$.}
+\end{enumerate}
+\emph{In these order relations, which elements have immediate predecessors?  Does that set have a smallest element?  Show that all three order types are different.}
+
+The elements that have immediate predecessors are, in the three cases respectively, those elements whose first coordinates are equal, those coordinates such that $x_0 - y_0 = x_1 - y_1$, and those elements such that $x_0 + y_0 = x_1 + y_1$.  In each case there is a smallest element, though that would not be true if we were dealing with $\Z$ instead of $\Z_+$.
+
+\item \emph{Prove that if an ordered set $A$ has the least upper bound property then it has the greatest lower bound property.}
+
+Let $A_0$ be a nonempty subset of $A$ that is bounded below and define $B$ as the set of all lower bounds of $A_0$.  By construction $B \neq \emptyset$, and, moreover, any element of $A_0$ is an upper bound for $B$ so it is bounded above.  By hypothesis, then, there exist a supremum $\alpha$ of $B$.  To show that this $\alpha$ is the greatest lower bound for $A_0$ it suffices to show that $\alpha$ is just a lower bound since by definition $\alpha \geq b$ for any $b \in B$.  Suppose for contradiction that $\alpha$ were not a lower bound for $A_0$.  Then there exists $x \in A_0$ with $x < \alpha$.  Since $\alpha$ is the least upper bound of $B$ there must be some $y \in B$ with $x < y < \alpha$, but then $y$ is not a lower bound for $A_0$ -- a contradiction.  Therefore $\alpha$ is the greatest lower bound for $A_0$.
+
+\item
+\begin{enumerate}
+\item \emph{Prove that for any $n \in \Z_+$, every nonempty subset of $\{1,\ldots,n\}$ has a largest element.}
+
+Clearly this is true for $n=1$, so assume $n > 1$.  Let $\emptyset \neq B \subset \{1,\ldots,n+1\}$.  If $B \subset \{1,\ldots,n\}$ then $B$ has a largest element by assumption.  Otherwise $n+1 \in B$, and $n+1$ is the largest element of $B$.
+
+\item \emph{Explain why you cannot conclude from the above that every nonempty subset of $\Z_+$ has a largest element.}
+
+The above statement is about finite ordinals, while such a statement about $\Z_+$ would be about about an infinite ordinal (i.e., $\omega$).
+
+\end{enumerate}
+
+\item \emph{Show that every positive number $a$ has exactly one square root.}
+
+First we show that for any number $x^2 < a$ there exists another number $b$ such that $x<b$ and $b^2 < a$, and similarly for $x^2 > a$.  Then we show that the set $\{x \in \R \mid x^2 < a\}$ is nonempty and bounded above, and so has a supremum $\alpha$.  If $\alpha^2 < a$ then there would be another number $b$ such that $\alpha^2 < b^2 < a$, contradicting the fact that $\alpha$ is an upper bound.  If $\alpha^2 > a$ then there would be another element with $b < \alpha$ and $b^2 > a$, contradicting the fact that $\alpha$ is the least upper bound.  The uniquenss of the square root of a positive number follows then from the uniqueness from the fact that if $b<c$ then $b^2 < bc < c^2$, so that $b^2 \neq c^2$.  Similarly for $b > c$.
+
+\item \emph{Let $m,n \in \Z_+$ and $X \neq \emptyset$.}
+\begin{enumerate}
+\item \emph{If $m \leq n$ find an injective map $f: X^m \rightarrow X^n$.}
+
+Fix $x'_1, \ldots, x'_n \in X$, and define $$f(x_1,x_2,\ldots,x_m) = (x_1, x_2, \ldots, x_m, x'_1, \ldots, x'_{m-n})$$
+
+\item \emph{Find a bijective map $g: X^m \times X^n \rightarrow X^{m+n}$.}
+
+Define $$g((x_1, x_2, \ldots, x_m),(x'_1, \ldots, x'_n)) = g(x_1, x_2, \ldots, x_m, x'_1, \ldots, x'_n)$$
+\item \emph{Find an injective map $h: X^n \rightarrow X^\omega$.}
+
+Fix $x \in X$ and define $$h(x_1, \ldots, x_n) = (x_1, \ldots, x_n, x, x, \ldots)$$
+
+\item \emph{Find a bijective map $k: X^n \times X^\omega \rightarrow X^\omega$.}
+
+Define $$k((x_1, \ldots, x_n), (x'_1, x'_2,\ldots)) = (x_1, \ldots, x_n, x'_1, x'_2, \ldots)$$
+
+\item \emph{Find a bijective map $l: X^\omega \times X^\omega \rightarrow X^\omega$.}
+
+Define $$l((x_1, x_2, \ldots), (x'_1, x'_2,\ldots)) = (x_1, x'_1, x_2, x'_2, \ldots)$$
+
+\item \emph{If $A \subset B$, find an injective map $m:(A^\omega)^n \rightarrow B^\omega$.}
+
+Define $$m\left((x_1^1,x_2^1, \ldots), (x_1^2,x_2^2,\ldots),\ldots(x_1^n,\ldots)\right) = (x_1^1, x_1^2, \ldots, x_1^n, x_2^1, \ldots, x_2^n, x_3^1, \ldots)$$
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

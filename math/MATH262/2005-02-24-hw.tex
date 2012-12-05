@@ -1,0 +1,127 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\powset}[1]{
+\wp\left(#1\right)
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\T}{\mathcal{T}}
+
+\newcommand{\iso}{\cong}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MATH 262: Homework \#6}
+\author{Jesse Farmer}
+\date{24 February 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Give $[0,1]^\omega$ the uniform topology.  Find an infinite subset of this space that has no limit point.}
+
+Let $\bar{\rho}$ be the uniform metric.  Let $e_i$ be the $\omega$-vector with a $1$ in the $i^{th}$ coordinate and $0$ in every other coordinate.  Then $\bar{\rho}(e_i, e_j) = 1$ for $i \neq j$.  In particular, a ball of radius $1/2$ around any of the $e_i$ intersects no other $e_i$, so that $\{e_i\}_{i \in \Z_+}$ is an infinite subset of $[0,1]^\omega$ without a limit point.
+ 
+\item \emph{Show that $[0,1]$ is not limit point compact as a subspace of $\R_l$.}
+
+Let $A = \left\{1 - \frac{1}{n} \mid n \in \Z_+ \right\} \subset [0,1]$.  In $\R$ (with the usual topology) the only limit point of this set is $1$.  Since $\R_l$ is finer than $\R$, $1$ is the only possible limit point this sequence.  For any $\epsilon > 0$ the neighborhood $[1, \epsilon)$ of $1$ does not intersect $A$, so $1$ cannot be a limit point of $A$ and therefore $[0,1]$ is not limit point compact in $\R_l$.
+
+\item \emph{Let $(X, \rho)$ be a metric space.  Show that if $f: X \rightarrow X$ is a isometry and $X$ is compact then $f$ is a homeomorphism.}
+
+Any isometry of a metric space, compact or not, is injective since if $f(x) = f(y)$ then $$0 = \rho(f(x), f(y)) = \rho(x,y)$$ which implies $x=y$.
+
+Since $X$ is compact its image under $f$, $f(X)$, is also compact.  Assume for contradiction that $f$ is no surjective, then there exist some $a \in X \setminus f(X)$.  Choose a ball around $a$ of radius $\epsilon$ such that it does not intersect $f(X)$ -- this is possible since $X$ is metric and hence Hausdorff.  Define a sequence recursively as follows.  Let $x_0 = a$ and let $x_n = f(x_{n-1})$.  By our choice of $\epsilon$, it follows that $\rho(a, f(x)) > \epsilon$ for every $x \in X$.  In particular, $\rho(a, x_n) > \epsilon$ for all $n \geq 1$.  Since $f$ is an isometry it follows by induction that $$\rho(x_n, x_m) = \rho(x_{n-1}, x_m) = \cdots = \rho(a, x_m) > \epsilon$$  That is, $\rho(x_n, x_m) > \epsilon$ for all $n \neq m$.  But this means $\{x_n\}_{n \in \N}$ is not limit point compact, as a ball of radius $\epsilon_0 < \epsilon$ around any $x_n$ intersects none of the other $x_n$ -- contradicting the compactness of $X$.  Therefore $f$ must be surjective.
+
+That it is bicontinuous is almost too trivial for words, but it follows directly from the fact that $f$ is an isometry.  The image of any open ball $B_r(x)$ under $f$ will just be $B_r(f(x))$, and likewise for $f^{-1}$.  Therefore both $f$ and $f^{-1}$ are continuous, and, since it is also a bijection, $f$ is a homeomorphism of $X$.
+
+\item \emph{Let $(X, \rho)$ be a metric space.}
+\begin{enumerate}
+\item \emph{Show that if $f$ is a contraction mapping and $X$ is compact then $f$ has a unique fixed point.}
+
+Define recursively $A_1 = f(X)$ and $A_n = f(A_{n-1})$.  Since $f$ is continuous (obviously any contraction mapping is -- simply choose $\delta = \epsilon / \alpha$ in the definition of continuity) each $A_n$ is compact.  Define $$A = \bigcap_{i \in \Z_+} A_n$$ $A$ is nonempty since $\{A_n\}$ is a nested sequence of compact sets.  If $x \in A$ then $x$ is a limit of the sequence $f^{(n)}(x)$, i.e., $f$ composed with itself $n$ times, as $n \rightarrow \infty$ (Do we need $X$ to be first countable?  It is since it's a metric space, but I'm not sure this implication holds otherwise.)  But for any such sequence
+\[
+\lim_{n\rightarrow\infty} f^{(n)}(x) = x \Rightarrow x = \lim_{n\rightarrow\infty} f^{(n+1)}(x) = f(x)
+\]
+
+Hence $f(x) = x$ for any $x \in A$.  If $x$ and $y$ are distinct fixed points of $f$ then
+\[
+\rho(x,y) = \rho(f(x), f(y)) \leq \alpha \rho(x,y) < \rho(x,y)
+\]
+
+which is a contradiction, and hence $x = y$.
+
+\item \emph{Show that if $f$ is a shrinking map and $X$ is compact then $f$ has a unique fixed point.}
+
+Suppose $f(x) \neq x$ for every $x \in X$.  Define $$g(x) = \rho(f(x), x)$$  It follows that $g$ is continuous and strictly positive since $f$ is continuous.  Because $X$ is compact $g$ attains its minimum on $X$, and so there is some $x_0 \in X$ such that $0 < g(x_0) \leq g(x)$ for all $x \in X$.  But then $$g(f(x_0)) = \rho(f(x_0), f(f(x_0))) < \rho(x_0, f(x_0) = g(x_0)$$ contradicting the minimality of $g(x_0)$.  Therefore there exists some $x \in X$ such that $f(x) = x$.
+
+As above, if $x,y$ are two fixed points then
+\[
+\rho(x,y) = \rho(f(x), f(y)) < \rho(x,y)
+\]
+
+which is absurd.  Therefore it must be the case that $x=y$.
+
+\item \emph{Let $X=[0,1]$.  Show that $f(x) = x - x^2/2$ maps $X$ into $X$ and is a shrinking map that is not a contraction.}
+
+Let $x,y \in [0,1]$ and assume without loss of generality that $x < y$.  Then since $1-(y-x) < 1$, $$|f(x) - f(y)| = \left|x - \frac{x^2}{2} - y + \frac{y^2}{2}\right| < |(x-y)(1-(y-x))| < |x-y|$$
+
+Assume that $f$ is a contraction mapping with contration factor $\alpha < 1$.  Taking $x = 0$ and $y < 2(1-\alpha)$, so that $1 - y/2 > \alpha$, we get $$y\left(1 - \frac{y}{2}\right) = \left|y - \frac{y^2}{2}\right| \leq \alpha y$$ By our choice of $y$, this is a contradiction.  Therefore $f$ cannot be a contraction mapping.
+\end{enumerate}
+
+\item \emph{Show that $[0,1]^\omega$ is not locally compact in the uniform topology.}
+
+Let $C$ be a compact subspace of $X$ that contains some $\epsilon$-neighborhood of $0$.  As in the first problem define $e_i$ as the $\omega$-vector with $\epsilon$ in the $i^{th}$ coordinate and $0$ in all other coordinates.  Then the $\{e_i\}$ are an infinite subset of $C$ but contain no limit point, contradicting the fact that $C$ is compact (and hence limit point compact).
+
+\item \emph{Show that the one-point compactification of $\R$ is homeomorphic with the circle $S^1$.}
+
+The real line $\R$ is homeomorphic to $(0, 2\pi)$, so it is sufficient to show that the one-point compactification of $(0, 2\pi)$ is the circle.  Let $\{\infty\}$ be the additional point in the one-point compactification and define $f: (0,2\pi) \cup \{\infty\} \rightarrow \R^2$ by
+\[
+f(t) = \begin{cases} (\cos t, \sin t) & t \in (0, 2\pi) \\ (1,0) & t = \infty \end{cases}
+\]
+
+From the properties of $\sin t$ and $\cos t$ on $(0,2\pi)$, this function is continuous and bijective.  For open sets not containing $(1,0)$ the preimage under $f$ is open, so let $U$ be a neighborhood of $(1,0)$.  Without loss of generality write $$U = \{(\cos t, \sin t) \mid t \in (-\epsilon, \epsilon)\}$$ for some $\epsilon > 0$.  Then $$f^{-1}(U) = (0, \epsilon) \cup \{\infty\} \cup (2\pi - \epsilon, 2\pi)$$  The complement of this is $[\epsilon, 2\pi - \epsilon]$, which is compact, and hence the preimage of any neighborhood around $(1,0)$ is open with respect to the topology on the one-point compactification.  It follows, then, that $f$ is a homeomorphism.
+
+\item \emph{Show that if $f:[0,1] \rightarrow \R^\omega$ is continuous with respect to the box topology then all but finitely many of the coordinate functions are constant.}
+
+The image of $[0,1]$ under $f$ must be compact, so it is sufficient to prove that the only compact subsets of $\R^\omega$ are those that have all but finitely many component sets consisting of one element.  This is not hard to see.  Let $C_1 \times C_2 \times C_3 \times \cdots$ be a compact set in $\R^\omega$.  At the very least each $C_i$ must be compact since otherwise we could product a covering of one single $C_i$ that has no finite subcover, and hence the direct product of all these sets could have no finite subcover.  Assume without loss of generality that each $C_i$ can be covered by two open sets whose intersection is strictly contained in both, but not empty (we wish to avoid the case where $C_i$ is a single point, so that a single open set must contain the whole $C_i$ or none of it).  We will show that no finite subcover exists, and hence cannot exist in the case where each $C_i$ is covered by more than two such open sets.  Identify these two open sets with $0$ and $1$, respectively.  Create a cover of $C_1 \times C_2 \times \cdots$ by taking all sequences that consist of a single $1$ and everything else $0$, and identifying this sequence with the associated direct product of open sets.  For a finite subset of this to cover the entire direct product it must contain an infinite number of $1$s, which is impossible by our construction.  Thus, for there to be a finite subcover, it must be the case that all but finitely many $C_i$ satisfy the property that any open set either contains $C_i$ or none of $C_i$.  But this only occurs with $C_i$ consists of a single point.
+
+\item \emph{Let $(X, <)$ be an ordered set.  Show that every infinite sequence in $X$ has an infinite monotone subsequence.  Give an example where the sequence has arbitrarily large increasing subsequences, but no infinite increasing subsequence.}
+
+Call $n \in \N$ a ``peak'' of the sequence $\{x_n\}$ if $a_m < a_n$ for all $m > n$.  There are two cases.  If there are infinitely many peaks $n_1, n_2, \ldots$, then $x_{n_1} > x_{n_2} > \ldots$, and $\{x_{n_k}\}$ is an increasing subsequence.  If there are finitely many peaks let $n_1$ be greater than all the peaks.  Since $n_1$ is not a peak there is some $n_2$ with $n_2 > n_1$ such that $x_{n_2} \geq x_{n_1}$.  Since $n_2$ is also not a peak there is some $n_3 > n_2$ such that $x_{n_3} \geq x_{n_2}$.  Continuing in this manner we produce a monotonic sequence.
+
+\end{enumerate}
+\end{document}

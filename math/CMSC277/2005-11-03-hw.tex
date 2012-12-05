@@ -1,0 +1,113 @@
+\documentclass[10pt]{article}
+
+\usepackage{homework}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\title{CMSC 277: Homework \#4}
+\author{Jesse Farmer}
+\date{03 November 2005}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item \emph{Let $\L = \set{<, +, F}$ where $<$ is a binary relation symbol, $+$ is a binary function symbol, and $F$ is a unary function symbol.  Find a $\sigma \in \SentL$ such that for all $f: \R \to \R$, $(\R, <, +, f) \vDash \sigma$ if and only if $f$ is continuous on $\R$.}
+
+Fix $f: \R \to \R$.  Define an $\L$-structure $\M$ as follows.  Let $M = \R$, $F^\M = f$, $$<^\M = \set{(x,y) \in \R^2 \mid x < y}$$ and $$(+ t_1 t_2)^\M = t_1^\M + t_2^\M$$ for $t_1, t_2 \in \TermL$.  Now define $\sigma$ as
+\[
+\sigma = \forall c \forall x \forall < 0 \e \to \exists \delta \land \land < c + x \delta < x + \delta \lnot = x c \land < fc + x \e < fx + \e fc
+\]
+
+which in human-readable format is simply
+\[
+\sigma = (\forall c)(\forall x)(\forall \e > 0)(\exists \delta)(((x \neq c) \land (c < x + \delta) \land (x < \delta+c)) \to ((f(c) < f(x)) + \e) \land (f(x) < f(c) + \e))
+\]
+
+or more succinctly
+\[
+\sigma = (\forall c)(\forall x)(\forall \e > 0)(\exists \delta)(0 < \abs{x - c} < \delta \to \abs{f(x)-f(c)} < \epsilon)
+\]
+
+\item \emph{Let $\L = \set{R}$ where $R$ is a binary relation symbol.  Show that the class of DAGs is weak elementary class in the language $\L$.}
+
+First note that digraphs correspond bijectively with the class of $\L$-structures, since a digraph is by definition a pair $(V,E)$ where $E \subset V^2$.  If $\M$ is an $\L$-structure then the pair $(M, R^\M)$ is a directed graph.  Similarly, if $G$ is a digraph then it can be realized as an $\L$-structure by interpreting $R$ as $E(G)$.  Define
+\[
+\sigma_n = \lnot (\exists v_1 \exists v_2 \cdots \exists v_n ((Rv_1v_2) \land (Rv_2v_3) \land \cdots \land (Rv_nv_1))
+\]
+and let $\Sigma = \set{\sigma_n \mid n \in \N^+}$.  Then the class of acyclic digraphs is precisely $\Mod(\Sigma)$.
+
+\item \emph{Let $\L = \set{F}$ where $F$ is a binary relation symbol.}
+\begin{enumerate}
+\item \emph{Let $A = \set{1,2,3,4}$ and $B = \set{a,b,c,d}$.  Let $g,h$ be defined as in the statement of the problem.  Show that $(A,g) \not\equiv (B,h)$.}
+
+Define $$\sigma = (\exists z \forall y \exists x)(f(x,y) = z)$$
+
+$(A,g) \vDash \sigma$ since $g(2,1) = g(2,2) = g(4,3) = g(2,4) = 2$, but $(B, h) \not\vDash \sigma$ as there is not even an element of $B$ contained in every column of the table.
+
+\item \emph{Show that $(\N, +) \not\equiv (\Z, +)$.}
+
+The most clear difference between the additive structure of $\N$ and $\Z$ is that the former is a monoid while the latter is a group.  However, since we have no constant symbol with which to express the identity we will have to find a less direct way.  Let $F$ be interpreted as addition on $\N$ and $\Z$, respectively, and define $\sigma$ as follows, in Polish notation
+\[
+\sigma = (\forall n \exists m \forall p = p ++nmp)
+\]
+
+That is, for all $n$ there exists an $m$ such that for all $p$, $n+m+p = p$.  $\sigma \in \Th(\Z)$ since every $n \in \Z$ has an additive inverse, while $\sigma \notin \Th(\N)$ since $0$ is the only element of $\N$ which has an inverse.  Hence $\Th(\N) \neq \Th(\Z)$ and therefore $(\N, +) \not\equiv (\Z, +)$.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Let $\L = \emptyset$.  For each $n \in \N^+$ find a $\sigma \in \SentL$ such that $\Spec(\sigma) = \set{n}$.}
+
+Let $$\tau_i = \bigwedge_{\substack{k=1 \\ k \neq i}}^n (v_i \neq v_k)$$ and define
+\[
+\sigma_n = (\exists v_1 \cdots \exists v_n ((\tau_1) \land (\tau_2) \land \cdots \land (\tau_n))) \land (\forall v)((v = v_1) \lor (v = v_2) \lor \cdots \lor (v = v_n))
+\]
+
+Then $\Spec(\sigma_n) = \set{n}$ since $sigma$ is satisfiable if and only if there are precisely $n$ elements in any $\L$-structure which models $\sigma_n$.
+
+\item \emph{Give an example of a finite language $\L$ and a $\sigma \in \SentL$ such that $\Spec(\sigma) = \set{2^n \mid n \in \N^+}$.}
+
+I cannot think of how to do this with a finite language.  At a glance the most obvious thing to do is to choose a language $\L$ in which it is possible to construct a sentence such that
+\[
+\M \vDash \sigma \mbox{ if and only if } A = \powset{M} \mbox{for some finite set $A$}
+\]
+
+or something similar using the fact that there are $2^n$ boolean functions on $\set{0,1}^n$.  However, I cannot think of how to do this without including an item in the language for \emph{every} $n$, making $\L$ infinite.
+
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Let $\L=\set{P}$ where $P$ is a unary relation symbol.  Calculate $I(\Cn(\emptyset), n)$ for all $n \in \N^+$.}
+
+Let $\M$ be an $\L$-structure of cardinality $n$.  We may assume without loss of generality that $M = \set{1,\ldots, n}$.  Note that there are only $n+1$ possible values for $P^\M$, viz., $$P^\M \in \set{\emptyset, \set{1}, \ldots, \set{n}}$$
+
+If $\M, \M'$ are two $\L$-structures of cardinality $n$ and both $P^\M$ and $P^{\M'}$ are nonempty then one can define an isomorphism between the two by sending the single element in $P^\M$ to the single element in $P^{\M'}$, and permuting the remaining elements.  If one of $P^\M$ or $P^{\M'}$ is empty, however, the two $\L$-structures are not even elementarily equivalent since the sentence asserting that $Px$ is true can be true in in the nonempty structure, depending on the variable assignment, but will never be true in the empty structure.
+
+Hence
+\[
+I(\Cn(\emptyset), n) = \begin{cases} 1 & n = 0 \\ 2 & n > 0\end{cases}
+\]
+\item \emph{Let $\L = \set{F}$ where $F$ is a unary function symbol.  Let $$\sigma = (\forall x \forall y ((fx = fy) \to (x = y))) \land (\forall z \exists x (fx = z))$$ Show that $I(\Cn(\sigma), n) = p(n)$ for all $n \in \N^+$ where $p(n)$ is the partition function.}
+
+Let $\M$ be an $\L$-structure of cardinality $n$.  Then $\M \vDash \sigma$ if and only if $F$ is interpreted as a permutation of $\M$, of which there are $n!$.  Consider these permutations as elements of the group $S_n$ acting on $\M$ and let $\M_\sigma$ be the model corresponding to $\sigma \in S_n$.  It is fairly clear that $\M_\sigma \iso \M_\tau$ if and only if $\sigma$ and $\tau$ are conjugate in $S_n$.  This follows since if $\alpha \sigma \alpha^{-1} = \tau$ for some $\alpha \in S_n$ then $\alpha$ as a permutation of the underlying set $M$ induces an isomorphism between $\M_\sigma$ and $\M_\tau$.  Similarly, if $\M_\sigma \iso \M_\tau$ via $\beta$ then it follows directly from the definition of an isomorphism of models that $\beta \sigma \beta^{-1} = \tau$.  Hence $I(\Cn(\sigma), n)$ is equal to the number of conjugacy classes of $S_n$.
+
+It is a basic result from group theory that two elements of $S_n$ are conjugate if and only if they have the same cycle type.  It is easy to see that the number of cycle types of elements in $S_n$ is exactly $p(n)$, where $p(n)$ is the number of partitions of $n$, since each cycle type corresponds to exactly one partition of $n$.  Hence $I(\Cn(\sigma), n) = p(n)$.
+
+\end{enumerate}
+
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,261 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\def\bddots{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu
+        \raise4pt\hbox{.}\mkern2mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern1mu}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\title{MATH 209: Homework \#1}
+\author{Jesse Farmer}
+\date{05 April 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Generalize the system of polar coordinates in $\mathbb{R}^2$ to $\mathbb{R}^n$.}
+
+Pick a point $(x_1,x_2, \ldots, x_n) \in \mathbb{R}^n$.  We claim that the polar representation of this is
+\[
+x_k = 
+\begin{cases} 
+r_{n-1} \cos\theta_1 \sin\theta_2 \cdots \sin\theta_{n-1} & k=1 \\ 
+r_{n-1} \sin\theta_1 \sin\theta_2 \cdots \sin\theta_{n-1} & k=2 \\
+r_{n-1} \cos\theta_{k-1} \sin\theta_k \cdots \sin\theta_{n-1} & k \geq 3  \end{cases}
+\]
+
+For $\mathbb{R}^2$ we know that $(x_1,x_2)$ is represented as $r_1(\cos\theta_1, \sin\theta_2)$ and for $\mathbb{R}^3$ that $(x_1,x_2,x_3)$ is represented as $r_2(\cos\theta_1 \sin\theta_2, \sin\theta_1 \sin\theta_2, \cos\theta_2)$.  For induction, assume that this is true for $\mathbb{R}^n$ and consider $(x_{n+1}, r_{n-1})$.  Converting this to polar coordinates,
+\begin{eqnarray*}
+x_{n+1} &=& r_n\cos\theta_n \\
+r_{n-1} &=& r_n\sin\theta_n
+\end{eqnarray*}
+
+We have expressions for all $x_k$ with $k < n$, each containing an $r_{n-1}$.  Substituting in the above for $r_{n-1}$ yields
+\[
+x_k = 
+\begin{cases}
+r_n \cos\theta_1 \sin\theta_2 \cdots \sin\theta_{n} & k=1 \\ 
+r_n \sin\theta_1 \sin\theta_2 \cdots \sin\theta_{n} & k=2 \\
+r_n \cos\theta_{k-1} \sin\theta_k \cdots \sin\theta_{n} & k \geq 3
+\end{cases}
+\]
+
+Which proves the original statement.
+\item \emph{Find the volume element of $\mathbb{R}^n$ in spherical coordinates.}
+
+We claim that the volume element for $\mathbb{R}^n$ with $n \geq 3$ is
+\[
+r_{n-1}^{n-1} \sin\theta_2 \sin^2\theta_3 \cdots \sin^{n-2}\theta_{n-1} dr_{n-1} d\theta_1 \cdots d\theta_{n-1}
+\]
+
+Given that the volume element for $\mathbb{R}^2$ is $rdr_1d\theta_1$, we will assume for induction that the above is true for $\mathbb{R}^n$.  For $\mathbb{R}^{n+1}$ the volume element
+\[
+dx_1dx_2 \cdots dx_{n+1}
+\]
+can be written by assumption as
+\[
+r_{n-1}^{n-1} \sin\theta_2 \sin^2\theta_3 \cdots \sin^{n-2}\theta_{n-1} dr_{n-1} d\theta_1 \cdots d\theta_{n-1} dx_{n+1}
+\]
+
+which is equivalent to
+
+\[
+r_{n-1}^{n-1} r_n\sin\theta_2 \sin^2\theta_3 \cdots \sin^{n-2}\theta_{n-1} dr_n d\theta_1 \cdots d\theta_{n-1} d\theta_n
+\]
+
+But from Problem 1 we know
+\[
+r_{n-1} = r_n \sin\theta_n
+\]
+
+which implies the volume element for $\mathbb{R}^{n+1}$ is
+\[
+r_n^n \sin\theta_2 \sin^2\theta_3 \cdots \sin^{n-2}\theta_{n-1}\sin^{n-1}\theta_n dr_n d\theta_1 \cdots d\theta_{n-1} d\theta_n
+\]
+
+This proves our original statement.
+
+\item \emph{Show that $\lim_{n \rightarrow \infty} V(B^n) = 0$.}
+
+Consider the ratio between the volumes of the $n$-sphere and the $n$-dimensional unit hypercube
+\[
+R(n) = \frac{V(B^n)}{V(C^n)} = \frac{V(B^n)}{2^n}
+\]
+
+It is then sufficient to show
+\[
+\lim_{n \rightarrow \infty} 2^n R(n) = 0
+\]
+
+$R(n)$ is also the probability of choosing $n$ independent and identically distributed points from $[-1,1]$ and having them lie in the unit sphere.  If five or more of these choises are greater than $\frac{1}{\sqrt{5}}$ in magnitude then the point rests outside the unit sphere.  The interval $[-1,1]$ has length $2$ and the interval $\left[-\,\frac{1}{\sqrt{5}},\frac{1}{\sqrt{5}}\right]$ has length $\frac{2}{\sqrt{5}}$, so the probability of picking a point in the latter interval is $\frac{1}{\sqrt{5}}$.  We use $\sqrt{5}$ because $5$ is the first number whose square root is greater than $2$, but any larger number would also suffice.  Moreover, any number greater than $1$ could be used to show that
+\[
+\lim_{n \rightarrow \infty} R(n) = 0
+\]
+
+Because we can only pick a finite number of points outside $\left[-\,\frac{1}{\sqrt{5}},\frac{1}{\sqrt{5}}\right]$, for large $n$ we have that $R(n)$ decreases by about a factor of $\sqrt{5}$.  But $\sqrt{5} > 2$, so
+\[
+\lim_{n \rightarrow \infty} 2^n R(n) \approx \lim_{n \rightarrow \infty} \left(\frac{2}{\sqrt{5}}\right)^n = 0
+\]
+
+\item \emph{Do the following problems about the gamma function}
+\begin{enumerate}
+\item \emph{Find $x_0 \in (0,1)$ such that $\Gamma(s)$ assumes a minimum at at $x_0$.}
+\item \emph{Find $\Gamma(x_0)$.}
+\item \emph{Show that $\Gamma(s)$ is monotonic decreasing on $(0,x_0)$ and monotonic increasing on $(x_0,0)$.}
+\item \emph{Graph $\Gamma(s)$ for $s>0$.}
+\item \emph{Extend $\Gamma(s)$ to $(\infty, 0) \setminus \{-1,-2,-3,\ldots\}$.}
+\end{enumerate}
+
+\item \emph{Show that any monotone function $f: [a,b] \rightarrow \mathbb{R}$ is almost everywhere differentiable.}
+
+In this proof will will denote the left-hand and right-hand limits of $f$ at $x_0$ as $f(x_0-0)$ and $f(x_0+0)$, respectively.
+
+First we show that any monotone function as above is almost everywhere continuous.  Let $x \in [a,b]$ and let $\{x_n\}$ be any sequence such that $x_n < x$ and $x_n \rightarrow x$.  Then ${f(x_n)}$ is a nondecreasing sequence which is bounded above by $f(x_0)$, and hence $f(x-0)$ exists.  Likewise for $f(x+0)$.  Therefore, if $f$ has a discontinuity it is a jump discontinuity.  The sum of the sizes of these jumps can be nore more than $f(b)-f(a)$.  Let $J_n$ be the set of all jumps greater than $\frac{1}{n}$ and let $J$ be the set of all jumps.  Then
+\[
+J = \bigcup_{n=1}^\infty J_n
+\]
+
+where each $J_n$ is finite.  Therefore $J$ is at most countably infinite, and thus measure zero.
+
+We will first prove the theorem for continuous monotone functions, and use the above to extend it to every monotone function.
+
+\textbf{Definition:} \emph{Let $f$ be a continuous function defined on an interval $[a,b]$.  A point $x_0 \in [a,b]$ is called \emph{invisible from the right} if there is a point $\xi$ such that $x_0 < \xi \leq b$ and $f(x_0) < f(\xi)$, and \emph{invisible from the left} if there is a point $\xi$ such that $a \leq \xi < x_0$ and $f(\xi) < f(x_0)$.}
+
+\textbf{Lemma 1:} \emph{The set of all points invisible from the right with respect to a function $f$ continuous on $[a,b]$ is the union of no more than countably many pairwise disjoint open intervals $(a_k,b_k)$ such that
+\begin{equation}
+\label{lem1}
+f(a_k) \leq f(b_k) \,\,\,\,(k=1,2,\ldots)
+\end{equation}}
+
+If $x_0$ is invisible from the right then this is true of any point sufficiently close to $x_0$, and hence any point within an open neighborhood of $x_0$.  So the set $G$ of all these points is open, and can therefore be written as the countable union of pairwise disjoint intervals $(a_k,b_k)$.  Let $(a_k,b_k)$ be one of these intervals and suppose $f(b_k) < f(a_k)$.  There is a point $x_0 \in (a_k,b_k)$ such that $f(x_0) > f(b_k)$.  Of the points $x \in (a_k,b_k)$ such that $f(x) = f(x_0)$, let $x^\ast$ be the one with the largest $x$-coordinate.  Since $x^\ast$ belongs to $(a_k,b_k)$ and hence is invisible from the right, there is a point $\xi > x^\ast$ such that $f(\xi > f(x^\ast)$.  Clearly $\xi$ cannot belong to $(a_k,b_k)$ from our choice of $x^\ast$.  Likewise, $\xi > b_k$ is impossible, since it implies $f(b_k) < f(x_0) < f(\xi)$ despite the fact that $b_k$ is not invisible from the right.  Since $\xi \neq b_k$, we have a contradiction.  Therefore $f(a_k) \leq f(b_k)$.
+
+\textbf{Lemma 1':} \emph{The set of all points invisible from the left with respect to a function $f$ continuous on $[a,b]$ is the union of no more than countably many pairwise disjoint open intervals $(a_k,b_k)$ such that
+\[
+f(a_k) \geq f(b_k) \,\,\,\,(k=1,2,\ldots)
+\]}
+
+The proof of this statement follow \emph{mutatis mutandis} from Lemma 1.
+
+We denote the upper and lower limits from the left and right sides as $\lambda_L, \Lambda_L, \lambda_R, \Lambda_R$, respectively.
+
+\textbf{Lemma 2:} \emph{Let $f$ be a continuous nondecreasing function on $[a,b]$ with $\lambda_L, \Lambda_R$ as defined above.  Given any numbers $c,C, \rho$ such that
+\[
+0<c<C<\infty,\,\,\,\,\,\,\,\,\rho=\frac{c}{C}
+\]
+let
+\[
+E_\rho = \{x \mid \lambda_l < c, \Lambda_R>C\}
+\]
+Then
+\[
+\mu\{x \mid x \in E_\rho \cap (\alpha,\beta) \} \leq \rho(\beta - \alpha)
+\]
+for every $(\alpha, \beta) \subset [a,b]$.}
+
+Let $x_0 \in (\alpha, \beta)$ such that $\lambda_L < c$.  Then there exists a point $\xi < x$ such that
+\[
+\frac{f(\xi) - f(x_0)}{\xi - x_0} < c
+\]
+
+That is,
+\[
+f(\xi) - c\xi > f(x_0) - cx_0
+\]
+
+Therefore $x_0$ is invisible from the left with respect to the function $f(x) - cx$.  By Lemma 1', the set of all such $x_0$ is the union of no more than countably many pairwise disjoint open intervals $(\alpha_k,\beta_k) \subset (\alpha,\beta)$, where
+\begin{equation}
+\label{V1}
+f(\beta_k) - f(\alpha_k) \leq c(\beta_k - \alpha_k)
+\end{equation}
+
+Let $G_k$ be the set of points in $(\alpha_k, \beta_k)$ such that $\Lambda_R > C$.  Then by the same argument as above, replacing Lemma 1' with Lemma 1, we get that $G_k$ is the union of no more than countably many pairwise disjoint open intervals $(\alpha_{k_n}, \beta_{k_n})$ where
+
+\begin{equation}
+\label{V2}
+C(\beta_{k_n} - \alpha_{k_n}) \leq f(\beta_{k_n}) - f(\alpha_{k_n})
+\end{equation}
+
+Clearly $E_\rho$ is covered by this system of intervals and from (\ref{V1}) and (\ref{V2}) it follows that
+
+\begin{eqnarray*}
+C \sum_{k,n} (\beta_{k_n} - \alpha_{k_n}) &\leq& C \sum_{k,n} [f(\beta_{k_n}) - f(\alpha_{k_n})] \\
+&\leq& \sum_{k} [f(\beta_k) - f(\alpha_k)] \\
+&\leq& c \sum_{k} (\beta_k - \alpha_k) \\
+&\leq& c(\beta - \alpha)
+\end{eqnarray*}
+
+which implies
+\[
+\sum_{k,n} (\beta_{k_n} - \alpha_{k_n}) \leq \rho(\beta - \alpha)
+\]
+\newpage
+\textbf{Theorem:} \emph{If $f: [a,b] \rightarrow \mathbb{R}$ is a monotonic function then $f$ is differentiable almost everywhere on $[a,b]$.}
+
+We may assume $f$ is nondecreasing, since otherwise we merely have to consider $-f$.  We may also assume $f$ is continuous, since this condition can be dropped afterwards.  It is sufficient to show that $\Lambda_R < +\infty$ and $\lambda_L \geq \Lambda_R$ almost everywhere on $[a,b]$, since if we consider $g(x)=-f(-x)$ we get that $g$ is continuous and nondecreasing, like $f$.  Moreover, $\lambda^g_L = \lambda_R$ and $\Lambda^g_R = \Lambda_L$.  Therefore
+\[
+\Lambda_R \leq \lambda_l \leq \Lambda_L \leq \lambda_R \leq \Lambda_R
+\]
+
+i.e., $f$ is differentiable almost everywhere on $[a,b]$.
+
+Let $\Lambda = +\infty$.  Then there is some point $x_0$ such that for every $C>0$ there exists $\xi > x_0$ such that
+\[
+\frac{f(\xi) - f(x_0)}{\xi - x_0} > C
+\]
+
+That is, $x_0$ is invisible from the right with respect to $f(x) - Cx$.  By Lemma 1, the set of all these $x_0$ can be covered by a countable union of pairsie disjoint intervals $(a_k, b_k)$, whose end points satisfy
+\[
+f(b_k) - f(a_k) \geq C(b_k - a_k)
+\]
+
+Dividing by $C$ and summing, we get
+\[
+\sum_k (b_k - a_k) \leq \sum_k \frac{f(b_k) - f(a_k)}{C} \leq \frac{f(b) - f(a)}{C}
+\]
+
+By making $C$ arbitrarily large we get that the set of $x_0$ where $\Lambda_R = +\infty$ is measure zero.
+
+To prove the other half of the condition, let $c,C,E_\rho$ be as in Lemma 2.  To show that $\lambda_L \geq \Lambda_R$ almost everywhere it is sufficient to prove that $E_\rho$ is measure zero, since the set of points where $\lambda_L < \Lambda_R$ can be covered by countably many sets of the same form as $E_\rho$ by choosing $\rho$ appropriately.  Let $t$ be the measure of $E_\rho$, then for any $\epsilon > 0$ there is any open set $G$ equal to the union of at most countably many open intervals $(a_k,b_k)$ such that $E_\rho \subset G$ and
+\[
+\sum_k (b_k - a_k) < t + \epsilon
+\]
+
+If
+\[
+t_k = \mu[E_\rho \cap (a_k,b_k)]
+\]
+
+then
+\[
+t = \sum_k t_k
+\]
+
+But by Lemma 2, $t_k \leq \rho(b_k-a_k)$.  Hence
+\[
+t \leq \rho\sum_k (b_k-a_k) < \rho(t+\epsilon)
+\]
+
+which implies $t \leq \rho t$, but since $0 < \rho < 1$, t = 0.  Therefore $\lambda_L \geq \Lambda_R$ almost everywhere, as asserted.
+
+To drop the requirement of continuity we note that because every discontinutity of a monotone function is a jump discontinuity, there are still neighborhoods around points in which invisibility from the left or right is retained.  Define $G(x) = \max\{f(x -0), f(x), f(x+0)\}$. Replace (\ref{lem1}) with the statement
+\[
+f(a_k + 0) \leq G(b_k)
+\]
+
+This suffices to replace the lemmas where $f$ is monotonic and discontinuous.
+
+\end{enumerate}
+\end{document}

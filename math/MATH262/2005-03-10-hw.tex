@@ -1,0 +1,124 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\powset}[1]{
+\wp\left(#1\right)
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\T}{\mathcal{T}}
+
+\newcommand{\iso}{\cong}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MATH 262: Homework \#8}
+\author{Jesse Farmer}
+\date{10 March 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Let $X$ be a compact Hausdorff space.  Show that $X$ is metrizable if and only if $X$ has a countable basis.}
+
+
+Every compact metrizable space $(X, \rho)$ is second-countable.  To see this, consider $$\mathcal{O}_n = \left\{B_\frac{1}{n}(x) \mid x \in X\right\}$$
+
+where $n \in \Z_+$ is fixed.  Since $X$ is compact there exists a finite subcover $\mathcal{A}_n$.  Let $\mathcal{B} = \bigcup_{n \in \Z_+} \mathcal{A}_n$.  $\mathcal{B}$ is countable.  Since the usual basis for $X$, $\left\{B_\epsilon(x)\right\}$, contains $\mathcal{B}$, it is sufficient to show that for every $\epsilon$-ball there exists some $B \in \mathcal{B}$ such that $B$ is contains in that $\epsilon$-ball.  Simply let $n$ be such that $\frac{1}{n} < \frac{\epsilon}{2}$, then there is some $B \in \mathcal{B}$ of radius $\frac{1}{n}$ containing $x$ and $B \subset B_\epsilon(x)$.  Therefore $\mathcal{B}$ is a basis for the metric topology on $X$.
+
+The other direction is easier.  Every compact Hausdorff space is normal, and any second-countable normal space is metrizable by Urysohn.
+
+\item \emph{Let $X$ be a locally compact Hausdorff space.  Is it true that if $X$ has a countable basis then $X$ is metrizable?  What about the converse?}
+
+Let $X$ be an uncountable discrete space.  Then $X$ is locally compact, Hausdorff, and metrizable, but not second-countable.
+
+Let $X$ be a second-countable, locally compact Hausdorff space.  Let $S$ be the one-point compactification of $X$.  By 29.4 it follows that $X$ is homeomorphic to an open subspace of $S$.  Since $S$ is compact Hausdorff it is normal, and hence completely regular.  $X$ inherits this property as a subspace of $S$, and therefore $X$ is also regular.  As $X$ is also second-countable, it follows that $X$ is metrizable (since second-countable and regular implies metrizable).
+
+\item \emph{Let $(X, \rho)$ be a metric space.}
+\begin{enumerate}
+\item \emph{Fix $\epsilon > 0$.  Show that if every ball of radius $\epsilon$ in $X$ has a compact closure then $X$ is complete.}
+
+Let $\{x_k\}$ be a Cauchy sequence in $X$, and fix $\epsilon > 0$ such that every ball of radius $\epsilon$ has compact closure.  Then there exists some $N \in \N$ such that $\rho(x_k, x_n) < \epsilon$ for all $k \in \N$.  Hence the sequence $\{x_{k+N}\}$ is contained entirely in $\overline{B_\epsilon(x_k)}$.  As a subspace this is compact since it is closed, and therefore sequentially compact.  But this means that it contains a convergence subsequence, and therefore that $\{x_k\}$ converges.
+
+\item \emph{Show that if for every $x$ there exists an $\epsilon > 0$ such that $B_\epsilon(x)$ has compact closure then $X$ need not be complete.}
+
+Let $X = (0,1)$.  For every $x \in X$ choose $\epsilon$ such that $0 < x - \epsilon < x < x + \epsilon < 1$.  Then $\overline{B_\epsilon(x)} = [x-\epsilon, x+\epsilon]$, which is compact.  However, $X$ is not complete.  In particular the sequence $\{1/n\}$ is Cauchy but does not converge in $X$.
+
+\end{enumerate}
+
+\item \emph{Let $(X, \rho)$ be a complete metric space.  Show that if $f: X \rightarrow X$ is a contraction mapping then there is a unique point $x \in X$ such that $f(x) = x$.}
+
+Define a sequence in $X$ as follows.  Let $x_0 \in X$ be arbitrary, and let $x_n = f(x_{n-1})$.  Let $0 < \alpha < 1$ be the coefficient of contraction, then it follows by induction that $$\rho(x_n, x_0) \leq \frac{1-\alpha^n}{1 - \alpha} \rho(x_1, x_0$$
+
+Since this is obvious for $n = 0$, assume it to be true for $n-1$.  Then
+\begin{eqnarray*}
+\rho(x_n, x_0) &\leq& \rho(x_n, x_{n-1}) + \rho(x_{n-1}, x_0) \\
+&\leq& \alpha^{n-1}\rho(x_1, x_0) + \frac{1 - \alpha^{n-1}}{1 - \alpha}\rho(x_1, x_0) \\
+&=& \left( \frac{\alpha^{n-1} - \alpha^n}{1 - \alpha} + \frac{1 - \alpha^{n-1}}{1 - \alpha}\right) \rho(x_1, x_0) \\
+&=& \frac{1 - \alpha^n}{1 - \alpha} \rho(x_1, x_0)
+\end{eqnarray*}
+
+And therefore it is true for every $n \in \N$.  Let $m,n \in \N$, and, without loss of generality, assume $m \geq n$.  Then by the above
+\begin{eqnarray*}
+\rho(x_m, x_n) &\leq& \alpha^n \rho(x_{m-n}, x_0) \\
+&\leq& \alpha^n \frac{1 - \alpha^{m-n}}{1 - \alpha}\rho(x_1, x_0) \\
+&=& \frac{\alpha^n - \alpha^m}{1 - \alpha}\rho(x_1, x_0) \\
+&<& \frac{\alpha^n}{1 - \alpha}\rho(x_1, x_0)
+\end{eqnarray*}
+
+However, as $\frac{\alpha^n}{1 - \alpha} \rightarrow 0$ as $n \rightarrow \infty$, we can choose $N$ such that if $n \geq N$ then $\frac{\alpha^n}{1 - \alpha} < \epsilon$ for all $\epsilon > 0$.  Therefore $\{x_n\}$ is a Cauchy sequence, and by the completeness of $X$ it has some limit $x \in X$.  Assume for contradiction that this is not a fixed point of $f$, i.e., $\rho(f(x), x) > 0$.  Then choose $N$ such that for $n \geq N$, $\rho(x, x_n) < \frac{\rho(f(x), x)}{2}$.  Then
+\begin{eqnarray*}
+\rho(f(x), x) &\leq& \rho(f(x), x_{N+1}) + \rho(x_{N+1}, x) \\
+&\leq& \alpha \rho(x, x_N) + \rho(x_{N+1}, x) \\
+&<& \frac{\rho(f(x), x)}{2} + \frac{\rho(f(x), x)}{2} < \rho(f(x), x)
+\end{eqnarray*}
+
+which is absurd.  Therefore $\rho(f(x), x) = 0$ and hence $f(x) = x$.  To see that $x$ is unique, let $y$ be such that $f(y) = y$.  Then
+\[
+\rho(x,y) = \rho(f(x), f(y)) \leq \alpha\rho(x,y)
+\]
+
+which is true if and only if $\rho(x,y) = 0$, i.e., $x=y$.
+
+\item \emph{Let $X$ be a compact metric space.  Is $C(X, \R)$ necessarily second-countable?  What about $C(X,Y)$ if $Y$ is also a compact metric space?}
+
+
+\item \emph{If $X$ and $Y$ are compact metric spaces such that there are isometric embeddings of $X$ into $Y$ and $Y$ into $X$, must $X$ and $Y$ be isometric?}
+
+
+
+\end{enumerate}
+\end{document}

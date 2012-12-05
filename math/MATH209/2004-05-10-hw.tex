@@ -1,0 +1,196 @@
+\documentclass[letterpaper,11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\def\bddots{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu
+        \raise4pt\hbox{.}\mkern2mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern1mu}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\title{MATH 209: Homework \#6}
+\author{Jesse Farmer}
+\date{10 May 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Show that if $f \in L^\infty(X)$ then $|f| \leq \|f\|_\infty$ almost everywhere.}
+
+Recall that $\|f\|_\infty = \inf A$ where $A = \{c > 0 \mid |f| \leq c \mbox{ almost everywhere}\}$.  By definition, for any $\epsilon > 0$ there exists a $c \in A$ such that $c < \|f\|_\infty + \epsilon$.  Moreover, from the definition of $A$,
+\[
+|f| \leq c < \|f\|_\infty + \epsilon
+\]
+
+But this means that $|f| \leq \|f\|_\infty$ whenever $|f| \leq c$, i.e., almost everywhere.
+
+\item \emph{Show that if $f$ is a nonnegative, measurable function such that $\int_X f \,d\mu = 0$, then $f = 0$ almost everywhere.}
+
+To prove the contrapositive, assume that there exists a $\epsilon > 0$ such that $f > \epsilon$ on a set $A \subset X$ of positive measure.  Then
+\[
+0 < \epsilon \mu(A) \leq \int_X f \,d\,u
+\]
+
+\item \emph{Let $p,q$ be such that $\frac{1}{p} + \frac{1}{q} = 1$.  Show that if $f \in \mathcal{L}^p$ and $g \in \mathcal{L}^q$ then $fg \in \mathcal{L}^1$ and $\|fg\|_1 \leq \|f\|_p \cdot \|g\|_q$.}
+
+Let $f \in L^p(X)$ and $g \in L^q(X)$ where $\frac{1}{p} + \frac{1}{q} = 1$.
+
+\textbf{Lemma} \emph{For any two numbers $x,y \geq 0$ and $\frac{1}{p} + \frac{1}{q} = 1$
+\begin{equation}
+\label{youngs}
+xy \leq \frac{x^p}{p} + \frac{y^q}{q}
+\end{equation}}
+
+\textbf{Proof} Let $f(x) = xy - \frac{x^p}{p}$.  Then
+\[
+f'(x) = y - x^{p-1}
+\]
+
+which, since the function is monotonic increasing, implies that the maximum is at $x = y^{\frac{1}{p-1}}$.  Therefore
+\begin{eqnarray*}
+xy - \frac{x^p}{p} &\leq& y^{\frac{p}{p-1}} \frac{y^{\frac{p}{p-1}}}{p} \\
+&=& \frac{y^{\frac{p}{p-1}}(p-1)}{p} \\
+&=& \frac{y^q}{q}
+\end{eqnarray*}
+
+Pointwise, this is true for arbitrary nonnegative functions.  Using (\ref{youngs}) with $x = \frac{|f|}{\|f\|_p}$ and $y=\frac{|g|}{\|g\|_q}$, it follows from the monotonicity of the Lebesgue integral and the definition of $\| \cdot \|_p$ that
+\begin{eqnarray*}
+\int_X \frac{|fg|}{\|f\|_p \|g\|_q} \,d\mu &\leq& \frac{1}{p\|f\|_p^p} \int_X |f|^p \,d\mu + \frac{1}{q\|g\|_q^q} \int_X |g|^q \,d\mu \\
+&=& \frac{1}{p} + \frac{1}{q} \\
+&=& 1
+\end{eqnarray*}
+
+Which is equivalent to
+\[
+\|fg\|_1 \leq \|f\|_p\|g\|_q < \infty
+\]
+
+From this, then, it follows that if $f \in L^p(X)$ and $g \in L^q(X)$, then $fg \in L^1(X)$.
+\item \emph{Show that if $f,g \in \mathcal{L}^p$ then $\|f+g\|_p \leq \|f\|_p + \|g\|_p$.}
+
+Assume $p>1$, since otherwise the above follows trivially from the triangle inequality.  Let $q = \frac{p}{p-1}$ so that $\frac{1}{p} + \frac{1}{q} = 1$.  Let $f,g \in L^2(X)$, then
+\[
+|f+g|^p = |f+g||f+g|^{p-1} \leq |f||f+g|^{p-1} + |g||f+g|^{p-1}
+\]
+and
+\begin{equation}
+\label{i_mon}
+\int_X |f+g|^p \,d\mu \leq \int_X |f||f+g|^{p-1} \,d\mu + \int_X |g||f+g|^{p-1} \,d\mu
+\end{equation}
+From the previous problem it follows that
+\begin{eqnarray}
+\label{h_p1}
+\int_X |f||f+g|^{p-1} \,d\mu &\leq& \left(\int_X |f|^p\right)^{\frac{1}{p}}\left(\int_X |f+g|^{(p-1)q}\right)^{\frac{1}{q}} \\
+\label{h_p2}
+\int_X |g||f+g|^{p-1} \,d\mu &\leq& \left(\int_X |g|^p\right)^{\frac{1}{p}}\left(\int_X |f+g|^{(p-1)q}\right)^{\frac{1}{q}}
+\end{eqnarray}
+
+Applying (\ref{i_mon}) to the sum of (\ref{h_p1}) and (\ref{h_p2}) and noting that $(p-1)q = p$ and $1 - \frac{1}{q} = \frac{1}{p}$ yields
+\[
+\int_X |f+g|^p \,d\mu \leq \left(\int_X |f+g|^p\right)^{\frac{1}{q}} \left[\left(\int_X |f|^p\right)^{\frac{1}{p}} + \left(\int_X |g|^p\right)^{\frac{1}{p}}\right]
+\]
+
+which is equivalent to
+\[
+\left(\int_X |f+g|^p \,d\mu\right)^{1-\frac{1}{q}} = \left(\int_X |f+g|^p \,d\mu\right)^{\frac{1}{p}} \leq \left(\int_X |f|^p\right)^{\frac{1}{p}} + \left(\int_X |g|^p\right)^{\frac{1}{p}}
+\]
+\item \emph{Finish the proof that $\mathcal{L}^p$ is complete by extending it to $p > 1$.}
+
+If $p = \infty$ then let $\{f_n\}$ be a Cauchy sequence.  It follows that for $n,m$ sufficiently large
+\[
+\left| \|f_n\|_\infty - \|f_m\|_\infty \right| \leq \|f_n - f_m\|_\infty < \epsilon
+\]
+
+It follows immediately that $\|\lim_{n\rightarrow\infty} f_n\|_\infty < \infty$, and therefore $L^\infty(X)$ is complete.
+
+For $1 \leq p < \infty$ we will augment the proof in class.  Let $\{f_n\}$ be a Cauchy sequence and pick a subsequence $\{f_{n_k}\}$ such that $\|f_{n_{k+1}} - f_{n_k}\| < \epsilon 2^{-k}$ for any $\epsilon > 0$.  Define
+\[
+g_k = \sum_{i=1}^k |f_{n_{k+1}} - f_{n_k}|
+\]
+
+From Minkowski's inequality
+\[
+\|g_k\|_p = \left\| \sum_{i=1}^k |f_{n_{k+1}} - f_{n_k}| \right\|_p \leq \sum_{i=1}^k \|f_{n_{k+1}} - f_{n_k}\|_p < 1
+\]
+
+Fatou's Lemma guarantees that $\|\lim_{k \rightarrow \infty} g_k\|_p$ is finite almost everywhere since
+\[
+\left\|\lim_{k \rightarrow \infty} g_k\right\|_p = \left(\int_X \left(\lim_{k \rightarrow \infty} g_k \,d\mu\right)^p \right)^{\frac{1}{p}} \leq \liminf_{k\rightarrow\infty} \left(\int_X g^p_n \,d\mu\right)^{\frac{1}{p}} \leq 1
+\]
+
+As in class, define
+\[
+f = f_{n_1} + \sum_{k=1}^\infty \left(f_{n_{k+1}} - f_{n_k}\right)
+\]
+
+Since the right-hand side is absolutely convergent, $f$ is well-defined (almost everywhere).  Moreover, from the above definition it follows that $f(x) = \lim_{k\rightarrow\infty} f_{n_k}(x)$, again, almost everywhere.  To show that $f_n \rightarrow f$ in $L^p(X)$, let $\epsilon > 0$ and $n,m$ sufficiently large so that $\|f_n - f_m\| < \epsilon$.  By Fatou's Lemma,
+\[
+\int_X |f - f_m|^p \,d\mu \leq \liminf_{k \rightarrow \infty} \int_X |f_{n_k} - f_m|^p \,d\mu \leq \epsilon^p
+\]
+\item \emph{Show that if $f,g \in L^p(X)$ then $(f \mid g) = \int_X f\bar{g} \,d\mu$ is well-defined and a positive-definite Hermitian form.}
+
+
+This is well-defined since if we consider the product of the component real-valued functions of these two complex-valued functions, which are measurable, we get an integral of the same form (i.e., the component functions of the products are also integrable).
+
+\textbf{Positive definite}
+\[
+(f \mid f ) = \int_X f \bar{f} \,d\mu = \int_X |f|^2 \geq 0
+\]
+
+From Problem 2 it follows that equality holds if and only if $f = 0$ almost everywhere.
+\textbf{Sesquilinear}
+\begin{eqnarray*}
+(\alpha f_1 + \beta f_2 \mid g ) &=& \int_X (\alpha f_1 + \beta f_2)\bar{g} \,d\mu \\
+&=& \alpha \int_X f_1 \bar{g} \,d\mu + \beta \int_X  f_2 \bar{g} \,d\mu \\
+&=& \alpha(f_1 \mid g) + \beta(f_2 \mid g)
+\end{eqnarray*}
+
+Since the conjugate preserves multiplication and addition, it follows that the conjugate scalars pull out and is linear in the second variable.
+
+\textbf{Complex symmetric}  Since integration preserves conjugation (i.e., the conjugate of the integral is the integral of the conjugate),
+\begin{eqnarray*}
+\overline{(f \mid g)} &=& \overline{\int_X f\bar{g} \,d\mu} \\
+&=& \int_X \overline{f\bar{g}} \,d\mu \\
+&=& \int_X \bar{f}g \,d\mu \\
+&=& (g \mid f)
+\end{eqnarray*}
+\item \emph{Show that $L^p(X) \subseteq L^1(X)$ for $1 \leq p < \infty$ and $\mu(X) < \infty$.}
+
+Let $p,q$ be such that $\frac{1}{p} + \frac{1}{q} = 1$, $g = 1$, and $f \in L^p(X)$.  Then clearly $g \in L^q(X)$, so by H\"{o}lder's inequality,
+\[
+\|f\| = \|fg\| \leq \|f\|_p \|g\|_q < \infty
+\]
+
+\item \emph{Show that an orthonormal basis is linearly independent.}
+
+Let $\{v_n\}$ be an orthonormal basis for a Hilbert space $\mathcal{H}$, $\{v_{n_i}\}$ be an arbitrary finite collection of basis elements, and
+\[
+\alpha_1 v_{n_1} + \alpha_2 v_{n_2} + \cdots + \alpha_m v_{n_m} = 0
+\]
+
+where $\alpha_1,\alpha_2,\ldots,\alpha_m$ are scalars.  For each $i=1,2,\ldots,m$ it follows from the properties of an inner product on a Hilbert space that
+\[
+0 = (\alpha_1 v_{n_1} + \alpha_2 v_{n_2} + \cdots + \alpha_m v_{n_m} \mid v_{n_i}) = \sum_{k=1}^m \alpha_k (v_{n_k} \mid v_{n_i}) = \alpha_i (v_{n_i} \mid v_{n_i}) = \alpha_i
+\]
+
+This proves the linear independence of arbitrary $\{v_{n_i}\}$, and therefore of $\{v_n\}$.
+\end{enumerate}
+\end{document}

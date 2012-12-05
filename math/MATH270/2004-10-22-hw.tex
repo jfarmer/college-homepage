@@ -1,0 +1,207 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\title{MATH 270: Homework \#3}
+\author{Jesse Farmer}
+\date{22 October 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Show, by changing variables, that the Cauchy-Riemann equations in terms of polar coordinates become $$ \frac{\partial u}{\partial r} = \frac{1}{r}\frac{\partial v}{\partial \theta} \text{ and } \frac{\partial v}{\partial r} = -\frac{1}{r} \frac{\partial u}{\partial \theta}$$}
+
+By the chain rule,
+\[
+\frac{\partial u}{\partial r} = \frac{\partial u}{\partial x}\frac{\partial x}{\partial r} + \frac{\partial u}{\partial y}\frac{\partial y}{\partial r} \mbox{ and } \frac{\partial u}{\partial \theta} = \frac{\partial u}{\partial x}\frac{\partial x}{\partial \theta} + \frac{\partial u}{\partial y}\frac{\partial y}{\partial \theta}
+\]
+
+And similarly for $\frac{\partial v}{\partial r}$ and $\frac{\partial v}{\partial \theta}$.  Since $x = r\cos\theta$ and $y = r\sin\theta$ we have
+\begin{eqnarray*}
+\frac{\partial u}{\partial r} = \frac{\partial u}{\partial x}\cos\theta + \frac{\partial u}{\partial y}\sin\theta && \frac{\partial u}{\partial \theta} = -\frac{\partial u}{\partial x}r\sin\theta + \frac{\partial u}{\partial y}r\cos\theta \\
+ \frac{\partial v}{\partial r} = \frac{\partial v}{\partial x}\cos\theta + \frac{\partial v}{\partial y}\sin\theta && \frac{\partial v}{\partial \theta} = -\frac{\partial v}{\partial x}r\sin\theta + \frac{\partial v}{\partial y}r\cos\theta
+\end{eqnarray*}
+
+The Cauchy-Riemann equations give $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ and $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$.  Making these substitutions into the partials of $u$ and $v$ with respect to $\theta$ gives
+\begin{eqnarray*}
+\frac{\partial u}{\partial \theta} &=& -\frac{\partial v}{\partial y}r\sin\theta - \frac{\partial v}{\partial x}r\cos\theta \\ 
+\frac{\partial v}{\partial \theta} &=& \frac{\partial u}{\partial y}r\sin\theta + \frac{\partial u}{\partial x}r\cos\theta
+\end{eqnarray*}
+
+Comparing these two equations with the first equations derived for the partials of $u$ and $v$ with respect to $r$ gives $$\frac{\partial u}{\partial \theta} = -r \frac{\partial v}{\partial r} \mbox{ and } \frac{\partial v}{\partial \theta} = r\frac{\partial u}{\partial r}$$ which is the deired result.
+
+\newpage
+
+\item \emph{Define the symbol $\partial f / \partial z$ by $$\frac{\partial f}{\partial z} = \frac{1}{2} \left( \frac{\partial f}{\partial x} + \frac{1}{i} \frac{\partial f}{\partial y} \right)$$}
+\begin{enumerate}
+\item \emph{If $f(z) = z$, show that $\frac{\partial f}{\partial z} = 1$ and $\frac{\partial f}{\partial \overline{z}} = 0$.}
+
+If $f(z) = z = x + iy$ then $\frac{\partial f}{\partial x} = 1$ and $\frac{\partial f}{\partial y} = i$, so
+\[
+\frac{\partial f}{\partial z} = \frac{1}{2}(1 + \frac{1}{i} i) = 1
+\]
+and
+\[
+\frac{\partial f}{\partial \overline{z}} = \frac{1}{2}(1 - \frac{1}{i} i) = 0
+\]
+
+\item \emph{If $f(z) = \overline{z}$, show that $\frac{\partial f}{\partial z} = 0$ and $\frac{\partial f}{\partial \overline{z}} = 1$.}
+
+If $f(z) = \overline{z} = x - iy$ then $\frac{\partial f}{\partial x} = 1$ and $\frac{\partial f}{\partial y} = -i$, so
+\[
+\frac{\partial f}{\partial z} = \frac{1}{2}(1 - \frac{1}{i} i) = 0
+\]
+and
+\[
+\frac{\partial f}{\partial \overline{z}} = \frac{1}{2}(1 + \frac{1}{i} i) = 1
+\]
+
+\item \emph{Show that $\frac{\partial}{\partial z}$ and $\frac{\partial}{\partial \overline{z}}$ obey the sum, product, and scalar multiple rules for derivatives.}
+
+Seriously?  Ugh.  These all follow obviously from the fact that the partials of with respect to $x$ and $y$ obey these rules, but here goes:
+\begin{eqnarray*}
+\frac{\partial (f+g)}{\partial z} &=& \frac{1}{2}\left(\frac{\partial f}{\partial x} + \frac{\partial g}{\partial x} + \frac{1}{i}\frac{\partial f}{\partial x} + \frac{1}{i}\frac{\partial g}{\partial x}\right) \\
+&=& \frac{1}{2}\left(\frac{\partial f}{\partial x} + \frac{1}{i}\frac{\partial f}{\partial x}\right) + \frac{1}{2}\left(\frac{\partial g}{\partial x} + \frac{1}{i}\frac{\partial g}{\partial x}\right) \\
+&=& \frac{1}{2}\left(\frac{\partial f}{\partial z}\right) + \frac{1}{2}\left(\frac{\partial g}{\partial z}\right)
+\end{eqnarray*}
+
+It follows \emph{mutatis mutandis} for $\frac{\partial f}{\partial \overline{z}}$.
+
+\begin{eqnarray*}
+\frac{\partial (f\cdot g)}{\partial z} &=& \frac{1}{2}\left(\frac{\partial f}{\partial x}g + \frac{\partial g}{\partial x}f + \frac{1}{i}\frac{\partial f}{\partial y}g + \frac{1}{i}\frac{\partial g}{\partial y}f\right) \\
+&=& \frac{1}{2}\left(\frac{\partial f}{\partial x}g + \frac{1}{i}\frac{\partial f}{\partial y}g\right) + \frac{1}{2}\left(\frac{\partial g}{\partial x}f  + \frac{1}{i}\frac{\partial g}{\partial y}f\right) \\
+&=& \frac{\partial f}{\partial z}g + \frac{\partial g}{\partial z}f
+\end{eqnarray*}
+
+It follows \emph{mutatis mutandis} for $\frac{\partial f}{\partial \overline{z}}$.
+
+Let $\alpha \in \mathbb{C}$, then
+\begin{eqnarray*}
+\alpha \frac{\partial f}{\partial z} &=& \frac{\alpha}{2}\left( \frac{\partial f}{\partial x} + \frac{1}{i} \frac{\partial f}{\partial y} \right) \\
+&=& \frac{1}{2}\left( \alpha\frac{\partial f}{\partial x} + \frac{1}{i} \alpha \frac{\partial f}{\partial y} \right) \\
+&=& \frac{1}{2}\left( \frac{\partial \alpha f}{\partial x} + \frac{1}{i} \frac{\partial \alpha f}{\partial y} \right) \\
+&=& \frac{\partial \alpha f}{\partial z}
+\end{eqnarray*}
+
+It follows \emph{mutatis mutandis} for $\frac{\partial f}{\partial \overline{z}}$.
+
+\item \emph{Show that the expression $\sum_{n=0}^N\sum_{m=0}^M a_{nm} z^n \overline{z}^m$ is a holomorphic function of $z$ if and only if $a_{mn} = 0$ when $m \neq 0$.}
+
+Because $\frac{partial}{\partial \overline{z}}$ preserves additivity, we must show that this statement is true for each of the terms in the double sum.  Let $n, m \in \mathbb{N}$ be arbitrary, then
+\[
+\frac{\partial f}{\partial x} = a_{nm}(nz^{n-1}\overline{z}^m + mz^n\overline{z}^{m-1})
+\]
+and
+\[
+\frac{\partial f}{\partial y} = a_{nm}(inz^{n-1}\overline{z}^m - imz^n\overline{z}^{m-1})
+\]
+
+This function is holomorphic if and only if $\frac{\partial f}{\partial \overline{z}} = 0$, which means if and only if
+\[
+\frac{\partial f}{\partial \overline{z}} = na_{nm}z^{n-1}\overline{z}^m = 0
+\]
+
+Since every term but $a_{nm}$ cannot be identically zero, it must be the case that $a_{nm} = 0$ when $m \neq 0$.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Let $f(z) = u(x,y) + iv(x,y)$ be a holomorphic function defined on an open, connected set $\Omega$.  If $au(x,y) + bv(x,y) = c$ on $\Omega$, where $a,b,c$ are real constants not all $0$, prove that $f(z)$ is constant on $\Omega$.}
+\item \emph{Is the previous result still valid if $a,b,c$ are complex constants?}
+\end{enumerate}
+
+\item \emph{Let $f$ be holomorphic on the set $A = \{z \mid \Re z > 1\}$ and $\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} = 0$ on $A$.  Show that there is a real constant $a$ and a complex constant $d$ such that $f(z) = -icz + d$ on $A$.}
+
+By the Cauchy-Riemann equations $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$, so $2 \frac{\partial u}{\partial x} = 0$ and $\frac{\partial v}{\partial y} = \frac{\partial u}{\partial x} = 0$.  This means $u$ depends only on $y$ and $v$ depends only on $x$.  Because $u$ and $v$ depend only on $y$ and $x$, respectively, $\frac{\partial u}{\partial y}$ depends only on $y$ and $\frac{\partial v}{\partial x}$ depends only on $x$.  However, since the Cauchy-Riemann equations give $\frac{\partial u}{\partial y} = - \frac{\partial v}{\partial x}$, neither can depend on $x$ or $y$ so they must be equal to some real constant, $c$.
+
+Together this means $u(x,y) = cy + d'$ and $v(x,y) = -cx + d''$, and therefore
+\[
+f(z) = cy + d' - icx + id'' =  -ic\left(x - \frac{y}{i}\right) + d' + d'' = -ic(x+iy) + d' + d'' = -icz + d
+\]
+
+\item \emph{Let $f$ be holomorphic on $\Omega$.  Define $g : \Omega \rightarrow \mathbb{C}$ by $g(z) = \overline{f(z)}$.  When is $g$ holomorphic?}
+
+If $f(z) = u + iv$ for real-valued functions $u$ and $v$, then $g(z) = u + iv'$ where $v' = -v$.  $g$ is holomorphic if and only if it satisfies the Cauchy-Riemann equations (and is differentiable in the real sense).  Hence, it is holomorphic if and only if $f$ is differentiable in the real sense and 
+\[
+\frac{\partial u}{\partial x} = \frac{\partial v'}{\partial y} = - \frac{\partial v}{\partial y}
+\]
+
+and
+\[
+\frac{\partial u}{\partial y} = - \frac{\partial v'}{\partial x} = \frac{\partial v}{\partial x}
+\]
+
+
+\item \emph{Evaluate the following:}
+\begin{enumerate}
+\item \emph{$\int_{\gamma} y\,dz$, where $\gamma$ is the union of the line segments joining $0$ to $i$ then to $i+2$.}
+\item \emph{$\int_{\gamma} \sin2z\,dz$, where $\gamma$ is the line segment joining $i+1$ to $-i$.}
+
+This function has an antiderivative, namely, $-\frac{\cos2z}{2}$.  Hence the integral is $-\frac{\cos(-i2)}{2} + \frac{\cos(2i+2)}{2} = \frac{1}{2}\left[\cos(2i+2) - \cos(2i)\right]$
+\item \emph{$\int_{\gamma} ze^{z^2}\,dz$, where $\gamma$ is the unit circle.}
+
+This function has an antiderivative, namely $\frac{e^{z^2}}{2}$, and since $\gamma$ is a closed path the integeral is $0$.
+\end{enumerate}
+
+\item \emph{Does $\Re\left\{\int_{\gamma} f\,dz\right\} = \int_{\gamma} \Re f\,dz$?}
+
+No.  Let $f(z) = z$ and let $\gamma(t) = it$ for $t \in [0,1]$ so that $\Re \gamma = 0$.  Then
+\[
+\Re \int_{\gamma} f \,dz = \Re \int_0^1 iti \,dt = \Re \int_0^1 -t = -\frac{1}{2}
+\]
+
+but
+\[
+\int_{\gamma} \Re f \,dz = \int_0^1 0 \cdot i\,dt = 0
+\]
+
+\item \emph{Evaluate the following integrals:}
+\begin{enumerate}
+\item \emph{$\int_{\gamma} \overline{z}\,dz$, where $\gamma$ is the unit circle traversed once in a counterclockwise direction.}
+
+We can parameterize the unit circle by $\gamma(\theta) = e^{i\theta}$ for $\theta \in [0,2\pi]$.  Hence $$\int_{\gamma} \overline{z}\,dz = \int_0^{2\pi} e^{-i\theta}e^{i\theta}i \,d\theta = \int_0^{2\pi} i = i2\pi$$
+\item \emph{$\int_{\gamma} (x^2-y^2)\,dz$, where $\gamma$ is the straight line from $0$ to $i$.}
+
+We can parameterize this line by $\gamma(t) = it$ for $t \in [0,1]$. Note that $\Re \gamma = 0$ and $\Im \gamma = t$.  Hence $$\int_{\gamma} x^2 - y^2 \,dz = \int_0^1 -it^2 \,dt = -\frac{i}{3}$$
+\end{enumerate}
+
+\item \emph{Evaluate the following:}
+\begin{enumerate}
+\item \emph{$\int_{|z| = 1} \frac{dz}{z}$, $\int_{|z| = 1} \frac{dz}{|z|}$, $\int_{|z| = 1} \frac{|dz|}{z}$, $\int_{|z| = 1} \left|\frac{dz}{z}\right|$}
+\item \emph{$\int_{\gamma} z^2\,dz$, where $\gamma$ is the curve given by $\gamma(t) = e^{it}\sin^3t$ for $0 \leq t \leq \frac{\pi}{2}$.}
+
+$z^2$ has a primitive, namely $F(z) = \frac{z^3}{3}$.  Noting that $e^{i\frac{\pi}{2}} = i$ and $\sin\frac{\pi}{2} = 1$, we get
+\[
+\int_{\gamma} z^2\,dz = F\left(\gamma\left(\frac{\pi}{2}\right)\right) - F(\gamma(0)) = \frac{i^3}{3} = -\frac{i}{3}
+\]
+\end{enumerate}
+
+\item \emph{Show that every disk is convex.}
+
+For any two points within a disk one can characterize the segment joining them by
+\[
+\gamma_{x,y} = \{(1-t)x + ty \mid t \in [0,1] \}
+\]
+
+It is sufficient to show this for a disc of arbitrary radius $r$ about the origin.  So let $x,y \in D(r,0)$, then $|x|, |y| < r$, and
+\[
+|(1-t)x + ty| \leq (1-t)|x| + t|y| < r(1-t+t) = r
+\]
+
+hence $\gamma_{x,y} \subset D(r,0)$, i.e., $D(r,0)$ is convex.
+\end{enumerate}
+\end{document}

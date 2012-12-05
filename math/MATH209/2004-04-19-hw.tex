@@ -1,0 +1,215 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\def\bddots{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu
+        \raise4pt\hbox{.}\mkern2mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern1mu}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\title{MATH 209: Homework \#3}
+\author{Jesse Farmer}
+\date{19 April 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Find $\mu(B)$ where $B = \{(x,y) \in [0,1] \times [0,1] \mid x,y \in \R \setminus \Q\}$.}
+
+Let
+\[
+A = \{(x,y) \in [0,1] \times [0,1] \mid x \in \Q \mbox{ or } y \in \Q\}
+\]
+
+Then
+\[
+B = [0,1] \times [0,1] \setminus A
+\]
+
+Let $(x_0,y_0) \in A$.  Then $x_0$ or $y_0$ is rational and is contained in the rectangle 
+\[
+[x_0 - \epsilon, y_0 + \epsilon] \times [y_0 - \epsilon, y_0+\epsilon]
+\]
+for any $\epsilon > 0$.  Each of these rectangle has measure $4\epsilon^2$, and by indexing with the rational point in $(x_0, y_0)$ we see that there exists a countable union of measure zero sets that contains $A$, i.e., $\mu(A) = 0$.  Hence,
+\[
+\mu(B) = 1 - \mu(A) = 1
+\]
+
+\item \emph{Let $C_n$ be the set constructed by the iterated removal of the middle $\frac{1}{n}$ of the interval $[0,1]$.}
+\begin{enumerate}
+\item \emph{What is left in $C_n$?}
+
+At the $i^{th}$ iteration, the length of the remaining intervals is
+\[
+\left(1-\frac{1}{n}\right)^i = \left(\frac{n-1}{n}\right)^i
+\]
+
+Thus
+\[
+\mu(C_n) = \lim_{i \rightarrow \infty} \left(\frac{n-1}{n}\right)^i = 0
+\]
+\item \emph{Is $C_n$ a nowhere dense, perfect set?}
+
+$C_n$ is clearly nowhere dense since $\mu(C_n) = 0$ implies that any subset must also be measure zero.  However, if $C_n$ contained an open set then it would contain an open interval, which has measure greater than $0$.
+\end{enumerate}
+
+\item \emph{Find the cardinality of the $\sigma$-algebra of Borel sets.}
+
+Consider Borel sets in $\R$.  Every open, half-open, or closed set can be considered as a $4$-tuple
+\[
+(a,b,\alpha,\beta)
+\]
+
+where $\alpha, \beta$ are the endpoints and $a,b$ denote whether or not the left-hand side or right-hand side is closed, respectively.  As $\alpha, \beta \in \R$, the set of all open, half-open, or closed intervals has cardinality $c$.  If we consider the union of any of these as the Cartesian product, then we see that the union of a countable number of any combination of these sets also has cardinality of the continuum.  Likewise, the complement of any of these sets is also of the above form (e.g., $(0,0,\alpha,\beta)^c = (0,1,-\infty,\alpha) \times (1,0,\beta,\infty)$).  Hence any element of the Borel algebra can be written as the result of a countable number of operations which preserve the above form, and therefore there are $c$ of them.
+
+This generalizes to $\R^n$ as intervals in $\R^n$ are merely Cartesian products of intervals in $\R$, i.e., there are as many of the former as of the latter.
+
+\item \emph{Find the circumradius of a regular icosahedron.}
+
+Consider a regular icosahedron centered at the origin with the pentagonal dipyramids oriented vertically.  If we take a plane along the other two axes which intersects the origin then this divides the edges of the equilateral triangles in half.  We will call the edge length $L$.  First we establish some trigonometric identities.  Let $A = 36^\circ$, then
+\[
+3A + 2A = 180
+\]
+
+hence
+\[
+\cos(3A) = -\cos(2A)
+\]
+
+Letting $c = \cos(A)$ and using the angle addition formulas we get
+\begin{eqnarray*}
+4c^3 - 3c &=& -(2c^2 -1) \\
+&\Rightarrow&4c^3 + 2c^2 - 3c -1 = 0 \\
+&\Rightarrow&(c+1)(4c^2 - 2c - 1) = 0 \\
+&\Rightarrow& 4c^2 - 2c -1 = 0 \\
+&\Rightarrow& c = \frac{1+\sqrt{5}}{4}
+\end{eqnarray*}
+
+and therefore
+\begin{eqnarray*}
+\cos^2(18^\circ) &=& \frac{1+c}{2} \\
+&=& \frac{5 + \sqrt{5}}{2}
+\end{eqnarray*}
+
+Using the Pythagorean Identity and the definition of cosecant, then
+\begin{equation}
+\label{csc_sq_18}
+\csc^2(18^\circ) = 6 + 2\sqrt{5}
+\end{equation}
+
+The circumradius, $r$, is the distance from the center of the icosahedron to one of the vertices.  Looking at the decagon produced from the intersection of the plane and the icosahedron, pick one of the isosceles triangles that constitute it and, from the center $O$ clockwise, call it triangle $OAB$.  Then $A$ and $B$ are points on the edge of one of the faces of the icosahedron.  In particular, the distance from $A$ to the vertex $P$ of the icosahedron is $\frac{L}{2}$ by our choice of intersecting plane.  Thus the triangle $OAP$ is a right triangle, where
+\[
+|OA| = \frac{L \csc(18^\circ)}{4} \mbox{ and } \sqrt{|OA|^2 + \left(\frac{L}{2}\right)^2} = r
+\]
+
+Using the above and (\ref{csc_sq_18}), then
+\begin{eqnarray*}
+r &=& \sqrt{\left(\frac{L \csc(18^\circ)}{4}\right)^2 + \left(\frac{L}{2}\right)^2} \\
+&=& \frac{L}{2}\sqrt{\frac{6 + 2\sqrt{5}}{4} + 1} \\
+&=& \frac{L}{4}\sqrt{10 + 2\sqrt{5}}
+\end{eqnarray*}
+\item \emph{Prove that $A \subseteq \R^n$ where $A$ is bounded is measurable if and only if for every $\epsilon > 0$ there exists a finite union $P$ of rectangles such that $\mu^\ast(A \triangle P) < \epsilon$.}
+
+\item \emph{Prove that the Lebesgue measure is regular.}
+
+Let $A \subseteq \R^n$ be Lebesgue measurable.  The subadditivity of the Lebesgue measure is sufficient to show that it is outer regular, so all that remains is to show it is inner regular.  Let $\mathcal{E}$ be the collection of all elementary sets, i.e., those sets which can be written as the finite union of rectangles.  For $E \in \mathcal{E}$ define 
+\begin{equation}
+\label{elem_disjoint}
+\mu(E) = \mu(R_1) + \cdots + \mu(R_n)
+\end{equation}
+
+where each $R_i$ is a disjoint rectangle.  Since the intersection of any two rectangles is a rectangle, whatever is left over must itself be an elementary sets and hence it is possible to find a finite collection of pairwise disjoint rectangles whose union is $E$, for any $E \in \mathcal{E}$.  For $R$ a rectangle, it is obvious that $\mu(R)$ is a a regular measure, since we can find a compact set $K$ in $R$ such that $\mu(R) < \mu(K) + \epsilon$.  Hence, from (\ref{elem_disjoint}), it follows that there exist disjoint $K_i$ such that
+\[
+\mu(R_i) < \mu(K_i) + \frac{\epsilon}{n}
+\]
+
+and therefore
+
+\[
+\mu(E) = \mu(R_1) + \cdots + \mu(R_n) = \mu(\cup_i K_i) + \epsilon
+\]
+
+Therefore $\mu$ is regular on all elementary sets.  Let $A \subseteq \R^n$ be measurable, then it is the union of countably many elementary sets $\{A_i\}$.  It follows that there is an $N \in \N$ such that $F$ is compact and 
+\[
+F \subset \bigcup_{i=1}^N A_i
+\]
+
+For $A_i \in \mathcal{E}$ we have $\mu^\ast(A_i) = \mu(A_i)$.  The proof of this statement is essentially the same as the equivalent proof of this statement for rectangles.  Therefore there exists an $N \in \mathbb{N}$ such that 
+\begin{eqnarray*}
+\mu^\ast(A) &\leq& \sum_{i=1}^N \mu^\ast(A_i) + \epsilon\\
+&=& \sum_{i=1}^N \mu(A_i) \\
+&<& \sum_{i=1}^N \left( \mu(K_i) + \frac{\epsilon}{N} \right) + \epsilon \\
+&=& \sum_{i=1}^N \mu(K_i) + 2\epsilon
+\end{eqnarray*}
+
+Where the $K_i$ are the compact sets provided by the regularity of $\mu$ of elementary sets.  However, I am not sure that the union of the $K_i$ are contained in $A$, and that this general idea for the proof is even the right trajectory -- I feel as if I made a significant mistake somewhere along the way.
+
+\item \emph{Prove that $\mu^\ast(A_r) = 0$ and hence $\mu^\ast(A) = 0$ to prove that every set with positive measure contains a nonmeasurable subset.}
+
+\item \emph{Let $X$ be a measure space and $Y$ a metric space.  Show that if $f: X \rightarrow Y$ is measurable and $B \subseteq Y$ is a Borel set then $f^{-1}(B)$ is measurable.}
+
+Let $B$ be a Borel set.  Then $B$ is the product of a countable number of basic set operations, i.e., union, symmetric difference, complementation, etc.  However, every basic set operation is some combination of union, complementation, or intersection.  In each of these cases the operation carries outside the preimage, i.e., the preimage of a countable union is the countable union of preimages, and likewise for intersection and complementation.  Since the system of measurable sets, $\mathfrak{M}$, forms a $\sigma$-algebra it is closed under the countable application of all these operations.  Hence, if $B$ is a Borel set the preimage is measurable since it is the result of a countable number of set operations which preserve measurability.
+
+\item \emph{Let $X$ be a metric space and $\mu$ a Borel measure on $X$.  Show that if $f: X \rightarrow Y$ is continuous then $f$ is measurable.}
+
+Let $V \subseteq Y$ be open, then $f^{-1}(V)$ is open by the continuity of $f$.  However, under a Borel measure every open set is measurable, so $f^{-1}(V)$ is measurable and $f$ is measurable.
+
+\newpage
+\item \emph{Let $X$ be a measure space and $Y = [-\infty, +\infty]$. Prove that the following are equivalent.}
+\begin{eqnarray}
+f:X \rightarrow Y\mbox{ is measurable.} \label{measurable}\\
+f^{-1}\big((y,+\infty)\big) \mbox{ is measurable for all } y \in \Q \label{meas_gt} \\
+f^{-1}\big([y,+\infty)\big) \mbox{ is measurable for all } y \in \Q \label{meas_geq}\\
+f^{-1}\big((-\infty,y)\big) \mbox{ is measurable for all } y \in \Q \label{meas_lt}\\
+f^{-1}\big((-\infty,y]\big) \mbox{ is measurable for all } y \in \Q \label{meas_leq}
+\end{eqnarray}
+
+
+We will first prove the equivalence of the last four.  Assume (\ref{meas_gt}), then $y - \frac{1}{n} \in \Q$ for any $n \in \N$, so $f^{-1}\big((y - \frac{1}{n},+\infty)\big)$ is measurable by hypothesis.  However,
+\[
+f^{-1}\big([y,+\infty)\big) = \bigcap_{n=1}^\infty f^{-1}\left(\left(y - \frac{1}{n},+\infty\right)\right)
+\]
+
+So (\ref{meas_gt}) $\Rightarrow$ (\ref{meas_geq}).  Assume (\ref{meas_geq}), then $X$ is measurable and
+\[
+f^{-1}\big((-\infty,y)\big) = X \setminus f^{-1}\big([y,+\infty)\big)
+\]
+
+So (\ref{meas_geq}) $\Rightarrow$ (\ref{meas_lt}).  Assume (\ref{meas_lt}), then by the first argument,
+\[
+f^{-1}\big((-\infty,y]\big) = \bigcap_{n=1}^\infty f^{-1}\left(\left(-\infty,y+\frac{1}{n}\right)\right)
+\]
+
+Likewise, assuming (\ref{meas_leq}),
+\[
+f^{-1}\big((y,+\infty)\big) = X \setminus f^{-1}\big((-\infty,y]\big)
+\]
+
+If $f$ is measurable then so is $(y, \infty)$ since it is a Borel set.  Let $\mathcal{B}$ denote the Borel algebra generated by all open intervals in $Y$.  Also, if $S$ is a sytem of sets (e.g., a $\sigma$-algebra) let
+\[
+f^{-1}(S) = \{f^{-1}(A) \mid A \in S\}
+\]
+
+Let $\mathcal{S}$ denote the system of all semi-infinite intervals $(y,\infty)$ where $y \in \Q$.  Finally, let $\sigma(S)$ denote the $\sigma$-closure of $S$, i.e., the smallest $\sigma$-algebra containing $S$.  It is clear that such a set exists if one considers the power set of the set generated by the union of all the elements of $S$.  Assume $f^{-1}(\mathcal{S}) \subset \mathfrak{M}$.  $\sigma(\mathcal{S}) = \mathcal{B}$ since any open interval\footnote{Even if  the interval has real-valued endpoints, the density of $\Q$ in $\R$ allows us to construct a sequence of sets whose intersection is an interval with whatever real-valued endpoints we might desire.} can be written as the countable intersection of intervals of the form $(y,\infty)$.  Since $\mathcal{S} \subset \mathcal{B}$,
+\[
+f^{-1}(\mathcal{S}) \subset f^{-1}(\mathcal{B}) = f^{-1}\big(\sigma(\mathcal{S})\big) = \sigma\big(f^{-1}(\mathcal{S})\big) \subset \sigma(\mathfrak{M}) = \mathfrak{M}
+\] 
+\end{enumerate}
+\end{document}

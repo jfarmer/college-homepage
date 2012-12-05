@@ -1,0 +1,101 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pslatex}
+\title{MATH 207: Problem Set 6}
+\author{Jesse Farmer}
+\date{November 10, 2003}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Let $F$ be a field and $A \in M_2(F)$.  Show that $A$ has a inverse if and only if $det(A) \neq 0$}
+
+By question 2, $A$ is invertible if and only if $det(A)$ is invertible in $F$.  But since $F$ is a field the only element that is not invertible is $0$.  Therefore $A$ is invertible if and only if $det(A) \neq 0$;
+
+\item \emph{Let $R$ be a commutative ring with one and $A \in M_2(R)$.  When does $A$ have an inverse?}
+
+\underline{Claim}: $A$ is invertible if and only if $det(A)$ is invertible in $R$.
+
+Assume $A$ is invertible, then there exists a $B \in M_2(R)$ such that $AB=I$.  But this means $det(AB)=det(I)=1$.
+Since the determinent is distributive, $1 = det(AB) = det(A)det(B) \Rightarrow det(B)=det(A)^{-1}$.  That is, $det(A)$ is invertible.
+
+Assume $det(A)$ is invertible and let 
+$A=\left( \begin{array}{cc} a & b \\ c & d \\ \end{array} \right)$.  
+We see that $det(A)=ad-bc$, and $A\cdot\frac{1}{ad-bc}
+\left( \begin{array}{rr} d & -b \\ -c & a \\  \end{array} \right) = 
+\frac{1}{ad-bc}\left( \begin{array}{cc} ad-bc & 0 \\ 0 & ad-bc \\  \end{array} \right) =
+\left( \begin{array}{cc} 1 & 0 \\ 0 & 1 \\  \end{array} \right) = I$.  That is, $A$ is invertible.
+
+Therefore $A$ is invertible if and only if $det(A)$ is invertible in $R$.
+\item \emph{What are the zero divisors of $M_2(R)$?}
+\item \emph{Let $(R,+,\cdot,<)$ be an ordered integral domain.  Show that $R$ has a subring which is order isomorphic to $\mathbb{Z}$.}
+\item \emph{Show that $\mathbb{Q}$ does not satisfy the least upper bound property.}
+
+Let $S = \{p \in \mathbb{Q} | p^2 < 2\}$.  We know that $p^2 = 2 \Rightarrow p \notin \mathbb{Q}$.  So we want to show that this number is the upper bound.  Let $\alpha = \sup{S} \in \mathbb{Q}$.
+
+\begin{itemize}
+\item Assume $\alpha^2 > 2$
+
+$\alpha^2 > 2 \Leftrightarrow \alpha^2 + 2\alpha > 2 + 2\alpha \Leftrightarrow \alpha > \frac{2\alpha + 2}{\alpha+2}$
+
+\begin{tabular}{lll}
+$(\frac{2\alpha + 2}{\alpha+2})^2 > 2$ 	& $\Leftrightarrow$ 	& $4\alpha^2 + 8\alpha + 4 > 2\alpha^2 + 8\alpha + 8$ \\
+					& $\Leftrightarrow$	& $4\alpha^2 > 2\alpha^2 + 4$ \\
+					& $\Leftrightarrow$	& $2\alpha^2 > 4$ \\
+					& $\Leftrightarrow$	& $\alpha^2 > 2$
+\end{tabular}
+
+So $\frac{2\alpha + 2}{\alpha+2}$ is an upper bound but less than $\alpha$, contradicting the assumption that $\alpha = \sup{S}$.
+
+\item Assume $\alpha^2 < 2$
+
+$\alpha^2 < 2 \Leftrightarrow \alpha^2 + 2\alpha < 2 + 2\alpha \Leftrightarrow \alpha < \frac{2\alpha + 2}{\alpha+2}$
+
+\begin{tabular}{lll}
+$(\frac{2\alpha + 2}{\alpha+2})^2 < 2$ 	& $\Leftrightarrow$ 	& $4\alpha^2 + 8\alpha + 4 < 2\alpha^2 + 8\alpha + 8$ \\
+					& $\Leftrightarrow$	& $4\alpha^2 < 2\alpha^2 + 4$ \\
+					& $\Leftrightarrow$	& $2\alpha^2 < 4$ \\
+					& $\Leftrightarrow$	& $\alpha^2 < 2$
+\end{tabular}
+
+So $\frac{2\alpha + 2}{\alpha+2} \in S$ but greater than $\alpha$, contradicting the assumption that $\alpha = \sup{S}$.
+\end{itemize}
+Hence the supremum must satisfy $\alpha^2 = 2$, but no rational number does this.  Therefore we have a bounded set, $S$, whose supremum is not in $\mathbb{Q}$.  That is, $\mathbb{Q}$ does not satisfy the least upper bound property.
+
+\item \emph{Show that there is a bijection from the normal subgroups of $\frac{G}{H}$ and the normal subgroups of $G$ containing $H$.}
+\item \emph{Let $G$ be a finite group and $H$ be a subgroup of $G$ with index $k$.  Show that there exists a set of elements $x_1,x_2,\ldots,x_k$ in $G$ which can serve as complete coset representatives for both left and right cosets of $H$.}
+\item \emph{Find all possible areas of lattice squares in $\mathbb{R}^2$.}
+\item \emph{Find all positive integers which can be the length of the hypotenuse of a right triangle with legs of integer length.}
+\item \emph{Define a polyhedron in $\mathbb{R}^n$.}
+\item \emph{Find a Cauchy sequence in $\mathbb{Q}$ which does not converge in $\mathbb{Q}$.}
+\item \emph{Show that if $(a_n),(b_n)$ are Cauchy sequences then $(a_n + b_n)$ is a Cauchy sequence.}
+
+We have 
+$\forall r>0 \exists N_1 \in \mathbb{N} \ni m,n>N_1 \Rightarrow |a_n - a_m|<\frac{r}{2}$ and 
+$\forall r>0 \exists N_2 \in \mathbb{N} \ni m,n>N_2 \Rightarrow |b_n - b_m|<\frac{r}{2}$
+
+Let $N=max(N_1,N_2)$, then  $\forall r>0,|(a_n + b_n) - (a_m + b_m)| \leq |a_n - a_m| + |b_n - b_m| < \frac{r}{2} + \frac{r}{2} = r$
+
+Therefore if $(a_n)$ and $(b_n)$ are Cauchy sequences then so is $(a_n + b_n)$.
+\item \emph{Let $(R,+,\cdot)$ be a ring with one. Show that $(R^x,\cdot)$ is a group.}
+\begin{itemize}
+\item Associativity is inhereted.
+\item Each element has an inverse by definition of $(R^x,\cdot)$.
+\item $1\cdot1 = 1$, so there is an identity in $R^x$
+\item Let $a,b \in R^x$, then $a^{-1},b^{-1}$ exist.  $(b^{-1}a^{-1})(ab) = b^{-1}(a^{-1}a)b = b^{-1}b = 1$.  So the operation is an internal law of composition.
+\end{itemize}
+
+\item \emph{Describe $(\mathbb{Z}^x_n,\cdot)$ for $2 \leq n \leq 16$.}
+
+\item \emph{Let $C$ be the set of all Cauchy sequences in $\mathbb{Q}$. Show that $\{(a_n) \in C | a_n \rightarrow 0\}$ is a maximal ideal.}
+\end{enumerate}
+\end{document}

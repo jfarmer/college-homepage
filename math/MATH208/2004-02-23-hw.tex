@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{MATH 208: Homework \#7}
+\author{Jesse Farmer}
+\date{23 February 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Show that $f_v$, the natural map from $V^{\ast}$ to the ground field $F$, is in $V^{\ast\ast}$.}
+
+Let $\alpha, \alpha_1, \alpha_2 \in V^{\ast}$ and $\beta \in F$, then
+\[f_v(\alpha_1+\alpha_2) = (\alpha_1 + \alpha_2)(v) = \alpha_1(v) + \alpha_2(v) = f_v(\alpha_1) + f_v(\alpha_2)\]
+and
+\[f_v(\beta\alpha) = (\beta\alpha)(v) = \beta \cdot \alpha(v) = \beta \cdot f_v(\alpha)\]
+so $f_v$ is linear.
+
+$f_v$ is clearly bounded since, for fixed $v$ and any $\alpha$, $\|f_v(\alpha)\| \leq \|v\|\|\alpha\|$.
+\item \emph{Show that the map $v \mapsto f_v$ is a norm-preserving monomorphism.}
+
+By the previous problem we have that $\|f_v\| \leq \|v\|$, so all that remains to be shown is the other direction of the inequality.
+
+We have by the corolllary of the Hahn-Banach Theorem that for every $v \in V$ there exists $\alpha \in V^{\ast}$ such that $a(v) = 1$ and $\|a(v)\| = \|v\|$.  Since $\|f_v(\alpha)\| = \|\alpha(v)\|$ by definition, $\|v\| \in \{\|f_v(\alpha)\|\}$, so $\|v\| \leq \|f_v\|$ and hence $\|f_v\| = \|v\|$.
+
+The linearity of the map trivially follows from the linearity of $\alpha$, and so it is injective (since, if it were not, it would not be norm preserving).  Therefore $f_v$ is a norm-preserving monomorphism.
+ 
+\item \emph{Answer the following:}
+
+\begin{enumerate}
+\item \emph{The set of matrices representing permutations on $l^p_n(F)$ is isomorphic to $S_n$.}
+
+Every element of $S_n$ can be represented as a vector of $n$ elements, each of the form $i \in \mathbb{N},\,i \leq n$.  Likewise, let $A$ be a permutation of $l^p_n(F)$, then the $i^{th}$ row as a $1$ in the $j^{th}$ column.  Denote the set of all these matrices as $M_p$ and define $\varphi: M_p \rightarrow S_n$ such that the $i^{th}$ entry of the resultant vector has a value of of $j$.
+
+By the uniqueness of $i,j$ this function is injective.  $|M_p| = n! = |S_n|$, so the map is also surjective.
+
+Let $A,B \in M_p$ where $A$ has a $j$ in the $i^{th}$ row and $B$ has a $k$ in the $j^{th}$ row, then $AB$ has a $k$ in the $i^{th}$ row so $\varphi(AB)$ has a $k$ in the $i^{th}$ entry.  Similarly, $\varphi(A)$ has a $j$ in the $i^{th}$ entry and $\varphi(B)$ has a $k$ in the $j^{th}$ entry so $\varphi(A)\varphi(B)$ has a $k$ in the $i^{th}$ entry.  Hence, $\varphi(AB) = \varphi(A)\varphi(B)$.
+
+\item \emph{What are the matrices corresponding to even permutations?}
+
+An even permutation is a permutation which can be arrived at with an even number of transpotitions, i.e., the exchange of only two elements.  Since each permutation corresponds to a matrix with a $1$ in each column and vector, a transposition corresponds to the exchange of only two rows.  Hence, even permutations correspond to matrices in $M_p$ with an even number of rows exchanged.
+
+Since there is only one non-zero pattern (i.e., only one way in which we can multiply any $n$ elements with unique columns and rows) in the matrix and it consists of all ones the determinant must be either $1$ or $-1$. If the matrix has an even number of row exchanges then it has a positive determinant or, in this case, a determinant of $1$.  Therefore the set $\{A \in M_p \mid \det A = 1\}$ is the set of all even permutations.
+\end{enumerate}
+
+\item \emph{Find $Iso(l^p_n(\mathbb{C}))$.}
+\item \emph{Determine all isomorphisms from $l^p_n(F)$ to $l^{p'}_n(F)$, where $n$ is fixed and $p \neq p'$.}
+\item \emph{Find $Iso(l^p(f))$.}
+
+\item \emph{$d'' := d + d'$ is a metric on $X \times X'$.}
+
+Recall that $d''((x,x'), (y,y')) = d(x,y) + d'(x',y')$ where $d$ and $d'$ are the metrics on $X$ and $X'$ respectively.  We must show that $d''$ is a metric on $X \times X'$.
+
+\begin{enumerate}
+\item{(Positive definite)} 
+If $(x,x') = (y,y')$ then  $x=y$ and $x'=y'$, so $d''((x,x'), (y,y')) = d(x,x) + d'(x',x') = 0$.  Likewise, if $d''((x,x'), (y,y') = 0$ then $d(x,y) = 0$ and $d'(x',y') = 0$, so $(x,x') = (y,y')$.
+\item{(Transitivity)} 
+\begin{eqnarray*}
+d''((x,x'), (y,y')) &=& d(x,y) + d'(x',y') \\
+&=& d(y,x) + d'(y',x') \\
+&=& d''((y,y'), (x,x'))
+\end{eqnarray*}
+
+\item{(Triangle inequality)} 
+\begin{eqnarray*}
+d''((x,x'), (y,y')) &=& d(x,y) + d'(x',y') \\
+&\leq&  d(x,z) + d(z,y) + d'(x',z') + d'(z',y') \\
+&=& d(x,z) + d'(x',z') + d(z,y) + d'(z',y') \\
+&=& d''((x,x'), (z,z')) + d''((z,z'), (y,y'))
+\end{eqnarray*}
+\end{enumerate}
+
+\item \emph{Show the following:}
+\begin{enumerate}
+\item \emph{$GL_n(F)$ is a dense open subset of $M_n(F)$.}
+
+Consider $M_n(F) \setminus GL_n(F)$, the set of all matrices with determinant zero.  Take any convergent sequence $(a_k)$ of $M_n(F) \setminus GL_n(F)$.  Each $a_i$ is a matrix with determinant zero, and since the determinant is a continuous function (a polynomial, in fact), $\lim_{k \rightarrow \infty} a_k = a$ must also be a matrix with determinant zero.  Therefore $M_n(F) \setminus GL_n(F)$ is closed, and hence $GL_n(F)$ is open.
+
+
+\item \emph{$GL_n(F)$ is a locally compact group.}
+\end{enumerate}
+
+\item \emph{$(G, \cdot, d)$ is a topological group if the map $(x,y) \mapsto x^{-1}y$ is continuous.}
+
+Since $f(x,y) = x^{-1}y$ is continuous for any $x,y \in G$ it follows that $h(x) = f(x,e) = x^{-1}$ is continuous as a function from $G \rightarrow G$.  Because composition of functions preserves continuity, $(f \circ h)(x) = xy$ is also continuous.  Therefore $(G, \cdot, d)$ is a topological group.
+
+\item \emph{$\mathbb{Q}_p(\sqrt{p})$ is a field.}
+
+Let $a+b\sqrt{p},c+d\sqrt{p}$ be arbitrary elements of $\mathbb{Q}_p(\sqrt{p})$.
+We see that $(a+b\sqrt{p})(c+d\sqrt{p}) = (ac+pbd)+(ad+bc)\sqrt{p}$, so we can treat $\mathbb{Q}_p(\sqrt{2})$ as the set of all ordered pairs of p-adic numbers with addition and multiplication defined as $(a,b)+(c,d) = (a+b,b+d)$ and $(a,b)(c,d) = (ac+pbd,ad+bc)$.
+
+Since addition is coordinate-wise all the additive properties of $\mathbb{Q}_p$ are inherited, so $(\mathbb{Q}_p)\sqrt{p}),+)$ is an Abelian group.  We only need look at multiplication and distributivity.
+
+\begin{itemize}
+\item{\underline{Multiplication}:}
+\begin{itemize}
+\item{Associativity}
+\begin{eqnarray*}
+(a,b)((c,d)(e,f)) &=& (a,b)(ce+pdf,cf+de) \\
+&=& (ace+padf+pbcf+pbde,acf+ade+bce+pbdf) \\
+&=& (ac+pbd,ad+bc)(e,f) \\
+&=&((a,b)(c,d))(e,f)
+\end{eqnarray*}
+
+\item{Identity}
+
+\[(a,b)(1,0)=(1a + p(b0),0a+1b)=(a,b)\]
+
+\item{Inverse}
+\begin{eqnarray*}
+(a,b)\left(\frac{a}{a-pb^2},\frac{-b}{a-pb^2}\right) &=& \left(\frac{a^2}{a-pb^2}+p\frac{-b^2}{a-pb^2}, \frac{-ab}{a-pb^2}+\frac{ab}{a-pb^2}\right) \\
+&=& \left(\frac{a-pb^2}{a-pb^2},\frac{ab-ab}{a-pb^2}\right) \\
+&=& (1,0)
+\end{eqnarray*}
+\end{itemize}
+
+\item{\underline{Distributivity}}
+\begin{eqnarray*}
+(a,b)((c,d)+(e,f)) &=& (a,b)(c+e,d+f) \\
+&=& (ac+ae+pbd+pbf,ad+af+bc+be) \\ 
+&=& (ac+pbd,ad+bc)+(ae+pbf,af+be) \\
+&=& (a,b)(c,d)+(a,b)(e,f)
+\end{eqnarray*}
+\end{itemize}
+
+Therefore $\mathbb{Q}_p(\sqrt{p})$ is a field.
+\item \emph{Show that a closed subgroup of a locally compact group is itself locally compact.}
+
+Let $G' < G$ be a closed subgroup of $G$, where $G$ is locally compact.  Take any point $x$ in $G'$, then there exists some neighborhood of $B(x)$ in $G$ whose closure in compact since $x$ is also in $G$.  Let $B(x)' = B(x) \cap G'$, then $B'(x)$ is clearly a neighborhood of $x$ in $G'$, so we will show that its closure is sequentially compact in $G'$ and hence compact in $G'$.
+
+Take any sequence $(a_n)$ in $\overline{B'(x)}$.  This is also a sequence in $\overline{B(x)}$, and so must have a convergent subsequence $(a_{n_k})$ by the local compactness of $G$.  By the choice of $(a_n)$ each $a_{n_k}$ is in $\overline{B'(x)}$, and must converge in there since the limit is an accumulation point of $G'$, which is closed.  Therefore, $G'$ is locally compact.
+
+\item \emph{Show that $Iso(l^2_n(\mathbb{R})) = O(n, \mathbb{R})$.}
+
+Let $A = (a_{ij}) \in Iso(l^2_n(\mathbb{R}))$.  Since an isometry preserves the dot product and the dot product of any two basis elements is zero, the dot product of any two distinct rows or columns is $0$ and the dot product of any identical rows or columns is $1$. Let $A^TA = B$, so $b_{ij} = \sum_{k=1}^n a_{ki}a_{kj}$.  If $i=j$ then there is a $1$ in that position (since $\sum_{k=1}^n a_{kj}^2 = 1$), otherwise there is a $0$ by the fact that the dot product is preserved.  Therefore $A^TA = I$, since $i=j$ are exactly the diagonal points.  Therefore $Iso(l^2_n(\mathbb{R})) \subseteq O(n, \mathbb{R})$
+
+Likewise, if $A^TA = I$ we get that $a_{kk} = 1$ for $1 \leq k \leq n$ and $a_{kj} = 0$ for $k \neq j$.  Clearly, then $\sum_{k=1}^n a_{kj}^2 = 1$.  It is then sufficient to show that each row or column of $A$has only one $1$ or $-1$ -- I am not precisely sure how.
+
+\item \emph{Around what line does the reflection matrix $A = \left( \begin{array}{cc}
+-\cos\theta & \sin\theta \\
+\sin\theta & \cos\theta \end{array} \right)$}
+
+First we note that $\det A = -\cos^2\theta - \sin^2\theta = -1$, so $A$ is indeed a reflection.  To find the line around which this matrix reflects we must find the points which are not affected by the transformation, i.e., the points $\left(\begin{array}{c} x \\ y \end{array}\right) \in \mathbb{R}^2$ such that $A\left(\begin{array}{c} x \\ y \end{array}\right) =\left(\begin{array}{c} x \\ y \end{array}\right)$.
+
+In general, 
+\[A\left(\begin{array}{c} x \\ y \end{array}\right) = \left( \begin{array}{cc}
+-\cos\theta & \sin\theta \\
+\sin\theta & \cos\theta \end{array} \right) \left(\begin{array}{c} x \\ y \end{array}\right) = \left(\begin{array}{c} -x\cos\theta + y\sin\theta \\ x\sin\theta + y\cos\theta \end{array}\right) \]
+
+So we need
+\[
+\left(\begin{array}{c} x \\ y \end{array}\right) = \left(\begin{array}{c} -x\cos\theta + y\sin\theta \\ x\sin\theta + y\cos\theta \end{array}\right) \]
+
+But this means that 
+\begin{equation}
+x = -x\cos\theta + y\sin\theta
+\end{equation}
+and
+\begin{equation}
+y = x\sin\theta + y\cos\theta
+\end{equation}
+
+Therefore $y = x\frac{1 + \cos\theta}{\sin\theta}$ and $y = x\frac{\sin\theta}{1 - \cos\theta}$.  It is easy to check that these are both satisfied irrespective of $x$ or $y$ (multiply the first by $\frac{1 - \cos\theta}{1- \cos\theta}$ to see that they are equivalent).
+
+We can reduce this to 
+\[
+y = x\frac{1 + \cos\theta}{\sin\theta} = x\frac{2\cos^2\frac{\theta}{2}}{\sin\theta} = x\frac{2\cos^2\frac{\theta}{2}}{2\sin\frac{\theta}{2}\cos\frac{\theta}{2}} = \frac{\cos\frac{\theta}{2}}{\sin\frac{\theta}{2}} \\
+= x\cot\frac{\theta}{2}
+\]
+
+This is the line around which $A$ reflects.
+\end{enumerate}
+\end{document}

@@ -1,0 +1,114 @@
+% LaTeX macros and other assorted things useful for math homework
+% -- Jesse Farmer (April 2005)
+
+\RequirePackage{amsmath, amsthm, amssymb, mathrsfs}
+
+%Algebraic and categorical structures
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Syl}{\operatorname{Syl}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\HomAlg}{\operatorname{HomAlg}}
+\newcommand{\Ob}{\operatorname{Ob}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\PSL}{\operatorname{PSL}}
+
+%Sentential and first-order logic stuff
+\newcommand{\Form}{\operatorname{Form}}
+\newcommand{\Subst}{\operatorname{Subst}}
+\newcommand{\Dual}{\operatorname{Dual}}
+\newcommand{\Depth}{\operatorname{Depth}}
+\newcommand{\Sent}{\operatorname{Sent}}
+\newcommand{\Term}{\operatorname{Term}}
+\newcommand{\Mod}{\operatorname{Mod}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Th}{\operatorname{Th}}
+\newcommand{\Cn}{\operatorname{Cn}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\OccurVar}{\operatorname{OccurVar}}
+\newcommand{\AtomicForm}{\operatorname{AtomicForm}}
+
+%Categories
+\newcommand{\category}[1]{\mathbf{#1}}
+\newcommand{\Set}{\category{Set}}
+\newcommand{\Grp}{\category{Grp}}
+\newcommand{\Top}{\category{Top}}
+\newcommand{\Ring}{\category{Ring}}
+\newcommand{\GSet}{\category{GSet}}
+\newcommand{\cat}[1]{\category{#1}}
+
+%Common sets
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\M}{\mathfrak{M}}
+\renewcommand{\L}{\mathfrak{L}}
+\renewcommand{\P}{\mathbb{P}}
+
+%Miscellaneous
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\st}{\operatorname{st}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\tor}{\operatorname{tor}}	%Torsion submodule
+\newcommand{\ch}{\operatorname{char}}	%Characterisic (e.g., of a field)
+\newcommand{\e}{\varepsilon}		%A nicer looking epsilon
+\newcommand{\iso}{\cong}		%Because I can never remember \cong
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\scr}[1]{\mathscr{#1}}	%Who wants to type all that?
+\renewcommand{\cal}[1]{\mathcal{#1}}
+\newcommand{\bs}{\backslash}
+
+\newcommand{\T}{\mathscr{T}}		%This font is nice for topologies
+
+\newcommand{\set}[1] {
+\left\{ #1 \right\}
+}
+
+\newcommand{\powset}[1] {
+\wp\left(#1\right)
+}
+
+\newcommand{\abs}[1] {
+\left| #1 \right|
+}
+
+\newcommand{\norm}[1] {
+\left\| #1 \right\|
+}
+
+\newcommand{\ceil}[1] {
+\left\lceil #1 \right\rceil
+}
+
+\newcommand{\floor}[1] {
+\left\lfloor #1 \right\rfloor
+}
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\Oh}[1]{
+O\left(#1\right)
+}
+
+\newcommand{\wt}[1]{
+\widetilde{#1}
+}
+
+\newcommand{\leftexp}[2]{{\vphantom{#2}}^{#1}{#2}}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\newtheorem{exercise}{Exercise}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]

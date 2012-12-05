@@ -1,0 +1,107 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC
+	"-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="Mr. Farmer at the University of Chicago" />
+	<title>Jesse E. I. Farmer - Code</title>
+	<link rel="stylesheet" type="text/css" href="/~farmerje/farmerje.css" />
+</head>
+<body>
+<div id="page">
+
+<div id="header">
+<h1>Jesse E. I. Farmer</h1>
+<a href="http://www.uchicago.edu">University of Chicago</a>
+<img src="/~farmerje/img/header.png" alt="Phoenix" />
+</div>
+
+<div id="navigation">
+<ul>
+<li class="first"><a href="/~farmerje/index.shtml">Home</a></li>
+<li><a href="/~farmerje/math">Math</a></li>
+<li><a href="/~farmerje/code">Code</a></li>
+<li><a href="/~farmerje/tutorials">Tutorials</a></li>
+<li><a href="/~farmerje/latex">LaTeX</a></li>
+<li><a href="/~farmerje/linux">Linux</a></li>
+<li><a href="/~farmerje/resume.pdf">Resumé</a></li>
+</ul>
+</div>
+
+<div id="content">
+
+
+<h2>Code</h2>
+<p>
+I like to program computers, and I've done it as a hobby, for work, and for class.  I program mostly in C/C++, Python, and Ruby, although I know a few other languages, too.  Below are the projects or whatever that I feel are worth sharing, either because they might be useful or they demonstrate something cool.  Or at least something that I think is cool.  Most of them weren't designed with sharing in mind, so I'll only be adding things as they become suitable for distribution.
+</p>
+<h3>Personal</h3>
+<ul>
+	<li>
+	<a href="http://webdev.uchicago.edu/ldap-email">LDAP email widget</a>
+	<p>
+	The LDAP email widget is, well, just what it says.  This was my first ever AJAX program and I borrowed some ideas from Google Suggest (e.g., the timeout adjust feature).  It acts like an LDAP-enabled email client, querying the University of Chicago's LDAP server for email addresses and/or names matching what you enter into the boxes.  They are attached using ids, so you can have as many on a single page as you'd like.  The Javascript is well-structured but would look funny to someone familiar with Javascript.  I definitely wouldn't write it like this now, which goes to show what two years of JS development experience will get you, I guess.
+	</p>
+</ul>
+<h3>Academic</h3>
+<ul>
+	<li>
+	<a href="eai">EAI</a>
+	<p>
+	EAI (Extensible Authorship Identification) is a modular system for determining to which of two authors a given text is most similar.  It is written in Python and Perl, although I plan to reimplement it purely in Python so as to make certain speed improvements.  This was my final project for <a href="http://www.classes.cs.uchicago.edu/archive/2006/winter/35100-1/">CMSC 35100</a>, Natural Language Processing.  I hope to continue working on it so as to make it function more reliably.
+	</p>
+	</li>
+	<li>
+	<a href="suffixes">suffixes</a>
+	<p>
+	<tt>suffixes</tt> is a C++ program which tries to compute root/suffix boundaries within a word given a training corpus.  By default it uses the supplied KJV Bible as training data, but it can use any file so long as the file has punctuation and capitalization removed.  If the corpus isn't prepared in this way it will treat punctuation as letters and not be able to differentiate between 'a' and 'A', for example.  It processes one string at a time, but can read from standard input so that it can parse an external list of words.  It is language agnostic, but assumes ASCII input.  If the input contains tab-delimited data corresponding to the correct parse of a word, <tt>suffixes</tt> will also compute its precision, recall, and F-score.
+	</p>
+	</li>
+	<li>
+	<a href="viterbi">viterbi</a>
+	<p>
+	<tt>viterbi</tt> is a C++ program which uses a <a href="http://en.wikipedia.org/wiki/Viteribi_algorithm">Viterbi-style</a> parsing algorithm to try and turn a string of letters into words.  That is, given an input of "therentisdue" its output might be something like "-the-rent-is-due," presuming it is actually able to predict this.  By default it, too, uses the KJV Bible as training data (which can produce some amusing results, e.g., it assigns a high probability to the word "sin"), but a different corpus can be specified via the command line.
+	</p>
+	</li>
+</ul>
+<h3>Professional</h3>
+<ul>
+	<li>
+	<a href="brutelogin">brutelogin</a>
+	<p>
+	brutelogin is a custom replacement of Apple's Login.app for Mac OS X written in C, Objective-C, and bourne shell script.  It is in use on approximately 30 computers throughout the <a href="http://www.uchicago.edu">University of Chicago's</a> <a href="http://rh.uchicago.edu">housing system</a>.  For legal reasons it is unavailable for download, but the above link contains a brief overview of how it works and some screenshots.  At one point I was the primary developer and maintainer for this application, preceeded by <a href="http://home.uchicago.edu/~ahiorean/">Alex Hioreanu</a> and followed by <a href="http://home.uchicago.edu/~jrlilly/">Jacob Lilly</a>.  My work enabled it to be put into production use on the <abbr title="Residential Computing">Rescom</abbr> lab machines.
+	</p>
+	</li>
+	<li>
+	<a href="http://rh.uchicago.edu/chopin/">Chopin</a>
+	<p>
+	Chopin is an "enterprise management system" <abbr title="Linux Apache PHP MySQL">LAMP</abbr> project used by <abbr title="Residence Halls &amp; Commons">RH&amp;C</abbr>, <abbr title="Office of Undergraduate Student Housing">OUSH</abbr>, and <abbr title="Residential Computing">Rescom</abbr> at the <a href="http://www.uchicago.edu">University of Chicago</a>.  The students know it mostly because it enables them to file housing-and-computer-related workorders, but it does a lot more, including keeping track of budgetary information, housing assignments, and so forth.  Basically if it's housing-related it's done in Chopin.  The above link will take you to the Chopin homepage, which will give you a vague idea of the more simple aspects of what it does even if you don't have access.
+	</p>
+	</li>
+</ul>
+
+</div>
+
+<div id="footer">
+Copyright &copy; <a href="mailto&#058;farmerje&#064;uchicago&#046;edu">Jesse E.I. Farmer</a>, 2005-2006
+
+<div class="updated">Last updated: 05 September 2006</div>
+<img src="/~farmerje/img/xhtml.png" alt="Valid xhtml 1.0" />
+<img src="/~farmerje/img/css.png" alt="Valid CSS" />
+</div>
+
+</div>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-313699-1";
+urchinTracker();
+</script>
+</body>
+</html>
+

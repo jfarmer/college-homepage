@@ -1,0 +1,266 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\def\bddots{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu
+        \raise4pt\hbox{.}\mkern2mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern1mu}}
+\title{MATH 208: Homework \#8}
+\author{Jesse Farmer}
+\date{01 March 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Show that the following are locally Euclidian:}
+\begin{enumerate}
+\item \emph{$SL_n(F)$}
+\item \emph{$O(n,F)$}
+\item \emph{$SO(n,F)$}
+\item \emph{$U(n)$}
+\item \emph{$SU(n)$}
+\end{enumerate}
+
+\item \emph{Show that the following are Lie groups:}
+\begin{enumerate}
+\item \emph{$U(n)$}
+\item \emph{$SU(n)$}
+\end{enumerate}
+
+\item \emph{Show that the derivative $L$ exists at $x_0$ if and only if $\lim_{h \rightarrow 0} \left| \frac{f(x_0 + h) - f(x_0) - Lh}{h}\right| = 0$.}
+
+Let 
+\[\lim_{h \rightarrow 0} \frac{f(x_0 + h) - f(x_0)}{h} = L\]  
+Then for any $\epsilon > 0$ we have there is some $\delta$ such that for $0<|h| < \delta$
+\[\left|\frac{ f(x_0 + h) - f(x_0) -Lh}{h} \right| < \epsilon\]
+
+But
+\[\left|\frac{ f(x_0 + h) - f(x_0) -Lh}{h} \right| = \left|\left|\frac{ f(x_0 + h) - f(x_0) -Lh}{h} \right|\right|\]
+
+So if either of these is less than $\epsilon$ then the other is, which guarantees that the derivative $L$ exists at $x_0$ if and only if $\lim_{h \rightarrow 0} \left| \frac{f(x_0 + h) - f(x_0) - Lh}{h}\right| = 0$.
+
+\item \emph{Find the center of $GL_n(F)$.}
+
+The center of $GL_n(F)$ is the set of elements which commute with every element in $GL_n(F)$.
+
+Consider the $n \times n$ matrix
+\[B = 
+\left (
+\begin{array}{cccc}
+0 & 1 & \cdots & 0 \\
+0 &  & \ddots & \vdots \\
+\vdots & & & 1 \\
+1 & 0 & \cdots & 0 \\
+\end{array}
+\right )
+\]
+
+and let $A$ be an arbitrary matrix 
+
+\[A=
+\left(
+\begin{array}{cccc}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} &  & a_{2n} \\
+\vdots & & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{array}
+\right)
+\]
+
+Then
+\[AB =
+\left(
+\begin{array}{cccc}
+a_{1n} & a_{11} & \cdots & a_{1,n-1} \\
+a_{2n} & a_{21} & & a_{2,n-1} \\
+\vdots & & \ddots & \vdots \\
+a_{nn} & a_{n1} & \cdots & a_{n,n-1}
+\end{array}
+\right)
+\]
+
+and
+
+\[BA =
+\left(
+\begin{array}{cccc}
+a_{21} & a_{22} & \cdots & a_{2n} \\
+a_{31} & a_{32} & & a_{3n} \\
+\vdots & & \ddots & \vdots \\
+a_{11} & a_{12} & \cdots & a_{1n}
+\end{array}
+\right)
+\]
+
+Look at $AB$ then $BA$ we see $a_{11} = a_{22}$, but finding $a_{22}$ in $AB$ we see that it corresponds to $a_{33}$ in $CA$.  Likewise for $a_{33}$, so continuing this process we get that $a_{11} = a_{22} = \cdots = a_{nn}$.
+
+Now consider the $n \times n$ matrix
+\[S=
+\left(
+\begin{array}{ccc}
+0 & \cdots & 1 \\
+\vdots & \bddots & \vdots \\
+1 & \cdots & 0
+\end{array}
+\right)
+\]
+
+Requiring that $SA = AS$ for any $A$ in the center we see that, in general
+
+\begin{equation}
+\label{cmatrix}
+a_{ij} = a_{(n-i+1),(n-j+1)}
+\end{equation}  
+
+Define $S_k$ as the matrix $S$ with a $-1$ in the $k^{th}$ row.  For each $k \leq n$ we see $AS_k$ is $AS$ with the $k^{th}$ column having a minus sign and $S_kA$ is $AS$ with the $k^{th}$ row having a minus sign.  From (\ref{cmatrix}) we see that the only elements that must not satisfy $a_{ij} = -a_{ij}$ are precisely the diagonals of $A$.  Therefore the center of $GL_n(F)$ consists precisely of those matrices of the form $\alpha I$ where $\alpha \in F^\times$, since we know already all of these matrices commute.
+
+\item \emph{Let \[f_r(x) = \begin{cases} \frac{1}{q^r} & \frac{p}{q} = x \in \mathbb{Q} \\ 0 & x \in \mathbb{R} \setminus \mathbb{Q} \end{cases}\]  Show that $f_r$ is not differentiable anywhere if $1 \leq r \leq 2$.}
+
+First, $f_r$ is not differentiable at any non-zero rational point since $f_r$ is not continuous there.  $0 \neq x \in \mathbb{R} \setminus \mathbb{Q}$.  We know that there exists infinitely many $\frac{p}{q}$ such that $|x - \frac{p}{q}| < \frac{1}{q^r}$ by the next problem, but between each of these points and $x$ the slope is at at most $-1$, i.e., in any interval we can find infinitely many rational numbers such that the slope of the secant is bounded away from zero by a constant.  Hence, the derivative, which is the limit of secant slopes, does not exist.
+
+\item \emph{Let $\alpha \in \mathbb{R} \setminus \mathbb{Q}$.  Show that there exists infinitely many $\frac{p}{q} \in \mathbb{Q}$ such that $|\alpha - \frac{p}{q}| < \frac{1}{q^2}$.}
+
+
+Let $\alpha$ be arbitrary and irrational and $N \in \mathbb{N}$.  For brevity's sake we will denote $[\alpha] = \alpha - \lfloor \alpha \rfloor$.
+
+Consider the intervals
+\[ \left[0,\frac{1}{N}\right), \left[\frac{1}{N}, \frac{2}{N}\right), \ldots, \left[\frac{N-1}{N}, 1\right) \]
+
+Clearly since $\alpha$ is irrational we have $0 \leq [q\alpha] < 1$ for any irrational $\alpha$ and rational $q$.  Consider $[0], [\alpha], [2\alpha], [3\alpha], \ldots, [N\alpha]$.  There are $N+1$ of these and each is less than $1$, but only $N$ intervals above.  Therefore there exist $q_1, q_2, S \in \mathbb{N}$ such that
+
+\[ [q_1\alpha], [q_2\alpha] \in \left[\frac{S}{N}, \frac{S+1}{N}\right)\]
+
+Letting $q = |q_1 - q_2|$ we get that for some $p \in \mathbb{Z}$
+\[ |q\alpha - p| < \frac{1}{N} \]
+or
+\[ |\alpha - \frac{p}{q}| < \frac{1}{Nq} \leq \frac{1}{q^2} \]
+
+Assume for contradiction that there are only a finite such $\frac{p_i}{q_i}$ satisfying this condition.  Since $\alpha$ is irrational this difference is never exactly $0$ and so there exists some $N'$ such that for all $i = 0, \ldots, N$
+
+\[|\alpha - \frac{p_i}{q_i}| > \frac{1}{N'}\]
+
+But we can apply the original argument for this $N'$, producing a $\frac{p}{q}$ which is within $\frac{1}{q^2}$ of $\alpha$.
+
+\item \emph{Let \[f(x) = \begin{cases} e^{\frac{-1}{x^2}} & x \neq 0 \\ 0 & x = 0 \end{cases}\]  For all $n \in \mathbb{N}$ show that $f^{(n)}(0) = 0$.}
+
+Let $p(x)$ be a $n$ degree polynomial of $\frac{1}{x}$, that is
+\[
+p(x) = \sum_{i=0}^n a_i\frac{1}{x^i}
+\]
+
+We will first show that $f^{(n)}(x)$ is of the form $e^{\frac{-1}{x^2}}p(x)$ when $x \neq 0$.  Clearly $f^{(0)}(x)$ is of this form, so assume 
+\[
+f^{(n)}(x) = e^{\frac{-1}{x^2}}\sum_{i=0}^n a_i\frac{1}{x^i}
+\]
+
+Then applying the product rule and chain rule we get that
+\[
+f^{(n+1)}(x) = e^{\frac{-1}{x^2}}\left(\frac{2}{x^3}\sum_{i=0}^n a_i\frac{1}{x^i} + \sum_{i=0}^n a_i\frac{-i}{x^{i-1}}\right)
+\]
+
+which is still of the the form $e^{\frac{-1}{x^2}}p(x)$, for the appropriate $p(x)$.
+
+Because the following is true
+\begin{eqnarray*}
+\lim_{x \rightarrow 0} e^{\frac{-1}{x^2}} \left(\sum_{i=0}^n a_i \frac{1}{x^i} \right) &=& \lim_{x \rightarrow 0}\sum_{i=0}^n a_i \frac{\frac{1}{x^i}}{e^{\frac{1}{x^2}}} \\
+&=& \lim_{u \rightarrow \pm \infty}\sum_{i=0}^n a_i \frac{u^i}{e^{u^2}} \\
+&=& 0
+\end{eqnarray*}
+
+we see that each $f^{(n)}(x)$ is continuous at zero since we define $f^{(n)}(0) = 0$.  All that remains to be shown is that each $f^{(n)}$ is differentiable at zero.  Since $f^{(n)}(0) = 0$, it follows that 
+
+\begin{eqnarray*}
+\lim_{x \rightarrow 0} \frac{e^{\frac{-1}{x^2}} \left(\sum_{i=0}^n a_i \frac{1}{x^i} \right)}{x} &=& \lim_{x \rightarrow 0} \frac{\frac{1}{x}\left(\sum_{i=0}^n a_i \frac{1}{x^i} \right)}{e^\frac{1}{x^2}} \\
+&=& \lim_{x \rightarrow 0} \frac{\left(\sum_{i=0}^n a_i \frac{1}{x^{i+1}} \right)}{e^\frac{1}{x^2}} \\
+&=& 0
+\end{eqnarray*}
+
+which is true by the same argument by which we showed continuity. Therfore $f^{(n)}(x)$ is differentiable at $0$ and $f^{(n)}(0) = 0$.
+
+\item \emph{Let $f: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ be such that $f(x,y)=(x\sin(y),e^x+y^2)$.}
+\begin{enumerate}
+\item \emph{Is $f$ differentiable at any point?}
+
+$f$ is differentiable at every point in $\mathbb{R}^2$.
+\item \emph{What is $Df(x,y)$?}
+
+Consider $f$ as $f(x,y) = (f_1(x,y), f_2(x,y))$.  For any point $(x,y) \in \mathbb{R}^2$ the linear transformation which best approximates $f$ at $(x,y)$ is
+
+\[
+Df(x,y) =
+\left(
+\begin{array}{cc}
+\frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} \\
+\frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y}
+\end{array}
+\right)
+=
+\left(
+\begin{array}{cc}
+\sin(y) & x\cos(y) \\
+e^x & 2y
+\end{array}
+\right)
+\]
+\end{enumerate}
+
+
+\item \emph{Show that if $Df(x)$ exists then it is unique.}
+
+Let $f$ be differentiable at $x_0$.
+
+Assume there exists a $D_1f(x_0), \delta_1$ such that for $0<|h|<\delta_1$
+\[\left|\frac{f(x_0 + h) - f(x_0) - D_1f(x_0)h}{h}\right| < \frac{\epsilon}{2}\]
+
+and a $D_2f(x_0), \delta_2$ such that for $0<|h|<\delta_2$
+\[\left|\frac{f(x_0 + h) - f(x_0) - D_1f(x_0)h}{h}\right| < \frac{\epsilon}{2}\]
+
+Assume $D_1f(x_0) \neq D_1f(x_0)$ since otherwise we are done and let $\delta = \min\{\delta_1, \delta_2\}$, then for $0<|h|<\delta$ we have 
+\[\left|\frac{f(x_0 + h) - f(x_0) - D_1f(x_0)h}{h}\right| + \left|\frac{f(x_0 + h) - f(x_0) - D_1f(x_0)h}{h}\right| < \epsilon\]
+
+Assuming \ldots
+
+I've tried to work through this, and all I know is that $D_1 \neq D_2$ iff $\|D_1 - D_2\| >0$, but this always produces an inequality in the wrong ``direction.''
+
+\item \emph{Let $\mu: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}^k$.}
+\begin{enumerate}
+\item \emph{What conditions are required for a ``$\mu$-product rule?''}
+
+We require that $\mu(a,b+c) = \mu(a,b) + \mu(a,c)$, i.e., distributivity, $\mu(0,a) = \mu(a,0) = 0$, $\alpha\mu(a,b) = \mu(\alpha a, b) = \mu(a, \alpha b)$, i.e., associativity with respect to ``normal'' multiplication, and commutativity.  We also require that $|\mu(a,b)| = \alpha |a||b|$ for some $\alpha \in \mathbb{R}^k$.  Finally $\mu$ must be continuous.
+
+I don't like all these conditions, especially the second-to-last, however I see now way to avoid it.  The proof for the other product rules work because we can talk about what $|a \cdot b|$ and $|a \times b|$ mean, and the result comes from the fact that they are related to the ``normal'' absolute value.  I think if we require this we can drop continuity, since I originally included it to guarantee that $\lim_{x \rightarrow 0} \mu(x,x) = 0$ and things of this form.
+
+\item \emph{Prove the``$\mu$-product rule'' under these conditions.}
+
+\[
+\lim_{x \rightarrow a} \left| \frac{ \mu(f(x), g(x)) - \mu(f(a), g(a)) - \big(\mu(g(a), Df(a)(x-a)) + \mu(f(a), Dg(a)(x-a))\big)}{x-a} \right|
+\]
+
+is equivalent to the following after adding and subtracting the same thing a few times, several applications of commutativity, and three applications of distributivity (the line is broken because otherwise it is too long)
+
+\begin{eqnarray*}
+& & \lim_{x \rightarrow a} \left| \frac{\mu(g(a), f(x) - f(a) - Df(a)(x-a))}{x-a} \right| \\
+&+& \lim_{x \rightarrow a} \left| \frac{\mu(f(a), g(x) - g(a) - Df(a)(x-a))}{x-a} \right| \\ 
+&+& \lim_{x \rightarrow a} \left| \frac{\mu(f(x)-f(a), g(x)-g(a))}{x-a} \right|
+\end{eqnarray*}
+
+For the first we get $\alpha |g(a)|\frac{|f(x)-f(a)-Df(a)(x-a)}{|x-a|}$, which goes to zero as $x \rightarrow a$ since $f$ is assumed to be differentiable.  The second follows from the same facts, but with $f$ and $g$ switched.
+
+Ths third we can write as $\alpha |g(x)-g(a)| \frac{|f(x) - f(a)|}{|x-a|}$, which also goes to zero as $x \rightarrow a$.
+
+Therefore if $f,g$ are differentiable at $a$ then $D\mu(f(a), g(a))(a) = \mu(g(a),Df(a)) + \mu(f(a),Dg(a))$.
+
+\end{enumerate}
+
+
+\end{enumerate}
+\end{document}

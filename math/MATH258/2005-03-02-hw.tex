@@ -1,0 +1,165 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\powset}[1]{
+\wp\left(#1\right)
+}
+
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Sym}{\text{Sym}}
+\newcommand{\Syl}{\text{Syl}}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\End}{\text{End}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\T}{\mathcal{T}}
+
+\newcommand{\iso}{\cong}
+
+\newtheorem{lemma}{Lemma}
+
+\title{MATH 258: Homework \#8}
+\author{Jesse Farmer}
+\date{02 March 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Let $A$ be a commutative ring and $M$ an $A$-module.  Show that for all $a \in A$ the map $h_a: M \rightarrow M$ defined by $x \mapsto ax$ and for all $x \in M$ the map $t_x: A \rightarrow M$ defined by $a \mapsto ax$ are homomorphisms of the additive group of $A$.  Deduce that $h_a$ and $t_x$ are $A$-module homomorphisms.}
+
+Both $h_a$ and $t_x$ are clearly well-defined, and are homomorphisms of the additive group associated with $A$ be left and right distributivity, respectively.  To see this, note that
+$$h_a(x+y) = a(x+y) = ax + ay = h_a(x) + h_a(y)$$ and $$t_x(a + b) = (a+b)x = ax + bx = t_x(a) + t_x(b)$$
+
+To see that $h_a$ and $t_x$ are $A$-module homomorphisms, let $a,b \in A$.  Then $$h_a(bx) = a(bx) = (ab)x = (ba)x = b(ax) = bh_a(x)$$ and $$t_x(ba) = (ba)x = b(ax) = bt_x(a)$$
+
+The rest of the properties then follow trivially from the properties of homomorphisms.  $0 \cdot x = t_x(0) = 0$, $a(x-y) = h_a(x-y) = h_a(x) - h_a(y) = ax - ay$, $a \cdot 0 = h_a(0) = 0$, and $$(-a)x = t_x(-a) = -t_x(a) = -(ax) = -h_a(x) = h_a(-x) = a(-x)$$
+
+\item \emph{Let $A$ be a commutative ring and define $E_n = \{ f \in A[x] \mid \deg f \leq n-1 \}$.  Show that $E_n$ is an $A$-module isomorphic to $A^n$.}
+
+That $E_n$ is an $A$-module follows by treating elements of $A$ as elements of $A[x]$ of degree $0$, and using the regular ring properties of $A[x]$.  Define a map $\varphi: E_n \rightarrow A^n$ by $$a_{n-1}x^{n-1} + a_{n-2}x^{n-2} + \cdots + a_0 \mapsto (a_{n-1}, a_{n-2}, \ldots, a_0)$$
+
+This is obviously surjective, and injective since if $(a_{n-1}, \ldots, a_0) = (b_{n-1}, \ldots, b_0)$ then $a_i = b_i$ for $0 \leq i \leq n-1$, and hence the respective polynomials are equal.  Letting $f,g \in A[x]$, where the coefficients of the polynomials are denoted by $a_i$ and $b_i$ respectively,(i.e., $f(x) = a_{n-1}x^{n-1} + \cdots + a_0$),
+\[
+\varphi(f+g) = (a_{n-1} + b_{n-1}, \ldots, a_0 + b_0) = (a_{n-1}, \ldots, a_0) + (b_{n-1}, \ldots, b_0) = \varphi(f) + \varphi(g)
+\]
+
+and for any $r \in A$
+\[
+\varphi(rf) = (ra_{n-1}, \ldots, ra_0) = r(a_{n-1}, \ldots, a_0) = r\varphi(f)
+\]
+
+Hence $E_n$ and $A^n$ are isomorphic as $A$-modules.
+
+\item \emph{Let $A$ be a commutative ring.}
+\begin{enumerate}
+\item \emph{Let $M,N$ be $A$-modules.  Show that $\Hom_A(M,N)$ is an $A$-module.}
+
+Let $f,g \in \Hom_A(M,N)$ and let $a \in A$.  Define $(f+g)(x) = f(x) + g(x)$ and $(af)(x) = af(x)$.  These operations are well-defined on $\Hom_A(M,N)$ since $$(f+g)(x+y) = f(x+y) + g(x+y) = f(x) + f(y) + g(x) + g(y) = (f+g)(x) + (f+g)(y)$$ and $$(af)(x+y) = af(x+y) = f(ax+ay) = f(ax) + f(ay) = af(x) + af(y) = (af)(x) + (af)(y)$$
+
+Since $N$ is an $A$-module, $1 \cdot f(x) = f(x)$.  Left-distributivity holds, 
+\[
+a((f+g)(x)) = a(f(x) + g(x)) = af(x) + ag(x) = (af)(x) + (ag)(x)
+\]
+
+Right distributivity holds similarly, since $N$ is an $A$-module.  Finally, for $a,b \in A$,
+\[
+(ab)(f(x)) = a(bf(x)) = a(bf(x))
+\]
+
+since $f(x) \in N$ and $N$ is an $A$-modules, which implies $(ab)f = a(bf)$.
+
+\item \emph{Let $M,N,P$ be $A$-modules.  Show that the map $\eta: Hom_A(M,N) \rightarrow \Hom_A(M,P)$ given by $f \mapsto g \circ f$ and $\varphi: \Hom_A(P,M) \rightarrow \Hom_A(N,M)$ given by $f \mapsto f \circ g$ are $A$-module homomorphisms.}
+
+Let $g \in \Hom_A(N,P)$, and $f,h \in \Hom_A(M,N)$.  Then to show that $\eta(f+h) = \eta(f) + \eta(h)$, the following suffices
+\[
+g \circ(f+h)(x) = g(f(x) + h(x)) = g(f(x)) + g(h(x)) = (g\circ f)(x) + (g \circ h)(x)
+\]
+
+and, for $a \in A$,
+\[
+g \circ (af)(x) = g(af(x)) = ag(f(x) = a(g \circ f)(x)
+\]
+
+so that $\eta(af) = a\eta(f)$.  The above works because $f(x) \in N$ and $g \in \Hom_A(N,P)$.  It follows \emph{mutatis mutandis} for $\varphi$.
+
+\end{enumerate}
+
+\item \emph{Let $A$ be a commutative ring and $M$ an $A$-module. Define $t_M: A \rightarrow \End_A(M)$ by $a \mapsto \tilde{a}$ where $\tilde{a}(x) = ax$.  Show that $\tilde{a}$ and $t_M$ are a ring homomorphisms and that $\ker t_M = \{a \in A \mid aM = 0\}$.}
+
+$\tilde{a}$ is a homomorphism from the first exercise, and $t_M$ is a homomorphism since $$t_M(a+b)(x) = (a+b)x = ax + bx = \tilde{a}(x) + \tilde{b}(x) = t_M(a)(x) + t_M(b)(x)$$
+
+and
+\[
+\ker t_M = \{a \in A \mid t_M(a) = 0\} = \{a \in A \mid \tilde{a} = 0 \} = \{a \in A \mid ax = 0, x \in M\} = \{a \in A \mid aM = 0\}
+\]
+\item \emph{Let $A$ be a commutative ring.  Show that any cyclic $A$-module $M$ is isomorphic to the $A$-module $A/I$, for some ideal $I$ of $A$.}
+
+Let $t_x: A \rightarrow M$ be defined by $t_x(a) = ax$.  From the first exercise $t_x$ is a homomorphism of $A$-modules.  Since $M$ is a cyclic $A$-module there exists some $x \in M$ such that $M = Ax$, and hence $t_x(A) = M$.  By the first isomorphism theorem $$\frac{A}{\ker t_x} \iso t_x(A) = M$$
+
+\item \emph{Let $A$ be a commutative ring.  Show that $M$ is a simple $A$-module if and only if $M$ is isomorphic to $A/P$, where $P$ is a maximal ideal in $A$.}
+
+Every simple $A$-module is cyclic, since if there were a nonzero element $x \in M$ such that $M \neq Ax$, then $Ax$ would be a proper submodule of $M$ -- contradicting the fact that $M$ is simple.  Thus ths previous exercise applies.
+
+Assume that $A/P \iso M$ where $P$ is a maximal ideal of $A$ and $M$ is an $R$-module.  Since $P$ is maximal the only ideals (and hence submodules when $A/P$ is treated as an $A$-module) are $0$ and $A/P$, and hence $M$ is simple.  For the other direction, note that the submodules of $A/P$ are of the form $N/P$ where $P \subset N$ is an $A$-module.  If the only submodules of $A/P$ are $0$ and $A/P$ then the only such $N$ are $A$ and $P$, i.e., $P$ is maximal in $A$.
+
+\item \emph{Let $A$ be a commutative ring and $\{M_i\}$ for $1 \leq i \leq n$ a family of $A$-modules.  Let $N$ be any $A$-module.  Let $$\varphi: \Hom_A(N, M_1 \times \cdots \times M_n) \rightarrow \prod_{i=1}^n \Hom_A(N,M_i)$$ be defined by $f \mapsto (f_1, \ldots, f_n)$ where $f_i = \pi_i \circ f$ and $\pi_i$ is the natural projection from $M_1 \times \cdots \times M_n$ to $M_i$.  Show that $\varphi$ is an isomorphism of $A$-modules.}
+
+$\varphi$ is surjective since for any $(f_1, f_2, \ldots, f_n)$ we have $f \mapsto (f_1, \ldots, f_n)$ where $f(x) = (f_1(x), \ldots, f_n(x))$.  It is injective since the kernel of $\varphi$ are all $f$ such that $\pi_i \circ f = 0$ for $1 \leq i \leq n$, but this means precisely that $f$ sends any $x \in N$ to $(0, 0, \ldots, 0)$ and hence $f \equiv 0$.  Therefore $\ker \varphi = 0$.
+
+From previous exercises we know that $\pi_i$ is an $A$-module homomorphism, so that $\pi_i \circ (f+g) = \pi_i \circ f + \pi_i \circ g$, and, similarly, $\pi_i \circ (af) = a(\pi_i \circ f)$.  It follows immediately that $\varphi$ is a homomorphism, and hence an $A$-module isomorphism.
+
+\item \emph{Using the notation from the previous problem, let $\eta_i: M_i \rightarrow M_1 \times \cdots \times M_n$ map $x$ to $(0, \ldots, x, \ldots, 0)$, where $x$ is in the $i^{th}$ place.  Show that the map $$\psi: \Hom_A(M_1 \times \cdots \times M_n, N) \rightarrow \prod_{i=1}^n \Hom_A(M_i, N)$$ given by $f \mapsto (f \circ \eta_1, \ldots, f \circ \eta_n)$ is an isomorphism of $A$-modules.}
+
+$\psi$ is surjective since $f(x_1, \ldots, x_n) = x_1 + \cdots x_n$ maps to $(f_1, f_2, \ldots, f_n)$ by $\psi$.  It is also injective since if $f,g \in \Hom_A(M_1 \times \cdots \times M_n, N)$ they map $0$ to $0$, and hence if $f_i = g_i$ for all $i$, then $f(\vec{x}) = g(\vec{x})$ for all $\vec{x} \in \prod M_i$ since this means precisely that they agree as functions of each coordinate.
+
+Each $\eta_i$ is a homomorphism of modules, so that $\psi$ is also a homomorphism, and hence an isomorphism. 
+\item \emph{Let $\{M_i\}$ with $1 \leq i \leq n$ be a family of $A$-modules, and $N_i \subset M_i$ sub-modules.  Consider the map $$\theta: M_1 \times \cdots \times M_n \rightarrow M_1/N_1 \times \cdots \times M_n/N_n$$ given by $\theta(x_1, \ldots, x_n) = (\bar{x}_1, \ldots, \bar{x}_n)$.  Show that $\theta$ is an $A$-module epimorphism.  Deduce that $$\frac{M_1 \times \cdots \times M_n}{N_1 \times \cdots \times N_n} \iso \frac{M_1}{N_1} \times \cdots \times \frac{M_n}{N_n}$$}
+
+That $\theta$ is an $A$-module homomorphism follows from the fact that addition and multiplication in $M_i/N_i$ as an $A$-module is well-defined, i.e., $\overline{x_i+y_i} = \bar{x}_i + \bar{y}_i$ and $\overline{ax_i} = \bar{a}\bar{x}_i$.  It is surjective since for any $(\bar{x}_1, \ldots, \bar{x}_n)$ we can choose coset representatives $x_1, \ldots, x_n$ such that $(x_1, \ldots, x_n) \mapsto (\bar{x}_1, \ldots, \bar{x}_n)$.  Finally, since $\bar{x}_i = 0$ if and only if $x_i \in N_i$, it follows that 
+
+\[
+\ker \theta = \left\{\vec{x} \in \prod M_i \mid \bar{x}_i = 0, 1 \leq i \leq n\right\} = \left\{\vec{x} \in \prod N_i\right\} = \prod N_i
+\]
+
+and the relation follows from the first isomorphism theorem.
+
+\item \emph{Let $A$ be a commutative ring and $\{I_i\}$ a family of mututally comaximal ideals for $1 \leq i \leq n$.  Let $M$ be an $A$-module and define $\varphi: M \rightarrow M/(I_1M) \times \cdots \times M/(I_nM)$ by $$\varphi(x) = (\theta_1(x), \ldots, \theta_n(x))$$ where $\theta_i(x) = x + I_iM$.  Show that $\varphi$ is a surjective $A$-module homomorphism.  Deduce that $$\frac{M}{(I_1 \cap \cdots \cap I_n)M} \iso \frac{M}{I_1M} \times \cdots \times \frac{M}{I_nM}$$}
+
+$\varphi$ is obviously a ring homomorphism since each $\theta_i$ is a homomorphism (which follows directly from the fact that addition and module multiplication are well-defined on each submodule).  Since the $\{I_i\}$ are comaximal we can choose $e_i$ which is congruent to $1$ modulo $I_i$, and congruent to $0$ modulo $I_j$ for all $j \neq i$, since certainly if $I_i + I_j = A$ then $I_1 + \cdots + I_n = 1$.  Consider $(\bar{x}_1, \ldots, \bar{x}_n)$ and let $x_i$ be a representative of $\bar{x}_i$.  Then $x = \sum_{i=1}^n e_ix_i$ is congruent to $x_i$ modulo $I_iM$ (as $e_j = 0$ modulo $I_j$ for $j \neq i$) so that $\varphi(x) = (\bar{x}_1, \ldots, \bar{x}_n)$.  Hence $\varphi$ is surjective.
+
+Certainly $I_1M \cap \cdots \cap I_nM = (I_1 \cap \cdots \cap I_n)M$ since the latter is precisely thos elements of the form $\sum a_ix_i$ where the sum is finite, $a_i \in I_j$ for all $j$, and $x_i \in M$.  The kernel of $\varphi$ will be $x$ such that $x \in I_iM$ for all $i$, i.e., $x \in I_1M \cap \cdots I_nM$, so that $\ker \varphi = (I_1 \cap \cdots \cap I_n)M$, and the result follows.
+
+
+\end{enumerate}
+\end{document}

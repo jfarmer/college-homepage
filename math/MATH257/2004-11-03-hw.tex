@@ -1,0 +1,99 @@
+\documentclass[letterpaper, 11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\brac}[1]{
+\left\langle #1 \right\rangle
+}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{MATH 257: Homework \#5}
+\author{Jesse Farmer}
+\date{03 November 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Let $A$ be an abelian group and let $B \leq A$.  Prove that $A/B$ is abelian.  Give an example of a non-abelian group containing a proper normal subgroup $N$ such that $G/N$ is abelian.}
+
+Since $A$ is abelian $B$ is also abelian and therefore normal in $A$, so the group operation on $A/B$ is well-defined.  Let $a_1, a_2 \in A$ be arbitrary, then
+\[
+a_1Ba_2B = a_1a_2B = a_2a_1B = a_2Ba_1B
+\]
+
+so $A/B$ is abelian.  The converse is not true.  Take $D_6 = \{1,r,r^2, f,fr,fr^2\}$ where $r$ and $f$ represent rotations and ``flips'' of the corresonding polygon respectively.  Define $R = \{1,r,r^2\}$.  Every element of $D_6$ can be written as $f^jr^k$ for some $j,k \in \mathbb{N}$, so $f^jr^kRr^{-k}f^{-j} = \{1, r^{-1}, r^{-2}\}$, but $r^{-1} = r^2$ and $r^{-2} = r$, so $R \unlhd D_6$ and $D_6/R$ is well-defined.  However, $|R|=3$, so $[D_6:R] = 2$ and therefore $G/R$ must be abelian.
+
+\item \emph{Let $G$ be a group and $N \unlhd G$.  Denote $\overline{G} = G/N$.  Prove that $\overline{x}$ and $\overline{y}$ commute in $\overline{G}$ if and only if $x^{-1}y^{-1}xy \in N$.}
+
+In general if $H \leq G$ then $aH = bH$ if and only if $b^{-1}a \in H$ by Proposition 3.4.  Therefore
+\begin{eqnarray*}
+\overline{x}\overline{y} = \overline{y}\overline{x} &\Leftrightarrow& xNyN = yNxN \\
+&\Leftrightarrow& xyN = yxN \\
+&\Leftrightarrow& (yx)^{-1}xy \in N \\
+&\Leftrightarrow& x^{-1}y^{-1}xy \in N
+\end{eqnarray*}
+
+\item \emph{Let $G$ be a group and let $N = \brac{x^{-1}y^{-1}xy \mid x,y \in G}$.  Show that $N \unlhd G$ and $G/N$ is abelian.}
+
+$N \leq G$ by construction.  Since $N$ is normal and $x^{-1}y^{-1}xy \in N$ for all $x,y \in G$ it follows from the previous problem that $G/N$ is abelian.
+
+\item \emph{Prove that if $N \unlhd G$ where $|G| < \infty$ and $(|N|, [G:N]))=1$ then $N$ is the unique subgroup of $G$ of order $|N|$}
+
+From the previous homework we know that if $H \leq G$ and $(|H|, [G:N])=1$ then $H \leq N$.  Assume $M \unlhd G$ and $|M| = |N|$.  Then $(|M|, [G:N]) = 1$, so $M \leq N$.  However, $$[G:M] = \frac{|G|}{|M|} = \frac{|G|}{|N|} = [G:N]$$ so $(|N|, [G:M]) = 1$ and $N \leq M$.  Therefore $M = N$, i.e., $N$ is unique.
+
+\item \emph{Prove that if $H \unlhd G$ with prime index $p$ then for all $K \leq G$ either $K \leq H$ or $G = HK$ and $[K: K \cap H] = p$.}
+
+Either $K \leq H$ or not, so assume not.  If $G = HK$ then by the second isomorphism theorem
+\[
+p = \left|\frac{G}{H}\right| =  \left|\frac{HK}{H}\right| = \left|\frac{K}{K \cap H}\right| = [K : K \cap H]
+\]
+
+So it is sufficient to show that $G = HK$.  
+
+Since $H \unlhd G$, $(Hg)^n = Hg^n$.  In particular this means for any $g \in G\setminus H$, $H = (Hg)^p = Hg^p$.  That is, $g^p \in H$ for any $g \in G \setminus H$.  $p$ must be the smallest integer such that this is true since otherwise we could pick a $g \in G \setminus H$ and $k \neq 1$ such that $(gH)^k = H$ where $k \mid p$, a contradiction.  Hence each of $1, g, g^2, \ldots, g^{p-1}$ are distinct coset representatives.  By hypothesis there are $p$ such representatives and therefore every coset representative can be repesented as $g^j$ for $0 \leq j \leq p-1$ if $g \in G \setminus H$.  Assuming $K$ is not a subgroup of $H$, then there exists a $k \in K \setminus H \subseteq G \setminus H$ and $\{1, k, k^2, \ldots, k^{p-1}\}$ is a complete set of coset representatives.
+
+Let $g \in G$ be arbitrary.  Then there exists $x \in G$ such that $g \in Hx$.  However, from above, $x = k^j$ for the appropriate $j$, and hence $g \in Hk^j \subseteq HK$, i.e., $G \subseteq HK$.  That $HK \subseteq G$ is obvious, so $G = HK$.
+
+
+\item \emph{Let $C \unlhd A$ and $D \unlhd B$.  Prove that $C \times D \unlhd A \times B$ and $(A \times B)/(C \times D) \cong (A/C) \times (B/D)$.}
+
+Let $(c,d) \in C \times D$ and $(a,b) \in A \times B$, then for some $c' \in C$ and $d' \in D$
+\[
+(a,b)(c,d)(a,b)^{-1} = (a,b)(c,d)(a^{-1},b^{-1}) = (aca^{-1}, bdb^{-1}) = (c', d') \in C \times D
+\]
+
+Therefore $C \times D \unlhd A \times B$.  Define the map $\varphi: A \times B \rightarrow (A/C) \times (B/D)$ by $\varphi(a,b) = (aC, bD)$.  This map is obviously surjective and
+\begin{eqnarray*}
+\ker \varphi &=& \{(a,b) \mid \varphi(a,b) = 1 \} \\
+&=& \{(a,b) \mid (aC, bD) = 1\} \\
+&=& \{(a,b) \mid aC = C, bD = D\} \\
+&=& \{(a,b) \mid a \in C, b \in D\} \\
+&=& C \times D
+\end{eqnarray*}
+
+By the first isomorphism theorem $$(A \times B)/(C \times D) = (A \times D)/\ker \varphi \cong \varphi(A \times B) = (A/C) \times (B/D)$$
+\item \emph{Let $p$ be a prime and let $G$ be a group of order $p^am$ where $p \nmid m$.  Assume $P \leq G$ with $|P|=p^b$ and $N \unlhd G$ with $|N| = p^an$, where $p \nmid n$.  Prove that $|P \cap N| = p^b$ and $|PN/N| = p^{a-b}$.}
+
+From the previous homework we know $P \cap N \unlhd P$ and therefore $P / (P \cap N)$ is a group.  By Lagrange's theorem $|P \cap N| \mid |P|$, but $|P| = p^b$, so there exists some $k \leq b$ such that $|P \cap N| = p^k$.  From the second isomorphism theorem (in the book, or the fourth in class)
+\[
+PN/N \cong P/(P \cap N) \Rightarrow |PN/N| = \frac{|P|}{|P \cap N|} = \frac{p^a}{p^k} = p^{a-k}
+\]
+
+Hence it is sufficient to show that $k \geq b$ so that $k = b$.  Because $PN \leq G$ the largest power of $p$ in $|PN|$ is $p^a$.  From the second isomorphism theorem we know $$|PN| \cdot |P \cap N| = |P|\cdot|N| = p^{a+b}n$$
+
+Hence the power of $p$ in $|P \cap N|$ must be at least $p^b$, i.e., $k \geq b$, and hence $k = b$.
+\end{enumerate}
+\end{document}

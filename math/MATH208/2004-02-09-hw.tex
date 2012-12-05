@@ -1,0 +1,118 @@
+\documentclass[11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{MATH 208: Homework \#5}
+\author{Jesse Farmer}
+\date{09 February 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Prove the following statements about the adjoint map.}
+\begin{enumerate}
+\item \emph{$(T_1 + T_2)^{\ast} = T_1^{\ast} + T_2^{\ast}$}
+
+Let $\alpha \in V^{\ast}$ and $v \in V$ be arbitrary, then
+\begin{eqnarray*}
+((T_1 + T_2)^{\ast}\alpha)(v) &=& \alpha((T_1 + T_2)v) \\
+&=& \alpha(T_1v + T_2v) \\
+&=& \alpha(T_1v) + \alpha(T_2v) \\
+&=& (T_1^{\ast}\alpha)(v) + (T_2^{\ast}\alpha)(v)
+\end{eqnarray*}
+
+\item \emph{$(zT)^{\ast} = zT^{\ast}$}
+
+Let $\alpha \in V^{\ast}$ and $z \in F$ be arbitrary, then
+\begin{eqnarray*}
+((zT)^{\ast}\alpha)v &=& \alpha(z(Tv)) \\
+&=& z \alpha(Tv) \\
+&=& z (T^{\ast}\alpha)(v)
+\end{eqnarray*}
+
+\item \emph{$(I)^{\ast} = I^{\ast}$}
+
+Let $\alpha \in V^{\ast}$ and $v \in V$ be arbitrary, then
+\begin{eqnarray*}
+((I)^{\ast} \alpha)v &=& \alpha(Iv) \\
+&=& \alpha(v) \\
+&=& (I^{\ast}(\alpha))(v)
+\end{eqnarray*}
+
+\item \emph{$(T_1 \circ T_2)^{\ast} = T_2^{\ast} \circ T_1^{\ast}$}
+
+Let $\alpha \in V^{\ast}$ and $v \in V$ be arbitrary, then
+\begin{eqnarray*}
+((T_1 \circ T_2)^{\ast}(\alpha))(v) &=& \alpha((T_1 \circ T_2)(v)) \\
+&=& (\alpha \circ T_1)(T_2(v)) \\
+&=& (T_2^{\ast} \circ \alpha)(T_1 (v)) \\
+&=& ((T_2^{\ast} \circ T_1^{\ast})(\alpha))(v)
+\end{eqnarray*}
+\end{enumerate}
+
+\newpage
+\item \emph{Find the matrix corresponding to the adjoint map.}
+
+Let $T = (a_{ij})$, $T^{\ast}=(b_{ij})$, and $v$ be a column vector and $\alpha$ a row vector.
+
+Then
+\begin{eqnarray*}
+Tv &=& (a_{ij}) \left(\begin{array}{c} v_1 \\ \vdots \\ v_n \end{array} \right) \\
+&=& (a_{i\ast} \cdot v)
+\end{eqnarray*}
+
+Consider the effect of $\alpha$,
+
+\begin{eqnarray*}
+\alpha(Tv) &=& ( \alpha_1 \cdots \alpha_n ) (a_{i\ast} \cdot v) \\
+&=& \alpha_1(a_1 \cdot v) + \cdots + \alpha_n(a_1 \cdot v) \\
+&=& \alpha_1(a_{11}v_1 + \cdots + a_{1n}v_n) + \cdots + \alpha_n(a_{n1}v_1 + \cdots + a_{nn}v_n)
+\end{eqnarray*}
+
+As $\alpha$ is a row vector, we see then that $(\alpha T^{\ast})(v) = \alpha_1(b_{11}v_1 + \cdots + b_{n1}v_n) + \cdots + \alpha_n(b_{1n}v_1 + \cdots + b_{nn}v_n)$.  By the definition of the adjoint these two quantities are equal, which implies that $b_{ij} = a_{ji}$, i.e., $T^{\ast} = T^T$. 
+
+\item \emph{Prove that $T$ is an open map if and only if there exists $r > 0$ such that $T(B_1(0)) \supset B_r(0)$.}
+
+Let $T$ be an open map.  Then $T(B_1(0))$ is open and, since $0 = T(0) \in B_r(0)$, there exists $r > 0$ such that $B_r(0) \subset T(B_1(0))$.
+
+Let $V_0 \subset V$ be open and $v \in V_0$ be arbitrary.  Then there exists $r > 0$ such that $B_r(v) \subset V_0$.  Since $B_r(v) = B_r(0) + v$ and $B_r(v) = rB_1(v)$, we have $B_1(0) \subset \frac{V_0 - v}{r}$ and $T(B_1(0)) \subset T(\frac{V_0 - v}{r}) = \frac{T(V_0) - T(v)}{r}$.  By hypothesis there exists $r' > 0$ such that $B_{r'}(0) \subset T(B_1(0))$.  Hence $B_{r'}(0) \subset \frac{T(V_0) - T(v)}{r}$ which implies $B_{rr'}(T(v)) \subset T(V_0)$.  As $v$ was arbitrary, it follows that $T$ takes open sets to open sets, i.e., $T$ is an open map.
+
+\item \emph{Prove that the inverse of a bounded bijective linear map is a bounded linear map.}
+
+Let $T \in B(V,W)$ be bijective.  Then we know $T^{-1}$ exists.  By the bijectivity of $T$ we have that for every $w_1,w_2 \in W$ there exists a unique $v_1,v_2 \in V$ such that $Tv_1 = ww_1$ and $Tv_2 = w_2$.  We have
+
+\begin{eqnarray*}
+T^{-1}(w_1 + w_2) &=& T^{-1}(Tv_1 + Tv_2) \\
+&=& T^{-1}(T(v_1 + v_2)) \\
+&=& v_1 + v_2 \\
+&=& T^{-1}(w_1) + T^{-1}(w_2)
+\end{eqnarray*}
+
+Let $w \in W$, $\alpha \in F$ be arbitrary, and $v \in V$ be such that $Tv = w$, then
+\begin{eqnarray*}
+T^{-1}(\alpha w) &=& T^{-1}(\alpha Tv) \\
+&=& T^{-1}(T(\alpha v)) \\
+&=& \alpha v \\
+&=& \alpha T^{-1}(w)
+\end{eqnarray*}
+
+By the Open Mapping Theorem $T$ is an open map, i.e., if $U \subset V$ is open then $T(U)$ is open.  Consider $T^{-1}: W \rightarrow V$.  We have for every open $U \subset V$ that $T(U) = (T^{-1})^{-1}(U)$ is open.  Therefore $T^{-1}$ is continuous and hence bounded.
+
+\item \emph{Show that you can replace $\overline{T(B_1)}$ with $T(B_1)$ in the proof of open mapping theorem.}
+
+We have that $\|w\| < r$ implies $\overline{T(B_1)}$, and in general $\|w\| < r2^{-n}$ implies $w \in \overline{T(B_{2^{-n}})}$.  It is sufficient to show that there exists $v \in  B_1$ such that $Tv = w$.
+
+There exists a $v_1 \in B_{\frac{1}{2}}$ such that $\|w - Tv_1\| < \frac{r}{4}$.  And, in general, there exists $v_n \in B_{2^{-n}}$ such that $\|w - \sum_{j=1}^n Tv_j \| < r 2^{-n-1}$.  Because $V$ is a Banach space it follows that $\sum_{j=1}^\infty Tv_j = v \in V$, where $Tv = w$.  Note that $\|v\| < \sum_{n=1}^\infty 2^{-n}$, so $B_{\frac{r}{2}}(0) \subset T(B_1)$.
+
+\end{enumerate}
+\end{document}

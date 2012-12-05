@@ -1,0 +1,171 @@
+\documentclass[letterpaper,11pt]{article}
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\def\bddots{\mathinner{\mkern1mu\raise1pt\hbox{.}\mkern2mu
+        \raise4pt\hbox{.}\mkern2mu\raise7pt\vbox{\kern7pt\hbox{.}}\mkern1mu}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\title{MATH 209: Homework \#7}
+\author{Jesse Farmer}
+\date{17 May 2004}
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item \emph{Let $\mu$ be the Lebesgue measure on $\R^n$.  Show that if $f \in L^1(\mu)$ then $\int_{\R^n} |f(x+h) - f(x)| \,d\mu = 0$ as $h \rightarrow 0$.}
+
+$C_0^\infty$ is dense in $L^1(\mu)$, so there exists a sequence $\{f_n\}$ of compactly supported continuous functions which converge to $f$.  Moreover, the $\{f_n\}$ are uniformly continuous over their whole domain since, if a function is continuous on a compact set then it is uniformly continuous on that set.  Letting $C$ be the set on which $f_n$ is compact, it follows that, if $|f_n(x+h) - f_n(x)| < \frac{\epsilon}{3\mu(C)}$
+\[
+\int_{\R^n} |f_n(x+h) - f_n(x)| \,d\mu < \frac{\epsilon}{3\mu(C)}\mu(C) = \frac{\epsilon}{3}
+\]
+
+Hence, for any $\epsilon > 0$, sufficiently small $h$, and sufficiently large $n$, 
+\begin{eqnarray*}
+\int_{\R^n} |f(x+h) - f(x)| \,d\mu &=& \int_{\R^n} |f(x+h) - f_n(x+h) + f_n(x+h) - f_n(x) + f_n(x) - f(x)| \,d\mu \\
+&\leq& \int_{\R^n}|f(x+h) - f_n(x+h)| \,d\mu \\ && + \int_{\R^n} |f_n(x+h) - f_n(x)| \,d\mu \\ && + \int_{\R^n} |f_n(x) - f(x)| \,d\mu \\
+&<& \epsilon
+\end{eqnarray*}
+\item \emph{Calculate $i^i$.}
+\begin{eqnarray*}
+i^i &=& e^{i \log(i)} \\
+&=& e^{i\left(\log\,|i| + i \text{Arg}\,i\right)} \\
+&=& e^{-\frac{\pi}{2}} \in \R
+\end{eqnarray*}
+
+\item \emph{Let $G_1,G_2$ be locally compact Abelian groups and $\chi_1$, $\chi_2$ be characters of $G_1,G_2$ respectively.  Show that for $x = (x_1,x_2)$, $\chi(x) = \chi_1(x_1)\chi_2(x_2)$ is a character of $G_1 \times G_2$.}
+
+Denote the group operation as ``+'', let $x = (x_1,x_2)$, and $y = (y_1,y_2)$. Then
+\begin{eqnarray*}
+\chi(x + y) &=& \chi_1(x_1 + y_1)\chi_2(x_2+y_2) \\
+&=& \chi_1(x_1)\chi_1(y_1)\chi_2(x_2)\chi_2(y_2) \\
+&=& \chi_1(x_1)\chi_2(x_2)\chi_1(y_1)\chi_2(y_2) \\
+&=& \chi(x)\chi(y)
+\end{eqnarray*}
+
+\item \emph{Do all characters occur in this way?}
+
+Let $\chi$ be a character on $G_1 \times G_2$.  It is clear that if
+\[
+\chi_1\left(x_1\right) = \chi\left(x_1,0_2\right) \mbox{ and } \chi_2\left(x_2\right) = \chi\left(0_1,x_2\right)
+\]
+
+where $0_1,0_2$ are the identities of $G_1, G_2$, respectively, then $\chi = \chi_1 \chi_2$.
+
+\item \emph{Show that if $G$ is a compact Abelian group then all characters on $G$ are unitary.}
+
+Let $\chi$ be a character on $G$.  Since the continuous image of a compact set is compact, $\chi\left(G\right) < \C^\times$ must be compact.  Therefore, it suffices to show that any compact subgroup of $\C^\times$ is a subgroup of $\T$.
+
+Let $S < \C^\times$ be compact and $z \in S$ an arbitrary element.  Assume first that $|z|>1$.  Then $z^n \in S$ and hence there exists $w = z^n \in S$ such that $|w|>n$ for all $n \in \N$, a contradiction of the compactness of $S$.  Similarly, if $|z| < 1$ then $\frac{1}{z} \in S$, so there exists a $w = \left(\frac{1}{z}\right)^n \in S$ such that $|w| > n$ for all $n \in \N$, a contradiction.  Therefore, if $z \in S$ then $|z| = 1$, and by definition $S < \T$.  In particular, $\chi\left(G\right) < \T$, and hence all characters of a compact Abelian group are unitary.
+
+\item \emph{What is the multiplicative Haar measure on complex locally compact Abelian groups?}
+
+$\C^\times \cong \T \times \R_+$.  This measure for $\T$ is $d\theta$ and for $\R_+$ it is $\frac{dr}{r}$.  Changing variable, we get $dz = r\,d\theta\,dr$.  Since $r = |z|$, the multiplicatively invariant Haar measure on $\C^\times$ is
+\[
+\frac{d\theta\,dr}{|z|} = \frac{dz}{|z|^2}
+\]
+\item \emph{Show that the following functions are (unitary) characters for the given locally compact Abelian group.}
+\begin{enumerate}
+\item \emph{$\chi_s(x) = e^{isx}$ for $(\R,+)$, where $s \in \C$ is fixed.  $\chi_s$ is unitary if $s \in \R$.}
+
+Let $x,y \in \R$.  Clearly $\chi_s$ is continuous.
+\[
+\chi\left(x+y\right) = e^{isx+isy} = e^{isx}e^{isy} = \chi\left(x\right)\chi\left(y\right)
+\]
+
+Therefore $\chi_s$ is a character on $(\R,+)$.  If $s \in \R$ then, since $|e^{iy}| = 1$ for all $y \in \R$ (in particular for $y = sx$), $\chi_s$ must be unitary.
+
+Why this condition is necessary, I am not sure.  The continuity provides assurance that this is the case were $\varphi$ to map into $(\R^\times,\cdot)$.  However, $\Q$ is not dense in $\C$, and therefore it does not necessarily follow here.  If $\chi$ were differentiable it would satisfy the differential equation
+\[
+f'(x) = f(x) \frac{f'(y)}{f(y)}
+\]
+
+for any $x,y \in \R$, which implies that $\chi(x) = e^{isx}$ for some $s \in \C$.  Therefore every \emph{differentiable} character is of this form.  However, it seems that proving the character must be differentiable would be at least as hard as proving it is of the above form.  In fact, it might only follow from the fact that $e^{isx}$ is differentiable.  Obviously, if every character is of this form, then the character is unitary if and only if $s \in \R$.
+
+\item \emph{$\psi_s(x) = e^{i(s \cdot x)}$ for $(\R^n, +)$, where $s \in \C^n$ is fixed.  $\psi_s$ is unitary is $s \in \R^n$.}
+
+Since
+\[
+\R^n = \underbrace{\R \times \R \times \cdots \times \R}_{\mbox{n times}}
+\]
+
+we can define 
+\[
+\psi_{s,i}\left(x\right)=\psi\left(0,\ldots,0,x_i,0,\ldots,0\right)
+\]
+
+It is obvious that $\psi_{s,i} = \chi_s$, which is a character of $\R$ and that
+\[
+\psi_s = \prod_{i=1}^n \psi_{s,i}
+\]
+
+Hence $\psi_s$ is a character of $\R^n$.  If $s = (s_1,s_2,\ldots,s_n) \in \R^n$ then each $s_i \in \R$, and from the previous problem it follows that each $\psi_{s,i}$ is unitary, and hence that $\psi_s$ is unitary.
+
+If $\psi$ is a character of $\R^n$ it can be expressed as a product of characters of $\R$, which must be of the same form as $\chi_s$.  Therefore, the character group of $\R^n$ is precisely those functions which are of the form $\psi_s(x) = e^{i(s \cdot x)}$, where $s \in \C$ is fixed.  Moreover, the unitary characters are of the same form, where $s \in \R^n$ is fixed.
+ 
+\item \emph{$\varphi_s(x) = |x|^s$ for $(\R^\times, \cdot)$, where $s \in \C$ is fixed.  $\varphi_s$ is unitary if $s \in i\R$.}
+
+First, note that $|x|^s = e^{s \log |x|}$.  Hence
+\[
+\varphi_s\left(xy\right) = e^{s \log |xy|} = e^{s \log |xy|} = e^{s\left(\log|x| + \log|y|\right)} = e^{s \log|x|}e^{s \log|y|} = \varphi_s\left(x\right)\varphi_s\left(y\right)
+\]
+
+If $s \in i\R$ then $s = iy$ for some $y \in \R$ and $|\varphi_s\left(x\right)| = \left|e^{iy\log|x|}\right| = 1$.
+
+Why is this condition necessary?
+
+\item \emph{Find the characters and unitary characters of $(\C,+)$.}
+
+$(\C,+) \cong (\R \times \R, +)$, so any character can be expressed as the product of characters on $\R$.  Since every character on $\R$ is of the form $\chi_s\left(x\right) = e^{isx}$ for $s \in \C$, it follows that every character on $\C$ is also of the form $\chi_t\left(z\right) = e^{itz}$ for some $t \in \C$.  The characters are unitary if and only if $t \in \R$.  This condition is also sufficient, for the same reasons as the $(\R,+)$ case.
+
+\item \emph{Find the characters and unitary characters of $(\C^\times,\cdot)$.}
+
+$(\C^\times, \cdot) \cong \T \times \R_+$, so any character $\varphi_{s,m}(z) = |z|^se^{imz}$ for fixed $s \in \C$ and $m \in \Z$.  Since both of these are characters, it follows that their product is a character, hence this condition is also sufficient.
+
+\item \emph{$\chi_m(e^{i\theta}) = e^{im\theta}$ for $(\T, \cdot)$ and $m \in \Z$ fixed.}
+
+For the same reasons as part (a), $\chi_m$ are characters.  
+
+Since $\T$ is compact, all characters must be unitary.  From the continuity of $\chi_m$ it follows that the image space must either be $\T$ or $\{1\}$.  In the first case, every element can be expressed as $e^{im\theta}$ for some fixed $m \in \Z$.  $m$ must be in $\Z$ since otherwise it would not be the case that multiples of $2\pi$ all map to the same value.  The second case occurs when $m=0$.
+
+\newpage
+
+\item \emph{$\chi_m(e^{i\theta}) = e^{i(m \cdot \theta)}$ for $(\T^n, \cdot)$ and $m \in \Z^n$ fixed.}
+
+For the same reasons as part (b), $\chi_m$ are characters.
+
+Since $\T^n$ is compact, all characters must be unitary.  Moreover,
+\[
+\T^n = \underbrace{\T \times \T \times \cdots \times \T}_{\mbox{n times}}
+\]
+
+so any character on $\T^n$ can be expressed as the product of characters of $\T$, all of which must be of the form $e^{im\theta}$ for fixed $m \in \Z$.  It follows that all characters on $\T^n$ are of the form $e^{i(m \cdot \theta)}$ for fixed $m \in \Z^n$.
+\end{enumerate}
+
+\item \emph{Show that $(\hat{G},\cdot)$ is an Abelian group.}
+
+The proof that $\cdot$ is an internal law of composition is identical to Problem $3$ above.  Clearly, $1 \in \hat{G}$, so $\hat{G}$ has an identity.  Moreover, since $\chi$ is a homomorphism $\chi\left(x^{-1}\right) = \chi\left(x\right)^{-1}$, so $\hat{G}$ has an inverse.  Finally, associativity and commutativity are inherited from $(\C^\times, \cdot)$.  Therefore, $(\hat{G},\cdot)$ is an Abelian group.
+
+\end{enumerate}
+\end{document}

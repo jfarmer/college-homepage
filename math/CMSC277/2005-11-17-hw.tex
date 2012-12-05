@@ -1,0 +1,115 @@
+\documentclass[10pt]{article}
+
+\usepackage{homework}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\title{CMSC 277: Homework \#6}
+\author{Jesse Farmer}
+\date{17 November 2005}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item \emph{Suppose $\L$ and $\L'$ are languages with $\L \subset \L'$.  Suppose also that $\Gamma \subseteq \Form_\L$ and $\varphi \in \Form_\L$.  Show that if $\Gamma \vdash_{\L'} \varphi$ then $\Gamma \vdash_\L \varphi$.}
+
+We use induction on the proof rules and this fact: If $\Gamma \vDash_{\L'} \varphi$ then $\Gamma \vDash_{\L} \varphi$.  This fact follow immediately since every $\L$ structure is also an $\L'$ structure.
+
+Define
+\[
+X = \set{(\Gamma, \varphi) \in G \mid (\Gamma, \varphi) \in G' \Rightarrow (\Gamma, \varphi) \in G}
+\]
+
+where $G$ and $G'$ are the generating system corresponding to the proof rules for $\L$ and $\L'$, respectively.
+
+The base case is trivial.  If $\varphi \in \Gamma$ then $(\Gamma, \varphi) \in G'$ and $(\Gamma, \varphi) \in G$.  Similarly, let $\varphi = (t=t)$ for some $t \in \Term_\L$.  If $(\Gamma, \varphi) \in G'$ then we have that $\Gamma \vDash_{\L'} \varphi$ by soundness.  If $\M$ is an $\L'$-structure and $s$ is a variable assignment for $\M$, then $\bar{s}(t) = \bar{s}(t)$.
+
+Each of the inductive steps is essentially identical, moving between syntax and semantics using soundness and completeness and applying the deduction rules where appropriate.  We will do a few of the exemplary cases here.
+
+Assume that $(\Gamma, \varphi), (\Gamma, \psi) \in X$.  Then
+\begin{align*}
+\Gamma \vdash_{\L'} \varphi \land \psi &\Rightarrow \Gamma \vDash_{\L'} \varphi \land \psi \\
+&\Rightarrow \Gamma \vDash_{\L'} \varphi \mbox{ and } \Gamma \vDash_{\L'} \psi \\
+&\Rightarrow \Gamma \vdash_{\L'} \varphi \mbox{ and } \Gamma \vdash_{\L'} \psi \\
+&\Rightarrow \Gamma \vdash_{\L} \varphi \mbox{ and } \Gamma \vdash_{\L} \psi \\
+&\Rightarrow \Gamma \vdash_{\L} \varphi \land \psi
+\end{align*}
+
+Here is the existential instantiation rule.  Assume $(\Gamma, \varphi^t_x) \in G$ and that substituting $x$ for $t$ is valid, and that $\Gamma \vdash_{\L'} \exists x \varphi$.  Let $\M$ be an $\L$-structure and $s$ a variable assignment which satisfies $\M$, recalling that it is therefore also an $\L'$-structure.  If $\Gamma \vdash_{\L'} \exists x \varphi$ then there exists some $a \in M$ such that $\M \vDash_{\L'} \varphi[s(x \mid a)]$, and hence $\M \vDash_{\L} \varphi[s(x \mid a)]$.  But then by completeness $\M \vdash \varphi_x^a$, so by ($\exists I$) we have $\M \vdash \exists x \varphi$.
+
+Every other proof rule is essentially the same.  We first use soundness to make all our arguments semantic.  Then we use the definition of semantic implication and the fact that every $\L$-structure is an $\L'$-structure to utilize the inductive step.  Finally, we switch back to syntax by completeness and possibly use whatever proof rule we're inducting on to make our conclusion.
+
+\item \emph{Let $\L = \set{R}$ where $R$ is a binary relation symbol.}
+\begin{enumerate}
+\item \emph{Show that the class of directed acyclic graphs is not an elementary class in $\L$.}
+
+Let $\cal{K}$ be the class of directed acyclic graphs. Define
+\[
+\sigma_n = \lnot (\exists v_1 \exists v_2 \cdots \exists v_n ((Rv_1v_2) \land (Rv_2v_3) \land \cdots \land (Rv_nv_1))
+\]
+
+and let $\Sigma = \set{\sigma_n \mid n \in \N}$.  Then $\cal{K} = \Mod(\Sigma)$.  Let $\Sigma_0 \subset \Sigma$ be finite so that there exists an $N \in \N$ such that $\Sigma_0 = \set{\sigma_n \mid n < N}$.  Then $C_N$, the $N$-cycle, is a model of $\Sigma_0$ but not of $\Sigma$.  Therefore by Proposition $5.35$ $\cal{K}$ is not an elementary class.
+
+\item \emph{Show that the class of all equivalence relations such that all equivalence classes are infinite is a weak elementary class, but not an elementary class in $\L$.}
+
+Let $\cal{K}$ be the class of all equivalence relations such that all equivalence classes are infinite.  Let $\sigma$ be the conjunction of the three equivalence relation axioms and define
+\[
+\tau_n = (\forall v_1 \cdots \forall v_n)(Rv_1v_2 \land \cdots \land Rv_{n-1}v_n)((\exists w)(w \neq v_1 \land \cdots \land w \neq v_n \land Rv_1w))
+\]
+
+If $\Sigma = \set{\sigma} \cup \set{\tau_n \mid n \in \N}$ then $\cal{K} = \Mod(\Sigma)$.  Hence $\cal{K}$ is a weak elementary class.
+
+To see that $\cal{K}$ is not an elementary class let $\Sigma_0 \subset \Sigma$ be finite, so that there exists an $N \in \N$ such that $\Sigma_0 = \set{\sigma} \cup \set{\tau_n \mid n < N}$.  Then simply choose a set $A$ of cardinality $2N$ and partition it into two subsets of size $N$.  Viewing these partitions as equivalence relations, $A$ is a model of $\Sigma_0$ but not a model of $\Sigma$.  Therefore by Proposition $5.35$ $\cal{K}$ is not an elementary class.
+
+
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Let $\L = \set{F, E}$ where $F$ is a binary function and $E$ is a constant symbol.  Show that the class of all torsion groups is not a weak elementary class in the language $\L$.}
+
+The idea here is to show that we can get elements of arbitrarily large order, and hence an element of infinite order by compactness.
+
+Let $\cal{K}$ be the class of all torsion groups and define
+\[
+\tau_n = \exists x (x \neq E \land x^2 \neq E \land \cdots \land x^n \neq E) 
+\]
+
+Let $\Sigma \subseteq \Sent_\L$ be such that $\cal{K} = \Mod(\Sigma)$ and let $\Sigma' = \Sigma \cup \set{\tau_n \mid n \mid \N}$.  We claim that every finite subset of $\Sigma'$ has a model.  Suppose that $\Sigma_0 \subset \Sigma$ is finite.  Fix $N \in \N$ such that $\Sigma_0 \subset \Sigma \cup \set{\tau_n \mid n \leq N}$.  Let $\M = (\Z/p\Z, \cdot, e)$, where $p > N$ is prime.  Then $\M$ satisfied $\Sigma_0$, so by compactness there exists a model of $\Sigma'$ (and in particular, a model of $\Sigma$).  But then this model has an element of infinite order and hence is not a torsion group.
+
+\item \emph{Let $\L = \set{R}$ where $R$ is a binary relation symbol.  Show that the class of all connected digraphs is not a weak elementary class in the language $\L$.}
+
+Let $\cal{K}$ be the class of all torsion groups and define
+\[
+\tau_n(x,y) = \exists v_1 \cdots \exists v_n (\bigwedge_{1 \leq i < j \leq n} v_i \neq v_j \land \bigwedge_{i=1}^n x \neq x_i \land \bigwedge_{i=1}^n y \neq v_i \land x \neq y \land Rxv_1 \land Rv_1v_2 \land \cdots \land Rv_ny)
+\]
+
+Now define
+\[
+\sigma_n = \exists x \exists y (\neg \tau_0(x,y)) \land (\neg \tau_1(x,y)) \land \cdots \land (\neg \tau_{n-1}(x,y)) \land \tau_n(x,y)
+\]
+
+Intuitively, $\sigma_n$ expresses the existence of a pair of vertices whose minimal distance is $n+1$.  Let $\Sigma' = \Sigma \cup \set{\sigma_n \mid n \in \N}$.  Let $\Sigma_0 \subseteq \Sigma'$ be finite and fix $N \in \N$ such that $\Sigma_0 \subseteq \Sigma \cup \set{\sigma_n \mid n < N}$.  If $G$ is the directed path of length $N$ then $G$ satisfies $\Sigma_0$.  Hence there exists a model of $\Sigma'$ which has a pair of elements with no finite minimal distance, contradicting connectedness.  Therefore $\cal{K}$ cannot be a weak elementary class.
+
+\end{enumerate}
+
+\item \emph{Let $\L$ be the language of arithmetic.  For each $n \in \N$ let $\varphi_n(x)$ be the formula $\exists y ( \underbar{n} \cdot y = x)$.}
+\begin{enumerate}
+\item \emph{Show that for any nonstandard model of arithmetic $\M$ there exists an $a \in M$ such that $\M \vDash \varphi_n(a)$.}
+\item \emph{Let $P \subseteq \N$ be the set of prime numbers and suppose that $Q \subseteq P$.  Show that there exists a countable nonstandard model of arithmetic $\M$ and an $a \in M$ such that \begin{enumerate} \item $\M \vDash \varphi_p(a)$ for all $p \in Q$ \item $\M \vDash \neg \varphi_p(a)$ for all $p \in Q \setminus P$\end{enumerate}}
+
+\end{enumerate}
+\end{enumerate}
+\end{document}

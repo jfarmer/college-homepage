@@ -1,0 +1,95 @@
+\documentclass[10pt]{article}
+
+\usepackage{homework}
+\usepackage{enumerate}
+\usepackage{geometry}
+
+\geometry{letterpaper}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\title{MATH 263: Homework \#7}
+\author{Jesse Farmer}
+\date{17 May 2005}
+\begin{document}
+\maketitle
+\begin{enumerate}
+\item \emph{Let $Y$ be the quasicircle obtained by adjoining the topologist's sine curve to the unit circle, and collapsing the portion on the $y$ axis to a poin.  Let $f: Y \rightarrow S^1$ be this quotient map.  Show that $f$ does not list to the covering space $\R \rightarrow S^1$ even though $\pi_1(Y) = 0$.}
+
+I think ``arc'' here means something precise, and I am not quite sure what.
+
+\item \emph{Let $\wt{X}$ and $\wt{Y}$ be simply-connected covering spaces of the path-connected, locally path-connected spaces $X$ and $Y$.  Show that if $X \iso Y$ then $\wt{X} \iso \wt{Y}$.}
+
+Let $f: X \rightarrow Y$ be a homeomorphism and $p: \wt{X} \rightarrow X$ a covering map.  Then certainly $f \circ p$ is a covering map of $Y$ by $\wt{X}$, as it simply identifies every neighborhood in $Y$ with its homeomorphic copy in $X$.  So both $\wt{X}$ and $\wt{Y}$ are covering spaces of $Y$ via $f \circ p$ and $p'$, say, with trivial fundamental group.  Hence $(f \circ p)_\ast(\pi_1(\wt{X})) = 0 = p'_\ast(\pi_1(\wt{Y}))$ and therefore $\wt{X} \iso \wt{Y}$.
+
+\item \emph{Find all the connected $2$-sheeted and $3$-sheeted covering spaces of $S^1 \vee S^1$, up to isomorphism of covering spaces without basepoints.}
+
+The fundamental group of $X = S^1 \vee S^1$ is $\Z \ast \Z$.  We therefore wish to find subgroups of $G = \Z \ast \Z$ with index $2$ and $3$, respectively, up to isomorphism.  Since then $|G/H| = 2,3$, it follows that $G/H \iso \Z/2\Z, \Z/3\Z$.  In particular this means $H$ is normal, so, up to isomorphism, there is only one connected $2$-sheeted and $3$-sheeted covering space.
+
+For the $2$-sheeted case, consider $S^1 \vee S^1 \vee S^1$ where the left and right circles are identified with the left circle in $X$ and each hemisphere of the center circle is identified with the right circle.  Each fiber has $2$ points and therefore the image under the induced map of this covering map of the fundamental group of the quotient space has index $2$ in $Z \ast \Z$.
+
+Similarly, consider $S^1 \vee S^1 \vee S^1 \vee S^1$ where the second the third circles are identified $2$-fold (i.e., as above, where each hemisphere is mapped to one of the circles) with the left and right circles in $X$, respectively, and the first and fourth circles are identified directly with the left and right circles in $X$, again, respectively.  Each fiber consists of $4$ points, and therefore this is a $4$-sheeted covering space.
+
+\item \emph{Find all the connected covering spaces of $\R P^2 \vee \R P^2$.}
+
+The fundamental group of $\R P^2 \vee \R P^2$ is $\Z/2\Z \ast \Z/2\Z$.
+
+\item \emph{Given maps $X \rightarrow Y \rightarrow Z$ such that both $Y \rightarrow Z$ and $X \rightarrow Z$ are covering spaces. show that $X \rightarrow Y$ is a covering space if $Z$ is locally path connected, and show that this covering space is normal if $X \rightarrow Z$ is a normal covering space.}
+
+Let $p_1 : X \rightarrow Y$ and $p_2: Y \rightarrow Z$ and assume $Z$ is locally path connected.  Then by hypothesis there exist, for all $z \in Z$, evenly covered neighborhoods $U_z$ and $U'_z$ by $p_2$ and $p_2 \circ p_1$, respectively.  Then $U = U_z \cap U'_z$ is a neighborhood evenly covered by \emph{both} $p_2$ and $p_2 \circ p_1$.
+
+Let $y \in Y$.  Since $Z$ is locally path connected we can choose a suitable neighborhood $U$ of $p(y)$ such that $U$ is evenly covered by $p_2$ and $p_2 \circ p_1$.  Let $y \in V$ where $p_2 \mid_V$ is a homeomorphism from $V$ to $U$.  Then
+\[
+p_1^{-1}(V) = \left(p_1^{-1} \circ p_2^{-1} \circ p_2 \mid_V \right)(V) =  \left(p_1^{-1} \circ p_2^{-1}\right)(U)
+\]
+
+Hence $p_1$ is a covering map since $U$ is evenly covered by $p_2 \circ p_1$ by hypothesis.
+
+Identifying $\pi_1(X)$ and $\pi_1(Y)$ with their isomorphic copies (i.e., identify $\pi_1(X) \leq \pi_1(Y)$ via $p_{1_\ast}$ and $\pi_1(Y) \leq \pi_1(Z)$ via $p_{2_\ast}$) in $\pi_1(Z)$ gives
+\[
+\pi_1(X) \leq \pi_1(Y) \leq \pi_1(Z)
+\]
+
+If $\pi_1(X) \unlhd \pi_1(Z)$ then certainly $\pi_1(X) \unlhd \pi_1(Y)$, and hence $X$ is a normal covering of $Y$ if $X$ is a normal covering of $Z$.
+
+\item \emph{Given a covering space action of a group $G$ on a path-connected, locally path-connected space $X$, then each subgroup $H \subset G$ determines a composition of covering spaces $X \rightarrow X/H \rightarrow X/G$.  Show:}
+\begin{enumerate}
+\item \emph{Every path-connected covering space between $X$ and $X/G$ is isomorphic to $X/H$ for some subgroup $H \leq G$.}
+
+
+\item \emph{Two such covering spaces $X/H_1$ and $X/H_2$ of $X/G$ are are isomorphic if and only if $H_1$ and $H_2$ are conjugate subgroups of $G$.}
+\item \emph{The covering space $X/H \rightarrow X/G$ is normal if and only if $H \unlhd G$.}
+\end{enumerate}
+
+\item \emph{Let $G$ be a discrete group.}
+\begin{enumerate}
+\item \emph{Show that the category of right transitive $G$-sets is isomorphic to the category with objects $H \bs G$, where we take one $H$ for each conjugacy class subgroups of $G$ and morphisms $G$-maps.}
+
+Let $\cat{C}$ be the category of transitive right $G$-sets and $\cat{D}$ the second category defined in the exercise.  From a previous homework we know that for any $A \in \Ob(\cat{C})$ there exists an isomorphism of $G$-sets $\varphi_x : G/G_x \rightarrow A$ defined by $x \mapsto x \cdot g$, where $G_x$ denotes the stabilizer of $x$ under the action of $G$.  Furthermore, we showed that the stabilizer of $Hx$ in $H \bs G$ is $x^{-1} H x$ and that $H \bs G$ and $K \bs G$ are isomorphic as $G$-sets if and only if $H$ and $K$ are conjugate in $G$.
+
+Define a functor on $\cat{C}$ by sending $A \in \Ob(\cat{C})$ to its image under $\varphi_x$, modulo conjugacy classes of subgroups of $G$.  For any $A,B \in \Ob(\cat{C})$ there exist $\varphi_A, \varphi_B$ such that $\varphi$ is an isomorphism between $A$ and $H \bs G$ for some $H \leq G$ and $\varphi_B$ is an isomorphism between $B$ and $K \bs G$.  If $\eta: A \rightarrow B$ is a $G$-map then define $F(\eta) = \varphi_B \circ \eta \circ \varphi_A^{-1}$.  This is clearly a well-defined $G$-map from $H \bs G$ to $K \bs G$, as $G$-maps are stable under composition.
+
+From the first paragraph it is clear that $F: \cat{C} \rightarrow \cat{D}$ so defined is an isomorphism of categories,odulo conjugacy classes of subgroups of $G$, the functor $F$ sends each object to a \emph{conjugacy class}, i.e., the image of each object is unique up to isomorphism.
+
+\item \emph{Describe explicitly the category of transitive $S_3$-sets.}
+
+Since $|S_3| = 6$, there exist a Sylow $2$-subgroup and a Sylow $3$-subgroup.  $\Syl_p(G)$ is stable under conjugation, in general, so that the objects consists of the trivial group, a group isomorphic to $\Z/2\Z$, a group isomorphic to $\Z/3\Z$, and all of $S_3$.
+
+\item \emph{Do the same for $\Z/10\Z$-sets.}
+
+As above, since $\abs{\Z/10\Z} = 10$ there exist Sylow $2$ and Sylow $5$ subgroups, which are unique modulo conjugation.  Hence the transitive $\Z/10\Z$ consist of objects isomorphic to the trivial group, $\Z/2\Z$, $\Z/5\Z$, and $\Z/10\Z$.
+
+\item \emph{Show that the category of finite dimensional real vector spaces is equivalent to a category whose objects are the natural numbers $\N$.}
+
+For each $V$, a real vector space, consider $V \rightarrow \dim V$.
+\end{enumerate}
+\end{enumerate}
+\end{document}
