@@ -9,7 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Mr. Farmer at the University of Chicago" />
 	<title>Jesse E. I. Farmer - Home</title>
-	<link rel="stylesheet" type="text/css" href="/~farmerje/farmerje.css" />
+	<link rel="stylesheet" type="text/css" href="/farmerje.css" />
 </head>
 <body>
 <div id="page">
@@ -17,18 +17,18 @@
 <div id="header">
 <h1>Jesse E. I. Farmer</h1>
 <a href="http://www.uchicago.edu">University of Chicago</a>
-<img src="/~farmerje/img/header.png" alt="Phoenix" />
+<img src="/img/header.png" alt="Phoenix" />
 </div>
 
 <div id="navigation">
 <ul>
-<li class="first"><a href="/~farmerje/index.shtml">Home</a></li>
-<li><a href="/~farmerje/math">Math</a></li>
-<li><a href="/~farmerje/code">Code</a></li>
-<li><a href="/~farmerje/tutorials">Tutorials</a></li>
-<li><a href="/~farmerje/latex">LaTeX</a></li>
-<li><a href="/~farmerje/linux">Linux</a></li>
-<li><a href="/~farmerje/resume.pdf">Resumé</a></li>
+<li class="first"><a href="/index.shtml">Home</a></li>
+<li><a href="/math">Math</a></li>
+<li><a href="/code">Code</a></li>
+<li><a href="/tutorials">Tutorials</a></li>
+<li><a href="/latex">LaTeX</a></li>
+<li><a href="/linux">Linux</a></li>
+<li><a href="/resume.pdf">Resumé</a></li>
 </ul>
 </div>
 
@@ -37,7 +37,7 @@
 
 <h2>Where am I?</h2>
 <p>
-You've stumbled across the homepage of Jesse Farmer.  I'm a current undergraduate at the <a href="http://www.uchicago.edu">University of Chicago</a> concentrating in <a href="http://math.uchicago.edu">mathematics</a>, though I have many varied (and contradictory, and confusing) interests. I am presently employed by <a href="http://nsit.uchicago.edu">NSIT</a>, within the Network Based Services division.  If you want more information about my professional and academic life, feel free to take a gander at my <a href="resume.pdf">resumé</a>. 
+You've stumbled across the homepage of Jesse Farmer.  I'm a current undergraduate at the <a href="http://www.uchicago.edu">University of Chicago</a> concentrating in <a href="http://math.uchicago.edu">mathematics</a>, though I have many varied (and contradictory, and confusing) interests. I am presently employed by <a href="http://nsit.uchicago.edu">NSIT</a>, within the Network Based Services division.  If you want more information about my professional and academic life, feel free to take a gander at my <a href="resume.pdf">resumé</a>.
 </p>
 <p>
 You can contact me via email at <a href="mailto&#058;farmerje&#064;uchicago&#046;edu">farmerje&#064;uchicago&#046;edu</a>, or if you're one of those cool kids you can IM me on AIM under the screen name <a href="aim:goim?screenname=farmerje">farmerje</a>.
@@ -51,8 +51,8 @@ Feel free to look around.  You can browse the main sections of this site by clic
 Copyright &copy; <a href="mailto&#058;farmerje&#064;uchicago&#046;edu">Jesse E.I. Farmer</a>, 2005-2006
 
 <div class="updated">Last updated: 13 May 2006</div>
-<img src="/~farmerje/img/xhtml.png" alt="Valid xhtml 1.0" />
-<img src="/~farmerje/img/css.png" alt="Valid CSS" />
+<img src="/img/xhtml.png" alt="Valid xhtml 1.0" />
+<img src="/img/css.png" alt="Valid CSS" />
 </div>
 
 </div>
@@ -65,4 +65,3 @@ urchinTracker();
 </script>
 </body>
 </html>
-
