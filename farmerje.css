@@ -18,7 +18,7 @@ max-width: 750px;
 #header {
 position: relative;
 background: #477ab6;
-background-image: url('/~farmerje/img/background.png');
+background-image: url('/img/background.png');
 background-repeat: repeat-y;
 color: white;
 text-align: left;
@@ -79,7 +79,7 @@ bottom: 0;
 margin-left: 0;
 padding-left: 0;
 display: inline;
-} 
+}
 
 #navigation ul li {
 margin-left: 0;
@@ -88,8 +88,8 @@ border-left: 1px solid #000;
 list-style: none;
 display: inline;
 }
-	
-		
+
+
 #navigation ul li.first {
 margin-left: 0;
 border-left: none;
